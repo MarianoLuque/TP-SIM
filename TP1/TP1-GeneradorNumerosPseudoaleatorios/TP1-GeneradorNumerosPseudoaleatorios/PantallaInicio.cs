@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TP1_GeneradorNumerosPseudoaleatorios.Clases;
 
 namespace TP1_GeneradorNumerosPseudoaleatorios
 {
@@ -14,6 +15,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
     {
         private bool flag_semilla, flag_k, flag_g;
         private bool flag_a = true;
+        NE_funcion funcion = new NE_funcion();
 
         public PantallaInicio()
         {
@@ -22,6 +24,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            cmb_a.CargarCombo(funcion.DatosComboCliente());
         }
 
         private void btn_cerrar_programa_Click(object sender, EventArgs e)
@@ -125,5 +128,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
                 MessageBox.Show(error_message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
+
+
     }
 }

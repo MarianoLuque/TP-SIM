@@ -38,7 +38,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.btn_cerrar_programa = new System.Windows.Forms.Button();
-            this.cmb_a = new System.Windows.Forms.ComboBox();
             this.txt_g = new System.Windows.Forms.TextBox();
             this.txt_k = new System.Windows.Forms.TextBox();
             this.txt_m = new System.Windows.Forms.TextBox();
@@ -47,6 +46,7 @@
             this.txt_a = new System.Windows.Forms.TextBox();
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cmb_a = new TP1_GeneradorNumerosPseudoaleatorios.Clases.ComboBox01();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -130,14 +130,6 @@
             this.btn_cerrar_programa.UseVisualStyleBackColor = false;
             this.btn_cerrar_programa.Click += new System.EventHandler(this.btn_cerrar_programa_Click);
             // 
-            // cmb_a
-            // 
-            this.cmb_a.FormattingEnabled = true;
-            this.cmb_a.Location = new System.Drawing.Point(68, 227);
-            this.cmb_a.Name = "cmb_a";
-            this.cmb_a.Size = new System.Drawing.Size(86, 21);
-            this.cmb_a.TabIndex = 10;
-            // 
             // txt_g
             // 
             this.txt_g.Location = new System.Drawing.Point(68, 338);
@@ -204,6 +196,14 @@
             this.panel1.Size = new System.Drawing.Size(1189, 56);
             this.panel1.TabIndex = 12;
             // 
+            // cmb_a
+            // 
+            this.cmb_a.FormattingEnabled = true;
+            this.cmb_a.Location = new System.Drawing.Point(68, 227);
+            this.cmb_a.Name = "cmb_a";
+            this.cmb_a.Size = new System.Drawing.Size(87, 21);
+            this.cmb_a.TabIndex = 13;
+            // 
             // PantallaInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -211,9 +211,9 @@
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1179, 533);
             this.ControlBox = false;
+            this.Controls.Add(this.cmb_a);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_calcular);
-            this.Controls.Add(this.cmb_a);
             this.Controls.Add(this.txt_a);
             this.Controls.Add(this.txt_m);
             this.Controls.Add(this.txt_k);
@@ -250,7 +250,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btn_cerrar_programa;
-        private System.Windows.Forms.ComboBox cmb_a;
         private System.Windows.Forms.TextBox txt_g;
         private System.Windows.Forms.TextBox txt_k;
         private System.Windows.Forms.TextBox txt_m;
@@ -259,6 +258,7 @@
         private System.Windows.Forms.TextBox txt_a;
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
         private System.Windows.Forms.Panel panel1;
+        private Clases.ComboBox01 cmb_a;
     }
 }
 
