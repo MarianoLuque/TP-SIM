@@ -14,15 +14,15 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Clases
             Estructura_ComboBox edc = new Estructura_ComboBox();
 
             DataTable workTable = new DataTable("Funciones");
-            DataColumn column1 = new DataColumn("nombre");
-            workTable.Columns.Add(column1);
+            DataColumn columna_nombre = new DataColumn("nombre");
+            workTable.Columns.Add(columna_nombre);
+            
             DataRow row1 = workTable.NewRow();
-            row1["nombre"] = "3 + 8 K";
-
             DataRow row2 = workTable.NewRow();
-            row2["nombre"] = "5 + 8 K";
-
             DataRow row3 = workTable.NewRow();
+
+            row1["nombre"] = "3 + 8 K";
+            row2["nombre"] = "5 + 8 K";
             row3["nombre"] = "1 + 4 K";
 
             workTable.Rows.Add(row1);

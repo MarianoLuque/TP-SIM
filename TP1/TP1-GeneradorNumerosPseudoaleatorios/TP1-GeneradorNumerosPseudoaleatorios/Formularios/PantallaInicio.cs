@@ -13,8 +13,8 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
 {
     public partial class PantallaInicio : Form
     {
-        private bool flag_semilla, flag_k, flag_g;
-        private bool flag_a = true;
+        private bool flag_semilla, flag_k, flag_g, flag_a;
+
         NE_funcion funcion = new NE_funcion();
 
         public PantallaInicio()
@@ -71,6 +71,14 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
             }
 
             //Compruebo si se seleccionó la formula para la variable a
+            if(cmb_a.SelectedIndex == -1)
+            {
+                flag_a = false;
+            }
+            else
+            {
+                flag_a = true;
+            }
 
             //Si todas las condiciones se cumplen, retorno verdadero, si alguna no se cumple retorno falso para mostrar el mensaje de error
             if(flag_semilla && flag_k && flag_g && flag_a)
@@ -126,7 +134,9 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
                 }
 
                 MessageBox.Show(error_message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
             }
+
         }
 
 
