@@ -47,15 +47,15 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             this.txt_a = new System.Windows.Forms.TextBox();
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.cmb_a = new TP1_GeneradorNumerosPseudoaleatorios.Clases.ComboBox01();
             this.btn_cerrar_programa = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.cmb_a = new TP1_GeneradorNumerosPseudoaleatorios.Clases.ComboBox01();
+            this.dg_datos = new System.Windows.Forms.DataGridView();
             this.x0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.multiplicador = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sumando = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_datos)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -190,14 +190,6 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             this.panel1.Size = new System.Drawing.Size(1189, 56);
             this.panel1.TabIndex = 12;
             // 
-            // cmb_a
-            // 
-            this.cmb_a.FormattingEnabled = true;
-            this.cmb_a.Location = new System.Drawing.Point(68, 227);
-            this.cmb_a.Name = "cmb_a";
-            this.cmb_a.Size = new System.Drawing.Size(87, 21);
-            this.cmb_a.TabIndex = 13;
-            // 
             // btn_cerrar_programa
             // 
             this.btn_cerrar_programa.BackColor = System.Drawing.Color.Transparent;
@@ -211,21 +203,29 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             this.btn_cerrar_programa.UseVisualStyleBackColor = false;
             this.btn_cerrar_programa.Click += new System.EventHandler(this.btn_cerrar_programa_Click);
             // 
-            // dataGridView1
+            // cmb_a
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cmb_a.FormattingEnabled = true;
+            this.cmb_a.Location = new System.Drawing.Point(68, 227);
+            this.cmb_a.Name = "cmb_a";
+            this.cmb_a.Size = new System.Drawing.Size(87, 21);
+            this.cmb_a.TabIndex = 13;
+            // 
+            // dg_datos
+            // 
+            this.dg_datos.AllowUserToAddRows = false;
+            this.dg_datos.AllowUserToDeleteRows = false;
+            this.dg_datos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_datos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.x0,
             this.mod,
             this.multiplicador,
             this.sumando});
-            this.dataGridView1.Location = new System.Drawing.Point(68, 58);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(443, 50);
-            this.dataGridView1.TabIndex = 14;
+            this.dg_datos.Location = new System.Drawing.Point(68, 58);
+            this.dg_datos.Name = "dg_datos";
+            this.dg_datos.ReadOnly = true;
+            this.dg_datos.Size = new System.Drawing.Size(443, 50);
+            this.dg_datos.TabIndex = 14;
             // 
             // x0
             // 
@@ -258,7 +258,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1179, 533);
             this.ControlBox = false;
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dg_datos);
             this.Controls.Add(this.cmb_a);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_calcular);
@@ -283,7 +283,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_datos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,7 +309,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
         private System.Windows.Forms.Panel panel1;
         private Clases.ComboBox01 cmb_a;
         private System.Windows.Forms.Button btn_cerrar_programa;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dg_datos;
         private System.Windows.Forms.DataGridViewTextBoxColumn x0;
         private System.Windows.Forms.DataGridViewTextBoxColumn mod;
         private System.Windows.Forms.DataGridViewTextBoxColumn multiplicador;

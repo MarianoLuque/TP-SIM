@@ -1,0 +1,16 @@
+Metodo congruencial lineal
+
+	semilla (X0): mayor a cero y entero
+	constante aditiva (c): mayor a cero, entero y relativamente prima de m
+	constante multiplicativa (a): 1 + 4 k
+	k: mayor a cero y entero
+	modulo (m): 2 ^ g
+	g: mayor a cero y entero
+
+Metodo congruencial multiplicativo
+
+	semilla (X0): mayor a cero, entero e impar
+	constante multiplicativa (a): 3 + 8 k ó 5 + 8 k
+	k: mayor a cero y entero
+	modulo (m): 2 ^ g
+	g: mayor a cero y entero

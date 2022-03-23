@@ -406,3 +406,4 @@ D:\nano\Facultad\UTN\4to\SIM\TP-SIM\TP1\TP1-GeneradorNumerosPseudoaleatorios\TP1
 D:\nano\Facultad\UTN\4to\SIM\TP-SIM\TP1\TP1-GeneradorNumerosPseudoaleatorios\TP1-GeneradorNumerosPseudoaleatorios\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
 D:\nano\Facultad\UTN\4to\SIM\TP-SIM\TP1\TP1-GeneradorNumerosPseudoaleatorios\TP1-GeneradorNumerosPseudoaleatorios\bin\Debug\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
 D:\nano\Facultad\UTN\4to\SIM\TP-SIM\TP1\TP1-GeneradorNumerosPseudoaleatorios\TP1-GeneradorNumerosPseudoaleatorios\obj\Debug\TP1-GeneradorNumerosPseudoaleatorios.csproj.CopyComplete
+D:\nano\Facultad\UTN\4to\SIM\TP-SIM\TP1\TP1-GeneradorNumerosPseudoaleatorios\TP1-GeneradorNumerosPseudoaleatorios\obj\Debug\TP1_GeneradorNumerosPseudoaleatorios.Formularios.Tabla.resources

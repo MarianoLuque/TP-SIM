@@ -13,7 +13,12 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
 {
     public partial class PantallaInicio : Form
     {
-        private bool flag_semilla, flag_k, flag_g, flag_a;
+        //Banderas de txt
+        private bool flag_semilla, flag_k, flag_g, flag_a, flag_cantidad;
+        private bool flag_c = true;
+
+        //Banderas de radio button
+        private bool habilitado, lineal, multiplicativo = false;
 
         NE_funcion funcion = new NE_funcion();
 
@@ -24,48 +29,55 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            cmb_a.CargarCombo(funcion.DatosComboCliente());
-        }
+            //Deshabilito todo hasta que seleccione el método
+            habilitar(habilitado);
+            txt_c.Visible = false;
+            lb_c.Visible = false;
 
-        private void btn_cerrar_programa_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private bool chequear_valores()
         {
-            
             int m = 0;
 
-            //Si g y k pueden castearse, no son un valor no entero ni letra
+            //Si la cantidad, la semilla, g y k pueden castearse, no son un valor no entero ni letra
+            flag_cantidad = Int32.TryParse(txt_cantidad.Text, out int cantidad_casteada);
+            flag_semilla = Int32.TryParse(txt_semilla.Text, out int semilla_casteada);
             flag_k = Int32.TryParse(txt_k.Text, out int k_casteada);
             flag_g = Int32.TryParse(txt_g.Text, out int g_casteada);
-            if (flag_g && flag_k)
+
+
+            //Los valores menores a ceros los deja castear asi que compruebo que sean mayores a cero
+            if (cantidad_casteada < 0) { flag_cantidad = false; }
+            if (semilla_casteada < 0)  { flag_semilla = false;  }
+            if (k_casteada < 0) { flag_k = false; }
+            if (g_casteada < 0) { flag_g = false; }
+
+            //si g cumple las condiciones, muestro el modulo
+            if (flag_g)
             {
-                //Calculo m y la coloco en un txt para que la visualice el usuario
+                //Calculo el modulo y la coloco en un txt para que la visualice el usuario
                 m = (int)(Math.Pow((double)2, (double)g_casteada));
-                txt_m.Text = m.ToString();
             }
 
-
-            //Compruebo si la semilla es texto o no entero
-            flag_semilla = Int32.TryParse(txt_semilla.Text, out int semilla_casteada);
-            if (flag_semilla)
+            //Si el metodo es multiplicativo la semilla tiene que ser impar
+            if (multiplicativo)
             {
                 //compruebo si es impar
-                if((semilla_casteada%2) == 0)
+                if ((semilla_casteada % 2) == 0)
                 {
                     flag_semilla = false;
                 }
+            }
 
-                //compruebo si g se pudo castear
-                if (flag_g)
+            //Si el metodo es lineal la constante aditiva debe ser entera, mayor a cero y relativamente prima del modulo
+            if(lineal)
+            {
+                if(Int32.TryParse(txt_c.Text, out int c_casteada) && c_casteada > 0 && flag_g)
                 {
-                    //compruebo si la semilla es coprimo de m
-                    if (!(mcd(semilla_casteada, m) == 1))
+                    if (!(mcd(c_casteada, m) == 1))
                     {
-                        MessageBox.Show(mcd(semilla_casteada, m).ToString());
-                        flag_semilla = false;
+                        flag_c = false;
                     }
                 }
             }
@@ -81,7 +93,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
             }
 
             //Si todas las condiciones se cumplen, retorno verdadero, si alguna no se cumple retorno falso para mostrar el mensaje de error
-            if(flag_semilla && flag_k && flag_g && flag_a)
+            if(flag_semilla && flag_k && flag_g && flag_a && flag_cantidad && flag_c)
             {
                 return true;
             }
@@ -90,6 +102,54 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
                 return false;
             }
             
+        }
+
+        private void btn_calcular_Click(object sender, EventArgs e)
+        {
+            if (!chequear_valores())
+            {
+                //Conformo el mensaje de error
+                String error_message = "";
+
+                if (!flag_cantidad)
+                {
+                    error_message += "La cantidad de numeros a generar debe ser un entero positivo\n";
+                }
+
+                if (!flag_semilla && lineal)
+                {
+                    error_message += "El valor de la semilla debe ser entero positivo\n";
+                }
+
+                if (!flag_semilla && multiplicativo)
+                {
+                    error_message += "El valor de la semilla debe ser entero positivo e impar\n";
+                }
+
+                if (!flag_k)
+                {
+                    error_message += "El valor de k debe ser entero\n";
+                }
+
+                if (!flag_a)
+                {
+                    error_message += "Debe seleccionar una fórmula para aplicarle a la constante multiplicativa\n";
+                }
+
+                if (!flag_g)
+                {
+                    error_message += "El valor de g debe ser entero\n";
+                }
+
+                if (!flag_c)
+                {
+                    error_message += "La constante aditiva debe ser un entero positivo y relativamente prima del modulo";
+                }
+
+                MessageBox.Show(error_message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
         }
 
         private int mcd(int numero1, int numero2)
@@ -106,39 +166,50 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
             return resultado;
         }
 
-        private void btn_calcular_Click(object sender, EventArgs e)
+        private void rb_lineal_CheckedChanged(object sender, EventArgs e)
         {
-            if (!chequear_valores())
-            {
-                //Conformo el mensaje de error
-                String error_message = "";
+            //Habilito todo si es que no lo habilité antes (para ahorrar recursos) y cargo el combo box
+            if (!habilitado) { habilitado = true; habilitar(habilitado); }
+            cmb_a.CargarCombo(funcion.DatosLineal());
 
-                if (!flag_semilla)
-                {
-                    error_message += "El valor de la semilla debe ser impar y coprimo de m\n";
-                }
+            //Cambio el valor de las banderas de tipo de metodo
+            lineal = true;
+            multiplicativo = false;
 
-                if (!flag_g)
-                {
-                    error_message += "El valor de g debe ser entero\n";
-                }
-
-                if (!flag_k)
-                {
-                    error_message += "El valor de k debe ser entero\n";
-                }
-
-                if (!flag_a)
-                {
-                    error_message += "Debe seleccionar una fórmula para aplicarle a la variable a";
-                }
-
-                MessageBox.Show(error_message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-
+            //Habilito insertar el valor c al ser lineal
+            txt_c.Visible = true;
+            lb_c.Visible = true;
         }
 
+        private void rb_multiplicativo_CheckedChanged(object sender, EventArgs e)
+        {
+            //Habilito todo si es que no lo habilité antes (para ahorrar recursos) y cargo el combo box
+            if (!habilitado) { habilitado = true; habilitar(habilitado); }
+            cmb_a.CargarCombo(funcion.DatosMultiplicativo());
+
+            //Cambio el valor de las banderas de tipo de metodo
+            multiplicativo = true;
+            lineal = false;
+
+            //Inhabilito insertar el valor c al ser multiplicativo
+            txt_c.Visible = false;
+            lb_c.Visible = false;
+        }
+
+        private void habilitar(bool a)
+        {
+            txt_cantidad.Enabled = a;
+            txt_semilla.Enabled = a;
+            txt_k.Enabled = a;
+            txt_g.Enabled = a;
+            cmb_a.Enabled = a;
+            btn_calcular.Enabled = a;
+        }
+
+        private void btn_cerrar_programa_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
 
     }
 }

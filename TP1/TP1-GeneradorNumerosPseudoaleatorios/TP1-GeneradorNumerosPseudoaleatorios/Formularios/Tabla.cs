@@ -23,6 +23,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
         }
 
         private void btn_cerrar_programa_Click(object sender, EventArgs e)
