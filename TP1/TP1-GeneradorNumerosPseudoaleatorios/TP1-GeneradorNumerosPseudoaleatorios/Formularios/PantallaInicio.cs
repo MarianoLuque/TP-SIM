@@ -153,12 +153,14 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
                 MessageBox.Show(error_message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+            //Consulto si es linea o multiplicativo y calculo el valor de la constante multiplicativa
             if (lineal)
             {
                 multiplicador = 1 + 4 * k_casteada;
             }
             if (multiplicativo)
             {
+                //Consulto que fórmula seleccionó
                 if(cmb_a.SelectedIndex == 0)
                 {
                     multiplicador = 3 + 8 * k_casteada;
@@ -168,7 +170,11 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
                     multiplicador = 5 + 8 * k_casteada;
                 }
             }
+
+            //Creo el formulario enviandole los valores de las variables por parametro
             Tabla tablita = new Tabla(cantidad_casteada, k_casteada, g_casteada, c_casteada, modulo, multiplicador, semilla_casteada);
+
+            //Muestro el formulario
             tablita.ShowDialog();
         }
 
@@ -218,6 +224,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
 
         private void habilitar(bool a)
         {
+            //Habilito o deshabilito los txt y cmb
             txt_cantidad.Enabled = a;
             txt_semilla.Enabled = a;
             txt_k.Enabled = a;
