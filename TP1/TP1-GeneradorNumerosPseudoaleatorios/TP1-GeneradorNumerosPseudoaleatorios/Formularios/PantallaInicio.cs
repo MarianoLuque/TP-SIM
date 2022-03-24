@@ -8,11 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TP1_GeneradorNumerosPseudoaleatorios.Clases;
+using TP1_GeneradorNumerosPseudoaleatorios.Formularios;
 
 namespace TP1_GeneradorNumerosPseudoaleatorios
 {
     public partial class PantallaInicio : Form
     {
+        //Valores
+        private int modulo, multiplicador, semilla_casteada, c_casteada, cantidad_casteada, k_casteada, g_casteada;
+
         //Banderas de txt
         private bool flag_semilla, flag_k, flag_g, flag_a, flag_cantidad;
         private bool flag_c = true;
@@ -38,13 +42,13 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
 
         private bool chequear_valores()
         {
-            int m = 0;
+            modulo = 0;
 
             //Si la cantidad, la semilla, g y k pueden castearse, no son un valor no entero ni letra
-            flag_cantidad = Int32.TryParse(txt_cantidad.Text, out int cantidad_casteada);
-            flag_semilla = Int32.TryParse(txt_semilla.Text, out int semilla_casteada);
-            flag_k = Int32.TryParse(txt_k.Text, out int k_casteada);
-            flag_g = Int32.TryParse(txt_g.Text, out int g_casteada);
+            flag_cantidad = Int32.TryParse(txt_cantidad.Text, out cantidad_casteada);
+            flag_semilla = Int32.TryParse(txt_semilla.Text, out semilla_casteada);
+            flag_k = Int32.TryParse(txt_k.Text, out k_casteada);
+            flag_g = Int32.TryParse(txt_g.Text, out g_casteada);
 
 
             //Los valores menores a ceros los deja castear asi que compruebo que sean mayores a cero
@@ -57,7 +61,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
             if (flag_g)
             {
                 //Calculo el modulo y la coloco en un txt para que la visualice el usuario
-                m = (int)(Math.Pow((double)2, (double)g_casteada));
+                modulo = (int)(Math.Pow((double)2, (double)g_casteada));
             }
 
             //Si el metodo es multiplicativo la semilla tiene que ser impar
@@ -73,9 +77,9 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
             //Si el metodo es lineal la constante aditiva debe ser entera, mayor a cero y relativamente prima del modulo
             if(lineal)
             {
-                if(Int32.TryParse(txt_c.Text, out int c_casteada) && c_casteada > 0 && flag_g)
+                if(Int32.TryParse(txt_c.Text, out c_casteada) && c_casteada > 0 && flag_g)
                 {
-                    if (!(mcd(c_casteada, m) == 1))
+                    if (!(mcd(c_casteada, modulo) == 1))
                     {
                         flag_c = false;
                     }
@@ -149,7 +153,23 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
                 MessageBox.Show(error_message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-
+            if (lineal)
+            {
+                multiplicador = 1 + 4 * k_casteada;
+            }
+            if (multiplicativo)
+            {
+                if(cmb_a.SelectedIndex == 0)
+                {
+                    multiplicador = 3 + 8 * k_casteada;
+                }
+                if (cmb_a.SelectedIndex == 1)
+                {
+                    multiplicador = 5 + 8 * k_casteada;
+                }
+            }
+            Tabla tablita = new Tabla(cantidad_casteada, k_casteada, g_casteada, c_casteada, modulo, multiplicador, semilla_casteada);
+            tablita.ShowDialog();
         }
 
         private int mcd(int numero1, int numero2)
