@@ -72,17 +72,22 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
                 {
                     flag_semilla = false;
                 }
+                flag_c = true;
             }
 
             //Si el metodo es lineal la constante aditiva debe ser entera, mayor a cero y relativamente prima del modulo
             if(lineal)
             {
-                if(Int32.TryParse(txt_c.Text, out c_casteada) && c_casteada > 0 && flag_g)
+                if((Int32.TryParse(txt_c.Text, out c_casteada)) && (c_casteada > 0) && flag_g)
                 {
                     if (!(mcd(c_casteada, modulo) == 1))
                     {
                         flag_c = false;
                     }
+                }
+                else
+                {
+                    flag_c = false;
                 }
             }
 

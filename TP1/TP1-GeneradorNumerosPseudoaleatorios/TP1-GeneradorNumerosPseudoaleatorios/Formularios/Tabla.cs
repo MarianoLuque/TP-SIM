@@ -12,8 +12,13 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
 {
     public partial class Tabla : Form
     {
+        //Creo la tabla de las iteraciones
+        DataTable tabla_iteracion = new DataTable();
+
+
         //declaro las variables que voy a traer del otro formulario
         private int modulo, multiplicador, semilla, sumando, cantidad_nros, const_k, const_g;
+
         public Tabla(int cantidad, int k, int g, int c, int m, int a, int semilla)
         {
             InitializeComponent();
@@ -68,16 +73,16 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             //Asigno el data table al data grid view de las variables
             dg_datos.DataSource = workTable;
 
+            //llamo a la funcion que carga los datos en la tabla de iteracion
+            calcularYCargar();
+
             //Asigno el data table al data grid view de las iteraciones
-            dg_iteraciones.DataSource = calcularYCargar();
+            dg_iteraciones.DataSource = tabla_iteracion;
 
         }
 
-        private DataTable calcularYCargar()
+        private void calcularYCargar()
         {
-            //Creo la tabla de las iteraciones
-            DataTable tabla_iteracion = new DataTable();
-
             //Creo las columnas de la tabla
             DataColumn iteracion = new DataColumn("Iteracion");
             DataColumn termino1 = new DataColumn("a.Xi + c");
@@ -110,9 +115,95 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
                 //Calculo el Xi + 1
                 semilla = equis_i % modulo;
             }
+        }
 
-            //Retorno la tabla que voy a asignar al data grid view
-            return tabla_iteracion;
+        private void btn_prueba_ajuste_Click(object sender, EventArgs e)
+        {
+            //Creo la tabla de las iteraciones
+            DataTable tabla_ajuste = new DataTable();
+
+            //Creo las columnas de la tabla
+            DataColumn intervalo = new DataColumn("Intervalo");
+            DataColumn fo = new DataColumn("Frecuencia observada (FO)");
+            DataColumn fe = new DataColumn("Frecuencia esperada (FE)");
+            DataColumn estadistico = new DataColumn("Estadístico de prueba (C)");
+            DataColumn estadistico_acumulado = new DataColumn("Estadístico de prueba acumulado (CA)");
+
+            //Agrego las columnas a la tabla
+            tabla_ajuste.Columns.Add(intervalo);
+            tabla_ajuste.Columns.Add(fo);
+            tabla_ajuste.Columns.Add(fe);
+            tabla_ajuste.Columns.Add(estadistico);
+            tabla_ajuste.Columns.Add(estadistico_acumulado);
+
+            //Calculo la cantidad de intervalos que es la raiz de n
+            double cantidad_intervalos = Math.Truncate(Math.Sqrt(cantidad_nros));
+
+            //Defino un array para almacenar los limites de cada intervalo que al ser x intervalos necesitan x+1 limites
+            double[] intervalos_array = new double[(int)(cantidad_intervalos+1.0)];
+
+            //Defino el primer limite que es cero
+            intervalos_array[0] = 0.0;
+
+            //Por la cantidad de intervalos, calculo el primer limite distinto de cero, el resto de intervalos se ven multiplicados por i
+            for (int i = 1; i < cantidad_intervalos+1.0; i++)
+            {
+                intervalos_array[i] = Math.Round((1.0 / cantidad_intervalos) * i, 4);
+            }
+
+            //valor esperado
+            double valor_esperado = cantidad_nros / cantidad_intervalos;
+
+            //Defino un array que contenga la cantidad de valores observados
+            int[] valores_observados = new int[(int)cantidad_intervalos];
+
+            //Por cada fila de la tabla de iteraciones observo en que intervalo cae el valor observado
+            for (int i = 0; i < tabla_iteracion.Rows.Count; i++)
+            {
+                //valor observado
+                double random_observado = Convert.ToDouble(tabla_iteracion.Rows[i][3].ToString());
+
+                //comparo los limites contra los random generados
+                for (int j = 0; j < intervalos_array.Length-1; j++)
+                {
+                    if (random_observado >= intervalos_array[j] && random_observado < intervalos_array[j + 1])
+                    {
+                        valores_observados[j] += 1;
+                    }
+                }
+
+            }
+
+            //defino el estadistico de prueba acumulado
+            double estadistico_de_prueba_acumulado = 0.0;
+
+            for (int i = 0; i < cantidad_intervalos; i++)
+            {
+                //Creo la fila
+                tabla_ajuste.Rows.Add();
+
+                //le agrego el intervalo
+                tabla_ajuste.Rows[i]["Intervalo"] = intervalos_array[i].ToString() + " - " + intervalos_array[i+1].ToString();
+
+                //le agrego la frecuencia observada
+                tabla_ajuste.Rows[i]["Frecuencia observada (FO)"] = valores_observados[i];
+
+                //le agrego la frecuencia esperada
+                tabla_ajuste.Rows[i]["Frecuencia esperada (FE)"] = Math.Round(valor_esperado, 0);
+
+                //le agrego el estadistico de prueba
+                double resta_de_frecuencias = valor_esperado - valores_observados[i];
+                double resta_al_cuadrado = (Math.Pow(2.0, resta_de_frecuencias));
+                double estadistico_de_prueba = Math.Round(resta_al_cuadrado / valor_esperado, 4);
+                tabla_ajuste.Rows[i]["Estadístico de prueba (C)"] = estadistico_de_prueba;
+
+                //le agrego el estadistico de prueba acumulado
+                estadistico_de_prueba_acumulado += estadistico_de_prueba;
+                tabla_ajuste.Rows[i]["Estadístico de prueba acumulado (CA)"] = estadistico_de_prueba_acumulado;
+            }
+
+            dg_prueba_ajuste.DataSource = tabla_ajuste;
+
         }
 
         private void btn_cerrar_programa_Click(object sender, EventArgs e)

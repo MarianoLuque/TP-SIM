@@ -38,9 +38,12 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             this.btn_cerrar_programa = new System.Windows.Forms.Button();
             this.dg_datos = new System.Windows.Forms.DataGridView();
             this.dg_iteraciones = new System.Windows.Forms.DataGridView();
+            this.btn_prueba_ajuste = new System.Windows.Forms.Button();
+            this.dg_prueba_ajuste = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_datos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg_iteraciones)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_prueba_ajuste)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -103,13 +106,36 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             this.dg_iteraciones.Size = new System.Drawing.Size(793, 241);
             this.dg_iteraciones.TabIndex = 15;
             // 
+            // btn_prueba_ajuste
+            // 
+            this.btn_prueba_ajuste.Location = new System.Drawing.Point(57, 426);
+            this.btn_prueba_ajuste.Name = "btn_prueba_ajuste";
+            this.btn_prueba_ajuste.Size = new System.Drawing.Size(111, 42);
+            this.btn_prueba_ajuste.TabIndex = 16;
+            this.btn_prueba_ajuste.Text = "Prueba de ajuste";
+            this.btn_prueba_ajuste.UseVisualStyleBackColor = true;
+            this.btn_prueba_ajuste.Click += new System.EventHandler(this.btn_prueba_ajuste_Click);
+            // 
+            // dg_prueba_ajuste
+            // 
+            this.dg_prueba_ajuste.AllowUserToAddRows = false;
+            this.dg_prueba_ajuste.AllowUserToDeleteRows = false;
+            this.dg_prueba_ajuste.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_prueba_ajuste.Location = new System.Drawing.Point(57, 488);
+            this.dg_prueba_ajuste.Name = "dg_prueba_ajuste";
+            this.dg_prueba_ajuste.ReadOnly = true;
+            this.dg_prueba_ajuste.Size = new System.Drawing.Size(793, 135);
+            this.dg_prueba_ajuste.TabIndex = 17;
+            // 
             // Tabla
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
-            this.ClientSize = new System.Drawing.Size(899, 533);
+            this.ClientSize = new System.Drawing.Size(899, 656);
             this.ControlBox = false;
+            this.Controls.Add(this.dg_prueba_ajuste);
+            this.Controls.Add(this.btn_prueba_ajuste);
             this.Controls.Add(this.dg_iteraciones);
             this.Controls.Add(this.dg_datos);
             this.Controls.Add(this.panel1);
@@ -125,6 +151,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_datos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg_iteraciones)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_prueba_ajuste)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -141,5 +168,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
         private System.Windows.Forms.DataGridViewTextBoxColumn k;
         private System.Windows.Forms.DataGridViewTextBoxColumn g;
         private System.Windows.Forms.DataGridView dg_iteraciones;
+        private System.Windows.Forms.Button btn_prueba_ajuste;
+        private System.Windows.Forms.DataGridView dg_prueba_ajuste;
     }
 }
