@@ -15,6 +15,8 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
         //Creo la tabla de las iteraciones
         DataTable tabla_iteracion = new DataTable();
 
+        //Bandera de si es nuestra serie o no
+        private bool flag_serie = false; 
 
         //declaro las variables que voy a traer del otro formulario
         private int modulo, multiplicador, semilla, sumando, cantidad_nros, const_k, const_g;
@@ -32,7 +34,31 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             this.semilla = semilla;
         }
 
+        public Tabla(DataTable tabla)
+        {
+            InitializeComponent();
+            tabla_iteracion = tabla;
+            flag_serie = true;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
+        {
+            if(!flag_serie)
+            {
+                //llamo a la funcion que carga los datos en la tabla de iteracion
+                generarTabla();
+                calcularYCargar();
+            }
+            else
+            {
+                dg_datos.Visible = false;
+            }
+            //Asigno el data table al data grid view de las iteraciones
+            dg_iteraciones.DataSource = tabla_iteracion;
+
+        }
+
+        public void generarTabla()
         {
             //Creo la tabla que va a tener todas las variables
             DataTable workTable = new DataTable("Valores");
@@ -56,7 +82,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             workTable.Columns.Add(c);
 
             //Creo una fila
-            DataRow row1= workTable.NewRow();
+            DataRow row1 = workTable.NewRow();
 
             //Le asigno valores a la fila
             row1["Cantidad de numeros"] = cantidad_nros;
@@ -66,19 +92,12 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             row1["G"] = const_g;
             row1["Modulo"] = modulo;
             row1["Constante Aditiva"] = sumando;
-            
+
             //Agrego la fila a la tabla
             workTable.Rows.Add(row1);
 
             //Asigno el data table al data grid view de las variables
             dg_datos.DataSource = workTable;
-
-            //llamo a la funcion que carga los datos en la tabla de iteracion
-            calcularYCargar();
-
-            //Asigno el data table al data grid view de las iteraciones
-            dg_iteraciones.DataSource = tabla_iteracion;
-
         }
 
         private void calcularYCargar()
@@ -150,7 +169,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             {
                 intervalos_array[i] = Math.Round((1.0 / cantidad_intervalos) * i, 4);
             }
-
+            
             //valor esperado
             double valor_esperado = cantidad_nros / cantidad_intervalos;
 
@@ -171,7 +190,6 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
                         valores_observados[j] += 1;
                     }
                 }
-
             }
 
             //defino el estadistico de prueba acumulado

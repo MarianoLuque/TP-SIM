@@ -1,6 +1,6 @@
 ﻿namespace TP1_GeneradorNumerosPseudoaleatorios
 {
-    partial class PantallaInicio
+    partial class NuestraSerie
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PantallaInicio));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NuestraSerie));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txt_semilla = new System.Windows.Forms.TextBox();
@@ -39,7 +39,7 @@
             this.btn_cerrar_programa = new System.Windows.Forms.Button();
             this.txt_g = new System.Windows.Forms.TextBox();
             this.txt_k = new System.Windows.Forms.TextBox();
-            this.btn_calcular = new System.Windows.Forms.Button();
+            this.btn_cc = new System.Windows.Forms.Button();
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -49,9 +49,14 @@
             this.lb_c = new System.Windows.Forms.Label();
             this.txt_cantidad = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.dg_iteraciones = new System.Windows.Forms.DataGridView();
+            this.dg_datos = new System.Windows.Forms.DataGridView();
             this.cmb_a = new TP1_GeneradorNumerosPseudoaleatorios.Clases.ComboBox01();
+            this.btn_generar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_iteraciones)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_datos)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -68,7 +73,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(173, 256);
+            this.label2.Location = new System.Drawing.Point(112, 249);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(285, 25);
             this.label2.TabIndex = 1;
@@ -76,7 +81,7 @@
             // 
             // txt_semilla
             // 
-            this.txt_semilla.Location = new System.Drawing.Point(68, 262);
+            this.txt_semilla.Location = new System.Drawing.Point(16, 255);
             this.txt_semilla.Name = "txt_semilla";
             this.txt_semilla.Size = new System.Drawing.Size(86, 20);
             this.txt_semilla.TabIndex = 2;
@@ -85,7 +90,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(173, 410);
+            this.label3.Location = new System.Drawing.Point(112, 403);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(477, 25);
             this.label3.TabIndex = 1;
@@ -95,7 +100,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(173, 307);
+            this.label4.Location = new System.Drawing.Point(112, 300);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(206, 25);
             this.label4.TabIndex = 1;
@@ -105,7 +110,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(173, 358);
+            this.label5.Location = new System.Drawing.Point(112, 351);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(577, 25);
             this.label5.TabIndex = 1;
@@ -117,7 +122,7 @@
             this.btn_cerrar_programa.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_cerrar_programa.BackgroundImage")));
             this.btn_cerrar_programa.FlatAppearance.BorderSize = 0;
             this.btn_cerrar_programa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_cerrar_programa.Location = new System.Drawing.Point(1127, 8);
+            this.btn_cerrar_programa.Location = new System.Drawing.Point(1246, 8);
             this.btn_cerrar_programa.Name = "btn_cerrar_programa";
             this.btn_cerrar_programa.Size = new System.Drawing.Size(41, 41);
             this.btn_cerrar_programa.TabIndex = 9;
@@ -126,27 +131,28 @@
             // 
             // txt_g
             // 
-            this.txt_g.Location = new System.Drawing.Point(68, 416);
+            this.txt_g.Location = new System.Drawing.Point(16, 409);
             this.txt_g.Name = "txt_g";
             this.txt_g.Size = new System.Drawing.Size(86, 20);
             this.txt_g.TabIndex = 2;
             // 
             // txt_k
             // 
-            this.txt_k.Location = new System.Drawing.Point(68, 313);
+            this.txt_k.Location = new System.Drawing.Point(16, 306);
             this.txt_k.Name = "txt_k";
             this.txt_k.Size = new System.Drawing.Size(86, 20);
             this.txt_k.TabIndex = 2;
             // 
-            // btn_calcular
+            // btn_cc
             // 
-            this.btn_calcular.Location = new System.Drawing.Point(931, 455);
-            this.btn_calcular.Name = "btn_calcular";
-            this.btn_calcular.Size = new System.Drawing.Size(111, 42);
-            this.btn_calcular.TabIndex = 11;
-            this.btn_calcular.Text = "Calcular";
-            this.btn_calcular.UseVisualStyleBackColor = true;
-            this.btn_calcular.Click += new System.EventHandler(this.btn_calcular_Click);
+            this.btn_cc.Enabled = false;
+            this.btn_cc.Location = new System.Drawing.Point(1133, 446);
+            this.btn_cc.Name = "btn_cc";
+            this.btn_cc.Size = new System.Drawing.Size(153, 46);
+            this.btn_cc.TabIndex = 11;
+            this.btn_cc.Text = "Prueba de Chi Cuadrado";
+            this.btn_cc.UseVisualStyleBackColor = true;
+            this.btn_cc.Click += new System.EventHandler(this.btn_cc_Click);
             // 
             // bunifuElipse1
             // 
@@ -160,7 +166,7 @@
             this.panel1.Controls.Add(this.btn_cerrar_programa);
             this.panel1.Location = new System.Drawing.Point(-1, -3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1189, 56);
+            this.panel1.Size = new System.Drawing.Size(1315, 56);
             this.panel1.TabIndex = 12;
             // 
             // groupBox1
@@ -168,7 +174,7 @@
             this.groupBox1.Controls.Add(this.rb_multiplicativo);
             this.groupBox1.Controls.Add(this.rb_lineal);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(68, 59);
+            this.groupBox1.Location = new System.Drawing.Point(16, 67);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(413, 108);
             this.groupBox1.TabIndex = 14;
@@ -201,7 +207,7 @@
             // 
             // txt_c
             // 
-            this.txt_c.Location = new System.Drawing.Point(68, 467);
+            this.txt_c.Location = new System.Drawing.Point(16, 460);
             this.txt_c.Name = "txt_c";
             this.txt_c.Size = new System.Drawing.Size(86, 20);
             this.txt_c.TabIndex = 15;
@@ -210,7 +216,7 @@
             // 
             this.lb_c.AutoSize = true;
             this.lb_c.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_c.Location = new System.Drawing.Point(173, 461);
+            this.lb_c.Location = new System.Drawing.Point(112, 454);
             this.lb_c.Name = "lb_c";
             this.lb_c.Size = new System.Drawing.Size(381, 25);
             this.lb_c.TabIndex = 16;
@@ -218,7 +224,7 @@
             // 
             // txt_cantidad
             // 
-            this.txt_cantidad.Location = new System.Drawing.Point(68, 211);
+            this.txt_cantidad.Location = new System.Drawing.Point(16, 204);
             this.txt_cantidad.Name = "txt_cantidad";
             this.txt_cantidad.Size = new System.Drawing.Size(86, 20);
             this.txt_cantidad.TabIndex = 2;
@@ -227,33 +233,69 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(173, 205);
+            this.label8.Location = new System.Drawing.Point(112, 198);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(411, 25);
             this.label8.TabIndex = 1;
             this.label8.Text = "Ingrese la cantidad de numeros a generar";
             // 
+            // dg_iteraciones
+            // 
+            this.dg_iteraciones.AllowUserToAddRows = false;
+            this.dg_iteraciones.AllowUserToDeleteRows = false;
+            this.dg_iteraciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_iteraciones.Location = new System.Drawing.Point(727, 165);
+            this.dg_iteraciones.Name = "dg_iteraciones";
+            this.dg_iteraciones.ReadOnly = true;
+            this.dg_iteraciones.Size = new System.Drawing.Size(559, 264);
+            this.dg_iteraciones.TabIndex = 18;
+            // 
+            // dg_datos
+            // 
+            this.dg_datos.AllowUserToAddRows = false;
+            this.dg_datos.AllowUserToDeleteRows = false;
+            this.dg_datos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_datos.Location = new System.Drawing.Point(727, 72);
+            this.dg_datos.Name = "dg_datos";
+            this.dg_datos.ReadOnly = true;
+            this.dg_datos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dg_datos.Size = new System.Drawing.Size(559, 87);
+            this.dg_datos.TabIndex = 17;
+            // 
             // cmb_a
             // 
             this.cmb_a.FormattingEnabled = true;
-            this.cmb_a.Location = new System.Drawing.Point(68, 364);
+            this.cmb_a.Location = new System.Drawing.Point(16, 357);
             this.cmb_a.Name = "cmb_a";
             this.cmb_a.Size = new System.Drawing.Size(87, 21);
             this.cmb_a.TabIndex = 13;
             // 
-            // PantallaInicio
+            // btn_generar
+            // 
+            this.btn_generar.Location = new System.Drawing.Point(574, 97);
+            this.btn_generar.Name = "btn_generar";
+            this.btn_generar.Size = new System.Drawing.Size(132, 46);
+            this.btn_generar.TabIndex = 19;
+            this.btn_generar.Text = "Generar";
+            this.btn_generar.UseVisualStyleBackColor = true;
+            this.btn_generar.Click += new System.EventHandler(this.btn_generar_Click);
+            // 
+            // NuestraSerie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
-            this.ClientSize = new System.Drawing.Size(1179, 521);
+            this.ClientSize = new System.Drawing.Size(1308, 521);
             this.ControlBox = false;
+            this.Controls.Add(this.btn_generar);
+            this.Controls.Add(this.dg_iteraciones);
+            this.Controls.Add(this.dg_datos);
             this.Controls.Add(this.lb_c);
             this.Controls.Add(this.txt_c);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cmb_a);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btn_calcular);
+            this.Controls.Add(this.btn_cc);
             this.Controls.Add(this.txt_k);
             this.Controls.Add(this.txt_g);
             this.Controls.Add(this.txt_cantidad);
@@ -266,7 +308,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "PantallaInicio";
+            this.Name = "NuestraSerie";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Generador de Números Pseudoaleatorios";
@@ -275,6 +317,8 @@
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_iteraciones)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_datos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -291,7 +335,7 @@
         private System.Windows.Forms.Button btn_cerrar_programa;
         private System.Windows.Forms.TextBox txt_g;
         private System.Windows.Forms.TextBox txt_k;
-        private System.Windows.Forms.Button btn_calcular;
+        private System.Windows.Forms.Button btn_cc;
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
         private System.Windows.Forms.Panel panel1;
         private Clases.ComboBox01 cmb_a;
@@ -302,6 +346,9 @@
         private System.Windows.Forms.TextBox txt_c;
         private System.Windows.Forms.TextBox txt_cantidad;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DataGridView dg_iteraciones;
+        private System.Windows.Forms.DataGridView dg_datos;
+        private System.Windows.Forms.Button btn_generar;
     }
 }
 

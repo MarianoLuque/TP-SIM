@@ -12,8 +12,11 @@ using TP1_GeneradorNumerosPseudoaleatorios.Formularios;
 
 namespace TP1_GeneradorNumerosPseudoaleatorios
 {
-    public partial class PantallaInicio : Form
+    public partial class NuestraSerie : Form
     {
+        //Creo la tabla de las iteraciones
+        DataTable tabla_iteracion = new DataTable();
+
         //Valores
         private int modulo, multiplicador, semilla_casteada, c_casteada, cantidad_casteada, k_casteada, g_casteada;
 
@@ -24,9 +27,15 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
         //Banderas de radio button
         private bool habilitado, lineal, multiplicativo = false;
 
+        private void btn_cc_Click(object sender, EventArgs e)
+        {
+            ChiCuadrado chi_cuadrado = new ChiCuadrado(tabla_iteracion, cantidad_casteada);
+            chi_cuadrado.ShowDialog();
+        }
+
         NE_funcion funcion = new NE_funcion();
 
-        public PantallaInicio()
+        public NuestraSerie()
         {
             InitializeComponent();
         }
@@ -37,7 +46,6 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
             habilitar(habilitado);
             txt_c.Visible = false;
             lb_c.Visible = false;
-
         }
 
         private bool chequear_valores()
@@ -113,7 +121,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
             
         }
 
-        private void btn_calcular_Click(object sender, EventArgs e)
+        private void btn_generar_Click(object sender, EventArgs e)
         {
             if (!chequear_valores())
             {
@@ -175,12 +183,89 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
                     multiplicador = 5 + 8 * k_casteada;
                 }
             }
+            generarTabla();
+            calcularYCargar();
+            btn_cc.Enabled = true;
+        }
 
-            //Creo el formulario enviandole los valores de las variables por parametro
-            Tabla tablita = new Tabla(cantidad_casteada, k_casteada, g_casteada, c_casteada, modulo, multiplicador, semilla_casteada);
+        public void generarTabla()
+        {
+            //Creo la tabla que va a tener todas las variables
+            DataTable workTable = new DataTable("Valores");
 
-            //Muestro el formulario
-            tablita.ShowDialog();
+            //Creo las columnas que va a tener
+            DataColumn columna_cantidad = new DataColumn("Cantidad de numeros");
+            DataColumn columna_semilla = new DataColumn("Semilla");
+            DataColumn k = new DataColumn("K");
+            DataColumn a = new DataColumn("Constante Multiplicativa");
+            DataColumn g = new DataColumn("G");
+            DataColumn m = new DataColumn("Modulo");
+            DataColumn c = new DataColumn("Constante Aditiva");
+
+            //Agrego las columnas
+            workTable.Columns.Add(columna_cantidad);
+            workTable.Columns.Add(columna_semilla);
+            workTable.Columns.Add(k);
+            workTable.Columns.Add(a);
+            workTable.Columns.Add(g);
+            workTable.Columns.Add(m);
+            workTable.Columns.Add(c);
+
+            //Creo una fila
+            DataRow row1 = workTable.NewRow();
+
+            //Le asigno valores a la fila
+            row1["Cantidad de numeros"] = cantidad_casteada;
+            row1["Semilla"] = semilla_casteada;
+            row1["K"] = k_casteada;
+            row1["Constante Multiplicativa"] = multiplicador;
+            row1["G"] = g_casteada;
+            row1["Modulo"] = modulo;
+            row1["Constante Aditiva"] = c_casteada;
+
+            //Agrego la fila a la tabla
+            workTable.Rows.Add(row1);
+
+            //Asigno el data table al data grid view de las variables
+            dg_datos.DataSource = workTable;
+        }
+
+        private void calcularYCargar()
+        {
+            tabla_iteracion.Clear();
+            //Creo las columnas de la tabla
+            DataColumn iteracion = new DataColumn("Iteracion");
+            DataColumn termino1 = new DataColumn("a.Xi + c");
+            DataColumn xi_mas_uno = new DataColumn("Xi + 1");
+            DataColumn rnd = new DataColumn("RND");
+            rnd.DataType = System.Type.GetType("System.Double");
+
+            //Agrego las columnas a la tabla
+            tabla_iteracion.Columns.Add(iteracion);
+            tabla_iteracion.Columns.Add(termino1);
+            tabla_iteracion.Columns.Add(xi_mas_uno);
+            tabla_iteracion.Columns.Add(rnd);
+
+            //Por la cantidad de numeros a generar, crea una fila y le asigna los valores
+            for (int i = 0; i < cantidad_casteada; i++)
+            {
+                //Creo la fila
+                tabla_iteracion.Rows.Add();
+
+                //Calculos
+                int equis_i = (multiplicador * semilla_casteada) + c_casteada;
+                int equis_i_mas_uno = equis_i % modulo;
+
+                //Le asigno los valores
+                tabla_iteracion.Rows[i]["Iteracion"] = i;
+                tabla_iteracion.Rows[i]["a.Xi + c"] = equis_i;
+                tabla_iteracion.Rows[i]["Xi + 1"] = equis_i % modulo;
+                tabla_iteracion.Rows[i]["RND"] = (double)equis_i_mas_uno / (double)modulo;
+
+                //Calculo el Xi + 1
+                semilla_casteada = equis_i % modulo;
+            }
+            dg_iteraciones.DataSource = tabla_iteracion;
         }
 
         private int mcd(int numero1, int numero2)
@@ -235,12 +320,12 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
             txt_k.Enabled = a;
             txt_g.Enabled = a;
             cmb_a.Enabled = a;
-            btn_calcular.Enabled = a;
+            btn_cc.Enabled = a;
         }
 
         private void btn_cerrar_programa_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TP1_GeneradorNumerosPseudoaleatorios.Formularios;
 
 namespace TP1_GeneradorNumerosPseudoaleatorios
 {
@@ -16,7 +17,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PantallaInicio());
+            Application.Run(new PantallaPrincipal());
         }
     }
 }
