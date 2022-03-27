@@ -53,7 +53,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(-3, -2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(870, 57);
+            this.panel1.Size = new System.Drawing.Size(1256, 57);
             this.panel1.TabIndex = 13;
             // 
             // btn_cerrar_programa
@@ -62,7 +62,7 @@
             this.btn_cerrar_programa.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_cerrar_programa.BackgroundImage")));
             this.btn_cerrar_programa.FlatAppearance.BorderSize = 0;
             this.btn_cerrar_programa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_cerrar_programa.Location = new System.Drawing.Point(814, 6);
+            this.btn_cerrar_programa.Location = new System.Drawing.Point(1196, 6);
             this.btn_cerrar_programa.Name = "btn_cerrar_programa";
             this.btn_cerrar_programa.Size = new System.Drawing.Size(41, 41);
             this.btn_cerrar_programa.TabIndex = 14;
@@ -73,7 +73,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(212, 6);
+            this.label1.Location = new System.Drawing.Point(427, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(396, 39);
             this.label1.TabIndex = 0;
@@ -85,14 +85,14 @@
             this.reporte_chi_cuadrado.Location = new System.Drawing.Point(12, 164);
             this.reporte_chi_cuadrado.Name = "reporte_chi_cuadrado";
             this.reporte_chi_cuadrado.ServerReport.BearerToken = null;
-            this.reporte_chi_cuadrado.Size = new System.Drawing.Size(840, 503);
+            this.reporte_chi_cuadrado.Size = new System.Drawing.Size(1222, 503);
             this.reporte_chi_cuadrado.TabIndex = 14;
             // 
             // lbl_intervalo
             // 
             this.lbl_intervalo.AutoSize = true;
             this.lbl_intervalo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_intervalo.Location = new System.Drawing.Point(102, 94);
+            this.lbl_intervalo.Location = new System.Drawing.Point(247, 94);
             this.lbl_intervalo.Name = "lbl_intervalo";
             this.lbl_intervalo.Size = new System.Drawing.Size(403, 24);
             this.lbl_intervalo.TabIndex = 15;
@@ -100,7 +100,7 @@
             // 
             // txt_intervalo
             // 
-            this.txt_intervalo.Location = new System.Drawing.Point(522, 97);
+            this.txt_intervalo.Location = new System.Drawing.Point(667, 97);
             this.txt_intervalo.Mask = "99999";
             this.txt_intervalo.Name = "txt_intervalo";
             this.txt_intervalo.Size = new System.Drawing.Size(100, 20);
@@ -110,7 +110,7 @@
             // btn_generar
             // 
             this.btn_generar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_generar.Location = new System.Drawing.Point(711, 96);
+            this.btn_generar.Location = new System.Drawing.Point(1159, 96);
             this.btn_generar.Name = "btn_generar";
             this.btn_generar.Size = new System.Drawing.Size(75, 24);
             this.btn_generar.TabIndex = 17;
@@ -123,7 +123,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
-            this.ClientSize = new System.Drawing.Size(864, 679);
+            this.ClientSize = new System.Drawing.Size(1246, 679);
             this.Controls.Add(this.btn_generar);
             this.Controls.Add(this.txt_intervalo);
             this.Controls.Add(this.lbl_intervalo);
@@ -131,6 +131,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ChiCuadrado";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ChiCuadrado";
             this.Load += new System.EventHandler(this.ChiCuadrado_Load);
             this.panel1.ResumeLayout(false);

@@ -61,7 +61,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
 
         private void btn_cc_Click(object sender, EventArgs e)
         {
-            ChiCuadrado chi_cuadrado = new ChiCuadrado(tabla_iteracion, int.Parse(txt_cantidad.Text));
+            ChiCuadrado chi_cuadrado = new ChiCuadrado(tabla_iteracion, int.Parse(txt_cantidad.Text), false);
             chi_cuadrado.ShowDialog();
         }
     }

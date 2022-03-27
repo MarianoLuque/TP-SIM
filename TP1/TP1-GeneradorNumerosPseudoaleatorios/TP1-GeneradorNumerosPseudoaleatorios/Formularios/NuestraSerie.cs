@@ -29,7 +29,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
 
         private void btn_cc_Click(object sender, EventArgs e)
         {
-            ChiCuadrado chi_cuadrado = new ChiCuadrado(tabla_iteracion, cantidad_casteada);
+            ChiCuadrado chi_cuadrado = new ChiCuadrado(tabla_iteracion, cantidad_casteada, true);
             chi_cuadrado.ShowDialog();
         }
 

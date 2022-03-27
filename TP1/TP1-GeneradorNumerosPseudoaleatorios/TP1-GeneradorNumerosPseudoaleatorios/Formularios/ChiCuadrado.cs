@@ -15,15 +15,16 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
     public partial class ChiCuadrado : Form
     {
         //Creo la tabla de las iteraciones
-        DataTable tabla_ajuste = new DataTable();
-
+        DataTable tabla_ajuste;
+        private bool serie_propia;
         private int cantidad_numeros;
         private DataTable tabla_iteracion;
-        public ChiCuadrado(DataTable tabla, int cantidad_numeros)
+        public ChiCuadrado(DataTable tabla, int cantidad_numeros, bool serie_propia)
         {
             InitializeComponent();
             this.cantidad_numeros = cantidad_numeros;
             this.tabla_iteracion = tabla;
+            this.serie_propia = serie_propia;
         }
 
         private void btn_cerrar_programa_Click(object sender, EventArgs e)
@@ -34,26 +35,30 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
         private void ChiCuadrado_Load(object sender, EventArgs e)
         {
             lbl_intervalo.Text = "Ingrese la cantidad de intervalos (Sugerimos " + Math.Truncate(Math.Sqrt(cantidad_numeros)).ToString() + ")";
-            reporte_chi_cuadrado.RefreshReport();
+            this.reporte_chi_cuadrado.RefreshReport();
         }
 
         private void btn_generar_Click(object sender, EventArgs e)
         {
+            ajuste();
             CargarReporte();
         }
 
         private void CargarReporte()
         {
-            ReportDataSource datos = new ReportDataSource("DataSetCC", tabla_ajuste);
+            ReportDataSource datos = new ReportDataSource("DataSet1", tabla_ajuste);
 
-            reporte_chi_cuadrado.LocalReport.ReportEmbeddedResource = "TP1-GeneradorNumerosPseudoaleatorios.Formularios.ReporteChiCuadrado.rdlc";
+            reporte_chi_cuadrado.LocalReport.ReportEmbeddedResource = "TP1_GeneradorNumerosPseudoaleatorios.Formularios.ReporteChiCuadrado.rdlc";
             reporte_chi_cuadrado.LocalReport.DataSources.Clear();
             reporte_chi_cuadrado.LocalReport.DataSources.Add(datos);
             reporte_chi_cuadrado.RefreshReport();
         }
 
-        private void btn_prueba_ajuste_Click(object sender, EventArgs e)
+        private void ajuste()
         {
+            //Creo la tabla de las iteraciones
+            tabla_ajuste = new DataTable();
+
             //Creo las columnas de la tabla
             DataColumn intervalo = new DataColumn("Intervalo");
             DataColumn fo = new DataColumn("FO");
@@ -70,7 +75,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             tabla_ajuste.Columns.Add(estadistico_acumulado);
 
             //Calculo la cantidad de intervalos que es la raiz de n
-            double cantidad_intervalos = int.Parse(txt_intervalo.Text);
+            double cantidad_intervalos = int.Parse(txt_intervalo.Text.Trim());
 
             //Defino un array para almacenar los limites de cada intervalo que al ser x intervalos necesitan x+1 limites
             double[] intervalos_array = new double[(int)(cantidad_intervalos + 1.0)];
@@ -93,8 +98,18 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             //Por cada fila de la tabla de iteraciones observo en que intervalo cae el valor observado
             for (int i = 0; i < tabla_iteracion.Rows.Count; i++)
             {
+                int columna_de_rnd;
+                if (serie_propia)
+                {
+                    columna_de_rnd = 3;
+                }
+                else
+                {
+                    columna_de_rnd = 1;
+                }
+
                 //valor observado
-                double random_observado = Convert.ToDouble(tabla_iteracion.Rows[i][3].ToString());
+                double random_observado = Convert.ToDouble(tabla_iteracion.Rows[i][columna_de_rnd].ToString());
 
                 //comparo los limites contra los random generados
                 for (int j = 0; j < intervalos_array.Length - 1; j++)
