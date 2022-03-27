@@ -15,6 +15,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
     public partial class ChiCuadrado : Form
     {
         //Creo la tabla de las iteraciones
+        double media = 0, desviacion_estandar;
         DataTable tabla_ajuste;
         private bool serie_propia;
         private int cantidad_numeros;
@@ -51,6 +52,11 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             reporte_chi_cuadrado.LocalReport.ReportEmbeddedResource = "TP1_GeneradorNumerosPseudoaleatorios.Formularios.ReporteChiCuadrado.rdlc";
             reporte_chi_cuadrado.LocalReport.DataSources.Clear();
             reporte_chi_cuadrado.LocalReport.DataSources.Add(datos);
+            ReportParameter[] parametro = new ReportParameter[3];
+            parametro[0] = new ReportParameter("RPMedia", media.ToString());
+            parametro[1] = new ReportParameter("RPDesviacion", desviacion_estandar.ToString());
+            parametro[2] = new ReportParameter("RPVarianza", (Math.Pow((double)2, (double)desviacion_estandar)).ToString());
+            reporte_chi_cuadrado.LocalReport.SetParameters(parametro);
             reporte_chi_cuadrado.RefreshReport();
         }
 
@@ -95,22 +101,24 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             //Defino un array que contenga la cantidad de valores observados
             int[] valores_observados = new int[(int)cantidad_intervalos];
 
+            int columna_de_rnd;
+            if (serie_propia)
+            {
+                columna_de_rnd = 3;
+            }
+            else
+            {
+                columna_de_rnd = 1;
+            }
+
+            double sumador = 0;
+
             //Por cada fila de la tabla de iteraciones observo en que intervalo cae el valor observado
             for (int i = 0; i < tabla_iteracion.Rows.Count; i++)
             {
-                int columna_de_rnd;
-                if (serie_propia)
-                {
-                    columna_de_rnd = 3;
-                }
-                else
-                {
-                    columna_de_rnd = 1;
-                }
-
                 //valor observado
                 double random_observado = Convert.ToDouble(tabla_iteracion.Rows[i][columna_de_rnd].ToString());
-
+                sumador += random_observado;
                 //comparo los limites contra los random generados
                 for (int j = 0; j < intervalos_array.Length - 1; j++)
                 {
@@ -120,6 +128,15 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
                     }
                 }
             }
+            media = sumador / cantidad_numeros;
+            double sumatoria = 0;
+            for (int i = 0; i < cantidad_numeros; i++)
+            {
+                double random_observado = Convert.ToDouble(tabla_iteracion.Rows[i][columna_de_rnd].ToString());
+                double resta = Math.Pow(2.0, random_observado - media);
+                sumatoria += resta;
+            }
+            desviacion_estandar = sumatoria / cantidad_numeros;
 
             //defino el estadistico de prueba acumulado
             double estadistico_de_prueba_acumulado = 0.0;
