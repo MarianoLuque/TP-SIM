@@ -15,8 +15,8 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
     public partial class ChiCuadrado : Form
     {
         //Creo la tabla de las iteraciones
-        double media = 0;
-        double desviacion_estandar;
+        double media = 0.0;
+        double varianza;
         DataTable tabla_ajuste;
         private bool serie_propia;
         private int cantidad_numeros;
@@ -50,8 +50,8 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             reporte_chi_cuadrado.LocalReport.DataSources.Add(datos);
             ReportParameter[] parametro = new ReportParameter[3];
             parametro[0] = new ReportParameter("RPMedia", media.ToString());
-            parametro[1] = new ReportParameter("RPDesviacion", desviacion_estandar.ToString());
-            parametro[2] = new ReportParameter("RPVarianza", (Math.Pow((double)2, (double)desviacion_estandar)).ToString());
+            parametro[1] = new ReportParameter("RPDesviacion", Math.Sqrt(varianza).ToString());
+            parametro[2] = new ReportParameter("RPVarianza", varianza.ToString());
             reporte_chi_cuadrado.LocalReport.SetParameters(parametro);
             reporte_chi_cuadrado.RefreshReport();
         }
@@ -107,7 +107,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
                 columna_de_rnd = 1;
             }
 
-            double sumador = 0;
+            double sumador = 0.0;
 
             //Por cada fila de la tabla de iteraciones observo en que intervalo cae el valor observado
             for (int i = 0; i < tabla_iteracion.Rows.Count; i++)
@@ -121,6 +121,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
                     if (random_observado >= intervalos_array[j] && random_observado < intervalos_array[j + 1])
                     {
                         valores_observados[j] += 1;
+                        break;
                     }
                 }
             }
@@ -129,10 +130,10 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             for (int i = 0; i < cantidad_numeros; i++)
             {
                 double random_observado = Convert.ToDouble(tabla_iteracion.Rows[i][columna_de_rnd].ToString());
-                double resta = Math.Pow(2.0, (random_observado - media));
+                double resta = Math.Pow((random_observado - media), 2.0);
                 sumatoria += resta;
             }
-            desviacion_estandar = sumatoria / (double)cantidad_numeros;
+            varianza = sumatoria / (double)cantidad_numeros;
 
             //defino el estadistico de prueba acumulado
             double estadistico_de_prueba_acumulado = 0.0;
