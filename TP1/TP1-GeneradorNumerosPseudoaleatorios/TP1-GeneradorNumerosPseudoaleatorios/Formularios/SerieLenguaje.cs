@@ -51,7 +51,12 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
 
         private void btn_cerrar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
+        }
+
+        private void btn_volver_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
 
         private void btn_generar_Click(object sender, EventArgs e)
@@ -63,6 +68,11 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
         {
             ChiCuadrado chi_cuadrado = new ChiCuadrado(tabla_iteracion, int.Parse(txt_cantidad.Text), false);
             chi_cuadrado.ShowDialog();
+        }
+
+        private void SerieLenguaje_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -284,7 +284,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
 
         private void rb_lineal_CheckedChanged(object sender, EventArgs e)
         {
-            //Habilito todo si es que no lo habilité antes (para ahorrar recursos) y cargo el combo box
+            //Habilito todo si es que no lo habilité antes y cargo el combo box
             if (!habilitado) { habilitado = true; habilitar(habilitado); }
             cmb_a.CargarCombo(funcion.DatosLineal());
 
@@ -320,12 +320,17 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
             txt_k.Enabled = a;
             txt_g.Enabled = a;
             cmb_a.Enabled = a;
-            btn_cc.Enabled = a;
+            btn_generar.Enabled = a;
         }
 
         private void btn_cerrar_programa_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
+        }
+
+        private void btn_volver_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
 
     }

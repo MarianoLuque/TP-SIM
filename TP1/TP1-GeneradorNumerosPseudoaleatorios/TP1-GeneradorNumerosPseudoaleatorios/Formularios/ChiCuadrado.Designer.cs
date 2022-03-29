@@ -38,6 +38,7 @@
             this.lbl_intervalo = new System.Windows.Forms.Label();
             this.txt_intervalo = new System.Windows.Forms.MaskedTextBox();
             this.btn_generar = new System.Windows.Forms.Button();
+            this.btn_volver = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,7 +93,7 @@
             // 
             this.lbl_intervalo.AutoSize = true;
             this.lbl_intervalo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_intervalo.Location = new System.Drawing.Point(247, 94);
+            this.lbl_intervalo.Location = new System.Drawing.Point(321, 94);
             this.lbl_intervalo.Name = "lbl_intervalo";
             this.lbl_intervalo.Size = new System.Drawing.Size(403, 24);
             this.lbl_intervalo.TabIndex = 15;
@@ -100,7 +101,7 @@
             // 
             // txt_intervalo
             // 
-            this.txt_intervalo.Location = new System.Drawing.Point(667, 97);
+            this.txt_intervalo.Location = new System.Drawing.Point(741, 97);
             this.txt_intervalo.Mask = "99999";
             this.txt_intervalo.Name = "txt_intervalo";
             this.txt_intervalo.Size = new System.Drawing.Size(100, 20);
@@ -118,12 +119,24 @@
             this.btn_generar.UseVisualStyleBackColor = true;
             this.btn_generar.Click += new System.EventHandler(this.btn_generar_Click);
             // 
+            // btn_volver
+            // 
+            this.btn_volver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_volver.Location = new System.Drawing.Point(20, 97);
+            this.btn_volver.Name = "btn_volver";
+            this.btn_volver.Size = new System.Drawing.Size(72, 23);
+            this.btn_volver.TabIndex = 18;
+            this.btn_volver.Text = "Volver";
+            this.btn_volver.UseVisualStyleBackColor = true;
+            this.btn_volver.Click += new System.EventHandler(this.btn_volver_Click);
+            // 
             // ChiCuadrado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1246, 679);
+            this.Controls.Add(this.btn_volver);
             this.Controls.Add(this.btn_generar);
             this.Controls.Add(this.txt_intervalo);
             this.Controls.Add(this.lbl_intervalo);
@@ -151,5 +164,6 @@
         private System.Windows.Forms.MaskedTextBox txt_intervalo;
         private System.Windows.Forms.Label lbl_intervalo;
         private System.Windows.Forms.Button btn_generar;
+        private System.Windows.Forms.Button btn_volver;
     }
 }

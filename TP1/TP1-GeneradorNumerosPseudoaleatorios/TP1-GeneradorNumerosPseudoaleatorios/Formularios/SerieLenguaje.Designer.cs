@@ -36,10 +36,11 @@
             this.txt_cantidad = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_cerrar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_cerrar_programa = new System.Windows.Forms.Button();
-            this.btn_cerrar = new System.Windows.Forms.Button();
             this.btn_cc = new System.Windows.Forms.Button();
+            this.btn_volver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dg_iteraciones)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -54,7 +55,7 @@
             this.dg_iteraciones.AllowUserToAddRows = false;
             this.dg_iteraciones.AllowUserToDeleteRows = false;
             this.dg_iteraciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dg_iteraciones.Location = new System.Drawing.Point(48, 160);
+            this.dg_iteraciones.Location = new System.Drawing.Point(119, 116);
             this.dg_iteraciones.Name = "dg_iteraciones";
             this.dg_iteraciones.ReadOnly = true;
             this.dg_iteraciones.Size = new System.Drawing.Size(273, 264);
@@ -62,7 +63,7 @@
             // 
             // btn_generar
             // 
-            this.btn_generar.Location = new System.Drawing.Point(47, 112);
+            this.btn_generar.Location = new System.Drawing.Point(444, 70);
             this.btn_generar.Name = "btn_generar";
             this.btn_generar.Size = new System.Drawing.Size(87, 30);
             this.btn_generar.TabIndex = 20;
@@ -97,8 +98,21 @@
             this.panel1.Controls.Add(this.btn_cerrar_programa);
             this.panel1.Location = new System.Drawing.Point(-72, -1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(568, 50);
+            this.panel1.Size = new System.Drawing.Size(630, 50);
             this.panel1.TabIndex = 23;
+            // 
+            // btn_cerrar
+            // 
+            this.btn_cerrar.BackColor = System.Drawing.Color.Transparent;
+            this.btn_cerrar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_cerrar.BackgroundImage")));
+            this.btn_cerrar.FlatAppearance.BorderSize = 0;
+            this.btn_cerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_cerrar.Location = new System.Drawing.Point(573, 3);
+            this.btn_cerrar.Name = "btn_cerrar";
+            this.btn_cerrar.Size = new System.Drawing.Size(41, 42);
+            this.btn_cerrar.TabIndex = 24;
+            this.btn_cerrar.UseVisualStyleBackColor = false;
+            this.btn_cerrar.Click += new System.EventHandler(this.btn_cerrar_Click);
             // 
             // label2
             // 
@@ -122,23 +136,10 @@
             this.btn_cerrar_programa.TabIndex = 9;
             this.btn_cerrar_programa.UseVisualStyleBackColor = false;
             // 
-            // btn_cerrar
-            // 
-            this.btn_cerrar.BackColor = System.Drawing.Color.Transparent;
-            this.btn_cerrar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_cerrar.BackgroundImage")));
-            this.btn_cerrar.FlatAppearance.BorderSize = 0;
-            this.btn_cerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_cerrar.Location = new System.Drawing.Point(514, 5);
-            this.btn_cerrar.Name = "btn_cerrar";
-            this.btn_cerrar.Size = new System.Drawing.Size(41, 42);
-            this.btn_cerrar.TabIndex = 24;
-            this.btn_cerrar.UseVisualStyleBackColor = false;
-            this.btn_cerrar.Click += new System.EventHandler(this.btn_cerrar_Click);
-            // 
             // btn_cc
             // 
             this.btn_cc.Enabled = false;
-            this.btn_cc.Location = new System.Drawing.Point(327, 392);
+            this.btn_cc.Location = new System.Drawing.Point(398, 348);
             this.btn_cc.Name = "btn_cc";
             this.btn_cc.Size = new System.Drawing.Size(144, 32);
             this.btn_cc.TabIndex = 24;
@@ -146,12 +147,24 @@
             this.btn_cc.UseVisualStyleBackColor = true;
             this.btn_cc.Click += new System.EventHandler(this.btn_cc_Click);
             // 
+            // btn_volver
+            // 
+            this.btn_volver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_volver.Location = new System.Drawing.Point(27, 348);
+            this.btn_volver.Name = "btn_volver";
+            this.btn_volver.Size = new System.Drawing.Size(86, 30);
+            this.btn_volver.TabIndex = 25;
+            this.btn_volver.Text = "Volver";
+            this.btn_volver.UseVisualStyleBackColor = true;
+            this.btn_volver.Click += new System.EventHandler(this.btn_volver_Click);
+            // 
             // SerieLenguaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
-            this.ClientSize = new System.Drawing.Size(495, 450);
+            this.ClientSize = new System.Drawing.Size(554, 398);
+            this.Controls.Add(this.btn_volver);
             this.Controls.Add(this.btn_cc);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
@@ -162,6 +175,7 @@
             this.Name = "SerieLenguaje";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SerieLenguaje";
+            this.Load += new System.EventHandler(this.SerieLenguaje_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dg_iteraciones)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -182,5 +196,6 @@
         private System.Windows.Forms.Button btn_cerrar_programa;
         private System.Windows.Forms.Button btn_cerrar;
         private System.Windows.Forms.Button btn_cc;
+        private System.Windows.Forms.Button btn_volver;
     }
 }

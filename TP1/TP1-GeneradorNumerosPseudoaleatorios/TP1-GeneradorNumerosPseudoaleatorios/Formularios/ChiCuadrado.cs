@@ -15,7 +15,8 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
     public partial class ChiCuadrado : Form
     {
         //Creo la tabla de las iteraciones
-        double media = 0, desviacion_estandar;
+        double media = 0;
+        double desviacion_estandar;
         DataTable tabla_ajuste;
         private bool serie_propia;
         private int cantidad_numeros;
@@ -26,11 +27,6 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             this.cantidad_numeros = cantidad_numeros;
             this.tabla_iteracion = tabla;
             this.serie_propia = serie_propia;
-        }
-
-        private void btn_cerrar_programa_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void ChiCuadrado_Load(object sender, EventArgs e)
@@ -128,15 +124,15 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
                     }
                 }
             }
-            media = sumador / cantidad_numeros;
+            media = sumador / (double)cantidad_numeros;
             double sumatoria = 0;
             for (int i = 0; i < cantidad_numeros; i++)
             {
                 double random_observado = Convert.ToDouble(tabla_iteracion.Rows[i][columna_de_rnd].ToString());
-                double resta = Math.Pow(2.0, random_observado - media);
+                double resta = Math.Pow(2.0, (random_observado - media));
                 sumatoria += resta;
             }
-            desviacion_estandar = sumatoria / cantidad_numeros;
+            desviacion_estandar = sumatoria / (double)cantidad_numeros;
 
             //defino el estadistico de prueba acumulado
             double estadistico_de_prueba_acumulado = 0.0;
@@ -166,6 +162,16 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
                 tabla_ajuste.Rows[i]["CA"] = estadistico_de_prueba_acumulado;
             }
 
+        }
+
+        private void btn_cerrar_programa_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btn_volver_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

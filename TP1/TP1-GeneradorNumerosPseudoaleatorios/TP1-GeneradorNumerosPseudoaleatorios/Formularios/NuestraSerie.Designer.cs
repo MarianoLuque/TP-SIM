@@ -53,6 +53,7 @@
             this.dg_datos = new System.Windows.Forms.DataGridView();
             this.cmb_a = new TP1_GeneradorNumerosPseudoaleatorios.Clases.ComboBox01();
             this.btn_generar = new System.Windows.Forms.Button();
+            this.btn_volver = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_iteraciones)).BeginInit();
@@ -272,6 +273,7 @@
             // 
             // btn_generar
             // 
+            this.btn_generar.Enabled = false;
             this.btn_generar.Location = new System.Drawing.Point(574, 97);
             this.btn_generar.Name = "btn_generar";
             this.btn_generar.Size = new System.Drawing.Size(132, 46);
@@ -280,6 +282,17 @@
             this.btn_generar.UseVisualStyleBackColor = true;
             this.btn_generar.Click += new System.EventHandler(this.btn_generar_Click);
             // 
+            // btn_volver
+            // 
+            this.btn_volver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_volver.Location = new System.Drawing.Point(727, 446);
+            this.btn_volver.Name = "btn_volver";
+            this.btn_volver.Size = new System.Drawing.Size(112, 46);
+            this.btn_volver.TabIndex = 20;
+            this.btn_volver.Text = "Volver";
+            this.btn_volver.UseVisualStyleBackColor = true;
+            this.btn_volver.Click += new System.EventHandler(this.btn_volver_Click);
+            // 
             // NuestraSerie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -287,6 +300,7 @@
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1308, 521);
             this.ControlBox = false;
+            this.Controls.Add(this.btn_volver);
             this.Controls.Add(this.btn_generar);
             this.Controls.Add(this.dg_iteraciones);
             this.Controls.Add(this.dg_datos);
@@ -349,6 +363,7 @@
         private System.Windows.Forms.DataGridView dg_iteraciones;
         private System.Windows.Forms.DataGridView dg_datos;
         private System.Windows.Forms.Button btn_generar;
+        private System.Windows.Forms.Button btn_volver;
     }
 }
 
