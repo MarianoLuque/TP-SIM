@@ -99,6 +99,7 @@
                       </ChartDataLabel>
                       <Style />
                       <ChartMarker>
+                        <Size>2pt</Size>
                         <Style />
                       </ChartMarker>
                       <DataElementOutput>Output</DataElementOutput>
@@ -175,8 +176,9 @@
                         <Color>#5c5c5c</Color>
                       </Style>
                     </ChartAxisTitle>
+                    <Interval>1</Interval>
                     <ChartMajorGridLines>
-                      <Enabled>False</Enabled>
+                      <Enabled>True</Enabled>
                       <Style>
                         <Border>
                           <Color>Gainsboro</Color>
@@ -184,6 +186,7 @@
                       </Style>
                     </ChartMajorGridLines>
                     <ChartMinorGridLines>
+                      <Enabled>True</Enabled>
                       <Style>
                         <Border>
                           <Color>Gainsboro</Color>
