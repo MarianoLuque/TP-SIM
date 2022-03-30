@@ -54,7 +54,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(-3, -2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1256, 57);
+            this.panel1.Size = new System.Drawing.Size(1747, 57);
             this.panel1.TabIndex = 13;
             // 
             // btn_cerrar_programa
@@ -63,7 +63,7 @@
             this.btn_cerrar_programa.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_cerrar_programa.BackgroundImage")));
             this.btn_cerrar_programa.FlatAppearance.BorderSize = 0;
             this.btn_cerrar_programa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_cerrar_programa.Location = new System.Drawing.Point(1196, 6);
+            this.btn_cerrar_programa.Location = new System.Drawing.Point(1691, 6);
             this.btn_cerrar_programa.Name = "btn_cerrar_programa";
             this.btn_cerrar_programa.Size = new System.Drawing.Size(41, 41);
             this.btn_cerrar_programa.TabIndex = 14;
@@ -86,14 +86,14 @@
             this.reporte_chi_cuadrado.Location = new System.Drawing.Point(12, 164);
             this.reporte_chi_cuadrado.Name = "reporte_chi_cuadrado";
             this.reporte_chi_cuadrado.ServerReport.BearerToken = null;
-            this.reporte_chi_cuadrado.Size = new System.Drawing.Size(1222, 503);
+            this.reporte_chi_cuadrado.Size = new System.Drawing.Size(1717, 791);
             this.reporte_chi_cuadrado.TabIndex = 14;
             // 
             // lbl_intervalo
             // 
             this.lbl_intervalo.AutoSize = true;
             this.lbl_intervalo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_intervalo.Location = new System.Drawing.Point(321, 94);
+            this.lbl_intervalo.Location = new System.Drawing.Point(436, 94);
             this.lbl_intervalo.Name = "lbl_intervalo";
             this.lbl_intervalo.Size = new System.Drawing.Size(403, 24);
             this.lbl_intervalo.TabIndex = 15;
@@ -101,7 +101,7 @@
             // 
             // txt_intervalo
             // 
-            this.txt_intervalo.Location = new System.Drawing.Point(741, 97);
+            this.txt_intervalo.Location = new System.Drawing.Point(856, 97);
             this.txt_intervalo.Mask = "99999";
             this.txt_intervalo.Name = "txt_intervalo";
             this.txt_intervalo.Size = new System.Drawing.Size(100, 20);
@@ -111,7 +111,7 @@
             // btn_generar
             // 
             this.btn_generar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_generar.Location = new System.Drawing.Point(1159, 96);
+            this.btn_generar.Location = new System.Drawing.Point(1654, 94);
             this.btn_generar.Name = "btn_generar";
             this.btn_generar.Size = new System.Drawing.Size(75, 24);
             this.btn_generar.TabIndex = 17;
@@ -135,7 +135,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
-            this.ClientSize = new System.Drawing.Size(1246, 679);
+            this.ClientSize = new System.Drawing.Size(1741, 967);
             this.Controls.Add(this.btn_volver);
             this.Controls.Add(this.btn_generar);
             this.Controls.Add(this.txt_intervalo);

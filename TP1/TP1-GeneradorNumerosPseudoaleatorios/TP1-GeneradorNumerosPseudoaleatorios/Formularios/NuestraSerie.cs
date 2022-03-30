@@ -21,8 +21,8 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
         private int modulo, multiplicador, semilla_casteada, c_casteada, cantidad_casteada, k_casteada, g_casteada;
 
         //Banderas de txt
-        private bool flag_semilla, flag_k, flag_g, flag_a, flag_cantidad;
-        private bool flag_c = true;
+        private bool flag_semilla, flag_k, flag_g, flag_a, flag_cantidad, flag_c;
+
 
         //Banderas de radio button
         private bool habilitado, lineal, multiplicativo = false;
@@ -93,6 +93,10 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
                     if (!(mcd(c_casteada, modulo) == 1))
                     {
                         flag_c = false;
+                    }
+                    else
+                    {
+                        flag_c = true;
                     }
                 }
                 else
