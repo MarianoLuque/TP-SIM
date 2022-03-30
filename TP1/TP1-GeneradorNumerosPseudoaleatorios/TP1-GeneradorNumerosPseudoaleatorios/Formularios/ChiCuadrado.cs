@@ -65,6 +65,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             DataColumn intervalo = new DataColumn("Intervalo");
             DataColumn fo = new DataColumn("FO");
             DataColumn fe = new DataColumn("FE");
+            DataColumn mc = new DataColumn("MC");
             DataColumn estadistico = new DataColumn("C");
             DataColumn estadistico_acumulado = new DataColumn("CA");
 
@@ -73,6 +74,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             tabla_ajuste.Columns.Add(intervalo);
             tabla_ajuste.Columns.Add(fo);
             tabla_ajuste.Columns.Add(fe);
+            tabla_ajuste.Columns.Add(mc);
             tabla_ajuste.Columns.Add(estadistico);
             tabla_ajuste.Columns.Add(estadistico_acumulado);
 
@@ -151,6 +153,8 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
 
                 //le agrego la frecuencia esperada
                 tabla_ajuste.Rows[i]["FE"] = Math.Round(valor_esperado, 0);
+
+                tabla_ajuste.Rows[i]["MC"] = ((intervalos_array[i + 1]- intervalos_array[i])/2)+ intervalos_array[i];
 
                 //le agrego el estadistico de prueba
                 double resta_de_frecuencias = valor_esperado - valores_observados[i];

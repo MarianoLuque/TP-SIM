@@ -37,10 +37,14 @@
           <DataField>CA</DataField>
           <rd:TypeName>System.Double</rd:TypeName>
         </Field>
+        <Field Name="MC">
+          <DataField>MC</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DataSetChiCuadrado</rd:DataSetName>
-        <rd:SchemaPath>D:\nano\Facultad\UTN\4to\SIM\TP-SIM\TP1\TP1-GeneradorNumerosPseudoaleatorios\TP1-GeneradorNumerosPseudoaleatorios\Formularios\DataSetChiCuadrado.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\Escritorio\TP-SIM\TP1\TP1-GeneradorNumerosPseudoaleatorios\TP1-GeneradorNumerosPseudoaleatorios\Formularios\DataSetChiCuadrado.xsd</rd:SchemaPath>
         <rd:TableName>DataTableChiCuadrado</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -461,6 +465,9 @@
                   <Width>2.23542cm</Width>
                 </TablixColumn>
                 <TablixColumn>
+                  <Width>2.5cm</Width>
+                </TablixColumn>
+                <TablixColumn>
                   <Width>2.79104cm</Width>
                 </TablixColumn>
                 <TablixColumn>
@@ -558,6 +565,40 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                              <Width>2pt</Width>
+                            </Border>
+                            <BackgroundColor>Aqua</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox8">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Marca de clase</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox8</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -741,6 +782,38 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="MC">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!MC.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>MC</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <rd:Selected>true</rd:Selected>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="C">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -812,6 +885,7 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -828,7 +902,7 @@
             <Top>2.77495cm</Top>
             <Left>14.46953cm</Left>
             <Height>1.72917cm</Height>
-            <Width>14.51083cm</Width>
+            <Width>17.01083cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -942,7 +1016,7 @@
         <Height>5.40625in</Height>
         <Style />
       </Body>
-      <Width>11.625in</Width>
+      <Width>12.39384in</Width>
       <Page>
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>

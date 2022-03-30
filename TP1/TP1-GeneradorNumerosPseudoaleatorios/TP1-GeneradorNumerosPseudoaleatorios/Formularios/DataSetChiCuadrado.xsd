@@ -12,7 +12,7 @@
   <xs:element name="DataSetChiCuadrado" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSetChiCuadrado" msprop:Generator_UserDSName="DataSetChiCuadrado">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="DataTableChiCuadrado" msprop:Generator_TableClassName="DataTableChiCuadradoDataTable" msprop:Generator_TableVarName="tableDataTableChiCuadrado" msprop:Generator_TablePropName="DataTableChiCuadrado" msprop:Generator_RowDeletingName="DataTableChiCuadradoRowDeleting" msprop:Generator_RowChangingName="DataTableChiCuadradoRowChanging" msprop:Generator_RowEvHandlerName="DataTableChiCuadradoRowChangeEventHandler" msprop:Generator_RowDeletedName="DataTableChiCuadradoRowDeleted" msprop:Generator_UserTableName="DataTableChiCuadrado" msprop:Generator_RowChangedName="DataTableChiCuadradoRowChanged" msprop:Generator_RowEvArgName="DataTableChiCuadradoRowChangeEvent" msprop:Generator_RowClassName="DataTableChiCuadradoRow">
+        <xs:element name="DataTableChiCuadrado" msprop:Generator_TableClassName="DataTableChiCuadradoDataTable" msprop:Generator_TableVarName="tableDataTableChiCuadrado" msprop:Generator_RowChangedName="DataTableChiCuadradoRowChanged" msprop:Generator_TablePropName="DataTableChiCuadrado" msprop:Generator_RowDeletingName="DataTableChiCuadradoRowDeleting" msprop:Generator_RowChangingName="DataTableChiCuadradoRowChanging" msprop:Generator_RowEvHandlerName="DataTableChiCuadradoRowChangeEventHandler" msprop:Generator_RowDeletedName="DataTableChiCuadradoRowDeleted" msprop:Generator_RowClassName="DataTableChiCuadradoRow" msprop:Generator_UserTableName="DataTableChiCuadrado" msprop:Generator_RowEvArgName="DataTableChiCuadradoRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Intervalo" msprop:Generator_ColumnVarNameInTable="columnIntervalo" msprop:Generator_ColumnPropNameInRow="Intervalo" msprop:Generator_ColumnPropNameInTable="IntervaloColumn" msprop:Generator_UserColumnName="Intervalo" type="xs:string" minOccurs="0" />
@@ -20,6 +20,7 @@
               <xs:element name="FE" msprop:Generator_ColumnVarNameInTable="columnFE" msprop:Generator_ColumnPropNameInRow="FE" msprop:Generator_ColumnPropNameInTable="FEColumn" msprop:Generator_UserColumnName="FE" type="xs:double" minOccurs="0" />
               <xs:element name="C" msprop:Generator_ColumnVarNameInTable="columnC" msprop:Generator_ColumnPropNameInRow="C" msprop:Generator_ColumnPropNameInTable="CColumn" msprop:Generator_UserColumnName="C" type="xs:double" minOccurs="0" />
               <xs:element name="CA" msprop:Generator_ColumnVarNameInTable="columnCA" msprop:Generator_ColumnPropNameInRow="CA" msprop:Generator_ColumnPropNameInTable="CAColumn" msprop:Generator_UserColumnName="CA" type="xs:double" minOccurs="0" />
+              <xs:element name="MC" msprop:Generator_ColumnVarNameInTable="columnMC" msprop:Generator_ColumnPropNameInRow="MC" msprop:Generator_ColumnPropNameInTable="MCColumn" msprop:Generator_UserColumnName="MC" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

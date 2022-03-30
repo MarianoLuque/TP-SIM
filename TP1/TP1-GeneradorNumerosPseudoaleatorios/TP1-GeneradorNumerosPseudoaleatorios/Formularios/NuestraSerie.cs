@@ -27,12 +27,14 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
         //Banderas de radio button
         private bool habilitado, lineal, multiplicativo = false;
 
+        //Realizar prueba chi cuadrado
         private void btn_cc_Click(object sender, EventArgs e)
         {
             ChiCuadrado chi_cuadrado = new ChiCuadrado(tabla_iteracion, cantidad_casteada, true);
             chi_cuadrado.ShowDialog();
         }
 
+        //Contiene la información para cargar los combo Box según corresponda (lineal o multiplicativo)
         NE_funcion funcion = new NE_funcion();
 
         public NuestraSerie()
@@ -232,7 +234,8 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
 
         private void calcularYCargar()
         {
-            tabla_iteracion.Clear();
+            tabla_iteracion.Rows.Clear();
+            tabla_iteracion.Columns.Clear();
             //Creo las columnas de la tabla
             DataColumn iteracion = new DataColumn("Iteracion");
             DataColumn termino1 = new DataColumn("a.Xi + c");
