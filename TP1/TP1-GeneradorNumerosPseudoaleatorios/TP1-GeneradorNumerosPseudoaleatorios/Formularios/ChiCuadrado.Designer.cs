@@ -118,7 +118,7 @@
             // btn_generar
             // 
             this.btn_generar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_generar.Location = new System.Drawing.Point(1909, 118);
+            this.btn_generar.Location = new System.Drawing.Point(1741, 114);
             this.btn_generar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_generar.Name = "btn_generar";
             this.btn_generar.Size = new System.Drawing.Size(100, 30);

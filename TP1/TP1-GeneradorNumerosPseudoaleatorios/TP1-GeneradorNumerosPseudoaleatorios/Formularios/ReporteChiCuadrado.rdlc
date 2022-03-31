@@ -115,6 +115,15 @@
                       <Style />
                     </ChartDataLabel>
                   </ChartEmptyPoints>
+                  <CustomProperties>
+                    <CustomProperty>
+                      <Name>PointWidth</Name>
+                      <Value>1</Value>
+                    </CustomProperty>
+                  </CustomProperties>
+                  <ChartItemInLegend>
+                    <LegendText>Frecuencia Observada</LegendText>
+                  </ChartItemInLegend>
                   <ValueAxisName>Primary</ValueAxisName>
                   <CategoryAxisName>Primary</CategoryAxisName>
                   <ChartSmartLabel>
@@ -148,6 +157,15 @@
                       <Style />
                     </ChartDataLabel>
                   </ChartEmptyPoints>
+                  <CustomProperties>
+                    <CustomProperty>
+                      <Name>PointWidth</Name>
+                      <Value>1</Value>
+                    </CustomProperty>
+                  </CustomProperties>
+                  <ChartItemInLegend>
+                    <LegendText>Frecuencia Esperada</LegendText>
+                  </ChartItemInLegend>
                   <ValueAxisName>Primary</ValueAxisName>
                   <CategoryAxisName>Primary</CategoryAxisName>
                   <ChartSmartLabel>
@@ -558,7 +576,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Frecuencia esperada</Value>
+                                  <Value>Frecuencia Esperada</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -592,7 +610,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Marca de clase</Value>
+                                  <Value>Marca de Clase</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -626,7 +644,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Estadistico de prueba (C)</Value>
+                                  <Value>Estadístico de Prueba (C)</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -660,7 +678,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Estadistico de prueba acumulado (CA)</Value>
+                                  <Value>Estadístico de Prueba Acumulado (CA)</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
