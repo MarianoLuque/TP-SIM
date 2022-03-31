@@ -88,7 +88,7 @@
             this.txt_semilla.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txt_semilla.Name = "txt_semilla";
             this.txt_semilla.Size = new System.Drawing.Size(113, 22);
-            this.txt_semilla.TabIndex = 1;
+            this.txt_semilla.TabIndex = 2;
             // 
             // label3
             // 
@@ -143,7 +143,7 @@
             this.txt_g.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txt_g.Name = "txt_g";
             this.txt_g.Size = new System.Drawing.Size(113, 22);
-            this.txt_g.TabIndex = 4;
+            this.txt_g.TabIndex = 5;
             // 
             // txt_k
             // 
@@ -151,7 +151,7 @@
             this.txt_k.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txt_k.Name = "txt_k";
             this.txt_k.Size = new System.Drawing.Size(113, 22);
-            this.txt_k.TabIndex = 2;
+            this.txt_k.TabIndex = 3;
             // 
             // btn_cc
             // 
@@ -160,7 +160,7 @@
             this.btn_cc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_cc.Name = "btn_cc";
             this.btn_cc.Size = new System.Drawing.Size(204, 57);
-            this.btn_cc.TabIndex = 11;
+            this.btn_cc.TabIndex = 9;
             this.btn_cc.Text = "Prueba de Chi Cuadrado";
             this.btn_cc.UseVisualStyleBackColor = true;
             this.btn_cc.Click += new System.EventHandler(this.btn_cc_Click);
@@ -191,7 +191,7 @@
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Size = new System.Drawing.Size(551, 133);
-            this.groupBox1.TabIndex = 14;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Metodo congruencial";
             // 
@@ -227,7 +227,7 @@
             this.txt_c.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txt_c.Name = "txt_c";
             this.txt_c.Size = new System.Drawing.Size(113, 22);
-            this.txt_c.TabIndex = 5;
+            this.txt_c.TabIndex = 6;
             // 
             // lb_c
             // 
@@ -246,7 +246,7 @@
             this.txt_cantidad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txt_cantidad.Name = "txt_cantidad";
             this.txt_cantidad.Size = new System.Drawing.Size(113, 22);
-            this.txt_cantidad.TabIndex = 0;
+            this.txt_cantidad.TabIndex = 1;
             // 
             // label8
             // 
@@ -270,7 +270,7 @@
             this.dg_iteraciones.ReadOnly = true;
             this.dg_iteraciones.RowHeadersWidth = 51;
             this.dg_iteraciones.Size = new System.Drawing.Size(745, 325);
-            this.dg_iteraciones.TabIndex = 18;
+            this.dg_iteraciones.TabIndex = 11;
             // 
             // dg_datos
             // 
@@ -283,7 +283,7 @@
             this.dg_datos.ReadOnly = true;
             this.dg_datos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dg_datos.Size = new System.Drawing.Size(745, 107);
-            this.dg_datos.TabIndex = 17;
+            this.dg_datos.TabIndex = 10;
             // 
             // btn_generar
             // 
@@ -292,7 +292,7 @@
             this.btn_generar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_generar.Name = "btn_generar";
             this.btn_generar.Size = new System.Drawing.Size(176, 57);
-            this.btn_generar.TabIndex = 6;
+            this.btn_generar.TabIndex = 7;
             this.btn_generar.Text = "Generar";
             this.btn_generar.UseVisualStyleBackColor = true;
             this.btn_generar.Click += new System.EventHandler(this.btn_generar_Click);
@@ -304,7 +304,7 @@
             this.btn_volver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_volver.Name = "btn_volver";
             this.btn_volver.Size = new System.Drawing.Size(149, 57);
-            this.btn_volver.TabIndex = 7;
+            this.btn_volver.TabIndex = 8;
             this.btn_volver.Text = "Volver";
             this.btn_volver.UseVisualStyleBackColor = true;
             this.btn_volver.Click += new System.EventHandler(this.btn_volver_Click);
@@ -316,7 +316,7 @@
             this.cmb_a.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_a.Name = "cmb_a";
             this.cmb_a.Size = new System.Drawing.Size(115, 24);
-            this.cmb_a.TabIndex = 3;
+            this.cmb_a.TabIndex = 4;
             // 
             // NuestraSerie
             // 

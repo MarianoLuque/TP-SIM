@@ -55,5 +55,8 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Clases
             return edc;
         }
 
+        
+
+
     }
 }

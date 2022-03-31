@@ -444,8 +444,8 @@
             <DataSetName>DataSet1</DataSetName>
             <Top>2.19287cm</Top>
             <Left>0.26141cm</Left>
-            <Height>12.32896cm</Height>
-            <Width>25.915cm</Width>
+            <Height>10.33929cm</Height>
+            <Width>21.597cm</Width>
             <Style>
               <Border>
                 <Color>LightGrey</Color>
@@ -901,8 +901,8 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Top>2.77495cm</Top>
-            <Left>26.53453cm</Left>
+            <Top>2.19287cm</Top>
+            <Left>22.0348cm</Left>
             <Height>1.72917cm</Height>
             <Width>17.01083cm</Width>
             <ZIndex>1</ZIndex>
@@ -931,8 +931,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>6.53203cm</Top>
-            <Left>30.37099cm</Left>
+            <Top>0.9652cm</Top>
+            <Left>0.26141cm</Left>
             <Height>0.6cm</Height>
             <Width>5.04cm</Width>
             <ZIndex>2</ZIndex>
@@ -965,10 +965,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox4</rd:DefaultName>
-            <Top>8.04016cm</Top>
-            <Left>30.37099cm</Left>
+            <Top>0.9652cm</Top>
+            <Left>6.48441cm</Left>
             <Height>0.6cm</Height>
-            <Width>5.04cm</Width>
+            <Width>9.20983cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -999,11 +999,113 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>9.81287cm</Top>
-            <Left>30.37099cm</Left>
+            <Top>0.9652cm</Top>
+            <Left>16.81841cm</Left>
             <Height>0.6cm</Height>
             <Width>5.04cm</Width>
             <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Valor de Chi Calculado: </Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!RPChiCalculado.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox10</rd:DefaultName>
+            <Top>13.3477cm</Top>
+            <Left>0.26141cm</Left>
+            <Height>0.6cm</Height>
+            <Width>7.0085cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox11">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Valor de Chi Tabulado: </Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!RPChiTabulado.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox10</rd:DefaultName>
+            <Top>13.3477cm</Top>
+            <Left>8.08727cm</Left>
+            <Height>0.6cm</Height>
+            <Width>7.0085cm</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox12">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Conclusión: </Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!RPResultado.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox10</rd:DefaultName>
+            <Top>14.27903cm</Top>
+            <Left>0.26141cm</Left>
+            <Height>0.6cm</Height>
+            <Width>14.83436cm</Width>
+            <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1044,6 +1146,18 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="RPChiCalculado">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="RPChiTabulado">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="RPResultado">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -1064,6 +1178,21 @@
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>RPVarianza</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>RPChiCalculado</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>RPChiTabulado</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>RPResultado</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

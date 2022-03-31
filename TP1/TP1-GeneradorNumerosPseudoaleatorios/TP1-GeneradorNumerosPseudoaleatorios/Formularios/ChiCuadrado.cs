@@ -21,6 +21,16 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
         private bool serie_propia;
         private int cantidad_numeros;
         private DataTable tabla_iteracion;
+        double valor_chi_tabulado = 0.0;
+        double estadistico_de_prueba_acumulado = 0.0;
+        string resultado;
+
+        private double[] vp_chi = new double[] { 3.8415, 5.9915, 7.8147, 9.4877, 11.0705, 12.5916,
+                                                 14.0671, 15.5073, 16.9190, 18.3070, 19.6752, 21,0261,
+                                                 22.3620, 23.6848, 24.9958, 26.2962, 27.5871, 28.8693,
+                                                 30.1435, 31.4104, 32.6706, 33.9245, 35.1725, 36.4150,
+                                                 37.6525, 38.8851, 40.1133, 41.3372, 42.5569, 43.7730};
+
         public ChiCuadrado(DataTable tabla, int cantidad_numeros, bool serie_propia)
         {
             InitializeComponent();
@@ -48,10 +58,13 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             reporte_chi_cuadrado.LocalReport.ReportEmbeddedResource = "TP1_GeneradorNumerosPseudoaleatorios.Formularios.ReporteChiCuadrado.rdlc";
             reporte_chi_cuadrado.LocalReport.DataSources.Clear();
             reporte_chi_cuadrado.LocalReport.DataSources.Add(datos);
-            ReportParameter[] parametro = new ReportParameter[3];
+            ReportParameter[] parametro = new ReportParameter[6];
             parametro[0] = new ReportParameter("RPMedia", media.ToString());
             parametro[1] = new ReportParameter("RPDesviacion", Math.Sqrt(varianza).ToString());
             parametro[2] = new ReportParameter("RPVarianza", varianza.ToString());
+            parametro[3] = new ReportParameter("RPChiCalculado", estadistico_de_prueba_acumulado.ToString());
+            parametro[4] = new ReportParameter("RPChiTabulado", valor_chi_tabulado.ToString());
+            parametro[5] = new ReportParameter("RPResultado", resultado);
             reporte_chi_cuadrado.LocalReport.SetParameters(parametro);
             reporte_chi_cuadrado.RefreshReport();
         }
@@ -87,14 +100,19 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             //Defino el primer limite que es cero
             intervalos_array[0] = 0.0;
 
+            //valor esperado
+            double valor_esperado = cantidad_numeros / cantidad_intervalos;
+            if (valor_esperado < 5.0)
+            {
+                cantidad_intervalos = cantidad_numeros / 5;
+                valor_esperado = cantidad_numeros / cantidad_intervalos;
+            }
+
             //Por la cantidad de intervalos, calculo el primer limite distinto de cero, el resto de intervalos se ven multiplicados por i
             for (int i = 1; i < cantidad_intervalos + 1.0; i++)
             {
                 intervalos_array[i] = Math.Round((1.0 / cantidad_intervalos) * i, 4);
-            }
-
-            //valor esperado
-            double valor_esperado = cantidad_numeros / cantidad_intervalos;
+            }           
 
             //Defino un array que contenga la cantidad de valores observados
             int[] valores_observados = new int[(int)cantidad_intervalos];
@@ -138,7 +156,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             varianza = sumatoria / (double)cantidad_numeros;
 
             //defino el estadistico de prueba acumulado
-            double estadistico_de_prueba_acumulado = 0.0;
+            
 
             for (int i = 0; i < cantidad_intervalos; i++)
             {
@@ -154,7 +172,8 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
                 //le agrego la frecuencia esperada
                 tabla_ajuste.Rows[i]["FE"] = Math.Round(valor_esperado, 0);
 
-                tabla_ajuste.Rows[i]["MC"] = ((intervalos_array[i + 1]- intervalos_array[i])/2)+ intervalos_array[i];
+                //Calculamos la marca de clase
+                tabla_ajuste.Rows[i]["MC"] = ((intervalos_array[i + 1] + intervalos_array[i]) / 2);
 
                 //le agrego el estadistico de prueba
                 double resta_de_frecuencias = valor_esperado - valores_observados[i];
@@ -167,7 +186,21 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
                 tabla_ajuste.Rows[i]["CA"] = estadistico_de_prueba_acumulado;
             }
 
+
+            valor_chi_tabulado = vp_chi[(int)cantidad_intervalos - 1];
+
+            if (estadistico_de_prueba_acumulado <= valor_chi_tabulado)
+            {
+                resultado = " No se puede rechazar la hipótesis";
+            }
+            else
+            {
+                resultado = " La hipótesis es rechazada ";
+            }
+
         }
+
+
 
         private void btn_cerrar_programa_Click(object sender, EventArgs e)
         {
