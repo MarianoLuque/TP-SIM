@@ -51,11 +51,17 @@
             this.msk_media_normal = new System.Windows.Forms.MaskedTextBox();
             this.msk_media_exp = new System.Windows.Forms.MaskedTextBox();
             this.msk_lam_exp = new System.Windows.Forms.MaskedTextBox();
-            this.msk_media_poi = new System.Windows.Forms.MaskedTextBox();
             this.msk_lam_poi = new System.Windows.Forms.MaskedTextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rb_lambda_exp = new System.Windows.Forms.RadioButton();
+            this.rb_media_exp = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rb_bm = new System.Windows.Forms.RadioButton();
+            this.rb_con = new System.Windows.Forms.RadioButton();
             this.gb_distribucion.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_salir
@@ -65,7 +71,7 @@
             this.btn_salir.FlatAppearance.BorderSize = 0;
             this.btn_salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_salir.Location = new System.Drawing.Point(1393, 15);
-            this.btn_salir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_salir.Margin = new System.Windows.Forms.Padding(4);
             this.btn_salir.Name = "btn_salir";
             this.btn_salir.Size = new System.Drawing.Size(55, 50);
             this.btn_salir.TabIndex = 25;
@@ -98,7 +104,7 @@
             // 
             this.txt_cantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_cantidad.Location = new System.Drawing.Point(633, 132);
-            this.txt_cantidad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_cantidad.Margin = new System.Windows.Forms.Padding(4);
             this.txt_cantidad.Mask = "99999";
             this.txt_cantidad.Name = "txt_cantidad";
             this.txt_cantidad.Size = new System.Drawing.Size(91, 30);
@@ -107,16 +113,18 @@
             // 
             // gb_distribucion
             // 
+            this.gb_distribucion.Controls.Add(this.groupBox2);
+            this.gb_distribucion.Controls.Add(this.groupBox1);
             this.gb_distribucion.Controls.Add(this.rb_poisson);
             this.gb_distribucion.Controls.Add(this.rb_exponencial);
             this.gb_distribucion.Controls.Add(this.rb_uniforme);
             this.gb_distribucion.Controls.Add(this.rb_normal);
             this.gb_distribucion.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_distribucion.Location = new System.Drawing.Point(60, 199);
-            this.gb_distribucion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gb_distribucion.Margin = new System.Windows.Forms.Padding(4);
             this.gb_distribucion.Name = "gb_distribucion";
-            this.gb_distribucion.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.gb_distribucion.Size = new System.Drawing.Size(619, 268);
+            this.gb_distribucion.Padding = new System.Windows.Forms.Padding(4);
+            this.gb_distribucion.Size = new System.Drawing.Size(619, 390);
             this.gb_distribucion.TabIndex = 29;
             this.gb_distribucion.TabStop = false;
             this.gb_distribucion.Text = "Seleccione el tipo de distribución ";
@@ -125,8 +133,8 @@
             // 
             this.rb_poisson.AutoSize = true;
             this.rb_poisson.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb_poisson.Location = new System.Drawing.Point(49, 188);
-            this.rb_poisson.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rb_poisson.Location = new System.Drawing.Point(49, 344);
+            this.rb_poisson.Margin = new System.Windows.Forms.Padding(4);
             this.rb_poisson.Name = "rb_poisson";
             this.rb_poisson.Size = new System.Drawing.Size(342, 35);
             this.rb_poisson.TabIndex = 0;
@@ -139,8 +147,8 @@
             // 
             this.rb_exponencial.AutoSize = true;
             this.rb_exponencial.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb_exponencial.Location = new System.Drawing.Point(49, 146);
-            this.rb_exponencial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rb_exponencial.Location = new System.Drawing.Point(49, 217);
+            this.rb_exponencial.Margin = new System.Windows.Forms.Padding(4);
             this.rb_exponencial.Name = "rb_exponencial";
             this.rb_exponencial.Size = new System.Drawing.Size(399, 35);
             this.rb_exponencial.TabIndex = 0;
@@ -154,7 +162,7 @@
             this.rb_uniforme.AutoSize = true;
             this.rb_uniforme.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rb_uniforme.Location = new System.Drawing.Point(49, 63);
-            this.rb_uniforme.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rb_uniforme.Margin = new System.Windows.Forms.Padding(4);
             this.rb_uniforme.Name = "rb_uniforme";
             this.rb_uniforme.Size = new System.Drawing.Size(371, 35);
             this.rb_uniforme.TabIndex = 0;
@@ -168,7 +176,7 @@
             this.rb_normal.AutoSize = true;
             this.rb_normal.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rb_normal.Location = new System.Drawing.Point(49, 105);
-            this.rb_normal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rb_normal.Margin = new System.Windows.Forms.Padding(4);
             this.rb_normal.Name = "rb_normal";
             this.rb_normal.Size = new System.Drawing.Size(342, 35);
             this.rb_normal.TabIndex = 0;
@@ -182,7 +190,7 @@
             this.btn_continuar.Enabled = false;
             this.btn_continuar.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_continuar.Location = new System.Drawing.Point(1268, 542);
-            this.btn_continuar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_continuar.Margin = new System.Windows.Forms.Padding(4);
             this.btn_continuar.Name = "btn_continuar";
             this.btn_continuar.Size = new System.Drawing.Size(180, 47);
             this.btn_continuar.TabIndex = 30;
@@ -193,7 +201,7 @@
             // msk_A
             // 
             this.msk_A.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.msk_A.Location = new System.Drawing.Point(776, 233);
+            this.msk_A.Location = new System.Drawing.Point(809, 233);
             this.msk_A.Mask = "99999999";
             this.msk_A.Name = "msk_A";
             this.msk_A.Size = new System.Drawing.Size(133, 37);
@@ -203,7 +211,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.label3.Location = new System.Drawing.Point(724, 239);
+            this.label3.Location = new System.Drawing.Point(745, 239);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(32, 31);
             this.label3.TabIndex = 33;
@@ -213,7 +221,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.label4.Location = new System.Drawing.Point(915, 239);
+            this.label4.Location = new System.Drawing.Point(947, 239);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(32, 31);
             this.label4.TabIndex = 34;
@@ -223,7 +231,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.label5.Location = new System.Drawing.Point(918, 292);
+            this.label5.Location = new System.Drawing.Point(950, 369);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 31);
             this.label5.TabIndex = 38;
@@ -233,7 +241,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.label6.Location = new System.Drawing.Point(727, 292);
+            this.label6.Location = new System.Drawing.Point(748, 369);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 31);
             this.label6.TabIndex = 37;
@@ -243,7 +251,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.label7.Location = new System.Drawing.Point(920, 346);
+            this.label7.Location = new System.Drawing.Point(750, 482);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(27, 31);
             this.label7.TabIndex = 42;
@@ -253,7 +261,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.label8.Location = new System.Drawing.Point(728, 346);
+            this.label8.Location = new System.Drawing.Point(951, 482);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(28, 31);
             this.label8.TabIndex = 41;
@@ -271,7 +279,7 @@
             // msk_de
             // 
             this.msk_de.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.msk_de.Location = new System.Drawing.Point(988, 289);
+            this.msk_de.Location = new System.Drawing.Point(988, 366);
             this.msk_de.Mask = "99999999";
             this.msk_de.Name = "msk_de";
             this.msk_de.Size = new System.Drawing.Size(133, 37);
@@ -280,7 +288,7 @@
             // msk_media_normal
             // 
             this.msk_media_normal.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.msk_media_normal.Location = new System.Drawing.Point(776, 289);
+            this.msk_media_normal.Location = new System.Drawing.Point(809, 366);
             this.msk_media_normal.Mask = "99999999";
             this.msk_media_normal.Name = "msk_media_normal";
             this.msk_media_normal.Size = new System.Drawing.Size(133, 37);
@@ -289,7 +297,7 @@
             // msk_media_exp
             // 
             this.msk_media_exp.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.msk_media_exp.Location = new System.Drawing.Point(988, 343);
+            this.msk_media_exp.Location = new System.Drawing.Point(809, 479);
             this.msk_media_exp.Mask = "99999999";
             this.msk_media_exp.Name = "msk_media_exp";
             this.msk_media_exp.Size = new System.Drawing.Size(133, 37);
@@ -298,49 +306,102 @@
             // msk_lam_exp
             // 
             this.msk_lam_exp.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.msk_lam_exp.Location = new System.Drawing.Point(776, 343);
+            this.msk_lam_exp.Location = new System.Drawing.Point(988, 481);
             this.msk_lam_exp.Mask = "99999999";
             this.msk_lam_exp.Name = "msk_lam_exp";
             this.msk_lam_exp.Size = new System.Drawing.Size(133, 37);
             this.msk_lam_exp.TabIndex = 46;
             // 
-            // msk_media_poi
-            // 
-            this.msk_media_poi.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.msk_media_poi.Location = new System.Drawing.Point(988, 398);
-            this.msk_media_poi.Mask = "99999999";
-            this.msk_media_poi.Name = "msk_media_poi";
-            this.msk_media_poi.Size = new System.Drawing.Size(133, 37);
-            this.msk_media_poi.TabIndex = 51;
-            // 
             // msk_lam_poi
             // 
             this.msk_lam_poi.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.msk_lam_poi.Location = new System.Drawing.Point(776, 398);
+            this.msk_lam_poi.Location = new System.Drawing.Point(809, 541);
             this.msk_lam_poi.Mask = "99999999";
             this.msk_lam_poi.Name = "msk_lam_poi";
-            this.msk_lam_poi.Size = new System.Drawing.Size(133, 37);
+            this.msk_lam_poi.Size = new System.Drawing.Size(312, 37);
             this.msk_lam_poi.TabIndex = 50;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.label9.Location = new System.Drawing.Point(920, 401);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(27, 31);
-            this.label9.TabIndex = 49;
-            this.label9.Text = "x̄";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.label10.Location = new System.Drawing.Point(728, 401);
+            this.label10.Location = new System.Drawing.Point(728, 544);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(28, 31);
+            this.label10.Size = new System.Drawing.Size(70, 31);
             this.label10.TabIndex = 48;
-            this.label10.Text = "λ";
+            this.label10.Text = "λ ó x̄";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rb_lambda_exp);
+            this.groupBox1.Controls.Add(this.rb_media_exp);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.groupBox1.Location = new System.Drawing.Point(72, 256);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(492, 71);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Seleccione la variable a ingresar";
+            // 
+            // rb_lambda_exp
+            // 
+            this.rb_lambda_exp.AutoSize = true;
+            this.rb_lambda_exp.Location = new System.Drawing.Point(195, 30);
+            this.rb_lambda_exp.Name = "rb_lambda_exp";
+            this.rb_lambda_exp.Size = new System.Drawing.Size(48, 33);
+            this.rb_lambda_exp.TabIndex = 3;
+            this.rb_lambda_exp.TabStop = true;
+            this.rb_lambda_exp.Text = "λ";
+            this.rb_lambda_exp.UseVisualStyleBackColor = true;
+            this.rb_lambda_exp.CheckedChanged += new System.EventHandler(this.media_lambda_changed);
+            // 
+            // rb_media_exp
+            // 
+            this.rb_media_exp.AutoSize = true;
+            this.rb_media_exp.Location = new System.Drawing.Point(138, 30);
+            this.rb_media_exp.Name = "rb_media_exp";
+            this.rb_media_exp.Size = new System.Drawing.Size(45, 33);
+            this.rb_media_exp.TabIndex = 2;
+            this.rb_media_exp.TabStop = true;
+            this.rb_media_exp.Text = "x̄";
+            this.rb_media_exp.UseVisualStyleBackColor = true;
+            this.rb_media_exp.CheckedChanged += new System.EventHandler(this.media_lambda_changed);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rb_con);
+            this.groupBox2.Controls.Add(this.rb_bm);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.groupBox2.Location = new System.Drawing.Point(72, 145);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(491, 65);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Seleccione el método de cálculo:";
+            // 
+            // rb_bm
+            // 
+            this.rb_bm.AutoSize = true;
+            this.rb_bm.Location = new System.Drawing.Point(93, 26);
+            this.rb_bm.Name = "rb_bm";
+            this.rb_bm.Size = new System.Drawing.Size(150, 33);
+            this.rb_bm.TabIndex = 0;
+            this.rb_bm.TabStop = true;
+            this.rb_bm.Text = "Box-Muller";
+            this.rb_bm.UseVisualStyleBackColor = true;
+            this.rb_bm.CheckedChanged += new System.EventHandler(this.box_con_changed);
+            // 
+            // rb_con
+            // 
+            this.rb_con.AutoSize = true;
+            this.rb_con.Location = new System.Drawing.Point(249, 26);
+            this.rb_con.Name = "rb_con";
+            this.rb_con.Size = new System.Drawing.Size(167, 33);
+            this.rb_con.TabIndex = 1;
+            this.rb_con.TabStop = true;
+            this.rb_con.Text = "Convolución";
+            this.rb_con.UseVisualStyleBackColor = true;
+            this.rb_con.CheckedChanged += new System.EventHandler(this.box_con_changed);
             // 
             // Principal
             // 
@@ -349,9 +410,7 @@
             this.BackColor = System.Drawing.Color.DarkCyan;
             this.ClientSize = new System.Drawing.Size(1464, 603);
             this.ControlBox = false;
-            this.Controls.Add(this.msk_media_poi);
             this.Controls.Add(this.msk_lam_poi);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.msk_media_exp);
             this.Controls.Add(this.msk_lam_exp);
@@ -372,11 +431,15 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_salir);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.gb_distribucion.ResumeLayout(false);
             this.gb_distribucion.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -406,10 +469,14 @@
         private System.Windows.Forms.MaskedTextBox msk_media_normal;
         private System.Windows.Forms.MaskedTextBox msk_media_exp;
         private System.Windows.Forms.MaskedTextBox msk_lam_exp;
-        private System.Windows.Forms.MaskedTextBox msk_media_poi;
         private System.Windows.Forms.MaskedTextBox msk_lam_poi;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rb_lambda_exp;
+        private System.Windows.Forms.RadioButton rb_media_exp;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton rb_con;
+        private System.Windows.Forms.RadioButton rb_bm;
     }
 }
 

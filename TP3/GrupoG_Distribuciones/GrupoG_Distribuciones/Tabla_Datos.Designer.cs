@@ -33,6 +33,7 @@ namespace GrupoG_Distribuciones
             this.btn_salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dg_rnd = new System.Windows.Forms.DataGridView();
+            this.btn_continuar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dg_rnd)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,12 +72,23 @@ namespace GrupoG_Distribuciones
             this.dg_rnd.Size = new System.Drawing.Size(736, 488);
             this.dg_rnd.TabIndex = 28;
             // 
+            // btn_continuar
+            // 
+            this.btn_continuar.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.btn_continuar.Location = new System.Drawing.Point(998, 534);
+            this.btn_continuar.Name = "btn_continuar";
+            this.btn_continuar.Size = new System.Drawing.Size(164, 46);
+            this.btn_continuar.TabIndex = 29;
+            this.btn_continuar.Text = "Continuar";
+            this.btn_continuar.UseVisualStyleBackColor = true;
+            // 
             // Tabla_Datos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkCyan;
             this.ClientSize = new System.Drawing.Size(1198, 656);
+            this.Controls.Add(this.btn_continuar);
             this.Controls.Add(this.dg_rnd);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_salir);
@@ -94,5 +106,6 @@ namespace GrupoG_Distribuciones
         private System.Windows.Forms.Button btn_salir;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dg_rnd;
+        private System.Windows.Forms.Button btn_continuar;
     }
 }
