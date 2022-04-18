@@ -85,7 +85,7 @@
             // txt_semilla
             // 
             this.txt_semilla.Location = new System.Drawing.Point(21, 314);
-            this.txt_semilla.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_semilla.Margin = new System.Windows.Forms.Padding(4);
             this.txt_semilla.Name = "txt_semilla";
             this.txt_semilla.Size = new System.Drawing.Size(113, 22);
             this.txt_semilla.TabIndex = 2;
@@ -129,8 +129,8 @@
             this.btn_cerrar_programa.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_cerrar_programa.BackgroundImage")));
             this.btn_cerrar_programa.FlatAppearance.BorderSize = 0;
             this.btn_cerrar_programa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_cerrar_programa.Location = new System.Drawing.Point(1661, 10);
-            this.btn_cerrar_programa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_cerrar_programa.Location = new System.Drawing.Point(1875, 10);
+            this.btn_cerrar_programa.Margin = new System.Windows.Forms.Padding(4);
             this.btn_cerrar_programa.Name = "btn_cerrar_programa";
             this.btn_cerrar_programa.Size = new System.Drawing.Size(55, 50);
             this.btn_cerrar_programa.TabIndex = 9;
@@ -140,7 +140,7 @@
             // txt_g
             // 
             this.txt_g.Location = new System.Drawing.Point(21, 503);
-            this.txt_g.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_g.Margin = new System.Windows.Forms.Padding(4);
             this.txt_g.Name = "txt_g";
             this.txt_g.Size = new System.Drawing.Size(113, 22);
             this.txt_g.TabIndex = 5;
@@ -148,7 +148,7 @@
             // txt_k
             // 
             this.txt_k.Location = new System.Drawing.Point(21, 377);
-            this.txt_k.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_k.Margin = new System.Windows.Forms.Padding(4);
             this.txt_k.Name = "txt_k";
             this.txt_k.Size = new System.Drawing.Size(113, 22);
             this.txt_k.TabIndex = 3;
@@ -157,7 +157,7 @@
             // 
             this.btn_cc.Enabled = false;
             this.btn_cc.Location = new System.Drawing.Point(1511, 549);
-            this.btn_cc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_cc.Margin = new System.Windows.Forms.Padding(4);
             this.btn_cc.Name = "btn_cc";
             this.btn_cc.Size = new System.Drawing.Size(204, 57);
             this.btn_cc.TabIndex = 9;
@@ -176,9 +176,9 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btn_cerrar_programa);
             this.panel1.Location = new System.Drawing.Point(-1, -4);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1753, 69);
+            this.panel1.Size = new System.Drawing.Size(2115, 69);
             this.panel1.TabIndex = 12;
             // 
             // groupBox1
@@ -187,9 +187,9 @@
             this.groupBox1.Controls.Add(this.rb_lineal);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(21, 82);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(551, 133);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -199,7 +199,7 @@
             // 
             this.rb_multiplicativo.AutoSize = true;
             this.rb_multiplicativo.Location = new System.Drawing.Point(8, 80);
-            this.rb_multiplicativo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rb_multiplicativo.Margin = new System.Windows.Forms.Padding(4);
             this.rb_multiplicativo.Name = "rb_multiplicativo";
             this.rb_multiplicativo.Size = new System.Drawing.Size(191, 35);
             this.rb_multiplicativo.TabIndex = 1;
@@ -212,7 +212,7 @@
             // 
             this.rb_lineal.AutoSize = true;
             this.rb_lineal.Location = new System.Drawing.Point(8, 37);
-            this.rb_lineal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rb_lineal.Margin = new System.Windows.Forms.Padding(4);
             this.rb_lineal.Name = "rb_lineal";
             this.rb_lineal.Size = new System.Drawing.Size(107, 35);
             this.rb_lineal.TabIndex = 0;
@@ -224,7 +224,7 @@
             // txt_c
             // 
             this.txt_c.Location = new System.Drawing.Point(21, 566);
-            this.txt_c.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_c.Margin = new System.Windows.Forms.Padding(4);
             this.txt_c.Name = "txt_c";
             this.txt_c.Size = new System.Drawing.Size(113, 22);
             this.txt_c.TabIndex = 6;
@@ -243,7 +243,7 @@
             // txt_cantidad
             // 
             this.txt_cantidad.Location = new System.Drawing.Point(21, 251);
-            this.txt_cantidad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_cantidad.Margin = new System.Windows.Forms.Padding(4);
             this.txt_cantidad.Name = "txt_cantidad";
             this.txt_cantidad.Size = new System.Drawing.Size(113, 22);
             this.txt_cantidad.TabIndex = 1;
@@ -265,7 +265,7 @@
             this.dg_iteraciones.AllowUserToDeleteRows = false;
             this.dg_iteraciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dg_iteraciones.Location = new System.Drawing.Point(969, 203);
-            this.dg_iteraciones.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dg_iteraciones.Margin = new System.Windows.Forms.Padding(4);
             this.dg_iteraciones.Name = "dg_iteraciones";
             this.dg_iteraciones.ReadOnly = true;
             this.dg_iteraciones.RowHeadersWidth = 51;
@@ -278,7 +278,7 @@
             this.dg_datos.AllowUserToDeleteRows = false;
             this.dg_datos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dg_datos.Location = new System.Drawing.Point(969, 89);
-            this.dg_datos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dg_datos.Margin = new System.Windows.Forms.Padding(4);
             this.dg_datos.Name = "dg_datos";
             this.dg_datos.ReadOnly = true;
             this.dg_datos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
@@ -289,7 +289,7 @@
             // 
             this.btn_generar.Enabled = false;
             this.btn_generar.Location = new System.Drawing.Point(765, 119);
-            this.btn_generar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_generar.Margin = new System.Windows.Forms.Padding(4);
             this.btn_generar.Name = "btn_generar";
             this.btn_generar.Size = new System.Drawing.Size(176, 57);
             this.btn_generar.TabIndex = 7;
@@ -301,7 +301,7 @@
             // 
             this.btn_volver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_volver.Location = new System.Drawing.Point(969, 549);
-            this.btn_volver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_volver.Margin = new System.Windows.Forms.Padding(4);
             this.btn_volver.Name = "btn_volver";
             this.btn_volver.Size = new System.Drawing.Size(149, 57);
             this.btn_volver.TabIndex = 8;
@@ -323,7 +323,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
-            this.ClientSize = new System.Drawing.Size(1744, 641);
+            this.ClientSize = new System.Drawing.Size(1942, 641);
             this.ControlBox = false;
             this.Controls.Add(this.btn_volver);
             this.Controls.Add(this.btn_generar);
@@ -345,12 +345,13 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NuestraSerie";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

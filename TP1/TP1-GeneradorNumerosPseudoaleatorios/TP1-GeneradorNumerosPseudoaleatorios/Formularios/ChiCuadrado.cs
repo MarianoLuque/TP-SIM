@@ -19,7 +19,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
         double varianza;
         DataTable tabla_ajuste;
         private bool serie_propia;
-        private int cantidad_numeros;
+        private Int64 cantidad_numeros;
         private DataTable tabla_iteracion;
         double valor_chi_tabulado = 0.0;
         double estadistico_de_prueba_acumulado = 0.0;
@@ -31,7 +31,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
                                                  30.1435, 31.4104, 32.6706, 33.9245, 35.1725, 36.4150,
                                                  37.6525, 38.8851, 40.1133, 41.3372, 42.5569, 43.7730};
 
-        public ChiCuadrado(DataTable tabla, int cantidad_numeros, bool serie_propia)
+        public ChiCuadrado(DataTable tabla, Int64 cantidad_numeros, bool serie_propia)
         {
             InitializeComponent();
             this.cantidad_numeros = cantidad_numeros;
@@ -41,7 +41,16 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
 
         private void ChiCuadrado_Load(object sender, EventArgs e)
         {
-            lbl_intervalo.Text = "Ingrese la cantidad de intervalos (Sugerimos " + Math.Truncate(Math.Sqrt(cantidad_numeros)).ToString() + ")";
+            int max_intervalo = (int)Math.Truncate(Math.Sqrt(cantidad_numeros));
+            if(max_intervalo > 32)
+            {
+                lbl_intervalo.Text = "Ingrese la cantidad de intervalos (Debe ser como maximo 31)";
+            }
+            else
+            {
+                lbl_intervalo.Text = "Ingrese la cantidad de intervalos (Sugerimos " + max_intervalo.ToString() + ")";
+            }
+            
             this.reporte_chi_cuadrado.RefreshReport();
         }
 
@@ -186,7 +195,11 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
                 tabla_ajuste.Rows[i]["CA"] = estadistico_de_prueba_acumulado;
             }
 
-
+            if (cantidad_intervalos > 31)
+            {
+                MessageBox.Show("La cantidad de intervalos debe ser menor a 31");
+                return;
+            }
             valor_chi_tabulado = vp_chi[(int)cantidad_intervalos - 1];
 
             if (estadistico_de_prueba_acumulado <= valor_chi_tabulado)

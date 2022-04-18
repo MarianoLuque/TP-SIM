@@ -462,8 +462,8 @@
             <DataSetName>DataSet1</DataSetName>
             <Top>2.19287cm</Top>
             <Left>0.26141cm</Left>
-            <Height>10.33929cm</Height>
-            <Width>21.597cm</Width>
+            <Height>7.31246cm</Height>
+            <Width>15.98783cm</Width>
             <Style>
               <Border>
                 <Color>LightGrey</Color>
@@ -920,7 +920,7 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Top>2.19287cm</Top>
-            <Left>22.0348cm</Left>
+            <Left>16.35507cm</Left>
             <Height>1.72917cm</Height>
             <Width>17.01083cm</Width>
             <ZIndex>1</ZIndex>

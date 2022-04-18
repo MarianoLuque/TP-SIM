@@ -18,7 +18,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
         DataTable tabla_iteracion = new DataTable();
 
         //Valores
-        private int modulo, multiplicador, semilla_casteada, c_casteada, cantidad_casteada, k_casteada, g_casteada;
+        private Int64 multiplicador, semilla_casteada, c_casteada, cantidad_casteada, k_casteada, g_casteada, modulo;
 
         //Banderas de txt
         private bool flag_semilla, flag_k, flag_g, flag_a, flag_cantidad, flag_c;
@@ -55,10 +55,10 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
             modulo = 0;
 
             //Si la cantidad, la semilla, g y k pueden castearse, no son un valor no entero ni letra
-            flag_cantidad = Int32.TryParse(txt_cantidad.Text, out cantidad_casteada);
-            flag_semilla = Int32.TryParse(txt_semilla.Text, out semilla_casteada);
-            flag_k = Int32.TryParse(txt_k.Text, out k_casteada);
-            flag_g = Int32.TryParse(txt_g.Text, out g_casteada);
+            flag_cantidad = Int64.TryParse(txt_cantidad.Text, out cantidad_casteada);
+            flag_semilla = Int64.TryParse(txt_semilla.Text, out semilla_casteada);
+            flag_k = Int64.TryParse(txt_k.Text, out k_casteada);
+            flag_g = Int64.TryParse(txt_g.Text, out g_casteada);
 
 
             //Los valores menores a ceros los deja castear asi que compruebo que sean mayores a cero
@@ -68,10 +68,14 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
             if (g_casteada < 0) { flag_g = false; }
 
             //si g cumple las condiciones, muestro el modulo
-            if (flag_g)
+            if (flag_g && g_casteada<55)
             {
                 //Calculo el modulo y la coloco en un txt para que la visualice el usuario
-                modulo = (int)(Math.Pow((double)2, (double)g_casteada));
+                modulo = (Int64)(Math.Pow((double)2, (double)g_casteada));
+            }
+            else
+            {
+                flag_g = false;
             }
 
             //Si el metodo es multiplicativo la semilla tiene que ser impar
@@ -88,7 +92,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
             //Si el metodo es lineal la constante aditiva debe ser entera, mayor a cero y relativamente prima del modulo
             if(lineal)
             {
-                if((Int32.TryParse(txt_c.Text, out c_casteada)) && (c_casteada > 0) && flag_g)
+                if((Int64.TryParse(txt_c.Text, out c_casteada)) && (c_casteada > 0) && flag_g)
                 {
                     if (!(mcd(c_casteada, modulo) == 1))
                     {
@@ -161,7 +165,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
 
                 if (!flag_g)
                 {
-                    error_message += "El valor de g debe ser entero\n";
+                    error_message += "El valor de g debe ser entero y menor a 55 \n";
                 }
 
                 if (!flag_c)
@@ -260,8 +264,8 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
                 tabla_iteracion.Rows.Add();
 
                 //Calculos
-                int equis_i = (multiplicador * semilla_casteada) + c_casteada;
-                int equis_i_mas_uno = equis_i % modulo;
+                Int64 equis_i = (multiplicador * semilla_casteada) + c_casteada;
+                Int64 equis_i_mas_uno = equis_i % modulo;
 
                 //Le asigno los valores
                 tabla_iteracion.Rows[i]["Iteracion"] = i;
@@ -275,9 +279,10 @@ namespace TP1_GeneradorNumerosPseudoaleatorios
             dg_iteraciones.DataSource = tabla_iteracion;
         }
 
-        private int mcd(int numero1, int numero2)
+        private long mcd(long numero1, long numero2)
         {
-            int resultado, a = numero1, b = numero2;
+            Int64 resultado, a = numero1;
+            Int64 b = numero2;
             do
             {
                 resultado = b;  // Guardamos el divisor en el resultado
