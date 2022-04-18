@@ -124,7 +124,7 @@ namespace GrupoG_Distribuciones
                 {
 
                     //Por la cantidad de numeros a generar, crea una fila y le asigna los valores
-                    for (int i = 0; i < int.Parse(txt_cantidad.Text); i++)
+                    for (int i = 0; i < n; i++)
                     {
                         //Creo la fila
                         tabla_iteracion.Rows.Add();
@@ -146,19 +146,15 @@ namespace GrupoG_Distribuciones
                 if (rb_bm.Checked)
                 {
                     //Por la cantidad de numeros a generar, crea una fila y le asigna los valores
-                    for (int i = 0; i < int.Parse(txt_cantidad.Text); i+=2)
+                    for (int i = 0; i < n; i+=2)
                     {
-                        if(i == 500)
-                        {
-                            int j = 0;
-                        }
                         //Creo la fila
                         tabla_iteracion.Rows.Add();
                         tabla_iteracion.Rows.Add();
 
                         //Le asigno los valores
-                        tabla_iteracion.Rows[i]["Iteracion"] = i;
-                        tabla_iteracion.Rows[i+1]["Iteracion"] = i + 1;
+                        tabla_iteracion.Rows[i]["Iteracion"] = i + 1;
+                        tabla_iteracion.Rows[i+1]["Iteracion"] = i + 2;
                         
                         double x1 = (Math.Truncate(myObject.NextDouble() * 10000)) / 10000;
                         double x2 = (Math.Truncate(myObject.NextDouble() * 10000)) / 10000;
