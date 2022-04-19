@@ -52,7 +52,11 @@ namespace GrupoG_Distribuciones
 
         private void btn_continuar_Click(object sender, EventArgs e)
         {
-            if(txt_cantidad.Text == "" || !(int.Parse(txt_cantidad.Text) >= 500))
+            int n = int.Parse(txt_cantidad.Text);
+            double maximo = 0;
+            double minimo = 0;
+
+            if (txt_cantidad.Text == "" || !(n >= 500))
             {
                 MessageBox.Show("La cantidad de números debe ser superior a 500");
                 return;
@@ -76,9 +80,11 @@ namespace GrupoG_Distribuciones
                 Random myObject = new Random();
                 Int64 a = Int64.Parse(msk_A.Text);
                 Int64 b = Int64.Parse(msk_B.Text);
+                maximo = b;
+                minimo = a;
 
                 //Por la cantidad de numeros a generar, crea una fila y le asigna los valores
-                for (int i = 0; i < int.Parse(txt_cantidad.Text); i++)
+                for (int i = 0; i < n; i++)
                 {
                     //Creo la fila
                     tabla_iteracion.Rows.Add();
@@ -89,7 +95,7 @@ namespace GrupoG_Distribuciones
                     double x = (a + (random_p * (b - a)));
                     tabla_iteracion.Rows[i]["RND"] = x;
                 }
-                Tabla_Datos td = new Tabla_Datos(tabla_iteracion);
+                Tabla_Datos td = new Tabla_Datos(tabla_iteracion, n, "U", maximo, minimo);
                 td.ShowDialog();
             }
 
@@ -115,7 +121,6 @@ namespace GrupoG_Distribuciones
 
                 double media = double.Parse(msk_media_normal.Text);
                 double de = double.Parse(msk_de.Text);
-                int n = int.Parse(txt_cantidad.Text);
                 
                 Random myObject = new Random();
 
@@ -137,9 +142,25 @@ namespace GrupoG_Distribuciones
                             x += (Math.Truncate(myObject.NextDouble() * 10000)) / 10000;
                         }
                         x = ((x - 6) * de) + media;
+                        if (i == 0)
+                        {
+                            maximo = x;
+                            minimo = x;
+                        }
+                        else
+                        {
+                            if (x > maximo)
+                            {
+                                maximo = x;
+                            }
+                            if (x < minimo)
+                            {
+                                minimo = x;
+                            }
+                        }
                         tabla_iteracion.Rows[i]["RND"] = x;
                     }
-                    Tabla_Datos td = new Tabla_Datos(tabla_iteracion);
+                    Tabla_Datos td = new Tabla_Datos(tabla_iteracion, n, "N", maximo, minimo);
                     td.ShowDialog();
                 }
 
@@ -169,8 +190,46 @@ namespace GrupoG_Distribuciones
                             break;
                         }
                         tabla_iteracion.Rows[i + 1]["RND"] = random_2;
+                        if (i == 0)
+                        {
+                            if (random_1 < random_2)
+                            {
+                                maximo = random_2;
+                                minimo = random_1;
+                            }
+                            else
+                            {
+                                maximo = random_1;
+                                minimo = random_2;
+                            }
+                        }
+                        else
+                        {
+                            if(random_1 < random_2)
+                            {
+                                if (random_2 > maximo)
+                                {
+                                    maximo = random_2;
+                                }
+                                if (random_1 < minimo)
+                                {
+                                    minimo = random_1;
+                                }
+                            }
+                            else
+                            {
+                                if (random_1 > maximo)
+                                {
+                                    maximo = random_1;
+                                }
+                                if (random_2 < minimo)
+                                {
+                                    minimo = random_2;
+                                }
+                            }
+                        }
                     }
-                    Tabla_Datos td = new Tabla_Datos(tabla_iteracion);
+                    Tabla_Datos td = new Tabla_Datos(tabla_iteracion, n, "N", maximo, minimo);
                     td.ShowDialog();
                 }
             }
@@ -201,7 +260,7 @@ namespace GrupoG_Distribuciones
                 }
 
                 //Por la cantidad de numeros a generar, crea una fila y le asigna los valores
-                for (int i = 0; i < int.Parse(txt_cantidad.Text); i++)
+                for (int i = 0; i < n; i++)
                 {
                     //Creo la fila
                     tabla_iteracion.Rows.Add();
@@ -214,8 +273,25 @@ namespace GrupoG_Distribuciones
                     double x = (-1/lambda)*(Math.Log(1-random_p));
                     //MessageBox.Show(x.ToString());
                     tabla_iteracion.Rows[i]["RND"] = x;
+                    if (i == 0)
+                    {
+                        maximo = x;
+                        minimo = x;
+                    }
+                    else
+                    {
+                        if (x > maximo)
+                        {
+                            maximo = x;
+                        }
+                        if (x < minimo)
+                        {
+                            minimo = x;
+                        }
+                    }
+
                 }
-                Tabla_Datos td = new Tabla_Datos(tabla_iteracion);
+                Tabla_Datos td = new Tabla_Datos(tabla_iteracion, n, "E", maximo, minimo);
                 td.ShowDialog();
             }
             
@@ -238,7 +314,7 @@ namespace GrupoG_Distribuciones
                 
 
                 //Por la cantidad de numeros a generar, crea una fila y le asigna los valores
-                for (int i = 0; i < int.Parse(txt_cantidad.Text); i++)
+                for (int i = 0; i < n; i++)
                 {
                     //Creo la fila
                     tabla_iteracion.Rows.Add();
@@ -256,8 +332,24 @@ namespace GrupoG_Distribuciones
                     } while (p >= A);
                     //MessageBox.Show(x.ToString());
                     tabla_iteracion.Rows[i]["RND"] = x;
+                    if (i == 0)
+                    {
+                        maximo = x;
+                        minimo = x;
+                    }
+                    else
+                    {
+                        if (x > maximo)
+                        {
+                            maximo = x;
+                        }
+                        if (x < minimo)
+                        {
+                            minimo = x;
+                        }
+                    }
                 }
-                Tabla_Datos td = new Tabla_Datos(tabla_iteracion);
+                Tabla_Datos td = new Tabla_Datos(tabla_iteracion, n, "P", maximo, minimo);
                 td.ShowDialog();
             }
             
