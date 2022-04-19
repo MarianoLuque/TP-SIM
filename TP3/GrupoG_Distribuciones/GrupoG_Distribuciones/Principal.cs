@@ -15,6 +15,7 @@ namespace GrupoG_Distribuciones
         public Principal()
         {
             InitializeComponent();
+            //Deshabilita todos los textBox
             todo_des();
         }
 
@@ -23,6 +24,7 @@ namespace GrupoG_Distribuciones
             Application.Exit();
         }
 
+        //Habilita los cuadros de textos según la selección del usuario
         private void CheckedChanged(object sender, EventArgs e)
         {
             btn_continuar.Enabled = true;
@@ -52,7 +54,11 @@ namespace GrupoG_Distribuciones
 
         private void btn_continuar_Click(object sender, EventArgs e)
         {
+            //n representa la cantidad de muestras que solicita el usuario
             int n = int.Parse(txt_cantidad.Text);
+
+            //A medida que se calculan los números randoms se determina cual es el valor maximo y minimo
+            //de estos, evitando hacer un nuevo recorrido luego
             double maximo = 0;
             double minimo = 0;
 
@@ -62,10 +68,20 @@ namespace GrupoG_Distribuciones
                 return;
             }
             
-            
+            //Tabla con los randoms generados
             DataTable tabla_iteracion = new DataTable();
+
+            //Calculo UNIFORME
             if (rb_uniforme.Checked)
             {
+                Int64 a = Int64.Parse(msk_A.Text);
+                Int64 b = Int64.Parse(msk_B.Text);
+                maximo = b;
+                minimo = a;
+
+                //Para calcular la media
+                double sumador = 0;
+
                 tabla_iteracion.Rows.Clear();
                 tabla_iteracion.Columns.Clear();
                 //Creo las columnas de la tabla
@@ -78,10 +94,6 @@ namespace GrupoG_Distribuciones
                 tabla_iteracion.Columns.Add(rnd);
 
                 Random myObject = new Random();
-                Int64 a = Int64.Parse(msk_A.Text);
-                Int64 b = Int64.Parse(msk_B.Text);
-                maximo = b;
-                minimo = a;
 
                 //Por la cantidad de numeros a generar, crea una fila y le asigna los valores
                 for (int i = 0; i < n; i++)
@@ -91,11 +103,16 @@ namespace GrupoG_Distribuciones
 
                     //Le asigno los valores
                     tabla_iteracion.Rows[i]["Iteracion"] = i+1;
+
                     double random_p = (Math.Truncate(myObject.NextDouble() * 10000)) / 10000;
                     double x = (a + (random_p * (b - a)));
+
+                    sumador += x;
+
                     tabla_iteracion.Rows[i]["RND"] = x;
                 }
-                Tabla_Datos td = new Tabla_Datos(tabla_iteracion, n, "U", maximo, minimo);
+                double media = sumador / n;
+                Tabla_Datos td = new Tabla_Datos(tabla_iteracion, n, "U", maximo, minimo, media, 0);
                 td.ShowDialog();
             }
 
@@ -121,7 +138,9 @@ namespace GrupoG_Distribuciones
 
                 double media = double.Parse(msk_media_normal.Text);
                 double de = double.Parse(msk_de.Text);
-                
+
+                double sumador = 0;
+
                 Random myObject = new Random();
 
 
@@ -158,9 +177,12 @@ namespace GrupoG_Distribuciones
                                 minimo = x;
                             }
                         }
+                        
+                        sumador += x;
+                        
                         tabla_iteracion.Rows[i]["RND"] = x;
                     }
-                    Tabla_Datos td = new Tabla_Datos(tabla_iteracion, n, "N", maximo, minimo);
+                    Tabla_Datos td = new Tabla_Datos(tabla_iteracion, n, "N", maximo, minimo, media, de);
                     td.ShowDialog();
                 }
 
@@ -229,7 +251,7 @@ namespace GrupoG_Distribuciones
                             }
                         }
                     }
-                    Tabla_Datos td = new Tabla_Datos(tabla_iteracion, n, "N", maximo, minimo);
+                    Tabla_Datos td = new Tabla_Datos(tabla_iteracion, n, "N", maximo, minimo, media, de);
                     td.ShowDialog();
                 }
             }
@@ -291,7 +313,7 @@ namespace GrupoG_Distribuciones
                     }
 
                 }
-                Tabla_Datos td = new Tabla_Datos(tabla_iteracion, n, "E", maximo, minimo);
+                Tabla_Datos td = new Tabla_Datos(tabla_iteracion, n, "E", maximo, minimo, (1/lambda), 0);
                 td.ShowDialog();
             }
             
@@ -349,7 +371,7 @@ namespace GrupoG_Distribuciones
                         }
                     }
                 }
-                Tabla_Datos td = new Tabla_Datos(tabla_iteracion, n, "P", maximo, minimo);
+                Tabla_Datos td = new Tabla_Datos(tabla_iteracion, n, "P", maximo, minimo, lambda, 0);
                 td.ShowDialog();
             }
             

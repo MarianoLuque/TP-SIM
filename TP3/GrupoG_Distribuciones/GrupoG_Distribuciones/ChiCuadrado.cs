@@ -15,6 +15,7 @@ namespace GrupoG_Distribuciones
     {
         //Creo la tabla de las iteraciones
         double media = 0.0;
+        double parametro_aux = 0.0;
         double varianza;
         DataTable tabla_ajuste;
         private Int64 cantidad_numeros;
@@ -31,7 +32,7 @@ namespace GrupoG_Distribuciones
                                                  30.1435, 31.4104, 32.6706, 33.9245, 35.1725, 36.4150,
                                                  37.6525, 38.8851, 40.1133, 41.3372, 42.5569, 43.7730};
 
-        public ChiCuadrado(DataTable tabla, Int64 cantidad_numeros, string tipo_distribucion, double maximo, double minimo)
+        public ChiCuadrado(DataTable tabla, Int64 cantidad_numeros, string tipo_distribucion, double maximo, double minimo, double media, double parametro_aux)
         {
             InitializeComponent();
             this.cantidad_numeros = cantidad_numeros;
@@ -39,6 +40,8 @@ namespace GrupoG_Distribuciones
             this.tipo_distribucion = tipo_distribucion;
             this.maximo = maximo;
             this.minimo = minimo;
+            this.media = media;
+            this.parametro_aux = parametro_aux;
         }
 
         private void ChiCuadrado_Load(object sender, EventArgs e)
@@ -92,6 +95,8 @@ namespace GrupoG_Distribuciones
             DataColumn mc = new DataColumn("MC");
             DataColumn estadistico = new DataColumn("C");
             DataColumn estadistico_acumulado = new DataColumn("CA");
+            DataColumn ks = new DataColumn("KS");
+            DataColumn max_ks = new DataColumn("MKS");
 
 
             //Agrego las columnas a la tabla
@@ -101,6 +106,8 @@ namespace GrupoG_Distribuciones
             tabla_ajuste.Columns.Add(mc);
             tabla_ajuste.Columns.Add(estadistico);
             tabla_ajuste.Columns.Add(estadistico_acumulado);
+            tabla_ajuste.Columns.Add(ks);
+            tabla_ajuste.Columns.Add(max_ks);
 
             //Calculo la cantidad de intervalos que es la raiz de n
             double cantidad_intervalos = int.Parse(txt_intervalo.Text.Trim());
@@ -108,20 +115,30 @@ namespace GrupoG_Distribuciones
             //Defino un array para almacenar los limites de cada intervalo que al ser x intervalos necesitan x+1 limites
             double[] intervalos_array = new double[(int)(cantidad_intervalos + 1.0)];
 
-            //Defino el primer limite que es el mínimo o A en caso de ser uniforme
-            if(tipo_distribucion == "U")
-            {
+            //Defino un array para almacenar la frecuencia esperada de cada intervalo
+            double[] fe_array = new double[(int)(cantidad_intervalos)];
 
-            }
+            double[] pe_array = new double[(int)(cantidad_intervalos)];
+            double po_acumulado = 0.0;
+            double pe_acumulado = 0.0;
+            double valor_max_ks = 0.0;
+
+
+            //Defino el primer limite que es el mínimo o A en caso de ser uniforme
+
             intervalos_array[0] = Math.Round(minimo,2);
 
-            //valor esperado
-            double valor_esperado = cantidad_numeros / cantidad_intervalos;
-            if (valor_esperado < 5.0)
+
+            // REVISAR
+            // REVISAR
+            // REVISAR
+
+
+            /*if (valor_esperado < 5.0)
             {
                 cantidad_intervalos = cantidad_numeros / 5;
                 valor_esperado = cantidad_numeros / cantidad_intervalos;
-            }
+            }*/
 
             //Por la cantidad de intervalos, calculo el primer limite distinto de cero, el resto de intervalos se ven multiplicados por i
             for (int i = 1; i < cantidad_intervalos + 1.0; i++)
@@ -129,6 +146,59 @@ namespace GrupoG_Distribuciones
                 intervalos_array[i] = Math.Round(intervalos_array[i-1] + (maximo-minimo)/cantidad_intervalos, 2) ;
             }
 
+            //Calculo de la Frecuencia Esperada según cada distribución
+            if (tipo_distribucion == "U")
+            {
+                for (int i = 0; i < cantidad_intervalos; i++)
+                {
+                    pe_array[i] = (cantidad_numeros / cantidad_intervalos) / cantidad_numeros;
+                    fe_array[i] = cantidad_numeros / cantidad_intervalos;
+                }
+            }
+
+            if (tipo_distribucion == "N")
+            {
+                for (int i = 0; i < cantidad_intervalos; i++)
+                {
+                    double marca_clase = ((intervalos_array[i + 1] + intervalos_array[i]) / 2);
+                    double resta = ((intervalos_array[i + 1] - intervalos_array[i]));
+                    double primer_termino = 1 / (parametro_aux * (Math.Sqrt(2 * Math.PI)));
+                    double segundo_termino = Math.Exp(-0.5 * Math.Pow(((marca_clase - media) / parametro_aux), 2));
+
+                    pe_array[i] = ((primer_termino * segundo_termino) * resta);
+                    fe_array[i] = ((primer_termino * segundo_termino) * resta) * cantidad_numeros;
+                }
+            }
+
+            if(tipo_distribucion == "E")
+            {
+                //=(1-EXP(-Lambda*hasta))-(1-EXP(-Lambda*desde)) * N              
+
+                for (int i = 0; i < cantidad_intervalos; i++)
+                {
+                    double lambda = 1 / media;
+                    double primer_termino = 1 - Math.Exp(-lambda * (intervalos_array[i + 1]));
+                    double segundo_termino = 1 - Math.Exp(-lambda * (intervalos_array[i]));
+
+                    pe_array[i] = (primer_termino - segundo_termino);
+                    fe_array[i] = (primer_termino - segundo_termino) * cantidad_numeros;
+                }
+            }
+
+            //falta
+
+
+            if(tipo_distribucion == "P")
+            {
+                for (int i = 0; i < cantidad_intervalos; i++)
+                {
+                    double lambda = 1 / media;
+                    double primer_termino = 1 - Math.Exp(-lambda * (intervalos_array[i + 1]));
+                    double segundo_termino = 1 - Math.Exp(-lambda * (intervalos_array[i]));
+                    fe_array[i] = (primer_termino / segundo_termino) * cantidad_numeros;
+                }
+
+            }
             //Defino un array que contenga la cantidad de valores observados
             int[] valores_observados = new int[(int)cantidad_intervalos];
 
@@ -153,7 +223,7 @@ namespace GrupoG_Distribuciones
                     }
                 }
             }
-            media = sumador / (double)cantidad_numeros;
+
             double sumatoria = 0;
             for (int i = 0; i < cantidad_numeros; i++)
             {
@@ -178,20 +248,33 @@ namespace GrupoG_Distribuciones
                 tabla_ajuste.Rows[i]["FO"] = valores_observados[i];
 
                 //le agrego la frecuencia esperada
-                tabla_ajuste.Rows[i]["FE"] = Math.Round(valor_esperado, 0);
+                tabla_ajuste.Rows[i]["FE"] = fe_array[i];
 
                 //Calculamos la marca de clase
                 tabla_ajuste.Rows[i]["MC"] = ((intervalos_array[i + 1] + intervalos_array[i]) / 2);
 
                 //le agrego el estadistico de prueba
-                double resta_de_frecuencias = valor_esperado - valores_observados[i];
+                double resta_de_frecuencias = fe_array[i] - valores_observados[i];
                 double resta_al_cuadrado = (Math.Pow(2.0, resta_de_frecuencias));
-                double estadistico_de_prueba = Math.Round(resta_al_cuadrado / valor_esperado, 4);
+                double estadistico_de_prueba = Math.Round(resta_al_cuadrado / fe_array[i], 4);
                 tabla_ajuste.Rows[i]["C"] = estadistico_de_prueba;
 
                 //le agrego el estadistico de prueba acumulado
                 estadistico_de_prueba_acumulado += estadistico_de_prueba;
                 tabla_ajuste.Rows[i]["CA"] = estadistico_de_prueba_acumulado;
+
+                //Calculo de KS
+                po_acumulado += (valores_observados[i] / cantidad_numeros);
+                pe_acumulado += pe_array[i];
+                double valor_ks = Math.Abs(po_acumulado - pe_acumulado);
+
+                tabla_ajuste.Rows[i]["KS"] = valor_ks;
+
+                if (valor_ks > valor_max_ks)
+                {
+                    valor_max_ks = valor_ks;
+                }
+                tabla_ajuste.Rows[i]["MKS"] = valor_max_ks;
             }
 
             if (cantidad_intervalos > 31)
