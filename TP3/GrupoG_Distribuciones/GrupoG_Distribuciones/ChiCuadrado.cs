@@ -29,6 +29,7 @@ namespace GrupoG_Distribuciones
         double estadistico_de_prueba_acumulado = 0.0;
         string resultado;
         string resultado_ks;
+        int maximo_valor_intervalos = 30;
 
         private double[] vp_chi = new double[] { 3.8415, 5.9915, 7.8147, 9.4877, 11.0705, 12.5916,
                                                  14.0671, 15.5073, 16.9190, 18.3070, 19.6752, 21,0261,
@@ -199,13 +200,38 @@ namespace GrupoG_Distribuciones
 
             if(tipo_distribucion == "P")
             {
+                //Determino la maxima cantidad de intervalos para esta distribución en particular
+                maximo_valor_intervalos = (int)(maximo - minimo);
+                int cantidad_numeros = (int)(maximo - minimo);
+                double rango_intervalos = 0;
+                double[] fe_poisson_array = new double[(int)(maximo-minimo)];
+
                 m = 1;
+                while (cantidad_numeros % cantidad_intervalos != 0)
+                {
+                    cantidad_numeros += 1;
+                }
+
+                rango_intervalos = cantidad_numeros / cantidad_intervalos;
+
+                for (int i = (int)minimo; i < (maximo-minimo); i++)
+                {
+                    fe_poisson_array[i] = ((Math.Pow(media, i)) * Math.Exp(-media)) / factorial(i);
+                }
+
+                //Calculo la frecuencia esperada para CADA intervalo
                 for (int i = 0; i < cantidad_intervalos; i++)
                 {
-                    double lambda = 1 / media;
-                    double primer_termino = 1 - Math.Exp(-lambda * (intervalos_array[i + 1]));
-                    double segundo_termino = 1 - Math.Exp(-lambda * (intervalos_array[i]));
-                    fe_array[i] = (primer_termino / segundo_termino) * cantidad_numeros;
+                    intervalos_array[i] = Math.Round(intervalos_array[i - 1] + cantidad_numeros / cantidad_intervalos, 2);
+                    //Rango 4
+                    //1 - 2 - 3 - 4 .... 5 - 6 - 7 - 8
+                    for (int j = 0; j < rango_intervalos; j++)
+                    {
+                        if (j + (int)(rango_intervalos * i) < (maximo - minimo))
+                        {
+                            fe_array[i] += fe_poisson_array[j + (int)(rango_intervalos * i)];
+                        }
+                    }
                 }
 
             }
@@ -287,9 +313,9 @@ namespace GrupoG_Distribuciones
                 tabla_ajuste.Rows[i]["MKS"] = valor_max_ks;
             }
 
-            if (cantidad_intervalos > 31)
+            if (cantidad_intervalos >= maximo_valor_intervalos)
             {
-                MessageBox.Show("La cantidad de intervalos debe ser menor a 31");
+                MessageBox.Show("La cantidad de intervalos debe ser menor o igual a " + maximo_valor_intervalos.ToString());
                 return;
             }
 
@@ -317,7 +343,23 @@ namespace GrupoG_Distribuciones
             }
         }
 
-
+        private int factorial(int n)
+        {
+            int resultado = 0;
+            if (n == 0 || n == 1)
+            {
+                resultado = 1;
+            }
+            else
+            {
+                for (int i = 2; i <= n; i++) {
+                    {
+                        resultado = resultado * i;
+                    }
+                }
+            }
+            return resultado;
+        }
 
         private void btn_cerrar_programa_Click(object sender, EventArgs e)
         {
