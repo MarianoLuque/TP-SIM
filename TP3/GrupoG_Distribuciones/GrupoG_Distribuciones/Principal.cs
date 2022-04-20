@@ -62,7 +62,7 @@ namespace GrupoG_Distribuciones
             double maximo = 0;
             double minimo = 0;
 
-            if (txt_cantidad.Text == "" || !(n >= 500))
+            if (txt_cantidad.Text == "" || !(n >= 400))
             {
                 MessageBox.Show("La cantidad de números debe ser superior a 500");
                 return;
@@ -105,7 +105,7 @@ namespace GrupoG_Distribuciones
                     tabla_iteracion.Rows[i]["Iteracion"] = i+1;
 
                     double random_p = (Math.Truncate(myObject.NextDouble() * 10000)) / 10000;
-                    double x = (a + (random_p * (b - a)));
+                    double x = Math.Truncate((a + (random_p * (b - a))*100)) / 100;
 
                     sumador += x;
 
@@ -160,7 +160,7 @@ namespace GrupoG_Distribuciones
                         {
                             x += (Math.Truncate(myObject.NextDouble() * 10000)) / 10000;
                         }
-                        x = ((x - 6) * de) + media;
+                        x = Math.Truncate((((x - 6) * de) + media)*100) / 100 ;
                         if (i == 0)
                         {
                             maximo = x;
@@ -202,8 +202,8 @@ namespace GrupoG_Distribuciones
                         double x1 = (Math.Truncate(myObject.NextDouble() * 10000)) / 10000;
                         double x2 = (Math.Truncate(myObject.NextDouble() * 10000)) / 10000;
 
-                        double random_1 = ((Math.Sqrt(-2 * Math.Log(x1))) * Math.Cos(2 * Math.PI * x2)) * de + media;
-                        double random_2 = ((Math.Sqrt(-2 * Math.Log(x1))) * Math.Sin(2 * Math.PI * x2)) * de + media;
+                        double random_1 = Math.Truncate((((Math.Sqrt(-2 * Math.Log(x1))) * Math.Cos(2 * Math.PI * x2)) * de + media)*100) / 100;
+                        double random_2 = Math.Truncate((((Math.Sqrt(-2 * Math.Log(x1))) * Math.Sin(2 * Math.PI * x2)) * de + media)*100) / 100;
 
                         tabla_iteracion.Rows[i]["RND"] = random_1;
                         if(!(n%2 == 0) && (n-1) == i)
@@ -292,7 +292,7 @@ namespace GrupoG_Distribuciones
                     double random_p = (Math.Truncate(myObject.NextDouble() * 10000)) / 10000;
                     double asd = -1 / lambda;
                     //MessageBox.Show(random_p.ToString());
-                    double x = (-1/lambda)*(Math.Log(1-random_p));
+                    double x = Math.Truncate(((-1/lambda)*(Math.Log(1-random_p)))*100) /100;
                     //MessageBox.Show(x.ToString());
                     tabla_iteracion.Rows[i]["RND"] = x;
                     if (i == 0)
@@ -352,7 +352,9 @@ namespace GrupoG_Distribuciones
                         p = (p * random_p);
                         x = x + 1;
                     } while (p >= A);
-                    //MessageBox.Show(x.ToString());
+                    x = Math.Truncate(x * 100) / 100;
+
+
                     tabla_iteracion.Rows[i]["RND"] = x;
                     if (i == 0)
                     {

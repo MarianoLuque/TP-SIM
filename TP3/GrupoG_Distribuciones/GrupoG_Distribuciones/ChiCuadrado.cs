@@ -19,12 +19,16 @@ namespace GrupoG_Distribuciones
         double varianza;
         DataTable tabla_ajuste;
         private Int64 cantidad_numeros;
+        private int m;
         private string tipo_distribucion;
         double maximo, minimo;
         private DataTable tabla_iteracion;
         double valor_chi_tabulado = 0.0;
+        double valor_ks_tabulado = 0.0;
+        double valor_max_ks = 0.0;
         double estadistico_de_prueba_acumulado = 0.0;
         string resultado;
+        string resultado_ks;
 
         private double[] vp_chi = new double[] { 3.8415, 5.9915, 7.8147, 9.4877, 11.0705, 12.5916,
                                                  14.0671, 15.5073, 16.9190, 18.3070, 19.6752, 21,0261,
@@ -72,13 +76,16 @@ namespace GrupoG_Distribuciones
             reporte_chi_cuadrado.LocalReport.ReportEmbeddedResource = "GrupoG_Distribuciones.ReporteChiCuadrado.rdlc";
             reporte_chi_cuadrado.LocalReport.DataSources.Clear();
             reporte_chi_cuadrado.LocalReport.DataSources.Add(datos);
-            ReportParameter[] parametro = new ReportParameter[6];
+            ReportParameter[] parametro = new ReportParameter[9];
             parametro[0] = new ReportParameter("RPMedia", media.ToString());
             parametro[1] = new ReportParameter("RPDesviacion", Math.Sqrt(varianza).ToString());
             parametro[2] = new ReportParameter("RPVarianza", varianza.ToString());
             parametro[3] = new ReportParameter("RPChiCalculado", estadistico_de_prueba_acumulado.ToString());
             parametro[4] = new ReportParameter("RPChiTabulado", valor_chi_tabulado.ToString());
             parametro[5] = new ReportParameter("RPResultado", resultado);
+            parametro[6] = new ReportParameter("RPResultadoKS", resultado_ks);
+            parametro[7] = new ReportParameter("RPKSTabulado", valor_ks_tabulado.ToString());
+            parametro[8] = new ReportParameter("RPKSCalculado", valor_max_ks.ToString());
             reporte_chi_cuadrado.LocalReport.SetParameters(parametro);
             reporte_chi_cuadrado.RefreshReport();
         }
@@ -121,14 +128,13 @@ namespace GrupoG_Distribuciones
             double[] pe_array = new double[(int)(cantidad_intervalos)];
             double po_acumulado = 0.0;
             double pe_acumulado = 0.0;
-            double valor_max_ks = 0.0;
+            
 
 
             //Defino el primer limite que es el mínimo o A en caso de ser uniforme
 
             intervalos_array[0] = Math.Round(minimo,2);
-
-
+            intervalos_array[1] = Math.Round((intervalos_array[0] + (maximo - minimo) / cantidad_intervalos) + 0.1, 2);
             // REVISAR
             // REVISAR
             // REVISAR
@@ -141,7 +147,7 @@ namespace GrupoG_Distribuciones
             }*/
 
             //Por la cantidad de intervalos, calculo el primer limite distinto de cero, el resto de intervalos se ven multiplicados por i
-            for (int i = 1; i < cantidad_intervalos + 1.0; i++)
+            for (int i = 2; i < cantidad_intervalos + 1.0; i++)
             {
                 intervalos_array[i] = Math.Round(intervalos_array[i-1] + (maximo-minimo)/cantidad_intervalos, 2) ;
             }
@@ -149,6 +155,7 @@ namespace GrupoG_Distribuciones
             //Calculo de la Frecuencia Esperada según cada distribución
             if (tipo_distribucion == "U")
             {
+                m = 0;
                 for (int i = 0; i < cantidad_intervalos; i++)
                 {
                     pe_array[i] = (cantidad_numeros / cantidad_intervalos) / cantidad_numeros;
@@ -158,6 +165,7 @@ namespace GrupoG_Distribuciones
 
             if (tipo_distribucion == "N")
             {
+                m = 2;
                 for (int i = 0; i < cantidad_intervalos; i++)
                 {
                     double marca_clase = ((intervalos_array[i + 1] + intervalos_array[i]) / 2);
@@ -172,6 +180,7 @@ namespace GrupoG_Distribuciones
 
             if(tipo_distribucion == "E")
             {
+                m = 1;
                 //=(1-EXP(-Lambda*hasta))-(1-EXP(-Lambda*desde)) * N              
 
                 for (int i = 0; i < cantidad_intervalos; i++)
@@ -190,6 +199,7 @@ namespace GrupoG_Distribuciones
 
             if(tipo_distribucion == "P")
             {
+                m = 1;
                 for (int i = 0; i < cantidad_intervalos; i++)
                 {
                     double lambda = 1 / media;
@@ -264,7 +274,7 @@ namespace GrupoG_Distribuciones
                 tabla_ajuste.Rows[i]["CA"] = estadistico_de_prueba_acumulado;
 
                 //Calculo de KS
-                po_acumulado += (valores_observados[i] / cantidad_numeros);
+                po_acumulado += ((double)valores_observados[i] / (double)cantidad_numeros);
                 pe_acumulado += pe_array[i];
                 double valor_ks = Math.Abs(po_acumulado - pe_acumulado);
 
@@ -282,7 +292,9 @@ namespace GrupoG_Distribuciones
                 MessageBox.Show("La cantidad de intervalos debe ser menor a 31");
                 return;
             }
-            valor_chi_tabulado = vp_chi[(int)cantidad_intervalos - 1];
+
+            //Resultado Chi Cuadrado
+            valor_chi_tabulado = vp_chi[(int)cantidad_intervalos - 1 - m];
 
             if (estadistico_de_prueba_acumulado <= valor_chi_tabulado)
             {
@@ -293,6 +305,16 @@ namespace GrupoG_Distribuciones
                 resultado = " La hipótesis es rechazada ";
             }
 
+            //Resultado KS
+            valor_ks_tabulado = 1.36 / Math.Sqrt(cantidad_numeros);
+            if (valor_max_ks <= valor_ks_tabulado)
+            {
+                resultado_ks = " No se puede rechazar la hipótesis";
+            }
+            else
+            {
+                resultado_ks = " La hipótesis es rechazada ";
+            }
         }
 
 
