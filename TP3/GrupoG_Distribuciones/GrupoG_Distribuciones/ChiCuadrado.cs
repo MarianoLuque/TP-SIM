@@ -29,7 +29,7 @@ namespace GrupoG_Distribuciones
         double estadistico_de_prueba_acumulado = 0.0;
         string resultado;
         string resultado_ks;
-        int maximo_valor_intervalos = 30;
+        int maximo_valor_intervalos = 50;
         double cantidad_intervalos = 0;
 
         private double[] vp_chi = new double[] { 3.8415, 5.9915, 7.8147, 9.4877, 11.0705, 12.5916,
@@ -60,9 +60,9 @@ namespace GrupoG_Distribuciones
             {
 
                 int max_intervalo = (int)Math.Truncate(Math.Sqrt(cantidad_numeros));
-                if (max_intervalo > 32)
+                if (max_intervalo > 50)
                 {
-                    lbl_intervalo.Text = "Ingrese la cantidad de intervalos (Debe ser como maximo 30)";
+                    lbl_intervalo.Text = "Ingrese la cantidad de intervalos (Debe ser como maximo 50)";
                 }
                 else
                 {
@@ -82,7 +82,11 @@ namespace GrupoG_Distribuciones
         {
             if (tipo_distribucion != "P") 
             { 
-                cantidad_intervalos = int.Parse(txt_intervalo.Text.Trim());
+                if(!double.TryParse(txt_intervalo.Text.Trim(), out cantidad_intervalos))
+                {
+                    MessageBox.Show("Ingrese el valor numerico de la cantidad de intervalos");
+                    return;
+                }
 
                 if (cantidad_intervalos > maximo_valor_intervalos || cantidad_intervalos < 4)
                 {
@@ -92,10 +96,10 @@ namespace GrupoG_Distribuciones
             }
             else
             {
-                if ((maximo - minimo) < 30)
+                if ((maximo - minimo) < 50)
                     cantidad_intervalos = maximo - minimo;
                 else
-                    cantidad_intervalos = 30;
+                    cantidad_intervalos = 50;
             }
             ajuste();
             CargarReporte();
@@ -228,9 +232,11 @@ namespace GrupoG_Distribuciones
                 cantidad_intervalos = (maximo - minimo);
                 for (int i = 0; i < (maximo-minimo); i++)
                 {
-                    pe_array[i] = ((Math.Pow(media, (i+minimo))) * Math.Exp(-media)) / factorial(i+(int)minimo);
-                    fe_array[i] = Math.Round((((Math.Pow(media, (i+minimo))) * Math.Exp(-media)) / (factorial(i+(int)minimo)))*cantidad_numeros, 0);
+                    double dividendo_pe = ((Math.Pow(media, (i + minimo))) * Math.Exp(-media));
+                    pe_array[i] = factorial(dividendo_pe, i+(int)minimo);
 
+                    double dividendo_fe = ((Math.Pow(media, (i + minimo))) * Math.Exp(-media));
+                    fe_array[i] = Math.Round(((factorial(dividendo_fe, i+(int)minimo)))*cantidad_numeros, 0);
                 }
 
                 /*
@@ -384,8 +390,16 @@ namespace GrupoG_Distribuciones
 
                 //le agrego el estadistico de prueba
                 double resta_de_frecuencias = fe_array[i] - valores_observados[i];
-                double resta_al_cuadrado = (Math.Pow(2.0, resta_de_frecuencias));
-                double estadistico_de_prueba = Math.Round(resta_al_cuadrado / fe_array[i], 4);
+                double resta_al_cuadrado = (Math.Pow(resta_de_frecuencias, 2.0));
+                double estadistico_de_prueba;
+                if (!(fe_array[i] == 0.0))
+                {
+                    estadistico_de_prueba = Math.Round(resta_al_cuadrado / fe_array[i], 4);
+                }
+                else
+                {
+                    estadistico_de_prueba = 0.0;
+                }
                 tabla_ajuste.Rows[i]["C"] = estadistico_de_prueba;
 
                 //le agrego el estadistico de prueba acumulado
@@ -430,17 +444,15 @@ namespace GrupoG_Distribuciones
             }
         }
 
-        private long factorial(int n)
+        private double factorial(double dividendo, int n)
         {
-            long resultado = 1;
-
-            for (long i = 1; i <= n; i++) {
+            for (int i = 1; i <= n; i++) {
                 {
-                    resultado = resultado * i;
+                    dividendo = dividendo / (double)i;
                 }
             }
 
-            return resultado;
+            return dividendo;
         }
 
         private void btn_cerrar_programa_Click(object sender, EventArgs e)

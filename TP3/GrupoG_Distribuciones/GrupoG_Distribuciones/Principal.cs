@@ -378,9 +378,9 @@ namespace GrupoG_Distribuciones
                     MessageBox.Show("Ingrese un valor numerico de lambda para la distribución de poisson");
                     return;
                 }
-                if(lambda <= 0 || lambda>7)
+                if(lambda <= 0 || lambda > 25)
                 {
-                    MessageBox.Show("Ingrese un valor positivo de lambda para la distribución de poisson, menor a 8");
+                    MessageBox.Show("Ingrese un valor positivo de lambda para la distribución de poisson, menor a 25");
                     return;
                 }
                 
