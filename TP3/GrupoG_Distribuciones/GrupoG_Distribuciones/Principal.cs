@@ -124,8 +124,11 @@ namespace GrupoG_Distribuciones
                     //Le asigno los valores
                     tabla_iteracion.Rows[i]["Iteracion"] = i+1;
 
-                    double random_p = (Math.Truncate(myObject.NextDouble() * 10000)) / 10000;
-                    double x = Math.Truncate((a + (random_p * (b - a))*100)) / 100;
+                    //double random_p = (Math.Truncate(myObject.NextDouble() * 10000)) / 10000;
+                    //double x = Math.Truncate((a + (random_p * (b - a))*100)) / 100;
+
+                    double random_p = (myObject.NextDouble());
+                    double x = (a + (random_p * (b - a)));
 
                     sumador += x;
 
@@ -375,9 +378,9 @@ namespace GrupoG_Distribuciones
                     MessageBox.Show("Ingrese un valor numerico de lambda para la distribución de poisson");
                     return;
                 }
-                if(lambda <= 0)
+                if(lambda <= 0 || lambda>7)
                 {
-                    MessageBox.Show("Ingrese un valor positivo de lambda para la distribución de poisson");
+                    MessageBox.Show("Ingrese un valor positivo de lambda para la distribución de poisson, menor a 8");
                     return;
                 }
                 

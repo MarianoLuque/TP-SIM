@@ -417,6 +417,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkCyan;
             this.ClientSize = new System.Drawing.Size(1464, 603);
+            this.ControlBox = false;
             this.Controls.Add(this.msk_lam_poi);
             this.Controls.Add(this.msk_lam_exp);
             this.Controls.Add(this.msk_de);

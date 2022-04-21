@@ -158,19 +158,8 @@ namespace GrupoG_Distribuciones
 
 
             //Defino el primer limite que es el mínimo o A en caso de ser uniforme
-
             intervalos_array[0] = Math.Round(minimo,2);
             intervalos_array[1] = Math.Round((intervalos_array[0] + (maximo - minimo) / cantidad_intervalos) + 0.1, 2);
-            // REVISAR
-            // REVISAR
-            // REVISAR
-
-
-            /*if (valor_esperado < 5.0)
-            {
-                cantidad_intervalos = cantidad_numeros / 5;
-                valor_esperado = cantidad_numeros / cantidad_intervalos;
-            }*/
 
             //Por la cantidad de intervalos, calculo el primer limite distinto de cero, el resto de intervalos se ven multiplicados por i
             for (int i = 2; i < cantidad_intervalos + 1.0; i++)
@@ -223,11 +212,20 @@ namespace GrupoG_Distribuciones
 
             if(tipo_distribucion == "P")
             {
-                cantidad_intervalos = (maximo - minimo);
-                for (int i = (int)minimo; i < (maximo-minimo); i++)
+                fe_array = new double[(int)(maximo - minimo)];
+                intervalos_array[0] = Math.Round(minimo, 0);
+
+                //Por la cantidad de intervalos, calculo el primer limite distinto de cero, el resto de intervalos se ven multiplicados por i
+                for (int i = 1; i < (maximo - minimo) + 1.0; i++)
                 {
-                    pe_array[i] = ((Math.Pow(media, i)) * Math.Exp(-media)) / factorial(i);
-                    fe_array[i] = Math.Round((((Math.Pow(media, i)) * Math.Exp(-media)) / factorial(i))*cantidad_numeros, 0);
+                    intervalos_array[i] = Math.Round(minimo + i);
+                }
+
+                cantidad_intervalos = (maximo - minimo);
+                for (int i = 0; i < (maximo-minimo); i++)
+                {
+                    pe_array[i] = ((Math.Pow(media, (i+minimo))) * Math.Exp(-media)) / factorial(i+(int)minimo);
+                    fe_array[i] = Math.Round((((Math.Pow(media, (i+minimo))) * Math.Exp(-media)) / (factorial(i+(int)minimo)))*cantidad_numeros, 0);
 
                 }
 
@@ -366,7 +364,10 @@ namespace GrupoG_Distribuciones
                 tabla_ajuste.Rows.Add();
 
                 //le agrego el intervalo
-                tabla_ajuste.Rows[i]["Intervalo"] = intervalos_array[i].ToString() + " - " + intervalos_array[i + 1].ToString();
+                if (tipo_distribucion != "P")
+                    tabla_ajuste.Rows[i]["Intervalo"] = intervalos_array[i].ToString() + " - " + intervalos_array[i + 1].ToString();
+                else
+                    tabla_ajuste.Rows[i]["Intervalo"] = intervalos_array[i];
 
                 //le agrego la frecuencia observada
                 tabla_ajuste.Rows[i]["FO"] = valores_observados[i];
@@ -425,11 +426,11 @@ namespace GrupoG_Distribuciones
             }
         }
 
-        private int factorial(int n)
+        private long factorial(int n)
         {
-            int resultado = 1;
+            long resultado = 1;
 
-            for (int i = 1; i <= n; i++) {
+            for (long i = 1; i <= n; i++) {
                 {
                     resultado = resultado * i;
                 }
