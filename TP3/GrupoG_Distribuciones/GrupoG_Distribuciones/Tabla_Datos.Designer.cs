@@ -46,8 +46,8 @@ namespace GrupoG_Distribuciones
             this.btn_salir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_salir.BackgroundImage")));
             this.btn_salir.FlatAppearance.BorderSize = 0;
             this.btn_salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_salir.Location = new System.Drawing.Point(1131, 14);
-            this.btn_salir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_salir.Location = new System.Drawing.Point(1060, 13);
+            this.btn_salir.Margin = new System.Windows.Forms.Padding(4);
             this.btn_salir.Name = "btn_salir";
             this.btn_salir.Size = new System.Drawing.Size(55, 50);
             this.btn_salir.TabIndex = 26;
@@ -79,7 +79,7 @@ namespace GrupoG_Distribuciones
             // btn_continuar
             // 
             this.btn_continuar.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.btn_continuar.Location = new System.Drawing.Point(997, 534);
+            this.btn_continuar.Location = new System.Drawing.Point(946, 533);
             this.btn_continuar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_continuar.Name = "btn_continuar";
             this.btn_continuar.Size = new System.Drawing.Size(169, 46);
@@ -92,7 +92,7 @@ namespace GrupoG_Distribuciones
             // 
             this.btn_volver.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_volver.Location = new System.Drawing.Point(36, 534);
-            this.btn_volver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_volver.Margin = new System.Windows.Forms.Padding(4);
             this.btn_volver.Name = "btn_volver";
             this.btn_volver.Size = new System.Drawing.Size(117, 46);
             this.btn_volver.TabIndex = 30;
@@ -110,7 +110,7 @@ namespace GrupoG_Distribuciones
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkCyan;
-            this.ClientSize = new System.Drawing.Size(1197, 656);
+            this.ClientSize = new System.Drawing.Size(1401, 656);
             this.Controls.Add(this.btn_volver);
             this.Controls.Add(this.btn_continuar);
             this.Controls.Add(this.dg_rnd);

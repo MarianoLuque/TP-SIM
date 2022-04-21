@@ -30,6 +30,7 @@ namespace GrupoG_Distribuciones
         string resultado;
         string resultado_ks;
         int maximo_valor_intervalos = 30;
+        double cantidad_intervalos = 0;
 
         private double[] vp_chi = new double[] { 3.8415, 5.9915, 7.8147, 9.4877, 11.0705, 12.5916,
                                                  14.0671, 15.5073, 16.9190, 18.3070, 19.6752, 21,0261,
@@ -51,14 +52,23 @@ namespace GrupoG_Distribuciones
 
         private void ChiCuadrado_Load(object sender, EventArgs e)
         {
-            int max_intervalo = (int)Math.Truncate(Math.Sqrt(cantidad_numeros));
-            if (max_intervalo > 32)
+            if (tipo_distribucion != "P")
             {
-                lbl_intervalo.Text = "Ingrese la cantidad de intervalos (Debe ser como maximo 31)";
+
+                int max_intervalo = (int)Math.Truncate(Math.Sqrt(cantidad_numeros));
+                if (max_intervalo > 32)
+                {
+                    lbl_intervalo.Text = "Ingrese la cantidad de intervalos (Debe ser como maximo 30)";
+                }
+                else
+                {
+                    lbl_intervalo.Text = "Ingrese la cantidad de intervalos (Sugerimos " + max_intervalo.ToString() + ")";
+                }
             }
             else
             {
-                lbl_intervalo.Text = "Ingrese la cantidad de intervalos (Sugerimos " + max_intervalo.ToString() + ")";
+                lbl_intervalo.Visible = false;
+                txt_intervalo.Visible = false;
             }
 
             this.reporte_chi_cuadrado.RefreshReport();
@@ -66,6 +76,23 @@ namespace GrupoG_Distribuciones
 
         private void btn_generar_Click(object sender, EventArgs e)
         {
+            if (tipo_distribucion != "P") 
+            { 
+                cantidad_intervalos = int.Parse(txt_intervalo.Text.Trim());
+
+                if (cantidad_intervalos > maximo_valor_intervalos || cantidad_intervalos < 4)
+                {
+                    MessageBox.Show("La cantidad de intervalos debe ser menor o igual a " + maximo_valor_intervalos.ToString() + " y mayor a 3");
+                    return;
+                }
+            }
+            else
+            {
+                if ((maximo - minimo) < 30)
+                    cantidad_intervalos = maximo - minimo;
+                else
+                    cantidad_intervalos = 30;
+            }
             ajuste();
             CargarReporte();
         }
@@ -116,9 +143,7 @@ namespace GrupoG_Distribuciones
             tabla_ajuste.Columns.Add(estadistico_acumulado);
             tabla_ajuste.Columns.Add(ks);
             tabla_ajuste.Columns.Add(max_ks);
-
-            //Calculo la cantidad de intervalos que es la raiz de n
-            double cantidad_intervalos = int.Parse(txt_intervalo.Text.Trim());
+            
 
             //Defino un array para almacenar los limites de cada intervalo que al ser x intervalos necesitan x+1 limites
             double[] intervalos_array = new double[(int)(cantidad_intervalos + 1.0)];
@@ -195,23 +220,23 @@ namespace GrupoG_Distribuciones
                 }
             }
 
-            //falta
-
 
             if(tipo_distribucion == "P")
             {
+                cantidad_intervalos = (maximo - minimo);
+                for (int i = (int)minimo; i < (maximo-minimo); i++)
+                {
+                    pe_array[i] = ((Math.Pow(media, i)) * Math.Exp(-media)) / factorial(i);
+                    fe_array[i] = Math.Round((((Math.Pow(media, i)) * Math.Exp(-media)) / factorial(i))*cantidad_numeros, 0);
+
+                }
+
+                /*
                 //Determino la maxima cantidad de intervalos para esta distribución en particular
                 int max_min = (int)(maximo - minimo);
                 int rango;
                 int restantes = 0;
                 int valores_distintos;
-
-
-                if (cantidad_intervalos > maximo_valor_intervalos)
-                {
-                    MessageBox.Show("La cantidad de intervalos debe ser menor o igual a " + maximo_valor_intervalos.ToString());
-                    return;
-                }
 
                 maximo_valor_intervalos = max_min;
                 
@@ -220,12 +245,12 @@ namespace GrupoG_Distribuciones
 
                 m = 1;
 
-                /*
+                
                 while (cantidad_numeros % cantidad_intervalos != 0)
                 {
                     cantidad_numeros += 1;
                 }
-                */
+                
                 //rango_intervalos es la cantidad de numeros que van en cada intervalo
                 if(max_min % cantidad_intervalos == 0)
                 {
@@ -274,14 +299,14 @@ namespace GrupoG_Distribuciones
                 {
                     intervalos_array[restantes + i + 1] = (double)(rango_intervalos);
                 }
-                /*
+                
                 cantidad de numeros: 500
                 cantidad de intervalos: 30
                 cantidad de numeros por intervalo: 16
                 intervalos con 17 : cantidad de numeros - rango
-                */
+                
 
-                /*Calculo la frecuencia esperada para CADA intervalo
+                Calculo la frecuencia esperada para CADA intervalo
                 for (int i = 0; i < cantidad_intervalos; i++)
                 {
                     intervalos_array[i] = Math.Round(intervalos_array[i - 1] + cantidad_numeros / cantidad_intervalos, 2);
@@ -295,7 +320,8 @@ namespace GrupoG_Distribuciones
                         }
                     }
                 }
-                */
+                
+                 */
 
             }
             //Defino un array que contenga la cantidad de valores observados

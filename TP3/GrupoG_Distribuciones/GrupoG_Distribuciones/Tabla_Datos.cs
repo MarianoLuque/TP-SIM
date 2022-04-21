@@ -44,5 +44,6 @@ namespace GrupoG_Distribuciones
             ChiCuadrado chiCuadrado = new ChiCuadrado(tabla, cantidad_numeros, tipo_distribucion, maximo, minimo, media, parametro_aux);
             chiCuadrado.ShowDialog();
         }
+
     }
 }
