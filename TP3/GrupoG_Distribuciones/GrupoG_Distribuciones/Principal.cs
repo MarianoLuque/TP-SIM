@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,6 +13,8 @@ namespace GrupoG_Distribuciones
 {
     public partial class Principal : Form
     {
+        int n;
+
         public Principal()
         {
             InitializeComponent();
@@ -52,21 +55,28 @@ namespace GrupoG_Distribuciones
             }
         }
 
+
         private void btn_continuar_Click(object sender, EventArgs e)
         {
-            //n representa la cantidad de muestras que solicita el usuario
-            int n = int.Parse(txt_cantidad.Text);
+            if (!int.TryParse(txt_cantidad.Text, out n))
+            {
+                MessageBox.Show("Ingrese un valor numerico entero");
+                return;
+            }
+            
+            if (!(n >= 500 && n <= 3000))
+            {
+                MessageBox.Show("La cantidad de números debe ser superior a 500 e inferior a 3000");
+                return;
+            }
+
 
             //A medida que se calculan los números randoms se determina cual es el valor maximo y minimo
             //de estos, evitando hacer un nuevo recorrido luego
             double maximo = 0;
             double minimo = 0;
 
-            if (txt_cantidad.Text == "" || !(n >= 400))
-            {
-                MessageBox.Show("La cantidad de números debe ser superior a 500");
-                return;
-            }
+            
             
             //Tabla con los randoms generados
             DataTable tabla_iteracion = new DataTable();
@@ -74,8 +84,18 @@ namespace GrupoG_Distribuciones
             //Calculo UNIFORME
             if (rb_uniforme.Checked)
             {
-                Int64 a = Int64.Parse(msk_A.Text);
-                Int64 b = Int64.Parse(msk_B.Text);
+                double a, b = 0;
+                if (!(double.TryParse(msk_A.Text, out a) && (double.TryParse(msk_B.Text, out b))))
+                {
+                    MessageBox.Show("Ingrese los valores de A y B para la distribución uniforme");
+                    return;
+                }
+                if (b < a)
+                {
+                    MessageBox.Show("Ingrese un valor de B mayor que el valor de A");
+                    return;
+                }
+
                 maximo = b;
                 minimo = a;
 
@@ -121,7 +141,17 @@ namespace GrupoG_Distribuciones
 
                 if (!(rb_con.Checked) && !(rb_bm.Checked))
                 {
-                    MessageBox.Show("Seleccione un método de cálculo");
+                    MessageBox.Show("Seleccione un método de cálculo para la distribución normal");
+                    return;
+                }
+                if(!(double.TryParse(msk_media_normal.Text, out double media) && double.TryParse(msk_de.Text, out double de)))
+                {
+                    MessageBox.Show("Cargue los valores de media y desviación para la distribución normal");
+                    return;
+                }
+                if (de <= 0)
+                {
+                    MessageBox.Show("La desviación estandar en la distribución normal debe ser positiva");
                     return;
                 }
 
@@ -135,9 +165,6 @@ namespace GrupoG_Distribuciones
                 //Agrego las columnas a la tabla
                 tabla_iteracion.Columns.Add(iteracion);
                 tabla_iteracion.Columns.Add(rnd);
-
-                double media = double.Parse(msk_media_normal.Text);
-                double de = double.Parse(msk_de.Text);
 
                 double sumador = 0;
 
@@ -258,6 +285,12 @@ namespace GrupoG_Distribuciones
 
             if (rb_exponencial.Checked)
             {
+                if (!(rb_media_exp.Checked) && !(rb_lambda_exp.Checked))
+                {
+                    MessageBox.Show("Seleccione un método de cálculo para la distribución exponencial");
+                    return;
+                }
+                
                 tabla_iteracion.Rows.Clear();
                 tabla_iteracion.Columns.Clear();
                 //Creo las columnas de la tabla
@@ -273,12 +306,30 @@ namespace GrupoG_Distribuciones
                 double lambda = 0;
                 if (rb_media_exp.Checked)
                 {
-                    double media = Int64.Parse(msk_media_exp.Text);
+                    if (!double.TryParse(msk_media_exp.Text, out double media))
+                    {
+                        MessageBox.Show("Ingrese un valor numerico de media para la distribución exponencial");
+                        return;
+                    } 
+                    if(media <= 0)
+                    {
+                        MessageBox.Show("Ingrese un valor positivo para la media de la distribución exponencial");
+                        return;
+                    }
                     lambda = 1 / media;
                 }
                 if (rb_lambda_exp.Checked)
                 {
-                    lambda = Int64.Parse(msk_lam_exp.Text);
+                    if (!double.TryParse(msk_lam_exp.Text, out lambda))
+                    {
+                        MessageBox.Show("Ingrese un valor numerico de lambda para la distribución exponencial");
+                        return;
+                    }
+                    if (lambda <= 0)
+                    {
+                        MessageBox.Show("Ingrese un valor positivo para el lambda de la distribución exponencial");
+                        return;
+                    }
                 }
 
                 //Por la cantidad de numeros a generar, crea una fila y le asigna los valores
@@ -319,6 +370,17 @@ namespace GrupoG_Distribuciones
             
             if (rb_poisson.Checked)
             {
+                if(!double.TryParse(msk_lam_poi.Text, out double lambda))
+                {
+                    MessageBox.Show("Ingrese un valor numerico de lambda para la distribución de poisson");
+                    return;
+                }
+                if(lambda <= 0)
+                {
+                    MessageBox.Show("Ingrese un valor positivo de lambda para la distribución de poisson");
+                    return;
+                }
+                
                 tabla_iteracion.Rows.Clear();
                 tabla_iteracion.Columns.Clear();
                 //Creo las columnas de la tabla
@@ -331,9 +393,6 @@ namespace GrupoG_Distribuciones
                 tabla_iteracion.Columns.Add(rnd);
 
                 Random myObject = new Random();
-                Int64 lambda = Int64.Parse(msk_lam_poi.Text);
-                
-                
 
                 //Por la cantidad de numeros a generar, crea una fila y le asigna los valores
                 for (int i = 0; i < n; i++)
@@ -379,7 +438,7 @@ namespace GrupoG_Distribuciones
             
         }
 
-        private void des(MaskedTextBox a, MaskedTextBox b)
+        private void des(TextBox a, TextBox b)
         {
             todo_des();
             a.Enabled = true;

@@ -18,7 +18,7 @@ namespace GrupoG_Distribuciones
         double parametro_aux = 0.0;
         double varianza;
         DataTable tabla_ajuste;
-        private Int64 cantidad_numeros;
+        private int cantidad_numeros;
         private int m;
         private string tipo_distribucion;
         double maximo, minimo;
@@ -37,7 +37,7 @@ namespace GrupoG_Distribuciones
                                                  30.1435, 31.4104, 32.6706, 33.9245, 35.1725, 36.4150,
                                                  37.6525, 38.8851, 40.1133, 41.3372, 42.5569, 43.7730};
 
-        public ChiCuadrado(DataTable tabla, Int64 cantidad_numeros, string tipo_distribucion, double maximo, double minimo, double media, double parametro_aux)
+        public ChiCuadrado(DataTable tabla, int cantidad_numeros, string tipo_distribucion, double maximo, double minimo, double media, double parametro_aux)
         {
             InitializeComponent();
             this.cantidad_numeros = cantidad_numeros;
@@ -201,25 +201,87 @@ namespace GrupoG_Distribuciones
             if(tipo_distribucion == "P")
             {
                 //Determino la maxima cantidad de intervalos para esta distribución en particular
-                maximo_valor_intervalos = (int)(maximo - minimo);
-                int cantidad_numeros = (int)(maximo - minimo);
-                double rango_intervalos = 0;
-                double[] fe_poisson_array = new double[(int)(maximo-minimo)];
+                int max_min = (int)(maximo - minimo);
+                int rango;
+                int restantes = 0;
+                int valores_distintos;
+
+
+                if (cantidad_intervalos > maximo_valor_intervalos)
+                {
+                    MessageBox.Show("La cantidad de intervalos debe ser menor o igual a " + maximo_valor_intervalos.ToString());
+                    return;
+                }
+
+                maximo_valor_intervalos = max_min;
+                
+                int rango_intervalos;
+                double[] fe_poisson_array = new double[max_min];
 
                 m = 1;
+
+                /*
                 while (cantidad_numeros % cantidad_intervalos != 0)
                 {
                     cantidad_numeros += 1;
                 }
-
-                rango_intervalos = cantidad_numeros / cantidad_intervalos;
-
-                for (int i = (int)minimo; i < (maximo-minimo); i++)
+                */
+                //rango_intervalos es la cantidad de numeros que van en cada intervalo
+                if(max_min % cantidad_intervalos == 0)
                 {
-                    fe_poisson_array[i] = ((Math.Pow(media, i)) * Math.Exp(-media)) / factorial(i);
+                    rango_intervalos = max_min / (int)cantidad_intervalos;
+                }
+                else
+                {
+                    rango_intervalos = max_min / (int)cantidad_intervalos;
+                    restantes = max_min - (int)cantidad_intervalos * rango_intervalos;
                 }
 
-                //Calculo la frecuencia esperada para CADA intervalo
+                for (int i = (int)minimo; i < maximo; i++)
+                {
+                    fe_poisson_array[i - (int)minimo] = ((Math.Pow(media, i)) * Math.Exp(-media)) / factorial(i);
+                }
+
+                //rango_intervalos = 2
+                //restantes = 15 - 6 * 2 = 15-12 = 3
+
+                //1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15
+                //6 intervalos
+                //1,2,3 -- 4,5,6 -- 7,8,9 -- 10,11 -- 12,13 -- 14,15
+                int indice_anterior = 0;
+                for (int i = 0; i < restantes; i++)
+                {
+                    for (int j = 0; j < rango_intervalos + 1; j++)
+                    {
+                        indice_anterior = j + ((int)rango_intervalos + 1) * i;
+                        fe_array[i] += fe_poisson_array[indice_anterior];
+                    }
+                }
+                for (int i = 0; i < cantidad_intervalos - restantes; i++)
+                {
+                    for (int j = indice_anterior + 1; j < rango_intervalos + indice_anterior + 1; j++)
+                    {
+                        fe_array[i] += fe_poisson_array[j + (int)rango_intervalos * i];
+                    }
+                }
+
+                intervalos_array[0] = minimo;
+                for (int i = 0; i < restantes; i++)
+                {
+                    intervalos_array[i + 1] = (double)(rango_intervalos + 1);
+                }
+                for (int i = 0; i < (int)cantidad_intervalos - restantes; i++)
+                {
+                    intervalos_array[restantes + i + 1] = (double)(rango_intervalos);
+                }
+                /*
+                cantidad de numeros: 500
+                cantidad de intervalos: 30
+                cantidad de numeros por intervalo: 16
+                intervalos con 17 : cantidad de numeros - rango
+                */
+
+                /*Calculo la frecuencia esperada para CADA intervalo
                 for (int i = 0; i < cantidad_intervalos; i++)
                 {
                     intervalos_array[i] = Math.Round(intervalos_array[i - 1] + cantidad_numeros / cantidad_intervalos, 2);
@@ -233,13 +295,13 @@ namespace GrupoG_Distribuciones
                         }
                     }
                 }
+                */
 
             }
             //Defino un array que contenga la cantidad de valores observados
             int[] valores_observados = new int[(int)cantidad_intervalos];
 
             int columna_de_rnd = 1;
-            
 
             double sumador = 0.0;
 
@@ -313,12 +375,6 @@ namespace GrupoG_Distribuciones
                 tabla_ajuste.Rows[i]["MKS"] = valor_max_ks;
             }
 
-            if (cantidad_intervalos >= maximo_valor_intervalos)
-            {
-                MessageBox.Show("La cantidad de intervalos debe ser menor o igual a " + maximo_valor_intervalos.ToString());
-                return;
-            }
-
             //Resultado Chi Cuadrado
             valor_chi_tabulado = vp_chi[(int)cantidad_intervalos - 1 - m];
 
@@ -345,19 +401,14 @@ namespace GrupoG_Distribuciones
 
         private int factorial(int n)
         {
-            int resultado = 0;
-            if (n == 0 || n == 1)
-            {
-                resultado = 1;
-            }
-            else
-            {
-                for (int i = 2; i <= n; i++) {
-                    {
-                        resultado = resultado * i;
-                    }
+            int resultado = 1;
+
+            for (int i = 1; i <= n; i++) {
+                {
+                    resultado = resultado * i;
                 }
             }
+
             return resultado;
         }
 
