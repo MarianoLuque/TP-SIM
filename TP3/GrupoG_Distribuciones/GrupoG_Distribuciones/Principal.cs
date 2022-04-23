@@ -152,7 +152,7 @@ namespace GrupoG_Distribuciones
                     MessageBox.Show("Cargue los valores de media y desviación para la distribución normal");
                     return;
                 }
-                if (de <= 0)
+                if (de < 0)
                 {
                     MessageBox.Show("La desviación estandar en la distribución normal debe ser positiva");
                     return;
@@ -344,7 +344,6 @@ namespace GrupoG_Distribuciones
                     //Le asigno los valores
                     tabla_iteracion.Rows[i]["Iteracion"] = i + 1;
                     double random_p = (Math.Truncate(myObject.NextDouble() * 10000)) / 10000;
-                    double asd = -1 / lambda;
                     //MessageBox.Show(random_p.ToString());
                     double x = Math.Truncate(((-1/lambda)*(Math.Log(1-random_p)))*100) /100;
                     //MessageBox.Show(x.ToString());
