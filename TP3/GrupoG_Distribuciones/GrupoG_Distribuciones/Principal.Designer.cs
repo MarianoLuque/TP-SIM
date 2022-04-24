@@ -188,7 +188,7 @@
             this.rb_lambda_exp.TabStop = true;
             this.rb_lambda_exp.Text = "λ";
             this.rb_lambda_exp.UseVisualStyleBackColor = true;
-            this.rb_lambda_exp.CheckedChanged += new System.EventHandler(this.media_lambda_changed);
+            this.rb_lambda_exp.CheckedChanged += new System.EventHandler(this.exponencial_parametro_changed);
             // 
             // rb_media_exp
             // 
@@ -201,7 +201,7 @@
             this.rb_media_exp.TabStop = true;
             this.rb_media_exp.Text = "x̄";
             this.rb_media_exp.UseVisualStyleBackColor = true;
-            this.rb_media_exp.CheckedChanged += new System.EventHandler(this.media_lambda_changed);
+            this.rb_media_exp.CheckedChanged += new System.EventHandler(this.exponencial_parametro_changed);
             // 
             // rb_poisson
             // 

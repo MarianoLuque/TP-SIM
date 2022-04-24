@@ -233,10 +233,10 @@ namespace GrupoG_Distribuciones
                 for (int i = 0; i < (maximo-minimo); i++)
                 {
                     double dividendo_pe = ((Math.Pow(media, (i + minimo))) * Math.Exp(-media));
-                    pe_array[i] = factorial(dividendo_pe, i+(int)minimo);
+                    pe_array[i] = division_por_factorial(dividendo_pe, i+(int)minimo);
 
                     double dividendo_fe = ((Math.Pow(media, (i + minimo))) * Math.Exp(-media));
-                    fe_array[i] = Math.Round(((factorial(dividendo_fe, i+(int)minimo)))*cantidad_numeros, 0);
+                    fe_array[i] = Math.Round(((division_por_factorial(dividendo_fe, i+(int)minimo)))*cantidad_numeros, 0);
                 }
             }
 
@@ -352,7 +352,7 @@ namespace GrupoG_Distribuciones
             }
         }
 
-        private double factorial(double dividendo, int n)
+        private double division_por_factorial(double dividendo, int n)
         {
             for (int i = 1; i <= n; i++) {
                 {

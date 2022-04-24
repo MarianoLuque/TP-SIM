@@ -13,13 +13,16 @@ namespace GrupoG_Distribuciones
 {
     public partial class Principal : Form
     {
+
         int n;
+        //Tabla con los randoms generados
+        DataTable tabla_iteracion = new DataTable();
 
         public Principal()
         {
             InitializeComponent();
             //Deshabilita todos los textBox
-            todo_des();
+            deshabilitar_todo();
         }
 
         private void btn_salir_Click(object sender, EventArgs e)
@@ -33,17 +36,17 @@ namespace GrupoG_Distribuciones
             btn_continuar.Enabled = true;
             if (rb_uniforme.Checked)
             {
-                des(msk_A, msk_B);
+                deshabilitar_todo_menos_a_y_b(msk_A, msk_B);
             }
             if (rb_normal.Checked)
             {
-                des(msk_de, msk_media_normal);
+                deshabilitar_todo_menos_a_y_b(msk_de, msk_media_normal);
                 rb_bm.Enabled = true;
                 rb_con.Enabled = true;
             }
             if(rb_exponencial.Checked)
             {
-                todo_des();
+                deshabilitar_todo();
                 rb_lambda_exp.Enabled = true;
                 rb_media_exp.Enabled = true;
                 
@@ -51,10 +54,23 @@ namespace GrupoG_Distribuciones
             }
             if (rb_poisson.Checked)
             {
-                des(msk_lam_poi, msk_lam_poi);
+                deshabilitar_todo_menos_a_y_b(msk_lam_poi, msk_lam_poi);
             }
         }
 
+        private void limpiar_tabla_y_crear_columnas()
+        {
+            tabla_iteracion.Rows.Clear();
+            tabla_iteracion.Columns.Clear();
+            //Creo las columnas de la tabla
+            DataColumn iteracion = new DataColumn("Iteracion");
+            DataColumn rnd = new DataColumn("RND");
+
+
+            //Agrego las columnas a la tabla
+            tabla_iteracion.Columns.Add(iteracion);
+            tabla_iteracion.Columns.Add(rnd);
+        }
 
         private void btn_continuar_Click(object sender, EventArgs e)
         {
@@ -75,11 +91,6 @@ namespace GrupoG_Distribuciones
             //de estos, evitando hacer un nuevo recorrido luego
             double maximo = 0;
             double minimo = 0;
-
-            
-            
-            //Tabla con los randoms generados
-            DataTable tabla_iteracion = new DataTable();
 
             //Calculo UNIFORME
             if (rb_uniforme.Checked)
@@ -102,16 +113,7 @@ namespace GrupoG_Distribuciones
                 //Para calcular la media
                 double sumador = 0;
 
-                tabla_iteracion.Rows.Clear();
-                tabla_iteracion.Columns.Clear();
-                //Creo las columnas de la tabla
-                DataColumn iteracion = new DataColumn("Iteracion");
-                DataColumn rnd = new DataColumn("RND");
-
-
-                //Agrego las columnas a la tabla
-                tabla_iteracion.Columns.Add(iteracion);
-                tabla_iteracion.Columns.Add(rnd);
+                limpiar_tabla_y_crear_columnas();
 
                 Random myObject = new Random();
 
@@ -158,16 +160,7 @@ namespace GrupoG_Distribuciones
                     return;
                 }
 
-                tabla_iteracion.Rows.Clear();
-                tabla_iteracion.Columns.Clear();
-                //Creo las columnas de la tabla
-                DataColumn iteracion = new DataColumn("Iteracion");
-                DataColumn rnd = new DataColumn("RND");
-
-
-                //Agrego las columnas a la tabla
-                tabla_iteracion.Columns.Add(iteracion);
-                tabla_iteracion.Columns.Add(rnd);
+                limpiar_tabla_y_crear_columnas();
 
                 double sumador = 0;
 
@@ -293,17 +286,8 @@ namespace GrupoG_Distribuciones
                     MessageBox.Show("Seleccione un método de cálculo para la distribución exponencial");
                     return;
                 }
-                
-                tabla_iteracion.Rows.Clear();
-                tabla_iteracion.Columns.Clear();
-                //Creo las columnas de la tabla
-                DataColumn iteracion = new DataColumn("Iteracion");
-                DataColumn rnd = new DataColumn("RND");
 
-
-                //Agrego las columnas a la tabla
-                tabla_iteracion.Columns.Add(iteracion);
-                tabla_iteracion.Columns.Add(rnd);
+                limpiar_tabla_y_crear_columnas();
 
                 Random myObject = new Random();
                 double lambda = 0;
@@ -344,9 +328,9 @@ namespace GrupoG_Distribuciones
                     //Le asigno los valores
                     tabla_iteracion.Rows[i]["Iteracion"] = i + 1;
                     double random_p = (Math.Truncate(myObject.NextDouble() * 10000)) / 10000;
-                    //MessageBox.Show(random_p.ToString());
+
                     double x = Math.Truncate(((-1/lambda)*(Math.Log(1-random_p)))*100) /100;
-                    //MessageBox.Show(x.ToString());
+
                     tabla_iteracion.Rows[i]["RND"] = x;
                     if (i == 0)
                     {
@@ -382,17 +366,8 @@ namespace GrupoG_Distribuciones
                     MessageBox.Show("Ingrese un valor positivo de lambda para la distribución de poisson, menor a 25");
                     return;
                 }
-                
-                tabla_iteracion.Rows.Clear();
-                tabla_iteracion.Columns.Clear();
-                //Creo las columnas de la tabla
-                DataColumn iteracion = new DataColumn("Iteracion");
-                DataColumn rnd = new DataColumn("RND");
 
-
-                //Agrego las columnas a la tabla
-                tabla_iteracion.Columns.Add(iteracion);
-                tabla_iteracion.Columns.Add(rnd);
+                limpiar_tabla_y_crear_columnas();
 
                 Random myObject = new Random();
 
@@ -440,14 +415,14 @@ namespace GrupoG_Distribuciones
             
         }
 
-        private void des(TextBox a, TextBox b)
+        private void deshabilitar_todo_menos_a_y_b(TextBox a, TextBox b)
         {
-            todo_des();
+            deshabilitar_todo();
             a.Enabled = true;
             b.Enabled = true;
         }
 
-        private void todo_des()
+        private void deshabilitar_todo()
         {
             msk_A.Enabled = false;
             msk_B.Enabled = false;
@@ -474,7 +449,7 @@ namespace GrupoG_Distribuciones
             rb_con.Checked = false;
         }
 
-        private void media_lambda_changed(object sender, EventArgs e)
+        private void exponencial_parametro_changed(object sender, EventArgs e)
         {
             if (rb_lambda_exp.Checked)
             {
