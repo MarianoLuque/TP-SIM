@@ -13,22 +13,41 @@ namespace GrupoG_Distribuciones
 {
     public partial class ChiCuadrado : Form
     {
-        //Creo la tabla de las iteraciones
-        double media = 0.0;
-        double parametro_aux = 0.0;
+        //Creo la tabla que contiene los valores observados
+        private DataTable tabla_randoms_observados;
+
+        //Creo la tabla que contiene los valores de la prueba de bondad de ajuste
+        private DataTable tabla_ajuste = new DataTable();
+
+        //Desviacion estandar ingresada por teclado de la distribucion normal
+        double desviacion_estandar_dist_normal;
+
+        //media y varianza de los valores observados
+        double media;
         double varianza;
-        DataTable tabla_ajuste;
+        
+        // Cantidad de numeros ingresados, tipo de distribucion elegida y valores maximo y minimo de la muestra
         private int cantidad_numeros;
-        private int m;
         private string tipo_distribucion;
         double maximo, minimo;
-        private DataTable tabla_iteracion;
+
+        // cantidad de datos empiricos (m) de cada distribucion 
+        // uniforme = 0, normal = 2 (media y desviacion), exponencial = 1 (media o lambda), poisson = 1 (media o lambda)
+        private int cantidad_datos_empiricos;
+
+        // Valores tabulados de chi y KS
         double valor_chi_tabulado = 0.0;
         double valor_ks_tabulado = 0.0;
+
+        // Valores calculados de chi y KS
         double valor_max_ks = 0.0;
         double estadistico_de_prueba_acumulado = 0.0;
+
+        //Resultado de chi y KS
         string resultado;
         string resultado_ks;
+
+        // Cantidad de intervalos maximos (por chi) y cantidad de intervalos ingresados
         int maximo_valor_intervalos = 50;
         double cantidad_intervalos = 0;
 
@@ -42,23 +61,23 @@ namespace GrupoG_Distribuciones
                                                  61.656,62.830, 64.001, 65.171, 66.339, 67.505, 68.669,
                                                  69.832, 70.993 , 72.153, 73.311 };
 
-        public ChiCuadrado(DataTable tabla, int cantidad_numeros, string tipo_distribucion, double maximo, double minimo, double media, double parametro_aux)
+        public ChiCuadrado(DataTable tabla, int cantidad_numeros, string tipo_distribucion, double maximo, double minimo, double media, double desviacion_estandar_normal)
         {
             InitializeComponent();
             this.cantidad_numeros = cantidad_numeros;
-            this.tabla_iteracion = tabla;
+            this.tabla_randoms_observados = tabla;
             this.tipo_distribucion = tipo_distribucion;
             this.maximo = maximo;
             this.minimo = minimo;
             this.media = media;
-            this.parametro_aux = parametro_aux;
+            this.desviacion_estandar_dist_normal = desviacion_estandar_normal;
         }
 
         private void ChiCuadrado_Load(object sender, EventArgs e)
         {
             if (tipo_distribucion != "P")
             {
-
+                // Si no es poisson debe ingresar la cantidad de intervalos
                 int max_intervalo = (int)Math.Truncate(Math.Sqrt(cantidad_numeros));
                 if (max_intervalo > 50)
                 {
@@ -71,6 +90,9 @@ namespace GrupoG_Distribuciones
             }
             else
             {
+                // Deshabilito la cantidad de intervalos al ser poisson y muevo los controles mas arriba para que queden alineados
+                lbl_nivel_significancia.Location = new Point(lbl_nivel_significancia.Location.X, lbl_nivel_significancia.Location.Y - 30);
+                btn_generar.Location = new Point(btn_generar.Location.X, btn_generar.Location.Y - 30);
                 lbl_intervalo.Visible = false;
                 txt_intervalo.Visible = false;
             }
@@ -126,10 +148,11 @@ namespace GrupoG_Distribuciones
             reporte_chi_cuadrado.RefreshReport();
         }
 
-        private void ajuste()
+        private void limpiar_tabla_y_crear_columnas()
         {
-            //Creo la tabla de las iteraciones
-            tabla_ajuste = new DataTable();
+            //Limpio las filas y columnas
+            tabla_ajuste.Rows.Clear();
+            tabla_ajuste.Columns.Clear();
 
             //Creo las columnas de la tabla
             DataColumn intervalo = new DataColumn("Intervalo");
@@ -141,7 +164,6 @@ namespace GrupoG_Distribuciones
             DataColumn ks = new DataColumn("KS");
             DataColumn max_ks = new DataColumn("MKS");
 
-
             //Agrego las columnas a la tabla
             tabla_ajuste.Columns.Add(intervalo);
             tabla_ajuste.Columns.Add(fo);
@@ -151,7 +173,12 @@ namespace GrupoG_Distribuciones
             tabla_ajuste.Columns.Add(estadistico_acumulado);
             tabla_ajuste.Columns.Add(ks);
             tabla_ajuste.Columns.Add(max_ks);
-            
+        }
+
+        private void ajuste()
+        {
+
+            limpiar_tabla_y_crear_columnas();
 
             //Defino un array para almacenar los limites de cada intervalo que al ser x intervalos necesitan x+1 limites
             double[] intervalos_array = new double[(int)(cantidad_intervalos + 1.0)];
@@ -178,7 +205,7 @@ namespace GrupoG_Distribuciones
             //Calculo de la Frecuencia Esperada según cada distribución
             if (tipo_distribucion == "U")
             {
-                m = 0;
+                cantidad_datos_empiricos = 0;
                 for (int i = 0; i < cantidad_intervalos; i++)
                 {
                     pe_array[i] = (cantidad_numeros / cantidad_intervalos) / cantidad_numeros;
@@ -188,13 +215,13 @@ namespace GrupoG_Distribuciones
 
             if (tipo_distribucion == "N")
             {
-                m = 2;
+                cantidad_datos_empiricos = 2;
                 for (int i = 0; i < cantidad_intervalos; i++)
                 {
                     double marca_clase = ((intervalos_array[i + 1] + intervalos_array[i]) / 2);
                     double resta = ((intervalos_array[i + 1] - intervalos_array[i]));
-                    double primer_termino = 1 / (parametro_aux * (Math.Sqrt(2 * Math.PI)));
-                    double segundo_termino = Math.Exp(-0.5 * Math.Pow(((marca_clase - media) / parametro_aux), 2));
+                    double primer_termino = 1 / (desviacion_estandar_dist_normal * (Math.Sqrt(2 * Math.PI)));
+                    double segundo_termino = Math.Exp(-0.5 * Math.Pow(((marca_clase - media) / desviacion_estandar_dist_normal), 2));
 
                     pe_array[i] = ((primer_termino * segundo_termino) * resta);
                     fe_array[i] = ((primer_termino * segundo_termino) * resta) * cantidad_numeros;
@@ -203,7 +230,7 @@ namespace GrupoG_Distribuciones
 
             if(tipo_distribucion == "E")
             {
-                m = 1;
+                cantidad_datos_empiricos = 1;
                 //=(1-EXP(-Lambda*hasta))-(1-EXP(-Lambda*desde)) * N              
 
                 for (int i = 0; i < cantidad_intervalos; i++)
@@ -220,6 +247,7 @@ namespace GrupoG_Distribuciones
 
             if(tipo_distribucion == "P")
             {
+                cantidad_datos_empiricos = 1;
                 fe_array = new double[(int)(maximo - minimo)];
                 intervalos_array[0] = Math.Round(minimo, 0);
 
@@ -248,10 +276,10 @@ namespace GrupoG_Distribuciones
             double sumador = 0.0;
 
             //Por cada fila de la tabla de iteraciones observo en que intervalo cae el valor observado
-            for (int i = 0; i < tabla_iteracion.Rows.Count; i++)
+            for (int i = 0; i < tabla_randoms_observados.Rows.Count; i++)
             {
                 //valor observado
-                double random_observado = Convert.ToDouble(tabla_iteracion.Rows[i][columna_de_rnd].ToString());
+                double random_observado = Convert.ToDouble(tabla_randoms_observados.Rows[i][columna_de_rnd].ToString());
                 sumador += random_observado;
                 //comparo los limites contra los random generados
                 for (int j = 0; j < intervalos_array.Length - 1; j++)
@@ -267,7 +295,7 @@ namespace GrupoG_Distribuciones
             double sumatoria = 0;
             for (int i = 0; i < cantidad_numeros; i++)
             {
-                double random_observado = Convert.ToDouble(tabla_iteracion.Rows[i][columna_de_rnd].ToString());
+                double random_observado = Convert.ToDouble(tabla_randoms_observados.Rows[i][columna_de_rnd].ToString());
                 double resta = Math.Pow((random_observado - media), 2.0);
                 sumatoria += resta;
             }
@@ -329,7 +357,7 @@ namespace GrupoG_Distribuciones
             }
 
             //Resultado Chi Cuadrado
-            valor_chi_tabulado = vp_chi[(int)cantidad_intervalos - 1 - m];
+            valor_chi_tabulado = vp_chi[(int)cantidad_intervalos - 1 - cantidad_datos_empiricos];
 
             if (estadistico_de_prueba_acumulado <= valor_chi_tabulado)
             {

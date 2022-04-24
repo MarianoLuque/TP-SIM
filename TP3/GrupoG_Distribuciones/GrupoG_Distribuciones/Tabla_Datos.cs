@@ -15,8 +15,8 @@ namespace GrupoG_Distribuciones
         DataTable tabla;
         int cantidad_numeros;
         string tipo_distribucion;
-        double maximo, minimo, media, parametro_aux;
-        public Tabla_Datos(DataTable tabla, int cantidad_numeros, string tipo_distribucion, double maximo, double minimo, double media, double parametro_aux)
+        double maximo, minimo, media, desviacion_estandar_normal;
+        public Tabla_Datos(DataTable tabla, int cantidad_numeros, string tipo_distribucion, double maximo, double minimo, double media, double desviacion_estandar_normal)
         {
             InitializeComponent();
             this.tabla = tabla;
@@ -25,7 +25,7 @@ namespace GrupoG_Distribuciones
             this.maximo = maximo;
             this.minimo = minimo;
             this.media = media;
-            this.parametro_aux = parametro_aux;
+            this.desviacion_estandar_normal = desviacion_estandar_normal;
             dg_rnd.DataSource = tabla;
         }
 
@@ -41,7 +41,7 @@ namespace GrupoG_Distribuciones
 
         private void btn_continuar_Click(object sender, EventArgs e)
         {
-            ChiCuadrado chiCuadrado = new ChiCuadrado(tabla, cantidad_numeros, tipo_distribucion, maximo, minimo, media, parametro_aux);
+            ChiCuadrado chiCuadrado = new ChiCuadrado(tabla, cantidad_numeros, tipo_distribucion, maximo, minimo, media, desviacion_estandar_normal);
             chiCuadrado.ShowDialog();
         }
 

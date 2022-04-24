@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChiCuadrado));
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbl_nivel_significancia = new System.Windows.Forms.Label();
             this.btn_volver = new System.Windows.Forms.Button();
             this.btn_generar = new System.Windows.Forms.Button();
             this.txt_intervalo = new System.Windows.Forms.MaskedTextBox();
@@ -38,15 +38,15 @@
             this.btn_cerrar_programa = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label2
+            // lbl_nivel_significancia
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(454, 104);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(299, 24);
-            this.label2.TabIndex = 24;
-            this.label2.Text = "Nivel de significancia usado = 0.95";
+            this.lbl_nivel_significancia.AutoSize = true;
+            this.lbl_nivel_significancia.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_nivel_significancia.Location = new System.Drawing.Point(454, 104);
+            this.lbl_nivel_significancia.Name = "lbl_nivel_significancia";
+            this.lbl_nivel_significancia.Size = new System.Drawing.Size(299, 24);
+            this.lbl_nivel_significancia.TabIndex = 24;
+            this.lbl_nivel_significancia.Text = "Nivel de significancia usado = 0.95";
             // 
             // btn_volver
             // 
@@ -62,7 +62,7 @@
             // btn_generar
             // 
             this.btn_generar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_generar.Location = new System.Drawing.Point(1084, 95);
+            this.btn_generar.Location = new System.Drawing.Point(1084, 101);
             this.btn_generar.Name = "btn_generar";
             this.btn_generar.Size = new System.Drawing.Size(75, 24);
             this.btn_generar.TabIndex = 22;
@@ -72,7 +72,7 @@
             // 
             // txt_intervalo
             // 
-            this.txt_intervalo.Location = new System.Drawing.Point(1084, 70);
+            this.txt_intervalo.Location = new System.Drawing.Point(1084, 75);
             this.txt_intervalo.Mask = "99999";
             this.txt_intervalo.Name = "txt_intervalo";
             this.txt_intervalo.Size = new System.Drawing.Size(100, 20);
@@ -118,7 +118,7 @@
             this.ClientSize = new System.Drawing.Size(1314, 849);
             this.Controls.Add(this.btn_cerrar_programa);
             this.Controls.Add(this.reporte_chi_cuadrado);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbl_nivel_significancia);
             this.Controls.Add(this.btn_volver);
             this.Controls.Add(this.btn_generar);
             this.Controls.Add(this.txt_intervalo);
@@ -136,7 +136,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_nivel_significancia;
         private System.Windows.Forms.Button btn_volver;
         private System.Windows.Forms.Button btn_generar;
         private System.Windows.Forms.MaskedTextBox txt_intervalo;
