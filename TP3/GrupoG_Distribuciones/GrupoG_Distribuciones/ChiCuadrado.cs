@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using MathNet.Numerics.Distributions;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -357,8 +358,9 @@ namespace GrupoG_Distribuciones
             }
 
             //Resultado Chi Cuadrado
-            valor_chi_tabulado = vp_chi[(int)cantidad_intervalos - 1 - cantidad_datos_empiricos];
-
+            //valor_chi_tabulado = vp_chi[(int)cantidad_intervalos - 1 - cantidad_datos_empiricos];
+            ChiSquared c = new ChiSquared((int)cantidad_intervalos - 1 - cantidad_datos_empiricos);
+            valor_chi_tabulado = c.InverseCumulativeDistribution(95.0); 
             if (estadistico_de_prueba_acumulado <= valor_chi_tabulado)
             {
                 resultado = " No se puede rechazar la hipótesis";
