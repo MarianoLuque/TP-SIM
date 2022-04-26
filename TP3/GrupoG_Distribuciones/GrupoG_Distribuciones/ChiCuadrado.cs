@@ -1,4 +1,5 @@
-﻿using MathNet.Numerics.Distributions;
+﻿using Accord.Statistics.Testing;
+using MathNet.Numerics.Distributions;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace GrupoG_Distribuciones
 
         // cantidad de datos empiricos (m) de cada distribucion 
         // uniforme = 0, normal = 2 (media y desviacion), exponencial = 1 (media o lambda), poisson = 1 (media o lambda)
-        private int cantidad_datos_empiricos;
+        static private int cantidad_datos_empiricos;
 
         // Valores tabulados de chi y KS
         double valor_chi_tabulado = 0.0;
@@ -50,7 +51,7 @@ namespace GrupoG_Distribuciones
 
         // Cantidad de intervalos maximos (por chi) y cantidad de intervalos ingresados
         int maximo_valor_intervalos = 50;
-        double cantidad_intervalos = 0;
+        static double cantidad_intervalos = 0;
 
         
         
@@ -329,7 +330,7 @@ namespace GrupoG_Distribuciones
                 tabla_ajuste.Rows[i]["MC"] = ((intervalos_array[i + 1] + intervalos_array[i]) / 2);
 
                 //le agrego el estadistico de prueba
-                double resta_de_frecuencias = fe_array[i] - valores_observados[i];
+                double resta_de_frecuencias = fe_array[i] - (double)valores_observados[i];
                 double resta_al_cuadrado = (Math.Pow(resta_de_frecuencias, 2.0));
                 double estadistico_de_prueba;
                 if (!(fe_array[i] == 0.0))
@@ -363,15 +364,23 @@ namespace GrupoG_Distribuciones
             //Resultado Chi Cuadrado
             valor_chi_tabulado = vp_chi[(int)cantidad_intervalos - 1 - cantidad_datos_empiricos];
 
-
-            /*public class chi
+            double[] valores_observados_double = new double[(int)cantidad_intervalos];
+            for (int i = 0; i < valores_observados.Length; i++)
             {
-                public static double valor_chi;
+                valores_observados_double[i] = (double)valores_observados[i];
             }
-            ChiSquared c = new ChiSquared((int)cantidad_intervalos - 1 - cantidad_datos_empiricos);
-            double grados_libertad = cantidad_intervalos - 1 - cantidad_datos_empiricos;
-            chi.valor_chi = c.InvCDF(grados_libertad, 95.0); */
 
+
+            ChiSquareTest chiSquareTest = new ChiSquareTest(valores_observados_double, fe_array, (int)cantidad_intervalos - 1 - cantidad_datos_empiricos);
+            
+            MessageBox.Show(@"Pvalue: " + chiSquareTest.PValue.ToString() +
+                            "\nStatistic: " + chiSquareTest.Statistic.ToString() +
+                            "\nGrados de libertad: " + chiSquareTest.DegreesOfFreedom.ToString() +
+                            "\nSignificancia: " + chiSquareTest.Significant.ToString());
+
+            bool significant = chiSquareTest.Significant; // true if statistically significant
+
+            /*
             if (estadistico_de_prueba_acumulado <= valor_chi_tabulado)
             {
                 resultado = " No se puede rechazar la hipótesis";
@@ -380,6 +389,16 @@ namespace GrupoG_Distribuciones
             {
                 resultado = " La hipótesis es rechazada ";
             }
+            */
+            if (significant)
+            {
+                resultado = " No se puede rechazar la hipótesis";
+            }
+            else
+            {
+                resultado = " La hipótesis es rechazada ";
+            }
+
 
             //Resultado KS
             valor_ks_tabulado = 1.36 / Math.Sqrt(cantidad_numeros);
@@ -413,5 +432,6 @@ namespace GrupoG_Distribuciones
         {
             this.Dispose();
         }
+
     }
 }
