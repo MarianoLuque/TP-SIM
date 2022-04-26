@@ -52,6 +52,9 @@ namespace GrupoG_Distribuciones
         int maximo_valor_intervalos = 50;
         double cantidad_intervalos = 0;
 
+        
+        
+
         private double[] vp_chi = new double[] { 3.8415, 5.9915, 7.8147, 9.4877, 11.0705, 12.5916,
                                                  14.0671, 15.5073, 16.9190, 18.3070, 19.6752, 21,0261,
                                                  22.3620, 23.6848, 24.9958, 26.2962, 27.5871, 28.8693,
@@ -358,9 +361,17 @@ namespace GrupoG_Distribuciones
             }
 
             //Resultado Chi Cuadrado
-            //valor_chi_tabulado = vp_chi[(int)cantidad_intervalos - 1 - cantidad_datos_empiricos];
+            valor_chi_tabulado = vp_chi[(int)cantidad_intervalos - 1 - cantidad_datos_empiricos];
+
+
+            /*public class chi
+            {
+                public static double valor_chi;
+            }
             ChiSquared c = new ChiSquared((int)cantidad_intervalos - 1 - cantidad_datos_empiricos);
-            valor_chi_tabulado = c.InverseCumulativeDistribution(95.0); 
+            double grados_libertad = cantidad_intervalos - 1 - cantidad_datos_empiricos;
+            chi.valor_chi = c.InvCDF(grados_libertad, 95.0); */
+
             if (estadistico_de_prueba_acumulado <= valor_chi_tabulado)
             {
                 resultado = " No se puede rechazar la hipótesis";
