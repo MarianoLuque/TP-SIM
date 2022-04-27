@@ -27,7 +27,7 @@ namespace GrupoG_Distribuciones
         //media y varianza de los valores observados
         double media;
         double varianza;
-        
+
         // Cantidad de numeros ingresados, tipo de distribucion elegida y valores maximo y minimo de la muestra
         private int cantidad_numeros;
         private string tipo_distribucion;
@@ -53,10 +53,8 @@ namespace GrupoG_Distribuciones
         int maximo_valor_intervalos = 50;
         static double cantidad_intervalos = 0;
 
-        
-        
 
-        private double[] vp_chi = new double[] { 3.8415, 5.9915, 7.8147, 9.4877, 11.0705, 12.5916,
+       /*private double[] vp_chi = new double[] { 3.8415, 5.9915, 7.8147, 9.4877, 11.0705, 12.5916,
                                                  14.0671, 15.5073, 16.9190, 18.3070, 19.6752, 21,0261,
                                                  22.3620, 23.6848, 24.9958, 26.2962, 27.5871, 28.8693,
                                                  30.1435, 31.4104, 32.6706, 33.9245, 35.1725, 36.4150,
@@ -64,7 +62,7 @@ namespace GrupoG_Distribuciones
                                                  44.985,46.194, 47.400, 48.602, 49.802, 50.998, 52.192,
                                                  53.384,54.572,55.758, 56.942, 58.124, 59.304, 60.481,
                                                  61.656,62.830, 64.001, 65.171, 66.339, 67.505, 68.669,
-                                                 69.832, 70.993 , 72.153, 73.311 };
+                                                 69.832, 70.993 , 72.153, 73.311 };*/
 
         public ChiCuadrado(DataTable tabla, int cantidad_numeros, string tipo_distribucion, double maximo, double minimo, double media, double desviacion_estandar_normal)
         {
@@ -84,7 +82,7 @@ namespace GrupoG_Distribuciones
             {
                 // Si no es poisson debe ingresar la cantidad de intervalos
                 int max_intervalo = (int)Math.Truncate(Math.Sqrt(cantidad_numeros));
-                if (max_intervalo > 50)
+                if (max_intervalo > 50000)
                 {
                     lbl_intervalo.Text = "Ingrese la cantidad de intervalos (Debe ser como maximo 50)";
                 }
@@ -115,19 +113,19 @@ namespace GrupoG_Distribuciones
                     return;
                 }
 
-                if (cantidad_intervalos > maximo_valor_intervalos || cantidad_intervalos < 4)
+                /*if (cantidad_intervalos > maximo_valor_intervalos || cantidad_intervalos < 4)
                 {
                     MessageBox.Show("La cantidad de intervalos debe ser menor o igual a " + maximo_valor_intervalos.ToString() + " y mayor a 3");
                     return;
-                }
+                }*/
             }
-            else
+            /*else
             {
                 if ((maximo - minimo) < 50)
                     cantidad_intervalos = maximo - minimo;
                 else
                     cantidad_intervalos = 50;
-            }
+            }*/
             ajuste();
             CargarReporte();
         }
@@ -194,18 +192,22 @@ namespace GrupoG_Distribuciones
             double[] pe_array = new double[(int)(cantidad_intervalos)];
             double po_acumulado = 0.0;
             double pe_acumulado = 0.0;
-            
+
 
 
             //Defino el primer limite que es el mínimo o A en caso de ser uniforme
-            intervalos_array[0] = Math.Round(minimo,2);
-            intervalos_array[1] = Math.Round((intervalos_array[0] + (maximo - minimo) / cantidad_intervalos) + 0.1, 2);
+            if (tipo_distribucion != "P") { 
+                intervalos_array[0] = Math.Round(minimo,2);
+                intervalos_array[1] = Math.Round((intervalos_array[0] + (maximo - minimo) / cantidad_intervalos) + 0.1, 2);
+            
 
-            //Por la cantidad de intervalos, calculo el primer limite distinto de cero, el resto de intervalos se ven multiplicados por i
-            for (int i = 2; i < cantidad_intervalos + 1.0; i++)
-            {
-                intervalos_array[i] = Math.Round(intervalos_array[i-1] + (maximo-minimo)/cantidad_intervalos, 2) ;
+                //Por la cantidad de intervalos, calculo el primer limite distinto de cero, el resto de intervalos se ven multiplicados por i
+                for (int i = 2; i < cantidad_intervalos + 1.0; i++)
+                {
+                    intervalos_array[i] = Math.Round(intervalos_array[i-1] + (maximo-minimo)/cantidad_intervalos, 2) ;
+                }
             }
+
 
             //Calculo de la Frecuencia Esperada según cada distribución
             if (tipo_distribucion == "U")
@@ -215,6 +217,8 @@ namespace GrupoG_Distribuciones
                 {
                     pe_array[i] = (cantidad_numeros / cantidad_intervalos) / cantidad_numeros;
                     fe_array[i] = cantidad_numeros / cantidad_intervalos;
+
+                    
                 }
             }
 
@@ -308,6 +312,11 @@ namespace GrupoG_Distribuciones
 
             //defino el estadistico de prueba acumulado
 
+            double valor_max_ks = 0.0;
+            double estadistico_de_prueba_acumulado = 0.0;
+
+            //Lista que contiene los valores observados y esperados agrupados para que la fe sea mayor a 5
+            List<double[]> valores_chi_frecuencia = new List<double[]>();
 
             for (int i = 0; i < cantidad_intervalos; i++)
             {
@@ -359,10 +368,53 @@ namespace GrupoG_Distribuciones
                     valor_max_ks = valor_ks;
                 }
                 tabla_ajuste.Rows[i]["MKS"] = valor_max_ks;
+
+
+
+                if (valores_chi_frecuencia.Count == 0)
+                {
+                    double[] array_auxiliar = new double[2] {valores_observados[i] , fe_array[i] };
+                    valores_chi_frecuencia.Add(array_auxiliar);
+                }
+                else
+                {
+                    int tamaño_lista = valores_chi_frecuencia.Count - 1;
+                    if (valores_chi_frecuencia.ElementAt(tamaño_lista)[1] < 5)
+                    {
+                        //valores_chi_frecuencia.ElementAt(tamaño_lista)[0] += valores_observados[i];
+                        //valores_chi_frecuencia.ElementAt(tamaño_lista)[1] += fe_array[i];
+                        valores_chi_frecuencia.Last()[0] += valores_observados[i];
+                        valores_chi_frecuencia.Last()[1] += fe_array[i];
+
+                    }
+                    else
+                    {
+                        double[] array_auxiliar_2 = new double[2] { (double)valores_observados[i], fe_array[i] };
+                        valores_chi_frecuencia.Add(array_auxiliar_2);
+                    }
+                }                
             }
 
+            if (valores_chi_frecuencia.Last()[1] < 5)
+            {
+                int penultimo_valor = valores_chi_frecuencia.Count - 2;
+                valores_chi_frecuencia.ElementAt(penultimo_valor)[0] += valores_chi_frecuencia.Last()[0];
+                valores_chi_frecuencia.ElementAt(penultimo_valor)[1] += valores_chi_frecuencia.Last()[1];
+                valores_chi_frecuencia.RemoveAt(valores_chi_frecuencia.Count - 1);
+            }
+
+            int cantidad_intervalos_agr = valores_chi_frecuencia.Count;
+            double[] array_valores_esperados_agrupados = new double[cantidad_intervalos_agr];
+            double[] array_valores_observados_agrupados = new double[cantidad_intervalos_agr];
+            for (int i = 0; i < cantidad_intervalos_agr; i++)
+            {
+                array_valores_observados_agrupados[i] = valores_chi_frecuencia.ElementAt(i)[0];
+                array_valores_esperados_agrupados[i] = valores_chi_frecuencia.ElementAt(i)[1];
+            }
+
+            
             //Resultado Chi Cuadrado
-            valor_chi_tabulado = vp_chi[(int)cantidad_intervalos - 1 - cantidad_datos_empiricos];
+            //valor_chi_tabulado = vp_chi[(int)cantidad_intervalos - 1 - cantidad_datos_empiricos];
 
             double[] valores_observados_double = new double[(int)cantidad_intervalos];
             for (int i = 0; i < valores_observados.Length; i++)
@@ -370,9 +422,8 @@ namespace GrupoG_Distribuciones
                 valores_observados_double[i] = (double)valores_observados[i];
             }
 
+            ChiSquareTest chiSquareTest = new ChiSquareTest(array_valores_esperados_agrupados, array_valores_observados_agrupados, (cantidad_intervalos_agr - 1 - cantidad_datos_empiricos));
 
-            ChiSquareTest chiSquareTest = new ChiSquareTest(valores_observados_double, fe_array, (int)cantidad_intervalos - 1 - cantidad_datos_empiricos);
-            
             MessageBox.Show(@"Pvalue: " + chiSquareTest.PValue.ToString() +
                             "\nStatistic: " + chiSquareTest.Statistic.ToString() +
                             "\nGrados de libertad: " + chiSquareTest.DegreesOfFreedom.ToString() +
@@ -390,6 +441,7 @@ namespace GrupoG_Distribuciones
                 resultado = " La hipótesis es rechazada ";
             }
             */
+
             if (significant)
             {
                 resultado = " No se puede rechazar la hipótesis";
