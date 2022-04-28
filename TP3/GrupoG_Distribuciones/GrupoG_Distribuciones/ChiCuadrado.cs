@@ -42,27 +42,27 @@ namespace GrupoG_Distribuciones
         double valor_ks_tabulado = 0.0;
 
         // Valores calculados de chi y KS
-        double valor_max_ks = 0.0;
-        double estadistico_de_prueba_acumulado = 0.0;
+        double valor_max_ks;
+        double estadistico_de_prueba_acumulado;
 
         //Resultado de chi y KS
         string resultado;
         string resultado_ks;
 
         // Cantidad de intervalos maximos (por chi) y cantidad de intervalos ingresados
-        int maximo_valor_intervalos = 50;
+        int maximo_valor_intervalos = 55;
         static double cantidad_intervalos = 0;
 
 
-       /*private double[] vp_chi = new double[] { 3.8415, 5.9915, 7.8147, 9.4877, 11.0705, 12.5916,
-                                                 14.0671, 15.5073, 16.9190, 18.3070, 19.6752, 21,0261,
+       private double[] vp_chi = new double[] { 3.8415, 5.9915, 7.8147, 9.4877, 11.0705, 12.5916,
+                                                 14.0671, 15.5073, 16.9190, 18.3070, 19.6752, 21.0261,
                                                  22.3620, 23.6848, 24.9958, 26.2962, 27.5871, 28.8693,
                                                  30.1435, 31.4104, 32.6706, 33.9245, 35.1725, 36.4150,
                                                  37.6525, 38.8851, 40.1133, 41.3372, 42.5569, 43.7730,
                                                  44.985,46.194, 47.400, 48.602, 49.802, 50.998, 52.192,
                                                  53.384,54.572,55.758, 56.942, 58.124, 59.304, 60.481,
                                                  61.656,62.830, 64.001, 65.171, 66.339, 67.505, 68.669,
-                                                 69.832, 70.993 , 72.153, 73.311 };*/
+                                                 69.832, 70.993 , 72.153, 73.311 };
 
         public ChiCuadrado(DataTable tabla, int cantidad_numeros, string tipo_distribucion, double maximo, double minimo, double media, double desviacion_estandar_normal)
         {
@@ -82,9 +82,9 @@ namespace GrupoG_Distribuciones
             {
                 // Si no es poisson debe ingresar la cantidad de intervalos
                 int max_intervalo = (int)Math.Truncate(Math.Sqrt(cantidad_numeros));
-                if (max_intervalo > 50000)
+                if (max_intervalo > 55)
                 {
-                    lbl_intervalo.Text = "Ingrese la cantidad de intervalos (Debe ser como maximo 50)";
+                    lbl_intervalo.Text = "Ingrese la cantidad de intervalos (Debe ser como maximo 55)";
                 }
                 else
                 {
@@ -113,19 +113,19 @@ namespace GrupoG_Distribuciones
                     return;
                 }
 
-                /*if (cantidad_intervalos > maximo_valor_intervalos || cantidad_intervalos < 4)
+                if (cantidad_intervalos > maximo_valor_intervalos || cantidad_intervalos < 4)
                 {
                     MessageBox.Show("La cantidad de intervalos debe ser menor o igual a " + maximo_valor_intervalos.ToString() + " y mayor a 3");
                     return;
-                }*/
+                }
             }
-            /*else
+            else
             {
                 if ((maximo - minimo) < 50)
                     cantidad_intervalos = maximo - minimo;
                 else
                     cantidad_intervalos = 50;
-            }*/
+            }
             ajuste();
             CargarReporte();
         }
@@ -312,8 +312,8 @@ namespace GrupoG_Distribuciones
 
             //defino el estadistico de prueba acumulado
 
-            double valor_max_ks = 0.0;
-            double estadistico_de_prueba_acumulado = 0.0;
+            valor_max_ks = 0.0;
+            estadistico_de_prueba_acumulado = 0.0;
 
             //Lista que contiene los valores observados y esperados agrupados para que la fe sea mayor a 5
             List<double[]> valores_chi_frecuencia = new List<double[]>();
@@ -406,22 +406,17 @@ namespace GrupoG_Distribuciones
             int cantidad_intervalos_agr = valores_chi_frecuencia.Count;
             double[] array_valores_esperados_agrupados = new double[cantidad_intervalos_agr];
             double[] array_valores_observados_agrupados = new double[cantidad_intervalos_agr];
+            estadistico_de_prueba_acumulado = 0.0;
             for (int i = 0; i < cantidad_intervalos_agr; i++)
             {
+                double resta_de_frecuencias = valores_chi_frecuencia.ElementAt(i)[1] - valores_chi_frecuencia.ElementAt(i)[0];
+                double resta_al_cuadrado = (Math.Pow(resta_de_frecuencias, 2.0));
+                estadistico_de_prueba_acumulado += Math.Round(resta_al_cuadrado / valores_chi_frecuencia.ElementAt(i)[1], 4);
                 array_valores_observados_agrupados[i] = valores_chi_frecuencia.ElementAt(i)[0];
                 array_valores_esperados_agrupados[i] = valores_chi_frecuencia.ElementAt(i)[1];
             }
 
-            
-            //Resultado Chi Cuadrado
-            //valor_chi_tabulado = vp_chi[(int)cantidad_intervalos - 1 - cantidad_datos_empiricos];
-
-            double[] valores_observados_double = new double[(int)cantidad_intervalos];
-            for (int i = 0; i < valores_observados.Length; i++)
-            {
-                valores_observados_double[i] = (double)valores_observados[i];
-            }
-
+            /*
             ChiSquareTest chiSquareTest = new ChiSquareTest(array_valores_esperados_agrupados, array_valores_observados_agrupados, (cantidad_intervalos_agr - 1 - cantidad_datos_empiricos));
 
             MessageBox.Show(@"Pvalue: " + chiSquareTest.PValue.ToString() +
@@ -430,8 +425,10 @@ namespace GrupoG_Distribuciones
                             "\nSignificancia: " + chiSquareTest.Significant.ToString());
 
             bool significant = chiSquareTest.Significant; // true if statistically significant
+            */
 
-            /*
+            //Resultado Chi Cuadrado
+            valor_chi_tabulado = vp_chi[cantidad_intervalos_agr - 1 - cantidad_datos_empiricos];
             if (estadistico_de_prueba_acumulado <= valor_chi_tabulado)
             {
                 resultado = " No se puede rechazar la hipótesis";
@@ -440,8 +437,8 @@ namespace GrupoG_Distribuciones
             {
                 resultado = " La hipótesis es rechazada ";
             }
-            */
-
+            
+            /*
             if (significant)
             {
                 resultado = " No se puede rechazar la hipótesis";
@@ -450,6 +447,7 @@ namespace GrupoG_Distribuciones
             {
                 resultado = " La hipótesis es rechazada ";
             }
+            */
 
 
             //Resultado KS

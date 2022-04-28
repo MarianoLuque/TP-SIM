@@ -80,7 +80,7 @@ namespace GrupoG_Distribuciones
                 return;
             }
             
-            if (!(n >= 500 && n <= 3000))
+            if (!(n >= 500 ))
             {
                 MessageBox.Show("La cantidad de números debe ser superior a 500 e inferior a 3000");
                 return;
@@ -154,9 +154,9 @@ namespace GrupoG_Distribuciones
                     MessageBox.Show("Cargue los valores de media y desviación para la distribución normal");
                     return;
                 }
-                if (de < 0)
+                if (de < 0 && de < 100000)
                 {
-                    MessageBox.Show("La desviación estandar en la distribución normal debe ser positiva");
+                    MessageBox.Show("La desviación estandar en la distribución normal debe ser positiva y menor a 100000");
                     return;
                 }
 
