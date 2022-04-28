@@ -41,6 +41,8 @@ namespace GrupoG_Distribuciones
         double valor_chi_tabulado = 0.0;
         double valor_ks_tabulado = 0.0;
 
+        double valor_chi_tabulado_libreria = 0.0;
+
         // Valores calculados de chi y KS
         double valor_max_ks;
         double estadistico_de_prueba_acumulado;
@@ -50,7 +52,7 @@ namespace GrupoG_Distribuciones
         string resultado_ks;
 
         // Cantidad de intervalos maximos (por chi) y cantidad de intervalos ingresados
-        int maximo_valor_intervalos = 55;
+        int maximo_valor_intervalos = 550000;
         static double cantidad_intervalos = 0;
 
 
@@ -82,7 +84,7 @@ namespace GrupoG_Distribuciones
             {
                 // Si no es poisson debe ingresar la cantidad de intervalos
                 int max_intervalo = (int)Math.Truncate(Math.Sqrt(cantidad_numeros));
-                if (max_intervalo > 55)
+                if (max_intervalo > 55000)
                 {
                     lbl_intervalo.Text = "Ingrese la cantidad de intervalos (Debe ser como maximo 55)";
                 }
@@ -142,7 +144,7 @@ namespace GrupoG_Distribuciones
             parametro[1] = new ReportParameter("RPDesviacion", Math.Sqrt(varianza).ToString());
             parametro[2] = new ReportParameter("RPVarianza", varianza.ToString());
             parametro[3] = new ReportParameter("RPChiCalculado", estadistico_de_prueba_acumulado.ToString());
-            parametro[4] = new ReportParameter("RPChiTabulado", valor_chi_tabulado.ToString());
+            parametro[4] = new ReportParameter("RPChiTabulado", valor_chi_tabulado_libreria.ToString());
             parametro[5] = new ReportParameter("RPResultado", resultado);
             parametro[6] = new ReportParameter("RPResultadoKS", resultado_ks);
             parametro[7] = new ReportParameter("RPKSTabulado", valor_ks_tabulado.ToString());
@@ -428,8 +430,11 @@ namespace GrupoG_Distribuciones
             */
 
             //Resultado Chi Cuadrado
-            valor_chi_tabulado = vp_chi[cantidad_intervalos_agr - 1 - cantidad_datos_empiricos];
-            if (estadistico_de_prueba_acumulado <= valor_chi_tabulado)
+            //valor_chi_tabulado = vp_chi[cantidad_intervalos_agr - 1 - cantidad_datos_empiricos];
+
+            double grados_de_libertad_libreria = (double)(cantidad_intervalos_agr - 1 - cantidad_datos_empiricos);
+            valor_chi_tabulado_libreria = ChiSquared.InvCDF(grados_de_libertad_libreria, 0.95);
+            if (estadistico_de_prueba_acumulado <= valor_chi_tabulado_libreria)
             {
                 resultado = " No se puede rechazar la hipótesis";
             }
