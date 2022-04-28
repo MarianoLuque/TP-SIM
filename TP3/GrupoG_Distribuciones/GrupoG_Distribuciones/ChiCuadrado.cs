@@ -123,10 +123,8 @@ namespace GrupoG_Distribuciones
             }
             else
             {
-                if ((maximo - minimo) < 50)
-                    cantidad_intervalos = maximo - minimo;
-                else
-                    cantidad_intervalos = 50;
+                cantidad_intervalos = maximo - minimo;
+                
             }
             ajuste();
             CargarReporte();

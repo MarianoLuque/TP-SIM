@@ -42,7 +42,7 @@
             // 
             this.lbl_nivel_significancia.AutoSize = true;
             this.lbl_nivel_significancia.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_nivel_significancia.Location = new System.Drawing.Point(454, 104);
+            this.lbl_nivel_significancia.Location = new System.Drawing.Point(506, 104);
             this.lbl_nivel_significancia.Name = "lbl_nivel_significancia";
             this.lbl_nivel_significancia.Size = new System.Drawing.Size(299, 24);
             this.lbl_nivel_significancia.TabIndex = 24;
@@ -51,9 +51,9 @@
             // btn_volver
             // 
             this.btn_volver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_volver.Location = new System.Drawing.Point(12, 73);
+            this.btn_volver.Location = new System.Drawing.Point(90, 73);
             this.btn_volver.Name = "btn_volver";
-            this.btn_volver.Size = new System.Drawing.Size(72, 23);
+            this.btn_volver.Size = new System.Drawing.Size(81, 35);
             this.btn_volver.TabIndex = 23;
             this.btn_volver.Text = "Volver";
             this.btn_volver.UseVisualStyleBackColor = true;
@@ -62,9 +62,9 @@
             // btn_generar
             // 
             this.btn_generar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_generar.Location = new System.Drawing.Point(1084, 101);
+            this.btn_generar.Location = new System.Drawing.Point(1033, 104);
             this.btn_generar.Name = "btn_generar";
-            this.btn_generar.Size = new System.Drawing.Size(75, 24);
+            this.btn_generar.Size = new System.Drawing.Size(81, 35);
             this.btn_generar.TabIndex = 22;
             this.btn_generar.Text = "Generar";
             this.btn_generar.UseVisualStyleBackColor = true;
@@ -72,7 +72,7 @@
             // 
             // txt_intervalo
             // 
-            this.txt_intervalo.Location = new System.Drawing.Point(1084, 75);
+            this.txt_intervalo.Location = new System.Drawing.Point(1033, 75);
             this.txt_intervalo.Mask = "99999";
             this.txt_intervalo.Name = "txt_intervalo";
             this.txt_intervalo.Size = new System.Drawing.Size(100, 20);
@@ -83,7 +83,7 @@
             // 
             this.lbl_intervalo.AutoSize = true;
             this.lbl_intervalo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_intervalo.Location = new System.Drawing.Point(354, 70);
+            this.lbl_intervalo.Location = new System.Drawing.Point(406, 70);
             this.lbl_intervalo.Name = "lbl_intervalo";
             this.lbl_intervalo.Size = new System.Drawing.Size(403, 24);
             this.lbl_intervalo.TabIndex = 20;
@@ -95,7 +95,7 @@
             this.reporte_chi_cuadrado.Location = new System.Drawing.Point(12, 161);
             this.reporte_chi_cuadrado.Name = "reporte_chi_cuadrado";
             this.reporte_chi_cuadrado.ServerReport.BearerToken = null;
-            this.reporte_chi_cuadrado.Size = new System.Drawing.Size(1290, 676);
+            this.reporte_chi_cuadrado.Size = new System.Drawing.Size(1306, 615);
             this.reporte_chi_cuadrado.TabIndex = 25;
             // 
             // btn_cerrar_programa
@@ -116,7 +116,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkCyan;
-            this.ClientSize = new System.Drawing.Size(1314, 849);
+            this.ClientSize = new System.Drawing.Size(1314, 788);
             this.Controls.Add(this.btn_cerrar_programa);
             this.Controls.Add(this.reporte_chi_cuadrado);
             this.Controls.Add(this.lbl_nivel_significancia);
