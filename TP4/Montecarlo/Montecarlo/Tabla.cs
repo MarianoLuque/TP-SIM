@@ -29,13 +29,23 @@ namespace Montecarlo
         //Variables creadas
         DataTable tabla = new DataTable();
         int simulacion_desde;
-        List<object> iteracion_anterior = new List<object>();
+        List<object> iteracion_anterior = new List<object> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         List<object> iteracion_actual = new List<object>();
+
+        int barcos_no_descargados;
+        decimal costo_acumulado;
+        int costo_por_noche_por_barco;
+        int costo_por_muelle_vacio;
+        double costo_total;
+        int j = 0;
+
         double rnd_llegadas;
         double rnd_descargas;
         double rnd_costo_descargas;
+
         int nro_llegadas;
         int nro_descargas;
+        double costo_descarga;
 
         public Tabla(long cantidad_iteraciones, int cantidad_muelles, int costo_media_descarga, int costo_desviacion_descarga, int costo_por_noche, int costo_muelle_desocupado, int dist_uniforme_a, int dist_uniforme_b, int dist_poisson_barcos, int dist_poisson_hs, DataTable tabla_llegadas, DataTable tabla_descargas)
         {
@@ -65,19 +75,23 @@ namespace Montecarlo
             tabla.Rows.Clear();
             cargar_tabla();
             cargar_datos();
-
+            dg_montecarlo.DataSource = tabla;
 
         }
 
+        //hacer calculos con iteracion_actual utilizando los valores que necesite de la anterior
+        //iteracion_anterior = iteracion_actual
         private void cargar_datos()
         {
-            for (int i = 0; i < 401; i++)
+            for (int i = 0; i < cantidad_iteraciones; i++)
             {
-                tabla.Rows.Add();
-                Random myObject = new Random();
+                Random myObject = new Random(1);
+                Random myObject1 = new Random(100);
+                Random myObject2 = new Random(1000);
                 rnd_llegadas = (Math.Truncate(myObject.NextDouble() * 100)) / 100;
-                rnd_descargas = (Math.Truncate(myObject.NextDouble() * 100)) / 100;
-                rnd_costo_descargas = (Math.Truncate(myObject.NextDouble() * 100)) / 100;
+
+                rnd_descargas = (Math.Truncate(myObject1.NextDouble() * 100)) / 100;
+                rnd_costo_descargas = (Math.Truncate(myObject2.NextDouble() * 100)) / 100;
                 if (cantidad_muelles == 1)
                 {
                     //Veo en que intervalo cae el rnd de las llegadas
@@ -128,7 +142,43 @@ namespace Montecarlo
                         nro_descargas = 5;
                     }
 
+                    for (int j = 0; j < 12; j++)
+                    {
+                        rnd_costo_descargas += (Math.Truncate(myObject.NextDouble() * 10000)) / 10000;
+                    }
+                    costo_descarga = Math.Truncate((((rnd_costo_descargas - 6) * costo_desviacion_descarga) + costo_media_descarga) * 100) / 100;
+                    
+                    if (barcos_no_descargados == 0 && nro_llegadas == 0) { costo_por_muelle_vacio = costo_muelle_desocupado; }
+                    else { costo_por_muelle_vacio = 0; }
 
+                    int cant_llegadas_menos_cant_descargas = barcos_no_descargados + nro_llegadas - nro_descargas;
+                    if(cant_llegadas_menos_cant_descargas < 0){ barcos_no_descargados = 0;}
+                    else { barcos_no_descargados = cant_llegadas_menos_cant_descargas; }
+
+                    costo_por_noche_por_barco = barcos_no_descargados * costo_por_noche;
+
+                    costo_total = costo_por_noche_por_barco + costo_por_muelle_vacio + costo_descarga;
+                    costo_acumulado += (decimal)costo_total;
+
+                    
+                    if(i>= simulacion_desde && i <= simulacion_desde + 400)
+                    {
+                        tabla.Rows.Add();
+                        tabla.Rows[j]["Iteracion"] = i;
+                        tabla.Rows[j]["RND llegadas"] = rnd_llegadas;
+                        tabla.Rows[j]["Cantidad llegadas"] = nro_llegadas;
+                        tabla.Rows[j]["RND descargas"] = rnd_descargas;
+                        tabla.Rows[j]["Cantidad descargas"] = nro_descargas;
+                        tabla.Rows[j]["RND costo descarga"] = rnd_costo_descargas;
+                        tabla.Rows[j]["Costo descarga"] = costo_descarga;
+                        tabla.Rows[j]["Costo por noche"] = costo_por_noche_por_barco;
+                        tabla.Rows[j]["Costo muelle desocupado"] = costo_por_muelle_vacio;
+                        tabla.Rows[j]["Barcos no descargados"] = barcos_no_descargados;
+                        tabla.Rows[j]["Costo total"] = costo_total;
+                        tabla.Rows[j]["Costo acumulado"] = costo_acumulado;
+                        j++;
+                    }
+                    
                 }
             }
         }
@@ -166,8 +216,6 @@ namespace Montecarlo
             tabla.Columns.Add(costo_muelle_desocupado);
             tabla.Columns.Add(costo_total);
             tabla.Columns.Add(costo_acumulado);
-
-            dg_montecarlo.DataSource = tabla;
         }
 
         private void btn_cerrar_programa_Click(object sender, EventArgs e)
