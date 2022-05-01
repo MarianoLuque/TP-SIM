@@ -151,9 +151,8 @@
             this.lbl_m3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_m3.Location = new System.Drawing.Point(17, 734);
             this.lbl_m3.Name = "lbl_m3";
-            this.lbl_m3.Size = new System.Drawing.Size(366, 25);
+            this.lbl_m3.Size = new System.Drawing.Size(0, 25);
             this.lbl_m3.TabIndex = 18;
-            this.lbl_m3.Text = "Porcentaje de ocupación del muelle: ";
             // 
             // lbl_m5
             // 
@@ -161,9 +160,8 @@
             this.lbl_m5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_m5.Location = new System.Drawing.Point(17, 808);
             this.lbl_m5.Name = "lbl_m5";
-            this.lbl_m5.Size = new System.Drawing.Size(418, 25);
+            this.lbl_m5.Size = new System.Drawing.Size(0, 25);
             this.lbl_m5.TabIndex = 18;
-            this.lbl_m5.Text = "Promedio de barcos descargados por día: ";
             // 
             // lbl_m1
             // 
@@ -171,9 +169,8 @@
             this.lbl_m1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_m1.Location = new System.Drawing.Point(17, 660);
             this.lbl_m1.Name = "lbl_m1";
-            this.lbl_m1.Size = new System.Drawing.Size(204, 25);
+            this.lbl_m1.Size = new System.Drawing.Size(0, 25);
             this.lbl_m1.TabIndex = 18;
-            this.lbl_m1.Text = "Máximo costo total: ";
             // 
             // lbl_m4
             // 
@@ -181,9 +178,8 @@
             this.lbl_m4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_m4.Location = new System.Drawing.Point(17, 771);
             this.lbl_m4.Name = "lbl_m4";
-            this.lbl_m4.Size = new System.Drawing.Size(394, 25);
+            this.lbl_m4.Size = new System.Drawing.Size(0, 25);
             this.lbl_m4.TabIndex = 18;
-            this.lbl_m4.Text = "Promedio de barcos que llegan por día: ";
             // 
             // lbl_m2
             // 
@@ -191,9 +187,8 @@
             this.lbl_m2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_m2.Location = new System.Drawing.Point(17, 697);
             this.lbl_m2.Name = "lbl_m2";
-            this.lbl_m2.Size = new System.Drawing.Size(325, 25);
+            this.lbl_m2.Size = new System.Drawing.Size(0, 25);
             this.lbl_m2.TabIndex = 18;
-            this.lbl_m2.Text = "Cantidad de barcos con retraso: ";
             // 
             // lbl_m6
             // 
@@ -201,9 +196,8 @@
             this.lbl_m6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_m6.Location = new System.Drawing.Point(17, 845);
             this.lbl_m6.Name = "lbl_m6";
-            this.lbl_m6.Size = new System.Drawing.Size(632, 25);
+            this.lbl_m6.Size = new System.Drawing.Size(0, 25);
             this.lbl_m6.TabIndex = 18;
-            this.lbl_m6.Text = "Porcentaje del costo por noche en el muelle sobre el costo total: ";
             // 
             // Tabla
             // 

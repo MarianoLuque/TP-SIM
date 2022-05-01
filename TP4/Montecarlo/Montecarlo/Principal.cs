@@ -225,6 +225,11 @@ namespace Montecarlo
             if (txt_desviacion_normal.Text != "")
             {
                 int.TryParse(txt_desviacion_normal.Text, out desviacion_costo_descarga);
+                if(desviacion_costo_descarga >= media_costo_descarga)
+                {
+                    MessageBox.Show("Ingrese un valor de desviación menor a la media (<" + media_costo_descarga.ToString() + ")" , "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
             }
             if (txt_costo_muelle_vacio.Text != "")
             {
