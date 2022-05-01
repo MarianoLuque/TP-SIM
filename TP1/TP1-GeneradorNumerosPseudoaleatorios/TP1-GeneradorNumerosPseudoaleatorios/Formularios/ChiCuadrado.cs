@@ -197,7 +197,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
 
             if (cantidad_intervalos > 31)
             {
-                MessageBox.Show("La cantidad de intervalos debe ser menor a 31");
+                MessageBox.Show("La cantidad de intervalos debe ser menor a 31", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             valor_chi_tabulado = vp_chi[(int)cantidad_intervalos - 1];

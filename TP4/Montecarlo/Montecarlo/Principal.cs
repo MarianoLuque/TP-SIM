@@ -181,7 +181,7 @@ namespace Montecarlo
         {
             if(!long.TryParse(txt_cantidad_simulaciones.Text, out cantidad_iteraciones) || cantidad_iteraciones < 400)
             {
-                MessageBox.Show("Ingrese la cantidad de días a simular (mayor o igual a 400)");
+                MessageBox.Show("Ingrese la cantidad de días a simular (mayor o igual a 400)", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             if (rb_un_muelle.Checked)
@@ -210,7 +210,7 @@ namespace Montecarlo
             }
             else
             {
-                MessageBox.Show("Seleccione la cantidad de muelles a simular");
+                MessageBox.Show("Seleccione la cantidad de muelles a simular", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 

@@ -68,7 +68,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(259, 9);
+            this.label1.Location = new System.Drawing.Point(344, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(364, 42);
             this.label1.TabIndex = 0;
@@ -148,7 +148,7 @@
             this.dg_nro_descargas.AllowUserToDeleteRows = false;
             this.dg_nro_descargas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dg_nro_descargas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dg_nro_descargas.Location = new System.Drawing.Point(510, 229);
+            this.dg_nro_descargas.Location = new System.Drawing.Point(523, 229);
             this.dg_nro_descargas.Name = "dg_nro_descargas";
             this.dg_nro_descargas.ReadOnly = true;
             this.dg_nro_descargas.Size = new System.Drawing.Size(257, 188);
@@ -167,7 +167,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(13, 443);
+            this.label3.Location = new System.Drawing.Point(13, 437);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(673, 24);
             this.label3.TabIndex = 1;
@@ -177,7 +177,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(13, 497);
+            this.label4.Location = new System.Drawing.Point(13, 491);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(646, 24);
             this.label4.TabIndex = 1;
@@ -187,7 +187,7 @@
             // 
             this.txt_k_mv.AutoSize = true;
             this.txt_k_mv.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_k_mv.Location = new System.Drawing.Point(13, 549);
+            this.txt_k_mv.Location = new System.Drawing.Point(13, 543);
             this.txt_k_mv.Name = "txt_k_mv";
             this.txt_k_mv.Size = new System.Drawing.Size(518, 24);
             this.txt_k_mv.TabIndex = 1;
@@ -196,20 +196,20 @@
             // txt_costo_por_noche
             // 
             this.txt_costo_por_noche.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_costo_por_noche.Location = new System.Drawing.Point(696, 440);
-            this.txt_costo_por_noche.Mask = "999999999999";
+            this.txt_costo_por_noche.Location = new System.Drawing.Point(720, 437);
+            this.txt_costo_por_noche.Mask = "99999";
             this.txt_costo_por_noche.Name = "txt_costo_por_noche";
-            this.txt_costo_por_noche.Size = new System.Drawing.Size(168, 29);
+            this.txt_costo_por_noche.Size = new System.Drawing.Size(84, 29);
             this.txt_costo_por_noche.TabIndex = 2;
             this.txt_costo_por_noche.ValidatingType = typeof(int);
             // 
             // txt_costo_muelle_vacio
             // 
             this.txt_costo_muelle_vacio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_costo_muelle_vacio.Location = new System.Drawing.Point(549, 546);
-            this.txt_costo_muelle_vacio.Mask = "999999999999";
+            this.txt_costo_muelle_vacio.Location = new System.Drawing.Point(722, 540);
+            this.txt_costo_muelle_vacio.Mask = "99999";
             this.txt_costo_muelle_vacio.Name = "txt_costo_muelle_vacio";
-            this.txt_costo_muelle_vacio.Size = new System.Drawing.Size(168, 29);
+            this.txt_costo_muelle_vacio.Size = new System.Drawing.Size(82, 29);
             this.txt_costo_muelle_vacio.TabIndex = 2;
             this.txt_costo_muelle_vacio.ValidatingType = typeof(int);
             // 
@@ -229,7 +229,7 @@
             // btn_simular
             // 
             this.btn_simular.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_simular.Location = new System.Drawing.Point(883, 592);
+            this.btn_simular.Location = new System.Drawing.Point(886, 592);
             this.btn_simular.Name = "btn_simular";
             this.btn_simular.Size = new System.Drawing.Size(104, 34);
             this.btn_simular.TabIndex = 16;
@@ -263,7 +263,7 @@
             // 
             this.lbl_b.AutoSize = true;
             this.lbl_b.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_b.Location = new System.Drawing.Point(736, 324);
+            this.lbl_b.Location = new System.Drawing.Point(877, 324);
             this.lbl_b.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_b.Name = "lbl_b";
             this.lbl_b.Size = new System.Drawing.Size(26, 25);
@@ -275,7 +275,7 @@
             // 
             this.lbl_a.AutoSize = true;
             this.lbl_a.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_a.Location = new System.Drawing.Point(563, 326);
+            this.lbl_a.Location = new System.Drawing.Point(691, 325);
             this.lbl_a.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_a.Name = "lbl_a";
             this.lbl_a.Size = new System.Drawing.Size(26, 25);
@@ -286,10 +286,10 @@
             // txt_dist_uniforme_a
             // 
             this.txt_dist_uniforme_a.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_dist_uniforme_a.Location = new System.Drawing.Point(594, 324);
-            this.txt_dist_uniforme_a.Mask = "999999999";
+            this.txt_dist_uniforme_a.Location = new System.Drawing.Point(720, 323);
+            this.txt_dist_uniforme_a.Mask = "99999";
             this.txt_dist_uniforme_a.Name = "txt_dist_uniforme_a";
-            this.txt_dist_uniforme_a.Size = new System.Drawing.Size(123, 29);
+            this.txt_dist_uniforme_a.Size = new System.Drawing.Size(84, 29);
             this.txt_dist_uniforme_a.TabIndex = 2;
             this.txt_dist_uniforme_a.ValidatingType = typeof(int);
             this.txt_dist_uniforme_a.Visible = false;
@@ -297,10 +297,10 @@
             // txt_dist_uniforme_b
             // 
             this.txt_dist_uniforme_b.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_dist_uniforme_b.Location = new System.Drawing.Point(767, 324);
-            this.txt_dist_uniforme_b.Mask = "999999999";
+            this.txt_dist_uniforme_b.Location = new System.Drawing.Point(908, 323);
+            this.txt_dist_uniforme_b.Mask = "99999";
             this.txt_dist_uniforme_b.Name = "txt_dist_uniforme_b";
-            this.txt_dist_uniforme_b.Size = new System.Drawing.Size(123, 29);
+            this.txt_dist_uniforme_b.Size = new System.Drawing.Size(79, 29);
             this.txt_dist_uniforme_b.TabIndex = 2;
             this.txt_dist_uniforme_b.ValidatingType = typeof(int);
             this.txt_dist_uniforme_b.Visible = false;
@@ -308,7 +308,7 @@
             // txt_dist_poisson_hs
             // 
             this.txt_dist_poisson_hs.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_dist_poisson_hs.Location = new System.Drawing.Point(872, 362);
+            this.txt_dist_poisson_hs.Location = new System.Drawing.Point(908, 362);
             this.txt_dist_poisson_hs.Mask = "99999";
             this.txt_dist_poisson_hs.Name = "txt_dist_poisson_hs";
             this.txt_dist_poisson_hs.Size = new System.Drawing.Size(79, 29);
@@ -320,7 +320,7 @@
             // 
             this.lbl_barcos.AutoSize = true;
             this.lbl_barcos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_barcos.Location = new System.Drawing.Point(773, 365);
+            this.lbl_barcos.Location = new System.Drawing.Point(810, 365);
             this.lbl_barcos.Name = "lbl_barcos";
             this.lbl_barcos.Size = new System.Drawing.Size(94, 24);
             this.lbl_barcos.TabIndex = 1;
@@ -331,7 +331,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.label10.Location = new System.Drawing.Point(823, 496);
+            this.label10.Location = new System.Drawing.Point(878, 491);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(24, 25);
@@ -342,7 +342,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.label11.Location = new System.Drawing.Point(672, 496);
+            this.label11.Location = new System.Drawing.Point(693, 490);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(24, 25);
@@ -352,20 +352,20 @@
             // txt_media_normal
             // 
             this.txt_media_normal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_media_normal.Location = new System.Drawing.Point(716, 494);
+            this.txt_media_normal.Location = new System.Drawing.Point(720, 489);
             this.txt_media_normal.Mask = "99999";
             this.txt_media_normal.Name = "txt_media_normal";
-            this.txt_media_normal.Size = new System.Drawing.Size(79, 29);
+            this.txt_media_normal.Size = new System.Drawing.Size(84, 29);
             this.txt_media_normal.TabIndex = 2;
             this.txt_media_normal.ValidatingType = typeof(int);
             // 
             // txt_desviacion_normal
             // 
             this.txt_desviacion_normal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_desviacion_normal.Location = new System.Drawing.Point(872, 494);
+            this.txt_desviacion_normal.Location = new System.Drawing.Point(908, 489);
             this.txt_desviacion_normal.Mask = "99999";
             this.txt_desviacion_normal.Name = "txt_desviacion_normal";
-            this.txt_desviacion_normal.Size = new System.Drawing.Size(79, 29);
+            this.txt_desviacion_normal.Size = new System.Drawing.Size(82, 29);
             this.txt_desviacion_normal.TabIndex = 2;
             this.txt_desviacion_normal.ValidatingType = typeof(int);
             // 
@@ -373,7 +373,7 @@
             // 
             this.lbl_hs.AutoSize = true;
             this.lbl_hs.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_hs.Location = new System.Drawing.Point(957, 365);
+            this.lbl_hs.Location = new System.Drawing.Point(993, 365);
             this.lbl_hs.Name = "lbl_hs";
             this.lbl_hs.Size = new System.Drawing.Size(30, 24);
             this.lbl_hs.TabIndex = 1;
@@ -383,10 +383,10 @@
             // txt_dist_poisson_barcos
             // 
             this.txt_dist_poisson_barcos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_dist_poisson_barcos.Location = new System.Drawing.Point(688, 362);
+            this.txt_dist_poisson_barcos.Location = new System.Drawing.Point(720, 362);
             this.txt_dist_poisson_barcos.Mask = "99999";
             this.txt_dist_poisson_barcos.Name = "txt_dist_poisson_barcos";
-            this.txt_dist_poisson_barcos.Size = new System.Drawing.Size(79, 29);
+            this.txt_dist_poisson_barcos.Size = new System.Drawing.Size(84, 29);
             this.txt_dist_poisson_barcos.TabIndex = 2;
             this.txt_dist_poisson_barcos.ValidatingType = typeof(int);
             this.txt_dist_poisson_barcos.Visible = false;

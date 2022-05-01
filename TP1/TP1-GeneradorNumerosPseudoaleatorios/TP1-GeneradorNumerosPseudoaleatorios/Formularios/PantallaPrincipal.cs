@@ -32,7 +32,7 @@ namespace TP1_GeneradorNumerosPseudoaleatorios.Formularios
             }
             else
             {
-                MessageBox.Show("Seleccione si la serie debe ser generada por el lenguaje o por un generador propio");
+                MessageBox.Show("Seleccione si la serie debe ser generada por el lenguaje o por un generador propio", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
         }

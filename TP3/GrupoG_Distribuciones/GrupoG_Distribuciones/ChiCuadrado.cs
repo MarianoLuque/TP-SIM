@@ -111,13 +111,13 @@ namespace GrupoG_Distribuciones
             { 
                 if(!double.TryParse(txt_intervalo.Text.Trim(), out cantidad_intervalos))
                 {
-                    MessageBox.Show("Ingrese el valor numerico de la cantidad de intervalos");
+                    MessageBox.Show("Ingrese el valor numerico de la cantidad de intervalos", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
 
                 if (cantidad_intervalos > maximo_valor_intervalos || cantidad_intervalos < 4)
                 {
-                    MessageBox.Show("La cantidad de intervalos debe ser menor o igual a " + maximo_valor_intervalos.ToString() + " y mayor a 3");
+                    MessageBox.Show("La cantidad de intervalos debe ser menor o igual a " + maximo_valor_intervalos.ToString() + " y mayor a 3", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
             }
@@ -415,20 +415,6 @@ namespace GrupoG_Distribuciones
                 array_valores_observados_agrupados[i] = valores_chi_frecuencia.ElementAt(i)[0];
                 array_valores_esperados_agrupados[i] = valores_chi_frecuencia.ElementAt(i)[1];
             }
-
-            /*
-            ChiSquareTest chiSquareTest = new ChiSquareTest(array_valores_esperados_agrupados, array_valores_observados_agrupados, (cantidad_intervalos_agr - 1 - cantidad_datos_empiricos));
-
-            MessageBox.Show(@"Pvalue: " + chiSquareTest.PValue.ToString() +
-                            "\nStatistic: " + chiSquareTest.Statistic.ToString() +
-                            "\nGrados de libertad: " + chiSquareTest.DegreesOfFreedom.ToString() +
-                            "\nSignificancia: " + chiSquareTest.Significant.ToString());
-
-            bool significant = chiSquareTest.Significant; // true if statistically significant
-            */
-
-            //Resultado Chi Cuadrado
-            //valor_chi_tabulado = vp_chi[cantidad_intervalos_agr - 1 - cantidad_datos_empiricos];
 
             double grados_de_libertad_libreria = (double)(cantidad_intervalos_agr - 1 - cantidad_datos_empiricos);
             valor_chi_tabulado_libreria = ChiSquared.InvCDF(grados_de_libertad_libreria, 0.95);

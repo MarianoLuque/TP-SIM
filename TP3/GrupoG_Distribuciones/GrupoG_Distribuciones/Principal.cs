@@ -76,13 +76,13 @@ namespace GrupoG_Distribuciones
         {
             if (!int.TryParse(txt_cantidad.Text, out n))
             {
-                MessageBox.Show("Ingrese un valor numerico entero");
+                MessageBox.Show("Ingrese un valor numerico entero", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             
             if (!(n >= 500 ))
             {
-                MessageBox.Show("La cantidad de números debe ser superior a 500 e inferior a 3000");
+                MessageBox.Show("La cantidad de números debe ser superior a 500 e inferior a 3000", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -98,12 +98,12 @@ namespace GrupoG_Distribuciones
                 double a, b = 0;
                 if (!(double.TryParse(msk_A.Text, out a) && (double.TryParse(msk_B.Text, out b))))
                 {
-                    MessageBox.Show("Ingrese los valores de A y B para la distribución uniforme");
+                    MessageBox.Show("Ingrese los valores de A y B para la distribución uniforme", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
                 if (b < a)
                 {
-                    MessageBox.Show("Ingrese un valor de B mayor que el valor de A");
+                    MessageBox.Show("Ingrese un valor de B mayor que el valor de A", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
 
@@ -146,17 +146,17 @@ namespace GrupoG_Distribuciones
 
                 if (!(rb_con.Checked) && !(rb_bm.Checked))
                 {
-                    MessageBox.Show("Seleccione un método de cálculo para la distribución normal");
+                    MessageBox.Show("Seleccione un método de cálculo para la distribución normal", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
                 if(!(double.TryParse(msk_media_normal.Text, out double media) && double.TryParse(msk_de.Text, out double de)))
                 {
-                    MessageBox.Show("Cargue los valores de media y desviación para la distribución normal");
+                    MessageBox.Show("Cargue los valores de media y desviación para la distribución normal", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
                 if (de < 0 && de < 100000)
                 {
-                    MessageBox.Show("La desviación estandar en la distribución normal debe ser positiva y menor a 100000");
+                    MessageBox.Show("La desviación estandar en la distribución normal debe ser positiva y menor a 100000", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
 
@@ -283,7 +283,7 @@ namespace GrupoG_Distribuciones
             {
                 if (!(rb_media_exp.Checked) && !(rb_lambda_exp.Checked))
                 {
-                    MessageBox.Show("Seleccione un método de cálculo para la distribución exponencial");
+                    MessageBox.Show("Seleccione un método de cálculo para la distribución exponencial", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
 
@@ -295,12 +295,12 @@ namespace GrupoG_Distribuciones
                 {
                     if (!double.TryParse(msk_media_exp.Text, out double media))
                     {
-                        MessageBox.Show("Ingrese un valor numerico de media para la distribución exponencial");
+                        MessageBox.Show("Ingrese un valor numerico de media para la distribución exponencial", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     } 
                     if(media <= 0)
                     {
-                        MessageBox.Show("Ingrese un valor positivo para la media de la distribución exponencial");
+                        MessageBox.Show("Ingrese un valor positivo para la media de la distribución exponencial", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
                     lambda = 1 / media;
@@ -309,12 +309,12 @@ namespace GrupoG_Distribuciones
                 {
                     if (!double.TryParse(msk_lam_exp.Text, out lambda))
                     {
-                        MessageBox.Show("Ingrese un valor numerico de lambda para la distribución exponencial");
+                        MessageBox.Show("Ingrese un valor numerico de lambda para la distribución exponencial", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
                     if (lambda <= 0)
                     {
-                        MessageBox.Show("Ingrese un valor positivo para el lambda de la distribución exponencial");
+                        MessageBox.Show("Ingrese un valor positivo para el lambda de la distribución exponencial", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
                 }
@@ -358,12 +358,12 @@ namespace GrupoG_Distribuciones
             {
                 if(!double.TryParse(msk_lam_poi.Text, out double lambda))
                 {
-                    MessageBox.Show("Ingrese un valor numerico de lambda para la distribución de poisson");
+                    MessageBox.Show("Ingrese un valor numerico de lambda para la distribución de poisson", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
                 if(lambda <= 0)
                 {
-                    MessageBox.Show("Ingrese un valor positivo de lambda para la distribución de poisson, menor a 1000");
+                    MessageBox.Show("Ingrese un valor positivo de lambda para la distribución de poisson, menor a 1000", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
 
