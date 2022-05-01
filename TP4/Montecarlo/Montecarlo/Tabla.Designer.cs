@@ -98,7 +98,7 @@
             this.btn_simular.Location = new System.Drawing.Point(1185, 63);
             this.btn_simular.Name = "btn_simular";
             this.btn_simular.Size = new System.Drawing.Size(124, 30);
-            this.btn_simular.TabIndex = 17;
+            this.btn_simular.TabIndex = 2;
             this.btn_simular.Text = "Simular";
             this.btn_simular.UseVisualStyleBackColor = true;
             this.btn_simular.Click += new System.EventHandler(this.btn_simular_Click);
@@ -120,7 +120,7 @@
             this.txt_desde.Mask = "99999";
             this.txt_desde.Name = "txt_desde";
             this.txt_desde.Size = new System.Drawing.Size(79, 29);
-            this.txt_desde.TabIndex = 19;
+            this.txt_desde.TabIndex = 1;
             this.txt_desde.ValidatingType = typeof(int);
             // 
             // btn_volver
@@ -129,7 +129,7 @@
             this.btn_volver.Location = new System.Drawing.Point(12, 63);
             this.btn_volver.Name = "btn_volver";
             this.btn_volver.Size = new System.Drawing.Size(124, 30);
-            this.btn_volver.TabIndex = 17;
+            this.btn_volver.TabIndex = 0;
             this.btn_volver.Text = "Volver";
             this.btn_volver.UseVisualStyleBackColor = true;
             this.btn_volver.Click += new System.EventHandler(this.btn_volver_Click);

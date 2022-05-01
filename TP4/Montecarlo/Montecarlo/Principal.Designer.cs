@@ -71,7 +71,7 @@
             this.label1.Location = new System.Drawing.Point(344, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(364, 42);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 10;
             this.label1.Text = "Montecarlo - Muelles";
             // 
             // label2
@@ -81,17 +81,17 @@
             this.label2.Location = new System.Drawing.Point(13, 81);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(314, 24);
-            this.label2.TabIndex = 1;
+            this.label2.TabIndex = 11;
             this.label2.Text = "Ingrese la cantidad de días a simular";
             // 
             // txt_cantidad_simulaciones
             // 
             this.txt_cantidad_simulaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_cantidad_simulaciones.Location = new System.Drawing.Point(373, 78);
-            this.txt_cantidad_simulaciones.Mask = "999999999999";
+            this.txt_cantidad_simulaciones.Mask = "99999999";
             this.txt_cantidad_simulaciones.Name = "txt_cantidad_simulaciones";
             this.txt_cantidad_simulaciones.Size = new System.Drawing.Size(168, 29);
-            this.txt_cantidad_simulaciones.TabIndex = 2;
+            this.txt_cantidad_simulaciones.TabIndex = 0;
             this.txt_cantidad_simulaciones.ValidatingType = typeof(int);
             // 
             // groupBox1
@@ -102,7 +102,7 @@
             this.groupBox1.Location = new System.Drawing.Point(17, 135);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(994, 64);
-            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Seleccione la cantidad de muelles que tendra la simulación";
             // 
@@ -112,7 +112,7 @@
             this.rb_dos_muelle.Location = new System.Drawing.Point(577, 26);
             this.rb_dos_muelle.Name = "rb_dos_muelle";
             this.rb_dos_muelle.Size = new System.Drawing.Size(99, 24);
-            this.rb_dos_muelle.TabIndex = 0;
+            this.rb_dos_muelle.TabIndex = 1;
             this.rb_dos_muelle.TabStop = true;
             this.rb_dos_muelle.Text = "2 Muelles";
             this.rb_dos_muelle.UseVisualStyleBackColor = true;
@@ -140,7 +140,7 @@
             this.dg_nro_llegadas.Name = "dg_nro_llegadas";
             this.dg_nro_llegadas.ReadOnly = true;
             this.dg_nro_llegadas.Size = new System.Drawing.Size(253, 188);
-            this.dg_nro_llegadas.TabIndex = 4;
+            this.dg_nro_llegadas.TabIndex = 14;
             // 
             // dg_nro_descargas
             // 
@@ -152,7 +152,7 @@
             this.dg_nro_descargas.Name = "dg_nro_descargas";
             this.dg_nro_descargas.ReadOnly = true;
             this.dg_nro_descargas.Size = new System.Drawing.Size(257, 188);
-            this.dg_nro_descargas.TabIndex = 5;
+            this.dg_nro_descargas.TabIndex = 15;
             // 
             // lbl_datos_simulacion
             // 
@@ -161,7 +161,7 @@
             this.lbl_datos_simulacion.Location = new System.Drawing.Point(13, 205);
             this.lbl_datos_simulacion.Name = "lbl_datos_simulacion";
             this.lbl_datos_simulacion.Size = new System.Drawing.Size(0, 20);
-            this.lbl_datos_simulacion.TabIndex = 1;
+            this.lbl_datos_simulacion.TabIndex = 13;
             // 
             // label3
             // 
@@ -170,7 +170,7 @@
             this.label3.Location = new System.Drawing.Point(13, 437);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(673, 24);
-            this.label3.TabIndex = 1;
+            this.label3.TabIndex = 22;
             this.label3.Text = "Ingrese el costo por barco por pasar la noche en el muelle (Por defecto $1500):";
             // 
             // label4
@@ -180,7 +180,7 @@
             this.label4.Location = new System.Drawing.Point(13, 491);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(646, 24);
-            this.label4.TabIndex = 1;
+            this.label4.TabIndex = 23;
             this.label4.Text = "Ingrese el costo por cada barco descargado (Por defecto Normal(800; 120)):";
             // 
             // txt_k_mv
@@ -190,7 +190,7 @@
             this.txt_k_mv.Location = new System.Drawing.Point(13, 543);
             this.txt_k_mv.Name = "txt_k_mv";
             this.txt_k_mv.Size = new System.Drawing.Size(518, 24);
-            this.txt_k_mv.TabIndex = 1;
+            this.txt_k_mv.TabIndex = 26;
             this.txt_k_mv.Text = "Ingrese el costo por tener el muelle vacio (Por defecto 3200):";
             // 
             // txt_costo_por_noche
@@ -200,7 +200,7 @@
             this.txt_costo_por_noche.Mask = "99999";
             this.txt_costo_por_noche.Name = "txt_costo_por_noche";
             this.txt_costo_por_noche.Size = new System.Drawing.Size(84, 29);
-            this.txt_costo_por_noche.TabIndex = 2;
+            this.txt_costo_por_noche.TabIndex = 6;
             this.txt_costo_por_noche.ValidatingType = typeof(int);
             // 
             // txt_costo_muelle_vacio
@@ -210,7 +210,7 @@
             this.txt_costo_muelle_vacio.Mask = "99999";
             this.txt_costo_muelle_vacio.Name = "txt_costo_muelle_vacio";
             this.txt_costo_muelle_vacio.Size = new System.Drawing.Size(82, 29);
-            this.txt_costo_muelle_vacio.TabIndex = 2;
+            this.txt_costo_muelle_vacio.TabIndex = 9;
             this.txt_costo_muelle_vacio.ValidatingType = typeof(int);
             // 
             // btn_cerrar_programa
@@ -232,7 +232,7 @@
             this.btn_simular.Location = new System.Drawing.Point(886, 592);
             this.btn_simular.Name = "btn_simular";
             this.btn_simular.Size = new System.Drawing.Size(104, 34);
-            this.btn_simular.TabIndex = 16;
+            this.btn_simular.TabIndex = 10;
             this.btn_simular.Text = "Simular";
             this.btn_simular.UseVisualStyleBackColor = true;
             this.btn_simular.Click += new System.EventHandler(this.btn_simular_Click);
@@ -244,7 +244,7 @@
             this.lbl_dist_uniforme.Location = new System.Drawing.Point(13, 325);
             this.lbl_dist_uniforme.Name = "lbl_dist_uniforme";
             this.lbl_dist_uniforme.Size = new System.Drawing.Size(543, 24);
-            this.lbl_dist_uniforme.TabIndex = 17;
+            this.lbl_dist_uniforme.TabIndex = 16;
             this.lbl_dist_uniforme.Text = "Ingrese los valores de la distribución Uniforme (Por defecto 0;9):";
             this.lbl_dist_uniforme.Visible = false;
             // 
@@ -255,7 +255,7 @@
             this.lbl_dist_poisson.Location = new System.Drawing.Point(13, 365);
             this.lbl_dist_poisson.Name = "lbl_dist_poisson";
             this.lbl_dist_poisson.Size = new System.Drawing.Size(663, 24);
-            this.lbl_dist_poisson.TabIndex = 17;
+            this.lbl_dist_poisson.TabIndex = 19;
             this.lbl_dist_poisson.Text = "Ingrese los valores de la distribución Poisson (Por defecto 20 barcos en 12hs):";
             this.lbl_dist_poisson.Visible = false;
             // 
@@ -267,7 +267,7 @@
             this.lbl_b.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_b.Name = "lbl_b";
             this.lbl_b.Size = new System.Drawing.Size(26, 25);
-            this.lbl_b.TabIndex = 53;
+            this.lbl_b.TabIndex = 18;
             this.lbl_b.Text = "B";
             this.lbl_b.Visible = false;
             // 
@@ -279,7 +279,7 @@
             this.lbl_a.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_a.Name = "lbl_a";
             this.lbl_a.Size = new System.Drawing.Size(26, 25);
-            this.lbl_a.TabIndex = 52;
+            this.lbl_a.TabIndex = 17;
             this.lbl_a.Text = "A";
             this.lbl_a.Visible = false;
             // 
@@ -301,7 +301,7 @@
             this.txt_dist_uniforme_b.Mask = "99999";
             this.txt_dist_uniforme_b.Name = "txt_dist_uniforme_b";
             this.txt_dist_uniforme_b.Size = new System.Drawing.Size(79, 29);
-            this.txt_dist_uniforme_b.TabIndex = 2;
+            this.txt_dist_uniforme_b.TabIndex = 3;
             this.txt_dist_uniforme_b.ValidatingType = typeof(int);
             this.txt_dist_uniforme_b.Visible = false;
             // 
@@ -312,7 +312,7 @@
             this.txt_dist_poisson_hs.Mask = "99999";
             this.txt_dist_poisson_hs.Name = "txt_dist_poisson_hs";
             this.txt_dist_poisson_hs.Size = new System.Drawing.Size(79, 29);
-            this.txt_dist_poisson_hs.TabIndex = 2;
+            this.txt_dist_poisson_hs.TabIndex = 5;
             this.txt_dist_poisson_hs.ValidatingType = typeof(int);
             this.txt_dist_poisson_hs.Visible = false;
             // 
@@ -323,7 +323,7 @@
             this.lbl_barcos.Location = new System.Drawing.Point(810, 365);
             this.lbl_barcos.Name = "lbl_barcos";
             this.lbl_barcos.Size = new System.Drawing.Size(94, 24);
-            this.lbl_barcos.TabIndex = 1;
+            this.lbl_barcos.TabIndex = 20;
             this.lbl_barcos.Text = "barcos en";
             this.lbl_barcos.Visible = false;
             // 
@@ -335,7 +335,7 @@
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(24, 25);
-            this.label10.TabIndex = 55;
+            this.label10.TabIndex = 25;
             this.label10.Text = "δ";
             // 
             // label11
@@ -346,7 +346,7 @@
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(24, 25);
-            this.label11.TabIndex = 54;
+            this.label11.TabIndex = 24;
             this.label11.Text = "µ";
             // 
             // txt_media_normal
@@ -356,7 +356,7 @@
             this.txt_media_normal.Mask = "99999";
             this.txt_media_normal.Name = "txt_media_normal";
             this.txt_media_normal.Size = new System.Drawing.Size(84, 29);
-            this.txt_media_normal.TabIndex = 2;
+            this.txt_media_normal.TabIndex = 7;
             this.txt_media_normal.ValidatingType = typeof(int);
             // 
             // txt_desviacion_normal
@@ -366,7 +366,7 @@
             this.txt_desviacion_normal.Mask = "99999";
             this.txt_desviacion_normal.Name = "txt_desviacion_normal";
             this.txt_desviacion_normal.Size = new System.Drawing.Size(82, 29);
-            this.txt_desviacion_normal.TabIndex = 2;
+            this.txt_desviacion_normal.TabIndex = 8;
             this.txt_desviacion_normal.ValidatingType = typeof(int);
             // 
             // lbl_hs
@@ -376,7 +376,7 @@
             this.lbl_hs.Location = new System.Drawing.Point(993, 365);
             this.lbl_hs.Name = "lbl_hs";
             this.lbl_hs.Size = new System.Drawing.Size(30, 24);
-            this.lbl_hs.TabIndex = 1;
+            this.lbl_hs.TabIndex = 21;
             this.lbl_hs.Text = "hs";
             this.lbl_hs.Visible = false;
             // 
@@ -387,7 +387,7 @@
             this.txt_dist_poisson_barcos.Mask = "99999";
             this.txt_dist_poisson_barcos.Name = "txt_dist_poisson_barcos";
             this.txt_dist_poisson_barcos.Size = new System.Drawing.Size(84, 29);
-            this.txt_dist_poisson_barcos.TabIndex = 2;
+            this.txt_dist_poisson_barcos.TabIndex = 4;
             this.txt_dist_poisson_barcos.ValidatingType = typeof(int);
             this.txt_dist_poisson_barcos.Visible = false;
             // 
@@ -429,6 +429,7 @@
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Enter += new System.EventHandler(this.btn_simular_Click);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_nro_llegadas)).EndInit();

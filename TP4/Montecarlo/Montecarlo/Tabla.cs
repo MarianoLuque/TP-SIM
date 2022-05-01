@@ -30,11 +30,12 @@ namespace Montecarlo
         DataTable tabla = new DataTable();
         int simulacion_desde;
 
-        int barcos_no_descargados;
         decimal costo_acumulado;
+        double costo_total;
         int costo_por_noche_por_barco;
         int costo_por_muelle_vacio;
-        double costo_total;
+        double costo_descarga;
+
         int j = 0;
 
         double rnd_llegadas;
@@ -43,18 +44,16 @@ namespace Montecarlo
 
         int nro_llegadas;
         int? nro_descargas;
-        double costo_descarga;
-
-        bool bandera_sacar_random_descarga = true;
+        int barcos_no_descargados;
 
         //Metricas
-        double max_costo_total = 0;
-        int fila_max_costo = 0;
-        int cantidad_barcos_retrasados = 0;
-        int cantidad_veces_muelle_no_vacio = 0;
-        int cantidad_barcos_llegados_total = 0;
-        int cantidad_barcos_descargados_total = 0;
-        int costo_por_noche_acumulado = 0;
+        double max_costo_total;
+        int fila_max_costo;
+        int cantidad_barcos_retrasados;
+        long cantidad_veces_muelle_no_vacio;
+        long cantidad_barcos_llegados_total;
+        long cantidad_barcos_descargados_total;
+        long costo_por_noche_acumulado;
 
         public Tabla(long cantidad_iteraciones, int cantidad_muelles, int costo_media_descarga, int costo_desviacion_descarga, int costo_por_noche, int costo_muelle_desocupado, int dist_uniforme_a, int dist_uniforme_b, int dist_poisson_barcos, int dist_poisson_hs, DataTable tabla_llegadas, DataTable tabla_descargas)
         {
@@ -80,9 +79,8 @@ namespace Montecarlo
                 MessageBox.Show("Ingrese desde que simulación se debe mostrar (valor mayor a 0 y menor a " + (cantidad_iteraciones - 400).ToString() + ")", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            tabla.Columns.Clear();
-            tabla.Rows.Clear();
             cargar_tabla();
+
             cargar_datos();
             dg_montecarlo.DataSource = tabla;
             mostrar_metricas();
@@ -90,12 +88,22 @@ namespace Montecarlo
 
         private void mostrar_metricas()
         {
-            lbl_m1.Text = "Máximo costo total: " + max_costo_total.ToString() + " en la fila: " + fila_max_costo.ToString();
+            lbl_m1.Text = "Máximo costo total: $" + max_costo_total.ToString() + " - En la fila: " + fila_max_costo.ToString();
             lbl_m2.Text = "Cantidad de barcos con retraso: " + cantidad_barcos_retrasados.ToString();
-            lbl_m3.Text = "Porcentaje de ocupación del muelle: " + (Math.Round((double)(cantidad_veces_muelle_no_vacio / cantidad_iteraciones) * 100 , 2)).ToString();
-            lbl_m4.Text = "Promedio de barcos que llegan por día: " + (cantidad_barcos_llegados_total / cantidad_iteraciones).ToString();
-            lbl_m5.Text = "Promedio de barcos descargados por día: " + (cantidad_barcos_descargados_total / cantidad_iteraciones).ToString();
-            lbl_m6.Text = "Porcentaje del costo por noche en el muelle sobre el costo total: " + (Math.Round(((decimal)costo_por_noche_acumulado / costo_acumulado) * 100 , 2)).ToString();
+            lbl_m3.Text = "Porcentaje de ocupación del muelle: " + (Math.Round(((double)cantidad_veces_muelle_no_vacio / (double)cantidad_iteraciones) * 100 , 10)).ToString() + "%";
+            lbl_m4.Text = "Promedio de barcos que llegan por día: " + (Math.Round(((double)cantidad_barcos_llegados_total / (double)cantidad_iteraciones), 2)).ToString();
+            lbl_m5.Text = "Promedio de barcos descargados por día: " + (Math.Round(((double)cantidad_barcos_descargados_total / (double)cantidad_iteraciones), 2)).ToString();
+            lbl_m6.Text = "Porcentaje del costo por noche en el muelle sobre el costo acumulado: " + (Math.Round(((decimal)costo_por_noche_acumulado / costo_acumulado) * 100 , 4)).ToString() + "%";
+        }
+
+        public void calcular_cantidad_llegadas(double rnd)
+        {
+            if (rnd <= 0.12) { nro_llegadas = 1; return; }
+            if (rnd > 0.29 && rnd <= 0.44) { nro_llegadas = 2; return; }
+            if (rnd > 0.44 && rnd <= 0.69) { nro_llegadas = 3; return; }
+            if (rnd > 0.69 && rnd <= 0.89) { nro_llegadas = 4; return; }
+            if (rnd > 0.89) { nro_llegadas = 5; return; }
+            nro_llegadas = 0; 
         }
 
         private void cargar_datos()
@@ -111,6 +119,9 @@ namespace Montecarlo
             barcos_no_descargados = 0;
             costo_acumulado = 0;
             j = 0;
+
+            //array llegadas
+            double[] array_llegadas = new double[] { 0, 0.12, 0.29, 0.44, 0.69, 0.89, 0.99 };
 
             //vuelvo metricas a 0
             max_costo_total = 0;
@@ -133,12 +144,24 @@ namespace Montecarlo
                 if (cantidad_muelles == 1)
                 {
                     //Veo en que intervalo cae el rnd de las llegadas
-                    if(rnd_llegadas <= 0.12)        { nro_llegadas = 0;}
-                    else if (rnd_llegadas <= 0.29)  { nro_llegadas = 1;}
-                    else if (rnd_llegadas <= 0.44)  { nro_llegadas = 2;}
-                    else if (rnd_llegadas <= 0.69)  { nro_llegadas = 3;}
-                    else if (rnd_llegadas <= 0.89)  { nro_llegadas = 4;}
-                    else if (rnd_llegadas <= 0.99)  { nro_llegadas = 5;}
+                    /*
+                    nro_llegadas = 0;
+                    if      (rnd_llegadas > 0.12 && rnd_llegadas <= 0.29)  { nro_llegadas = 1;}
+                    else if (rnd_llegadas > 0.29 && rnd_llegadas <= 0.44)  { nro_llegadas = 2;}
+                    else if (rnd_llegadas > 0.44 && rnd_llegadas <= 0.69)  { nro_llegadas = 3;}
+                    else if (rnd_llegadas > 0.69 && rnd_llegadas <= 0.89)  { nro_llegadas = 4;}
+                    else if (rnd_llegadas > 0.89)                          { nro_llegadas = 5;}
+                    */
+
+                    for (int k = 0; k < array_llegadas.Length-2; k++)
+                    {
+                        
+                        if(rnd_llegadas > array_llegadas[k] && rnd_llegadas <= array_llegadas[k + 1])
+                        {
+                            nro_llegadas = k;
+                            break;
+                        }
+                    }
 
                     //Veo si tengo que sacar un random
                     if (nro_llegadas == 0 && barcos_no_descargados == 0)
@@ -152,13 +175,14 @@ namespace Montecarlo
                     }
                     else
                     {
+                        
                         //Veo en que intervalo cae el rnd de las descargas
-                        if (rnd_descargas <= 0.04)        { nro_descargas = 1;}
+                        if      (rnd_descargas <= 0.04)   { nro_descargas = 1;}
                         else if (rnd_descargas <= 0.19)   { nro_descargas = 2;}
                         else if (rnd_descargas <= 0.69)   { nro_descargas = 3;}
                         else if (rnd_descargas <= 0.89)   { nro_descargas = 4;}
-                        else if (rnd_descargas <= 0.99)   { nro_descargas = 5;}
-
+                        else                              { nro_descargas = 5;}
+                        
                         //Si llegaron barcos o había de la noche anterior, no hay costo por muelle vacío
                         costo_por_muelle_vacio = 0;
                         //metrica porcentaje de ocupacion muelle (FALTA DIVIDIR POR LA CANTIDAD DE ITERACIONES)
@@ -208,7 +232,7 @@ namespace Montecarlo
                 }
                 costo_descarga = Math.Truncate((((rnd_costo_descargas - 6.00) * costo_desviacion_descarga) + costo_media_descarga) * 100) / 100;
                 if(costo_descarga < 0) { costo_descarga = 0; }
-
+                
                 //intento:
                     //calcular la suma de las llegadas y los barcos no descargados menos el numero de descargas si es que hubiera
                     //sumar los barcos con retraso que es el numero de llegadas menos el numero de descargas
@@ -228,19 +252,14 @@ namespace Montecarlo
                     //metrica promedio de barcos que se descargan (FALTA DIVIDIR POR LA CANTIDAD DE ITERACIONES)
                     cantidad_barcos_descargados_total += (int)nro_descargas;
                 }
-                //esto no estaría al pedo? si llega al catch es porque no hay llegadas y no hay barcos no descargados (por eso es null las descargas)
+                //si el numero de descargas es 0 no hay barcos no descargados
                 catch
                 {
-                    // o sea aca sería 0 + 0 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    cant_llegadas_menos_cant_descargas = barcos_no_descargados + nro_llegadas;
-
-                    //y aca sería += 0 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    //metrica cantidad de barcos con retraso
-                    cantidad_barcos_retrasados += nro_llegadas;
+                    cant_llegadas_menos_cant_descargas = 0;
                 }
                 
                 //si hay mas descargas que llegadas los barcos no descargados son 0, sino es la diferencia
-                if (cant_llegadas_menos_cant_descargas < 0) { barcos_no_descargados = 0; }
+                if (cant_llegadas_menos_cant_descargas <= 0) { barcos_no_descargados = 0; }
                 else                                        { barcos_no_descargados = cant_llegadas_menos_cant_descargas; }
 
                 //Calculo el costo por pasar la noche por barco
@@ -255,7 +274,7 @@ namespace Montecarlo
                 if(costo_total > max_costo_total)
                 {
                     max_costo_total = costo_total;
-                    fila_max_costo = i;
+                    fila_max_costo = i+1;
                 }
 
                 //metrica promedio de barcos que llegan (FALTA DIVIDIR POR LA CANTIDAD DE ITERACIONES)
@@ -323,6 +342,13 @@ namespace Montecarlo
 
         private void cargar_tabla()
         {
+            //desligo la tabla del data source
+            dg_montecarlo.DataSource = null;
+
+            //limpio las filas y columnas
+            tabla.Columns.Clear();
+            tabla.Rows.Clear();
+
             //creo las columnas
             DataColumn iteracion = new DataColumn("Iteracion");
             DataColumn rnd_llegadas = new DataColumn("RND llegadas");
