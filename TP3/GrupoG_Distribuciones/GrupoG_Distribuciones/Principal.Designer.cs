@@ -129,9 +129,9 @@
             this.groupBox2.Controls.Add(this.rb_bm);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.groupBox2.Location = new System.Drawing.Point(54, 118);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(368, 53);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
@@ -141,7 +141,7 @@
             // 
             this.rb_con.AutoSize = true;
             this.rb_con.Location = new System.Drawing.Point(187, 21);
-            this.rb_con.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rb_con.Margin = new System.Windows.Forms.Padding(2);
             this.rb_con.Name = "rb_con";
             this.rb_con.Size = new System.Drawing.Size(134, 28);
             this.rb_con.TabIndex = 1;
@@ -154,7 +154,7 @@
             // 
             this.rb_bm.AutoSize = true;
             this.rb_bm.Location = new System.Drawing.Point(70, 21);
-            this.rb_bm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rb_bm.Margin = new System.Windows.Forms.Padding(2);
             this.rb_bm.Name = "rb_bm";
             this.rb_bm.Size = new System.Drawing.Size(119, 28);
             this.rb_bm.TabIndex = 0;
@@ -169,9 +169,9 @@
             this.groupBox1.Controls.Add(this.rb_media_exp);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.groupBox1.Location = new System.Drawing.Point(54, 208);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(369, 58);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
@@ -181,7 +181,7 @@
             // 
             this.rb_lambda_exp.AutoSize = true;
             this.rb_lambda_exp.Location = new System.Drawing.Point(146, 24);
-            this.rb_lambda_exp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rb_lambda_exp.Margin = new System.Windows.Forms.Padding(2);
             this.rb_lambda_exp.Name = "rb_lambda_exp";
             this.rb_lambda_exp.Size = new System.Drawing.Size(38, 28);
             this.rb_lambda_exp.TabIndex = 3;
@@ -194,7 +194,7 @@
             // 
             this.rb_media_exp.AutoSize = true;
             this.rb_media_exp.Location = new System.Drawing.Point(104, 24);
-            this.rb_media_exp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rb_media_exp.Margin = new System.Windows.Forms.Padding(2);
             this.rb_media_exp.Name = "rb_media_exp";
             this.rb_media_exp.Size = new System.Drawing.Size(38, 28);
             this.rb_media_exp.TabIndex = 2;

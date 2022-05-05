@@ -162,10 +162,7 @@ namespace GrupoG_Distribuciones
 
                 limpiar_tabla_y_crear_columnas();
 
-                double sumador = 0;
-
                 Random myObject = new Random();
-
 
                 if (rb_con.Checked)
                 {
@@ -201,8 +198,6 @@ namespace GrupoG_Distribuciones
                             }
                         }
                         
-                        sumador += x;
-                        
                         tabla_iteracion.Rows[i]["RND"] = x;
                     }
                     Tabla_Datos td = new Tabla_Datos(tabla_iteracion, n, "N", maximo, minimo, media, de);
@@ -232,9 +227,13 @@ namespace GrupoG_Distribuciones
                         if(!(n%2 == 0) && (n-1) == i)
                         {
                             tabla_iteracion.Rows.Remove(tabla_iteracion.Rows[i+1]);
-                            break;
+                            random_2 = random_1;
                         }
-                        tabla_iteracion.Rows[i + 1]["RND"] = random_2;
+                        else
+                        {
+                            tabla_iteracion.Rows[i + 1]["RND"] = random_2;
+                        }
+                        
                         if (i == 0)
                         {
                             if (random_1 < random_2)
@@ -379,6 +378,7 @@ namespace GrupoG_Distribuciones
 
                     //Le asigno los valores
                     tabla_iteracion.Rows[i]["Iteracion"] = i + 1;
+
                     double p = 1;
                     double x = -1;
                     double A = Math.Exp(-lambda);
@@ -389,7 +389,6 @@ namespace GrupoG_Distribuciones
                         x = x + 1;
                     } while (p >= A);
                     x = Math.Truncate(x * 100) / 100;
-
 
                     tabla_iteracion.Rows[i]["RND"] = x;
                     if (i == 0)

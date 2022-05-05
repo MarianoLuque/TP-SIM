@@ -256,7 +256,7 @@
             this.lbl_dist_poisson.Name = "lbl_dist_poisson";
             this.lbl_dist_poisson.Size = new System.Drawing.Size(663, 24);
             this.lbl_dist_poisson.TabIndex = 19;
-            this.lbl_dist_poisson.Text = "Ingrese los valores de la distribución Poisson (Por defecto 20 barcos en 12hs):";
+            this.lbl_dist_poisson.Text = "Ingrese los valores de la distribución Poisson (Por defecto 20 barcos en 10hs):";
             this.lbl_dist_poisson.Visible = false;
             // 
             // lbl_b

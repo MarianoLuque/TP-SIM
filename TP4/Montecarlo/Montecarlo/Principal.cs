@@ -32,7 +32,7 @@ namespace Montecarlo
         int dist_uniforme_a = 0;
         int dist_uniforme_b = 9;
         int dist_poisson_barcos = 20;
-        int dist_poisson_hs = 12;
+        int dist_poisson_hs = 10;
 
         public Principal()
         {

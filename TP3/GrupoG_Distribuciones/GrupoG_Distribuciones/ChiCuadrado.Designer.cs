@@ -73,7 +73,7 @@
             // txt_intervalo
             // 
             this.txt_intervalo.Location = new System.Drawing.Point(1033, 75);
-            this.txt_intervalo.Mask = "99999";
+            this.txt_intervalo.Mask = "9999";
             this.txt_intervalo.Name = "txt_intervalo";
             this.txt_intervalo.Size = new System.Drawing.Size(100, 20);
             this.txt_intervalo.TabIndex = 21;
