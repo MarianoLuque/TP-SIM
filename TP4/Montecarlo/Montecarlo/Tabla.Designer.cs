@@ -64,10 +64,10 @@
             this.dg_montecarlo.AllowUserToDeleteRows = false;
             this.dg_montecarlo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dg_montecarlo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dg_montecarlo.Location = new System.Drawing.Point(12, 101);
+            this.dg_montecarlo.Location = new System.Drawing.Point(15, 99);
             this.dg_montecarlo.Name = "dg_montecarlo";
             this.dg_montecarlo.ReadOnly = true;
-            this.dg_montecarlo.Size = new System.Drawing.Size(1297, 507);
+            this.dg_montecarlo.Size = new System.Drawing.Size(1343, 376);
             this.dg_montecarlo.TabIndex = 4;
             // 
             // lbl_datos_simulacion
@@ -139,7 +139,7 @@
             this.label2.AutoSize = true;
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(15, 615);
+            this.label2.Location = new System.Drawing.Point(15, 487);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(139, 39);
             this.label2.TabIndex = 18;
@@ -149,7 +149,7 @@
             // 
             this.lbl_m3.AutoSize = true;
             this.lbl_m3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_m3.Location = new System.Drawing.Point(17, 734);
+            this.lbl_m3.Location = new System.Drawing.Point(17, 606);
             this.lbl_m3.Name = "lbl_m3";
             this.lbl_m3.Size = new System.Drawing.Size(0, 25);
             this.lbl_m3.TabIndex = 18;
@@ -158,7 +158,7 @@
             // 
             this.lbl_m5.AutoSize = true;
             this.lbl_m5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_m5.Location = new System.Drawing.Point(17, 808);
+            this.lbl_m5.Location = new System.Drawing.Point(17, 680);
             this.lbl_m5.Name = "lbl_m5";
             this.lbl_m5.Size = new System.Drawing.Size(0, 25);
             this.lbl_m5.TabIndex = 18;
@@ -167,7 +167,7 @@
             // 
             this.lbl_m1.AutoSize = true;
             this.lbl_m1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_m1.Location = new System.Drawing.Point(17, 660);
+            this.lbl_m1.Location = new System.Drawing.Point(17, 532);
             this.lbl_m1.Name = "lbl_m1";
             this.lbl_m1.Size = new System.Drawing.Size(0, 25);
             this.lbl_m1.TabIndex = 18;
@@ -176,7 +176,7 @@
             // 
             this.lbl_m4.AutoSize = true;
             this.lbl_m4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_m4.Location = new System.Drawing.Point(17, 771);
+            this.lbl_m4.Location = new System.Drawing.Point(17, 643);
             this.lbl_m4.Name = "lbl_m4";
             this.lbl_m4.Size = new System.Drawing.Size(0, 25);
             this.lbl_m4.TabIndex = 18;
@@ -185,7 +185,7 @@
             // 
             this.lbl_m2.AutoSize = true;
             this.lbl_m2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_m2.Location = new System.Drawing.Point(17, 697);
+            this.lbl_m2.Location = new System.Drawing.Point(17, 569);
             this.lbl_m2.Name = "lbl_m2";
             this.lbl_m2.Size = new System.Drawing.Size(0, 25);
             this.lbl_m2.TabIndex = 18;
@@ -194,7 +194,7 @@
             // 
             this.lbl_m6.AutoSize = true;
             this.lbl_m6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_m6.Location = new System.Drawing.Point(17, 845);
+            this.lbl_m6.Location = new System.Drawing.Point(17, 717);
             this.lbl_m6.Name = "lbl_m6";
             this.lbl_m6.Size = new System.Drawing.Size(0, 25);
             this.lbl_m6.TabIndex = 18;
@@ -204,7 +204,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.ClientSize = new System.Drawing.Size(1321, 881);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this.txt_desde);
             this.Controls.Add(this.lbl_m6);
             this.Controls.Add(this.lbl_m4);
@@ -224,6 +224,7 @@
             this.Name = "Tabla";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Tabla_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dg_montecarlo)).EndInit();
             this.ResumeLayout(false);

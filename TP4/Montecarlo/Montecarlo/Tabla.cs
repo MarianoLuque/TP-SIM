@@ -253,7 +253,7 @@ namespace Montecarlo
                     //sumar los barcos con retraso que es el numero de llegadas menos el numero de descargas
                     //sumar los barcos descargados
                 int cant_llegadas_menos_cant_descargas;
-                try
+                if (nro_descargas != null)
                 {
                     cant_llegadas_menos_cant_descargas = barcos_no_descargados + nro_llegadas - (int)nro_descargas;
 
@@ -267,12 +267,8 @@ namespace Montecarlo
                     //metrica promedio de barcos que se descargan (FALTA DIVIDIR POR LA CANTIDAD DE ITERACIONES)
                     cantidad_barcos_descargados_total += (int)nro_descargas;
                 }
-                //si el numero de descargas es 0 no hay barcos no descargados
-                catch
-                {
-                    cant_llegadas_menos_cant_descargas = 0;
-                }
-                
+                else { cant_llegadas_menos_cant_descargas = 0; }
+
                 //si hay mas descargas que llegadas los barcos no descargados son 0, sino es la diferencia
                 if (cant_llegadas_menos_cant_descargas <= 0) { barcos_no_descargados = 0; }
                 else                                        { barcos_no_descargados = cant_llegadas_menos_cant_descargas; }
