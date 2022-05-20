@@ -52,6 +52,46 @@ namespace ITV
         int[] tiempo_fin_atencion_oficina_1 = new int[] { 0, 0, 0 };
         int[] tiempo_fin_atencion_oficina_2 = new int[] { 0, 0, 0 };
 
+        //servidores
+        servidor caseta = new servidor();
+        servidor nave = new servidor();
+        servidor oficina = new servidor();
+
+        //metrica 1
+
+        //metrica 2
+        int[] tiempo_permanencia_caseta   = new int[] { 0, 0, 0 };
+        int[] tiempo_medio_cliente_caseta = new int[] { 0, 0, 0 };
+        int cantidad_clientes_atencion_finalizada_caseta;
+
+        //metrica 3
+        int[] tiempo_permanencia_nave   = new int[] { 0, 0, 0 };
+        int[] tiempo_medio_cliente_nave = new int[] { 0, 0, 0 };
+        int cantidad_clientes_atencion_finalizada_nave;
+
+        //metrica 4
+        int[] tiempo_permanencia_oficina   = new int[] { 0, 0, 0 };
+        int[] tiempo_medio_cliente_oficina = new int[] { 0, 0, 0 };
+        int cantidad_clientes_atencion_finalizada_oficina;
+
+        //metrica 5
+        int[] tiempo_permanencia_itv   = new int[] { 0, 0, 0 };
+        int[] tiempo_medio_cliente_itv = new int[] { 0, 0, 0 };
+
+        //metrica 6
+        int[] tiempo_permanencia_cola_caseta = new int[] { 0, 0, 0 };
+        int[] tiempo_medio_cliente_cola_caseta = new int[] { 0, 0, 0 };
+
+        //metrica 7
+        int[] tiempo_permanencia_cola_nave = new int[] { 0, 0, 0 };
+        int[] tiempo_medio_cliente_cola_nave = new int[] { 0, 0, 0 };
+
+        //metrica 8
+        int[] tiempo_maximo_entre_llegadas = new int[] { 0, 0, 0 };
+
+        //metrica 9
+        int cantidad_clientes_que_se_van_por_cola_llena;
+
         //tabla con iteraciones
         DataTable tabla_iteraciones = new DataTable();
 
