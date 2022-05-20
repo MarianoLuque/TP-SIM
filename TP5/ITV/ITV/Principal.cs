@@ -33,6 +33,34 @@ namespace ITV
             txt_minutos_caseta.Text = "1";
             txt_minutos_nave.Text = "60";
             txt_minutos_oficina.Text = "2";
+
+            txt_cantidad_maxima_cola.Text = "15";
+        }
+
+        private void btn_simular_Click(object sender, EventArgs e)
+        {
+            if(txt_cantidad_simulaciones.Text == "")
+            {
+                MessageBox.Show("Ingrese la cantidad de minutos a simular", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (txt_cantidad_clientes_llegadas.Text == "" || txt_cantidad_clientes_caseta.Text == "" || txt_cantidad_clientes_nave.Text == "" || txt_cantidad_clientes_oficina.Text == "" )
+            {
+                MessageBox.Show("Ingrese la cantidad de clientes que llegan al sistema y que son atendidos en cada servicio", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (txt_minutos_llegadas.Text == "" || txt_minutos_caseta.Text == "" || txt_minutos_nave.Text == "" || txt_minutos_oficina.Text == "")
+            {
+                MessageBox.Show("Ingrese la cantidad de minutos en los que llegan los clientes al sistema y que tardan en la atención de cada servicio", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if(txt_cantidad_maxima_cola.Text == "")
+            {
+                MessageBox.Show("Ingrese la cantidad máxima de clientes que puede haber en la cola de la caseta", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            Simulacion simulacion = new Simulacion(int.Parse(txt_cantidad_simulaciones.Text), int.Parse(txt_cantidad_clientes_llegadas.Text), int.Parse(txt_cantidad_clientes_caseta.Text), int.Parse(txt_cantidad_clientes_nave.Text), int.Parse(txt_cantidad_clientes_oficina.Text), int.Parse(txt_minutos_llegadas.Text), int.Parse(txt_minutos_caseta.Text), int.Parse(txt_minutos_nave.Text), int.Parse(txt_minutos_oficina.Text), int.Parse(txt_cantidad_maxima_cola.Text));
+            simulacion.ShowDialog();
         }
     }
 }

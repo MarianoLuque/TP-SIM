@@ -34,26 +34,26 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txt_cantidad_clientes_oficina = new System.Windows.Forms.MaskedTextBox();
+            this.txt_cantidad_clientes_nave = new System.Windows.Forms.MaskedTextBox();
+            this.txt_cantidad_clientes_caseta = new System.Windows.Forms.MaskedTextBox();
             this.txt_cantidad_clientes_llegadas = new System.Windows.Forms.MaskedTextBox();
-            this.txt_minutos_llegadas = new System.Windows.Forms.MaskedTextBox();
-            this.lbl_hs = new System.Windows.Forms.Label();
-            this.lbl_barcos = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.txt_cantidad_clientes_caseta = new System.Windows.Forms.MaskedTextBox();
-            this.txt_cantidad_clientes_nave = new System.Windows.Forms.MaskedTextBox();
-            this.txt_cantidad_clientes_oficina = new System.Windows.Forms.MaskedTextBox();
-            this.txt_minutos_caseta = new System.Windows.Forms.MaskedTextBox();
-            this.txt_minutos_oficina = new System.Windows.Forms.MaskedTextBox();
             this.txt_minutos_nave = new System.Windows.Forms.MaskedTextBox();
+            this.txt_minutos_oficina = new System.Windows.Forms.MaskedTextBox();
+            this.txt_minutos_caseta = new System.Windows.Forms.MaskedTextBox();
+            this.txt_minutos_llegadas = new System.Windows.Forms.MaskedTextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lbl_hs = new System.Windows.Forms.Label();
+            this.lbl_barcos = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.txt_cantidad_maxima_cola = new System.Windows.Forms.MaskedTextBox();
             this.btn_simular = new System.Windows.Forms.Button();
@@ -77,7 +77,7 @@
             // 
             this.txt_cantidad_simulaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_cantidad_simulaciones.Location = new System.Drawing.Point(558, 85);
-            this.txt_cantidad_simulaciones.Mask = "99999";
+            this.txt_cantidad_simulaciones.Mask = "999999";
             this.txt_cantidad_simulaciones.Name = "txt_cantidad_simulaciones";
             this.txt_cantidad_simulaciones.Size = new System.Drawing.Size(168, 29);
             this.txt_cantidad_simulaciones.TabIndex = 17;
@@ -97,7 +97,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(287, 12);
+            this.label1.Location = new System.Drawing.Point(198, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(439, 42);
             this.label1.TabIndex = 18;
@@ -133,45 +133,55 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Probabilidad de Eventos";
             // 
-            // label3
+            // label12
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(42, 56);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(265, 24);
-            this.label3.TabIndex = 19;
-            this.label3.Text = "Llegada de clientes al sistema:";
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(596, 173);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(76, 24);
+            this.label12.TabIndex = 25;
+            this.label12.Text = "minutos";
             // 
-            // label4
+            // label10
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(129, 95);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(178, 24);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "Fin atencion caseta:";
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(596, 134);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(76, 24);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "minutos";
             // 
-            // label5
+            // txt_cantidad_clientes_oficina
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(142, 134);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(165, 24);
-            this.label5.TabIndex = 19;
-            this.label5.Text = "Fin atencion nave:";
+            this.txt_cantidad_clientes_oficina.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_cantidad_clientes_oficina.Location = new System.Drawing.Point(321, 170);
+            this.txt_cantidad_clientes_oficina.Mask = "999";
+            this.txt_cantidad_clientes_oficina.Name = "txt_cantidad_clientes_oficina";
+            this.txt_cantidad_clientes_oficina.Size = new System.Drawing.Size(84, 29);
+            this.txt_cantidad_clientes_oficina.TabIndex = 22;
+            this.txt_cantidad_clientes_oficina.ValidatingType = typeof(int);
             // 
-            // label6
+            // txt_cantidad_clientes_nave
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(129, 173);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(178, 24);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "Fin atencion oficina:";
+            this.txt_cantidad_clientes_nave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_cantidad_clientes_nave.Location = new System.Drawing.Point(321, 131);
+            this.txt_cantidad_clientes_nave.Mask = "999";
+            this.txt_cantidad_clientes_nave.Name = "txt_cantidad_clientes_nave";
+            this.txt_cantidad_clientes_nave.Size = new System.Drawing.Size(84, 29);
+            this.txt_cantidad_clientes_nave.TabIndex = 22;
+            this.txt_cantidad_clientes_nave.ValidatingType = typeof(int);
+            // 
+            // txt_cantidad_clientes_caseta
+            // 
+            this.txt_cantidad_clientes_caseta.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_cantidad_clientes_caseta.Location = new System.Drawing.Point(321, 92);
+            this.txt_cantidad_clientes_caseta.Mask = "999";
+            this.txt_cantidad_clientes_caseta.Name = "txt_cantidad_clientes_caseta";
+            this.txt_cantidad_clientes_caseta.Size = new System.Drawing.Size(84, 29);
+            this.txt_cantidad_clientes_caseta.TabIndex = 22;
+            this.txt_cantidad_clientes_caseta.ValidatingType = typeof(int);
             // 
             // txt_cantidad_clientes_llegadas
             // 
@@ -183,45 +193,15 @@
             this.txt_cantidad_clientes_llegadas.TabIndex = 22;
             this.txt_cantidad_clientes_llegadas.ValidatingType = typeof(int);
             // 
-            // txt_minutos_llegadas
+            // label11
             // 
-            this.txt_minutos_llegadas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_minutos_llegadas.Location = new System.Drawing.Point(511, 53);
-            this.txt_minutos_llegadas.Mask = "999";
-            this.txt_minutos_llegadas.Name = "txt_minutos_llegadas";
-            this.txt_minutos_llegadas.Size = new System.Drawing.Size(79, 29);
-            this.txt_minutos_llegadas.TabIndex = 23;
-            this.txt_minutos_llegadas.ValidatingType = typeof(int);
-            // 
-            // lbl_hs
-            // 
-            this.lbl_hs.AutoSize = true;
-            this.lbl_hs.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_hs.Location = new System.Drawing.Point(596, 56);
-            this.lbl_hs.Name = "lbl_hs";
-            this.lbl_hs.Size = new System.Drawing.Size(76, 24);
-            this.lbl_hs.TabIndex = 25;
-            this.lbl_hs.Text = "minutos";
-            // 
-            // lbl_barcos
-            // 
-            this.lbl_barcos.AutoSize = true;
-            this.lbl_barcos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_barcos.Location = new System.Drawing.Point(411, 56);
-            this.lbl_barcos.Name = "lbl_barcos";
-            this.lbl_barcos.Size = new System.Drawing.Size(101, 24);
-            this.lbl_barcos.TabIndex = 24;
-            this.lbl_barcos.Text = "clientes en";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(411, 95);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(101, 24);
-            this.label7.TabIndex = 24;
-            this.label7.Text = "clientes en";
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(411, 173);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(101, 24);
+            this.label11.TabIndex = 24;
+            this.label11.Text = "clientes en";
             // 
             // label8
             // 
@@ -243,75 +223,15 @@
             this.label9.TabIndex = 24;
             this.label9.Text = "clientes en";
             // 
-            // label10
+            // txt_minutos_nave
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(596, 134);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(76, 24);
-            this.label10.TabIndex = 25;
-            this.label10.Text = "minutos";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(411, 173);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(101, 24);
-            this.label11.TabIndex = 24;
-            this.label11.Text = "clientes en";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(596, 173);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(76, 24);
-            this.label12.TabIndex = 25;
-            this.label12.Text = "minutos";
-            // 
-            // txt_cantidad_clientes_caseta
-            // 
-            this.txt_cantidad_clientes_caseta.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_cantidad_clientes_caseta.Location = new System.Drawing.Point(321, 92);
-            this.txt_cantidad_clientes_caseta.Mask = "999";
-            this.txt_cantidad_clientes_caseta.Name = "txt_cantidad_clientes_caseta";
-            this.txt_cantidad_clientes_caseta.Size = new System.Drawing.Size(84, 29);
-            this.txt_cantidad_clientes_caseta.TabIndex = 22;
-            this.txt_cantidad_clientes_caseta.ValidatingType = typeof(int);
-            // 
-            // txt_cantidad_clientes_nave
-            // 
-            this.txt_cantidad_clientes_nave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_cantidad_clientes_nave.Location = new System.Drawing.Point(321, 131);
-            this.txt_cantidad_clientes_nave.Mask = "999";
-            this.txt_cantidad_clientes_nave.Name = "txt_cantidad_clientes_nave";
-            this.txt_cantidad_clientes_nave.Size = new System.Drawing.Size(84, 29);
-            this.txt_cantidad_clientes_nave.TabIndex = 22;
-            this.txt_cantidad_clientes_nave.ValidatingType = typeof(int);
-            // 
-            // txt_cantidad_clientes_oficina
-            // 
-            this.txt_cantidad_clientes_oficina.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_cantidad_clientes_oficina.Location = new System.Drawing.Point(321, 170);
-            this.txt_cantidad_clientes_oficina.Mask = "999";
-            this.txt_cantidad_clientes_oficina.Name = "txt_cantidad_clientes_oficina";
-            this.txt_cantidad_clientes_oficina.Size = new System.Drawing.Size(84, 29);
-            this.txt_cantidad_clientes_oficina.TabIndex = 22;
-            this.txt_cantidad_clientes_oficina.ValidatingType = typeof(int);
-            // 
-            // txt_minutos_caseta
-            // 
-            this.txt_minutos_caseta.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_minutos_caseta.Location = new System.Drawing.Point(511, 92);
-            this.txt_minutos_caseta.Mask = "999";
-            this.txt_minutos_caseta.Name = "txt_minutos_caseta";
-            this.txt_minutos_caseta.Size = new System.Drawing.Size(79, 29);
-            this.txt_minutos_caseta.TabIndex = 23;
-            this.txt_minutos_caseta.ValidatingType = typeof(int);
+            this.txt_minutos_nave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_minutos_nave.Location = new System.Drawing.Point(511, 131);
+            this.txt_minutos_nave.Mask = "999";
+            this.txt_minutos_nave.Name = "txt_minutos_nave";
+            this.txt_minutos_nave.Size = new System.Drawing.Size(79, 29);
+            this.txt_minutos_nave.TabIndex = 23;
+            this.txt_minutos_nave.ValidatingType = typeof(int);
             // 
             // txt_minutos_oficina
             // 
@@ -323,15 +243,95 @@
             this.txt_minutos_oficina.TabIndex = 23;
             this.txt_minutos_oficina.ValidatingType = typeof(int);
             // 
-            // txt_minutos_nave
+            // txt_minutos_caseta
             // 
-            this.txt_minutos_nave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_minutos_nave.Location = new System.Drawing.Point(511, 131);
-            this.txt_minutos_nave.Mask = "999";
-            this.txt_minutos_nave.Name = "txt_minutos_nave";
-            this.txt_minutos_nave.Size = new System.Drawing.Size(79, 29);
-            this.txt_minutos_nave.TabIndex = 23;
-            this.txt_minutos_nave.ValidatingType = typeof(int);
+            this.txt_minutos_caseta.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_minutos_caseta.Location = new System.Drawing.Point(511, 92);
+            this.txt_minutos_caseta.Mask = "999";
+            this.txt_minutos_caseta.Name = "txt_minutos_caseta";
+            this.txt_minutos_caseta.Size = new System.Drawing.Size(79, 29);
+            this.txt_minutos_caseta.TabIndex = 23;
+            this.txt_minutos_caseta.ValidatingType = typeof(int);
+            // 
+            // txt_minutos_llegadas
+            // 
+            this.txt_minutos_llegadas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_minutos_llegadas.Location = new System.Drawing.Point(511, 53);
+            this.txt_minutos_llegadas.Mask = "999";
+            this.txt_minutos_llegadas.Name = "txt_minutos_llegadas";
+            this.txt_minutos_llegadas.Size = new System.Drawing.Size(79, 29);
+            this.txt_minutos_llegadas.TabIndex = 23;
+            this.txt_minutos_llegadas.ValidatingType = typeof(int);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(411, 95);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(101, 24);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "clientes en";
+            // 
+            // lbl_hs
+            // 
+            this.lbl_hs.AutoSize = true;
+            this.lbl_hs.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_hs.Location = new System.Drawing.Point(596, 56);
+            this.lbl_hs.Name = "lbl_hs";
+            this.lbl_hs.Size = new System.Drawing.Size(76, 24);
+            this.lbl_hs.TabIndex = 25;
+            this.lbl_hs.Text = "minutos";
+            // 
+            // lbl_barcos
+            // 
+            this.lbl_barcos.AutoSize = true;
+            this.lbl_barcos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_barcos.Location = new System.Drawing.Point(411, 56);
+            this.lbl_barcos.Name = "lbl_barcos";
+            this.lbl_barcos.Size = new System.Drawing.Size(101, 24);
+            this.lbl_barcos.TabIndex = 24;
+            this.lbl_barcos.Text = "clientes en";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(129, 173);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(178, 24);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Fin atencion oficina:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(142, 134);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(165, 24);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "Fin atencion nave:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(129, 95);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(178, 24);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "Fin atencion caseta:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(42, 56);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(265, 24);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "Llegada de clientes al sistema:";
             // 
             // label13
             // 
@@ -347,7 +347,7 @@
             // 
             this.txt_cantidad_maxima_cola.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_cantidad_maxima_cola.Location = new System.Drawing.Point(558, 409);
-            this.txt_cantidad_maxima_cola.Mask = "99999";
+            this.txt_cantidad_maxima_cola.Mask = "999";
             this.txt_cantidad_maxima_cola.Name = "txt_cantidad_maxima_cola";
             this.txt_cantidad_maxima_cola.Size = new System.Drawing.Size(168, 29);
             this.txt_cantidad_maxima_cola.TabIndex = 17;
@@ -360,8 +360,9 @@
             this.btn_simular.Name = "btn_simular";
             this.btn_simular.Size = new System.Drawing.Size(104, 34);
             this.btn_simular.TabIndex = 21;
-            this.btn_simular.Text = "Simular";
+            this.btn_simular.Text = "Continuar";
             this.btn_simular.UseVisualStyleBackColor = true;
+            this.btn_simular.Click += new System.EventHandler(this.btn_simular_Click);
             // 
             // Principal
             // 
