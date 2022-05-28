@@ -125,7 +125,39 @@ namespace ITV
 
         private void btn_simular_Click(object sender, EventArgs e)
         {
+
+            /*
+            preguntar si la tabla esta asociada al dataSource
+                Si esta, desligarlo, limpiar las filas y cargar la tabla
+                Si no esta (es la primera vez) cargarTabla()
             
+            Iteracion 0: calcularProximaLlegada()
+
+            Para las colas usar listas de <cliente> y no arrays, para saber quien es el que sigue en la cola y porque las listas
+            pueden cambiar de tamaño
+            List<cliente> cola_clientes_caseta/nave/oficina = new List<cliente>();
+
+            While( tiempos de proxima llegada y fin atencion < minutos de simulacion)
+            {
+                EventoDeLlegada(){
+                    calcularProximaLlegada()
+                    chequeo el estado del servidor
+                        libre --> cliente a SIENDO_ATENDIDO_CASETA y servidor a ocupado
+                        ocupado --> pregunto por la cola < 15
+                            es < 15 --> cliente a ESPERANDO_ATENCION_CASETA
+                            es > 15 --> cliente a FUERA_DEL_SISTEMA
+                }
+
+
+                EventoFinAtencionCaseta/Nave/Oficina (dividan en 3 funciones porfi){
+                    pregunto por la cola
+                        hay gente --> calcularTiempoDeAtencion() y cliente a SIENDO_ATENDIDO_CASETA/NAVE/OFICINA
+                        no hay gente --> servidor a libre
+                }
+            }
+
+            Asociar la tabla al dataSource
+            */
         }
 
         private void cargarTabla()
