@@ -58,6 +58,7 @@ namespace ITV
         servidor oficina = new servidor();
 
         //metrica 1
+        int longitud_media_de_la_cola_de_la_nave;
 
         //metrica 2
         int[] tiempo_permanencia_caseta   = new int[] { 0, 0, 0 };
@@ -123,6 +124,31 @@ namespace ITV
 
         }
 
+        private void calcularFinAtencion(int tipo /*caseta = 1, nave = 2, oficina = 3*/)
+        {
+
+        }
+
+        private void EventoDeLlegada()
+        {
+            
+        }
+
+        private void EventoFinAtencionCaseta()
+        {
+
+        }
+
+        private void EventoFinAtencionNave()
+        {
+
+        }
+
+        private void EventoFinAtencionOficina()
+        {
+
+        }
+
         private void btn_simular_Click(object sender, EventArgs e)
         {
 
@@ -151,7 +177,7 @@ namespace ITV
 
                 EventoFinAtencionCaseta/Nave/Oficina (dividan en 3 funciones porfi){
                     pregunto por la cola
-                        hay gente --> calcularTiempoDeAtencion() y cliente a SIENDO_ATENDIDO_CASETA/NAVE/OFICINA
+                        hay gente --> calcularFinAtencion() y cliente a SIENDO_ATENDIDO_CASETA/NAVE/OFICINA
                         no hay gente --> servidor a libre
                 }
             }
@@ -198,6 +224,8 @@ namespace ITV
             DataColumn columna_cola_oficina             = new DataColumn("Cola oficina");
 
             //Metrica 1
+            //HABRIA QUE AGREGAR DE NUEVO EL TIEMPO DE PERMANENCIA EN LA COLA DE LA NAVE? 
+            DataColumn columna_longitud_media_de_la_cola_de_la_nave           = new DataColumn("Longitud media de la cola de la nave");
 
             //Metrica 2
             DataColumn columna_tiempo_permanencia_caseta                      = new DataColumn("Tiempo de permanencia en la caseta");
@@ -267,9 +295,10 @@ namespace ITV
             tabla_iteraciones.Columns.Add(columna_cola_caseta );
             tabla_iteraciones.Columns.Add(columna_cola_nave   );
             tabla_iteraciones.Columns.Add(columna_cola_oficina);
-                                          
-            //Metrica 1                   
-                                          
+
+            //Metrica 1       
+            tabla_iteraciones.Columns.Add(columna_longitud_media_de_la_cola_de_la_nave);
+
             //Metrica 2                   
             tabla_iteraciones.Columns.Add(columna_tiempo_permanencia_caseta                     );
             tabla_iteraciones.Columns.Add(columna_cantidad_clientes_atencion_finalizada_caseta  );
