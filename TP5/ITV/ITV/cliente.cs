@@ -8,8 +8,8 @@ namespace ITV
 {
     class cliente
     {
-        private DateTime hora_llegada_a_la_cola;
-        private DateTime hora_llegada_al_sistema;
+        private double minuto_llegada_a_la_cola;
+        private double minuto_llegada_al_sistema;
 
         public enum Estados { ESPERANDO_ATENCION_CASETA     = 0,
                               SIENDO_ATENDIDO_CASETA        = 1,
@@ -23,10 +23,10 @@ namespace ITV
         private Estados estado;
         
 
-        public cliente(DateTime hora_actual, Estados estado)
+        public cliente(double hora_actual, Estados estado)
         {
-            this.hora_llegada_a_la_cola = hora_actual;
-            this.hora_llegada_al_sistema = hora_actual;
+            this.minuto_llegada_a_la_cola = hora_actual;
+            this.minuto_llegada_al_sistema = hora_actual;
             this.estado = estado;
         }
 
@@ -35,9 +35,9 @@ namespace ITV
             return this.estado;
         }
 
-        public void SetEstadoYHoraLlegadaCola(DateTime reloj, Estados estado)
+        public void SetEstadoYHoraLlegadaCola(double reloj, Estados estado)
         {
-            this.hora_llegada_a_la_cola = reloj;
+            this.minuto_llegada_a_la_cola = reloj;
             this.estado = estado;
         }
 

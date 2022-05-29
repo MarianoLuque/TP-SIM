@@ -12,9 +12,13 @@ namespace ITV
 {
     public partial class Principal : Form
     {
+        string parametro_cantidad;
         public Principal()
         {
             InitializeComponent();
+            txt_cantidad_minutos.Enabled = false;
+            txt_cantidad_eventos.Enabled = false;
+            
         }
 
         private void btn_cerrar_programa_Click(object sender, EventArgs e)
@@ -39,9 +43,14 @@ namespace ITV
 
         private void btn_simular_Click(object sender, EventArgs e)
         {
-            if(txt_cantidad_simulaciones.Text == "")
+            if(rb_minutos.Checked && txt_cantidad_minutos.Text == "")
             {
                 MessageBox.Show("Ingrese la cantidad de minutos a simular", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (rb_eventos.Checked && (txt_cantidad_eventos.Text == "" || int.Parse(txt_cantidad_eventos.Text) < 400))
+            {
+                MessageBox.Show("Ingrese la cantidad de eventos a simular (mayor o igual a 400)", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             if (txt_cantidad_clientes_llegadas.Text == "" || txt_cantidad_clientes_caseta.Text == "" || txt_cantidad_clientes_nave.Text == "" || txt_cantidad_clientes_oficina.Text == "" )
@@ -59,8 +68,37 @@ namespace ITV
                 MessageBox.Show("Ingrese la cantidad máxima de clientes que puede haber en la cola de la caseta", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            Simulacion simulacion = new Simulacion(int.Parse(txt_cantidad_simulaciones.Text), int.Parse(txt_cantidad_clientes_llegadas.Text), int.Parse(txt_cantidad_clientes_caseta.Text), int.Parse(txt_cantidad_clientes_nave.Text), int.Parse(txt_cantidad_clientes_oficina.Text), int.Parse(txt_minutos_llegadas.Text), int.Parse(txt_minutos_caseta.Text), int.Parse(txt_minutos_nave.Text), int.Parse(txt_minutos_oficina.Text), int.Parse(txt_cantidad_maxima_cola.Text));
-            simulacion.ShowDialog();
+            
+            if (rb_eventos.Checked)
+            {
+                parametro_cantidad = "eventos";
+                Simulacion simulacion = new Simulacion(int.Parse(txt_cantidad_eventos.Text), int.Parse(txt_cantidad_clientes_llegadas.Text), int.Parse(txt_cantidad_clientes_caseta.Text), int.Parse(txt_cantidad_clientes_nave.Text), int.Parse(txt_cantidad_clientes_oficina.Text), int.Parse(txt_minutos_llegadas.Text), int.Parse(txt_minutos_caseta.Text), int.Parse(txt_minutos_nave.Text), int.Parse(txt_minutos_oficina.Text), int.Parse(txt_cantidad_maxima_cola.Text), parametro_cantidad);
+                simulacion.ShowDialog();
+
+            }
+
+            if (rb_minutos.Checked)
+            {
+                parametro_cantidad = "minutos";
+                Simulacion simulacion = new Simulacion(int.Parse(txt_cantidad_minutos.Text), int.Parse(txt_cantidad_clientes_llegadas.Text), int.Parse(txt_cantidad_clientes_caseta.Text), int.Parse(txt_cantidad_clientes_nave.Text), int.Parse(txt_cantidad_clientes_oficina.Text), int.Parse(txt_minutos_llegadas.Text), int.Parse(txt_minutos_caseta.Text), int.Parse(txt_minutos_nave.Text), int.Parse(txt_minutos_oficina.Text), int.Parse(txt_cantidad_maxima_cola.Text), parametro_cantidad);
+                simulacion.ShowDialog();
+            }
+        }
+
+        private void CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb_eventos.Checked)
+            {
+                txt_cantidad_minutos.Enabled = false;
+                txt_cantidad_eventos.Enabled = true;
+                txt_cantidad_minutos.Text = "";
+            }
+            if (rb_minutos.Checked)
+            {   
+                txt_cantidad_minutos.Enabled = true;
+                txt_cantidad_eventos.Enabled = false;
+                txt_cantidad_eventos.Text = "";
+            }
         }
     }
 }
