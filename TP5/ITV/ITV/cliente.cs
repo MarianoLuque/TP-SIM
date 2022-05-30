@@ -46,6 +46,16 @@ namespace ITV
             this.estado = estado;
         }
 
+        public double GetMinutoLlegadaAlSistema()
+        {
+            return this.minuto_llegada_al_sistema;
+        }
+
+        public double GetMinutoLlegadaALaCola()
+        {
+            return this.minuto_llegada_a_la_cola;
+        }
+
 
 
     }
