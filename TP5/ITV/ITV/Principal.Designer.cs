@@ -444,7 +444,7 @@
             this.txt_cantidad_eventos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_cantidad_eventos.Location = new System.Drawing.Point(668, 174);
             this.txt_cantidad_eventos.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_cantidad_eventos.Mask = "999";
+            this.txt_cantidad_eventos.Mask = "9999999";
             this.txt_cantidad_eventos.Name = "txt_cantidad_eventos";
             this.txt_cantidad_eventos.Size = new System.Drawing.Size(223, 34);
             this.txt_cantidad_eventos.TabIndex = 24;
