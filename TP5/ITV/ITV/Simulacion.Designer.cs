@@ -117,7 +117,7 @@
             this.txt_desde.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_desde.Location = new System.Drawing.Point(964, 128);
             this.txt_desde.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_desde.Mask = "99999";
+            this.txt_desde.Mask = "9999999";
             this.txt_desde.Name = "txt_desde";
             this.txt_desde.Size = new System.Drawing.Size(104, 34);
             this.txt_desde.TabIndex = 27;

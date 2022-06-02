@@ -85,7 +85,7 @@
             this.txt_cantidad_minutos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_cantidad_minutos.Location = new System.Drawing.Point(668, 84);
             this.txt_cantidad_minutos.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_cantidad_minutos.Mask = "999999";
+            this.txt_cantidad_minutos.Mask = "9999999";
             this.txt_cantidad_minutos.Name = "txt_cantidad_minutos";
             this.txt_cantidad_minutos.Size = new System.Drawing.Size(223, 34);
             this.txt_cantidad_minutos.TabIndex = 17;

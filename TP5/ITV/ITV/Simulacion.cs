@@ -177,18 +177,18 @@ namespace ITV
                 double media = minutos_caseta / cantidad_caseta;
                 rnd_atencion_caseta = (Math.Truncate(objeto_rnd_atencion_caseta.NextDouble() * 100)) / 100;
 
-                double random_p = (Math.Truncate(rnd_atencion_caseta * 10000)) / 10000;
+                double random_p = (Math.Truncate(rnd_atencion_caseta * 100)) / 100;
                 tiempo_atencion_caseta = Math.Truncate(((-media) * (Math.Log(1 - random_p))) * 100) / 100;
-                tiempo_fin_atencion_caseta = reloj + tiempo_atencion_caseta;
+                tiempo_fin_atencion_caseta =  (Math.Truncate((reloj + tiempo_atencion_caseta) * 100)) / 100;
             }
             else if (tipo == 2)
             {
                 double media = minutos_nave / cantidad_nave;
                 rnd_atencion_nave = (Math.Truncate(objeto_rnd_atencion_nave.NextDouble() * 100)) / 100; 
 
-                double random_p = (Math.Truncate(rnd_atencion_nave * 10000)) / 10000;
+                double random_p = (Math.Truncate(rnd_atencion_nave * 100)) / 100;
                 tiempo_atencion_nave = Math.Truncate(((-media) * (Math.Log(1 - random_p))) * 100) / 100;
-                tiempo_fin_atencion_nave_1 = reloj + tiempo_atencion_nave;
+                tiempo_fin_atencion_nave_1 = (Math.Truncate((reloj + tiempo_atencion_nave) * 100)) / 100;
 
             }
             else if (tipo == 3)
@@ -196,9 +196,9 @@ namespace ITV
                 double media = minutos_nave / cantidad_nave;
                 rnd_atencion_nave = (Math.Truncate(objeto_rnd_atencion_nave.NextDouble() * 100)) / 100;
 
-                double random_p = (Math.Truncate(rnd_atencion_nave * 10000)) / 10000;
+                double random_p = (Math.Truncate(rnd_atencion_nave * 100)) / 100;
                 tiempo_atencion_nave = Math.Truncate(((-media) * (Math.Log(1 - random_p))) * 100) / 100;
-                tiempo_fin_atencion_nave_2 = reloj + tiempo_atencion_nave;
+                tiempo_fin_atencion_nave_2 = (Math.Truncate((reloj + tiempo_atencion_nave) * 100)) / 100;
 
             }
             else if (tipo == 4)
@@ -206,9 +206,9 @@ namespace ITV
                 double media = minutos_oficina / cantidad_oficina;
                 rnd_atencion_oficina = (Math.Truncate(objeto_rnd_atencion_oficina.NextDouble() * 100)) / 100;
 
-                double random_p = (Math.Truncate(rnd_atencion_oficina * 10000)) / 10000;
+                double random_p = (Math.Truncate(rnd_atencion_oficina * 100)) / 100;
                 tiempo_atencion_oficina = Math.Truncate(((-media) * (Math.Log(1 - random_p))) * 100) / 100;
-                tiempo_fin_atencion_oficina_1 = reloj + tiempo_atencion_oficina;
+                tiempo_fin_atencion_oficina_1 = (Math.Truncate((reloj + tiempo_atencion_oficina) * 100)) / 100;
 
             }
             else
@@ -218,7 +218,7 @@ namespace ITV
 
                 double random_p = (Math.Truncate(rnd_atencion_oficina * 10000)) / 10000;
                 tiempo_atencion_oficina = Math.Truncate(((-media) * (Math.Log(1 - random_p))) * 100) / 100;
-                tiempo_fin_atencion_oficina_2 = reloj + tiempo_atencion_oficina;
+                tiempo_fin_atencion_oficina_2 = (Math.Truncate((reloj + tiempo_atencion_oficina) * 100)) / 100;
             }
 
         }
@@ -696,20 +696,24 @@ namespace ITV
             if (parametro_cantidad == "minutos")
             {
                 int cantidad_iteraciones = 0;
-                while (reloj < cantidad)
+                while (reloj <= cantidad)
                 {
                     siguiente_secuencia();
 
-                    cargar_datos_tabla(cantidad_iteraciones);
+                    if (cantidad_iteraciones < 400)
+                    {
+                        cargar_datos_tabla(cantidad_iteraciones);
+                    }
+
+                    if (reloj >= cantidad)
+                    {
+                        cargar_datos_tabla(400);
+                    }
 
                     cantidad_iteraciones += 1;
+
                 }
 
-                if (reloj == cantidad)
-                {
-                    //Última fila
-                    cargar_datos_tabla(cantidad_iteraciones);
-                }
 
             }
 
@@ -732,10 +736,10 @@ namespace ITV
                     }
                     cantidad_iteraciones += 1;
 
-                    //if (cantidad_iteraciones == cantidad)
-                    //{
-                    //    cargar_datos_tabla(401);
-                    //}
+                    if (cantidad_iteraciones == cantidad && cantidad_iteraciones != (simulacion_desde + 400))
+                    {
+                        cargar_datos_tabla(400);
+                    }
                 }
 
             }
