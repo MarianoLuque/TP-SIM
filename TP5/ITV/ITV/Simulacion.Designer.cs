@@ -56,7 +56,7 @@
             // btn_simular
             // 
             this.btn_simular.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_simular.Location = new System.Drawing.Point(1076, 124);
+            this.btn_simular.Location = new System.Drawing.Point(1522, 124);
             this.btn_simular.Margin = new System.Windows.Forms.Padding(4);
             this.btn_simular.Name = "btn_simular";
             this.btn_simular.Size = new System.Drawing.Size(139, 42);
@@ -68,7 +68,7 @@
             // btn_volver
             // 
             this.btn_volver.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_volver.Location = new System.Drawing.Point(16, 124);
+            this.btn_volver.Location = new System.Drawing.Point(1697, 124);
             this.btn_volver.Margin = new System.Windows.Forms.Padding(4);
             this.btn_volver.Name = "btn_volver";
             this.btn_volver.Size = new System.Drawing.Size(139, 42);
@@ -105,7 +105,7 @@
             // 
             this.lbl_desde.AutoSize = true;
             this.lbl_desde.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_desde.Location = new System.Drawing.Point(163, 129);
+            this.lbl_desde.Location = new System.Drawing.Point(148, 129);
             this.lbl_desde.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_desde.Name = "lbl_desde";
             this.lbl_desde.Size = new System.Drawing.Size(447, 31);
@@ -115,7 +115,7 @@
             // txt_desde
             // 
             this.txt_desde.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_desde.Location = new System.Drawing.Point(964, 128);
+            this.txt_desde.Location = new System.Drawing.Point(1410, 128);
             this.txt_desde.Margin = new System.Windows.Forms.Padding(4);
             this.txt_desde.Mask = "9999999";
             this.txt_desde.Name = "txt_desde";

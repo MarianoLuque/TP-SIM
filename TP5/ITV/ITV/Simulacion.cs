@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -35,9 +36,10 @@ namespace ITV
 
         //reloj
         //int[] reloj = new int[] { 0, 0, 0 };
-        double reloj = 0; 
+        double reloj = 0;
 
         //randoms para los diferentes eventos (llegadas y atenciones)
+        
         Random objeto_rnd_llegadas = new Random();
         Random objeto_rnd_atencion_caseta = new Random();
         Random objeto_rnd_atencion_nave = new Random();
@@ -61,16 +63,22 @@ namespace ITV
         double tiempo_fin_atencion_oficina_2 = 0.0;
 
         //servidores
-        servidor caseta = new servidor();
-        servidor nave_1 = new servidor();
-        servidor nave_2 = new servidor();
-        servidor oficina_1 = new servidor();
-        servidor oficina_2 = new servidor();
+        servidor caseta;
+        servidor nave_1;
+        servidor nave_2 ;
+        servidor oficina_1;
+        servidor oficina_2;
 
         //Cola para los servidores
-        List<cliente> cola_clientes_caseta= new List<cliente>();
-        List<cliente> cola_clientes_nave = new List<cliente>();
-        List<cliente> cola_clientes_oficina = new List<cliente>();
+        List<cliente> cola_clientes_caseta;
+        List<cliente> cola_clientes_nave;
+        List<cliente> cola_clientes_oficina;
+
+        double media_0;
+        double media_1;
+        double media_2;
+        double media_3;
+
 
         //metrica 1
         int longitud_media_de_la_cola_de_la_nave;
@@ -115,9 +123,10 @@ namespace ITV
         DataTable tabla_iteraciones = new DataTable();
         int simulacion_desde;
         bool flag_tabla_cargada = false;
+        int cantidad_a_mostrar;
 
         //Bandera para comprobar si es la primera vuelta
-        bool flag_primera_vuelta = false;
+        bool flag_primera_vuelta;
 
         //Objeto que representa el cliente atendido en la caseta
         cliente Cliente_atendido_caseta;
@@ -146,10 +155,14 @@ namespace ITV
 
             this.parametro_cantidad = parametro_cantidad;
 
-            if(parametro_cantidad == "minutos")
+            media_0 = (double)minutos_llegadas / (double)cantidad_llegadas;
+            media_1 = minutos_caseta / cantidad_caseta;
+            media_2 = (double)minutos_nave / (double)cantidad_nave;
+            media_3 = (double)minutos_oficina / (double)cantidad_oficina;
+
+            if (parametro_cantidad == "minutos")
             {
-                lbl_desde.Visible = false;
-                txt_desde.Visible = false;
+                lbl_desde.Text = "Ingrese desde que minuto mostrar";
             }
         }
 
@@ -160,12 +173,11 @@ namespace ITV
 
         private void calcularProximaLlegada()
         {
-            double media = minutos_llegadas / cantidad_llegadas;
+
+            //Thread.Sleep(50);
             rnd_llegadas = (Math.Truncate(objeto_rnd_llegadas.NextDouble() * 100)) / 100;
-            
-            double random_p = (Math.Truncate(rnd_llegadas * 10000)) / 10000;
-            tiempo_entre_llegadas = Math.Truncate(((-media) * (Math.Log(1 - random_p))) * 100) / 100;
-            tiempo_proxima_llegada = reloj + tiempo_entre_llegadas;
+            tiempo_entre_llegadas = Math.Truncate(((-media_0) * (Math.Log(1 - rnd_llegadas))) * 100) / 100;
+            tiempo_proxima_llegada = Math.Truncate((reloj + tiempo_entre_llegadas) * 100) / 100;
 
         }
 
@@ -174,50 +186,42 @@ namespace ITV
         {
             if(tipo == 1)
             {
-                double media = minutos_caseta / cantidad_caseta;
+                //Thread.Sleep(50);
                 rnd_atencion_caseta = (Math.Truncate(objeto_rnd_atencion_caseta.NextDouble() * 100)) / 100;
-
-                double random_p = (Math.Truncate(rnd_atencion_caseta * 100)) / 100;
-                tiempo_atencion_caseta = Math.Truncate(((-media) * (Math.Log(1 - random_p))) * 100) / 100;
+                tiempo_atencion_caseta = Math.Truncate(((-media_1) * (Math.Log(1 - rnd_atencion_caseta))) * 100) / 100;
                 tiempo_fin_atencion_caseta =  (Math.Truncate((reloj + tiempo_atencion_caseta) * 100)) / 100;
             }
             else if (tipo == 2)
             {
-                double media = minutos_nave / cantidad_nave;
-                rnd_atencion_nave = (Math.Truncate(objeto_rnd_atencion_nave.NextDouble() * 100)) / 100; 
-
-                double random_p = (Math.Truncate(rnd_atencion_nave * 100)) / 100;
-                tiempo_atencion_nave = Math.Truncate(((-media) * (Math.Log(1 - random_p))) * 100) / 100;
+                
+                //Thread.Sleep(50);
+                rnd_atencion_nave = (Math.Truncate(objeto_rnd_atencion_nave.NextDouble() * 100)) / 100;
+                tiempo_atencion_nave = Math.Truncate(((-media_2) * (Math.Log(1 - rnd_atencion_nave))) * 100) / 100;
                 tiempo_fin_atencion_nave_1 = (Math.Truncate((reloj + tiempo_atencion_nave) * 100)) / 100;
 
             }
             else if (tipo == 3)
             {
-                double media = minutos_nave / cantidad_nave;
+                
+                //Thread.Sleep(50);
                 rnd_atencion_nave = (Math.Truncate(objeto_rnd_atencion_nave.NextDouble() * 100)) / 100;
-
-                double random_p = (Math.Truncate(rnd_atencion_nave * 100)) / 100;
-                tiempo_atencion_nave = Math.Truncate(((-media) * (Math.Log(1 - random_p))) * 100) / 100;
+                tiempo_atencion_nave = Math.Truncate(((-media_2) * (Math.Log(1 - rnd_atencion_nave))) * 100) / 100;
                 tiempo_fin_atencion_nave_2 = (Math.Truncate((reloj + tiempo_atencion_nave) * 100)) / 100;
 
             }
             else if (tipo == 4)
             {
-                double media = minutos_oficina / cantidad_oficina;
+                //Thread.Sleep(50);
                 rnd_atencion_oficina = (Math.Truncate(objeto_rnd_atencion_oficina.NextDouble() * 100)) / 100;
-
-                double random_p = (Math.Truncate(rnd_atencion_oficina * 100)) / 100;
-                tiempo_atencion_oficina = Math.Truncate(((-media) * (Math.Log(1 - random_p))) * 100) / 100;
+                tiempo_atencion_oficina = Math.Truncate(((-media_3) * (Math.Log(1 - rnd_atencion_oficina))) * 100) / 100;
                 tiempo_fin_atencion_oficina_1 = (Math.Truncate((reloj + tiempo_atencion_oficina) * 100)) / 100;
 
             }
             else
             {
-                double media = minutos_oficina / cantidad_oficina;
+                //Thread.Sleep(50);
                 rnd_atencion_oficina = (Math.Truncate(objeto_rnd_atencion_oficina.NextDouble() * 100)) / 100;
-
-                double random_p = (Math.Truncate(rnd_atencion_oficina * 10000)) / 10000;
-                tiempo_atencion_oficina = Math.Truncate(((-media) * (Math.Log(1 - random_p))) * 100) / 100;
+                tiempo_atencion_oficina = Math.Truncate(((-media_3) * (Math.Log(1 - rnd_atencion_oficina))) * 100) / 100;
                 tiempo_fin_atencion_oficina_2 = (Math.Truncate((reloj + tiempo_atencion_oficina) * 100)) / 100;
             }
 
@@ -237,7 +241,6 @@ namespace ITV
                 else
                 {
                     Nuevo_Cliente = new cliente(reloj, cliente.Estados.ESPERANDO_ATENCION_CASETA);
-                    Nuevo_Cliente.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.ESPERANDO_ATENCION_CASETA);
                     cola_clientes_caseta.Add(Nuevo_Cliente);
                     cantidad_clientes_ingresan_al_sistema += 1;
                     
@@ -258,7 +261,6 @@ namespace ITV
                 //Si no pasa a la cola nunca, el tiempo en cola es 0. Esta bien poner el reloj aca?
 
 
-                Cliente_atendido_caseta.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_CASETA);
                 tiempo_permanencia_cola_caseta += 0;
                 calcularFinAtencion(1);
                 
@@ -279,23 +281,23 @@ namespace ITV
             //VERFICIAR EL TEMA DE HORA DE SISTEMA Y HORA DE COLA
             //VERFICIAR EL TEMA DE HORA DE SISTEMA Y HORA DE COLA
 
-            //tiempo_permanencia_caseta += (reloj - Cliente_atendido_caseta.GetMinutoLlegadaALaCola());
-
+            tiempo_permanencia_caseta += (reloj - Cliente_atendido_caseta.GetMinutoLlegadaALaCola());
             cantidad_clientes_atencion_finalizada_caseta += 1;
 
             //Primero verifico si alguna nave esta libre para atender
             if (nave_1.GetEstado() == servidor.Estados.libre)
             {
-                Cliente_atendido_caseta.SetEstado(cliente.Estados.SIENDO_ATENDIDO_NAVE);
+                Cliente_atendido_caseta.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_NAVE);
                 nave_1.SetEstado(servidor.Estados.ocupado);
                 Cliente_atendido_nave_1 = Cliente_atendido_caseta;
+
                 calcularFinAtencion(2);
 
 
             }
             else if(nave_2.GetEstado() == servidor.Estados.libre)
             {
-                Cliente_atendido_caseta.SetEstado(cliente.Estados.SIENDO_ATENDIDO_NAVE);
+                Cliente_atendido_caseta.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_NAVE);
                 nave_2.SetEstado(servidor.Estados.ocupado);
                 Cliente_atendido_nave_2 = Cliente_atendido_caseta;
                 calcularFinAtencion(3);
@@ -303,7 +305,7 @@ namespace ITV
             //Si ninguna nave esta libre, lo agrego a la cola de las nave
             else
             {
-                Cliente_atendido_caseta.SetEstado(cliente.Estados.ESPERANDO_ATENCION_NAVE);
+                Cliente_atendido_caseta.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.ESPERANDO_ATENCION_NAVE);
                 cola_clientes_nave.Add(Cliente_atendido_caseta);
             }
 
@@ -327,6 +329,9 @@ namespace ITV
             else
             {
                 Cliente_atendido_caseta = cola_clientes_caseta.ElementAt(0);
+
+                tiempo_medio_cliente_cola_caseta += (reloj - Cliente_atendido_caseta.GetMinutoLlegadaALaCola());
+
                 Cliente_atendido_caseta.SetEstado(cliente.Estados.SIENDO_ATENDIDO_CASETA);
                 cola_clientes_caseta.RemoveAt(0);
                 calcularFinAtencion(1);
@@ -336,14 +341,17 @@ namespace ITV
 
         private void EventoFinAtencionNave(int nave)
         {
-            
+            cantidad_clientes_atencion_finalizada_nave += 1;
+
             if(oficina_1.GetEstado() == servidor.Estados.libre)
             {
                 //Paso el cliente que estaba siendo atendido en la nave a ser atendido en la oficina
                 //Porque el servidor esta libre.
                 if(nave == 1)
                 {
-                    Cliente_atendido_nave_1.SetEstado(cliente.Estados.SIENDO_ATENDIDO_OFICINA);
+                    tiempo_permanencia_nave += (reloj - Cliente_atendido_nave_1.GetMinutoLlegadaALaCola());
+
+                    Cliente_atendido_nave_1.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA);
                     oficina_1.SetEstado(servidor.Estados.ocupado);
                     Cliente_atendido_oficina_1 = Cliente_atendido_nave_1;
                     calcularFinAtencion(2);
@@ -351,7 +359,9 @@ namespace ITV
                 }
                 else
                 {
-                    Cliente_atendido_nave_2.SetEstado(cliente.Estados.SIENDO_ATENDIDO_OFICINA);
+                    tiempo_permanencia_nave += (reloj - Cliente_atendido_nave_2.GetMinutoLlegadaALaCola());
+
+                    Cliente_atendido_nave_2.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA);
                     oficina_1.SetEstado(servidor.Estados.ocupado);
                     Cliente_atendido_oficina_1 = Cliente_atendido_nave_2;
                     calcularFinAtencion(3);
@@ -363,7 +373,9 @@ namespace ITV
             {
                 if (nave == 1)
                 {
-                    Cliente_atendido_nave_1.SetEstado(cliente.Estados.SIENDO_ATENDIDO_OFICINA);
+                    tiempo_permanencia_nave += (reloj - Cliente_atendido_nave_1.GetMinutoLlegadaALaCola());
+
+                    Cliente_atendido_nave_1.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA);
                     oficina_2.SetEstado(servidor.Estados.ocupado);
                     Cliente_atendido_oficina_2 = Cliente_atendido_nave_1;
                     calcularFinAtencion(2);
@@ -371,8 +383,9 @@ namespace ITV
                 }
                 else
                 {
-                    
-                    Cliente_atendido_nave_2.SetEstado(cliente.Estados.SIENDO_ATENDIDO_OFICINA);
+                    tiempo_permanencia_nave += (reloj - Cliente_atendido_nave_2.GetMinutoLlegadaALaCola());
+
+                    Cliente_atendido_nave_2.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA);
                     oficina_2.SetEstado(servidor.Estados.ocupado);
                     Cliente_atendido_oficina_2 = Cliente_atendido_nave_2;
                     calcularFinAtencion(3);
@@ -385,12 +398,12 @@ namespace ITV
             {
                 if(nave == 1)
                 {
-                    Cliente_atendido_nave_1.SetEstado(cliente.Estados.ESPERANDO_ATENCION_OFICINA);
+                    Cliente_atendido_nave_1.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.ESPERANDO_ATENCION_OFICINA);
                     cola_clientes_oficina.Add(Cliente_atendido_nave_1);
                 }
                 else
                 {
-                    Cliente_atendido_nave_2.SetEstado(cliente.Estados.ESPERANDO_ATENCION_OFICINA);
+                    Cliente_atendido_nave_2.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.ESPERANDO_ATENCION_OFICINA);
                     cola_clientes_oficina.Add(Cliente_atendido_nave_2);
                 }
 
@@ -402,6 +415,7 @@ namespace ITV
                 if(nave == 1)
                 {
                     Cliente_atendido_nave_1 = cola_clientes_nave.ElementAt(0);
+                    tiempo_medio_cliente_cola_nave += (reloj - Cliente_atendido_nave_1.GetMinutoLlegadaALaCola());
                     Cliente_atendido_nave_1.SetEstado(cliente.Estados.SIENDO_ATENDIDO_NAVE);
                     cola_clientes_nave.RemoveAt(0);
                     calcularFinAtencion(2);
@@ -409,6 +423,7 @@ namespace ITV
                 else
                 {
                     Cliente_atendido_nave_2 = cola_clientes_nave.ElementAt(0);
+                    tiempo_medio_cliente_cola_nave += (reloj - Cliente_atendido_nave_2.GetMinutoLlegadaALaCola());
                     Cliente_atendido_nave_2.SetEstado(cliente.Estados.SIENDO_ATENDIDO_NAVE);
                     cola_clientes_nave.RemoveAt(0);
                     calcularFinAtencion(3);
@@ -439,13 +454,19 @@ namespace ITV
 
         private void EventoFinAtencionOficina(int oficina)
         {
+            cantidad_clientes_atencion_finalizada_oficina += 1;
+
             if (oficina == 1)
             {
+                tiempo_permanencia_itv += (reloj - Cliente_atendido_oficina_1.GetMinutoLlegadaAlSistema());
+                tiempo_medio_cliente_oficina += (reloj - Cliente_atendido_oficina_1.GetMinutoLlegadaALaCola());
                 Cliente_atendido_oficina_1.SetEstado(cliente.Estados.FUERA_DEL_SISTEMA);
                 calcularFinAtencion(4);
             }
             else
             {
+                tiempo_permanencia_itv += (reloj - Cliente_atendido_oficina_2.GetMinutoLlegadaAlSistema());
+                tiempo_medio_cliente_oficina += (reloj - Cliente_atendido_oficina_2.GetMinutoLlegadaALaCola());
                 Cliente_atendido_oficina_2.SetEstado(cliente.Estados.FUERA_DEL_SISTEMA);
                 calcularFinAtencion(5);
             }
@@ -455,14 +476,14 @@ namespace ITV
                 if(oficina == 1)
                 {
                     Cliente_atendido_oficina_1 = cola_clientes_oficina.ElementAt(0);
-                    Cliente_atendido_oficina_1.SetEstado(cliente.Estados.SIENDO_ATENDIDO_OFICINA);
+                    Cliente_atendido_oficina_1.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA);
                     cola_clientes_oficina.RemoveAt(0);
                     calcularFinAtencion(4);
                 }
                 else
                 {
                     Cliente_atendido_oficina_2 = cola_clientes_oficina.ElementAt(0);
-                    Cliente_atendido_oficina_2.SetEstado(cliente.Estados.SIENDO_ATENDIDO_OFICINA);
+                    Cliente_atendido_oficina_2.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA);
                     cola_clientes_oficina.RemoveAt(0);
                     calcularFinAtencion(5);
                 }
@@ -491,7 +512,14 @@ namespace ITV
 
         private void Simulacion_Load(object sender, EventArgs e)
         {
-            lbl_desde.Text = lbl_desde.Text + "(Desde 0 hasta " + (cantidad - 400).ToString() + ")";
+            if(parametro_cantidad == "minutos")
+            {
+                lbl_desde.Text = lbl_desde.Text + " (Desde 0 hasta un valor menor a " + (cantidad.ToString()) + ")";
+            }
+            else
+            {
+                lbl_desde.Text = lbl_desde.Text + "(Desde 0 hasta " + (cantidad - 400).ToString() + ")";
+            }
         }
 
         private void btn_cerrar_programa_Click(object sender, EventArgs e)
@@ -587,43 +615,51 @@ namespace ITV
             else
             {
                 string menor_tiempo = calcular_menor();
-                if (menor_tiempo == "tiempo_proxima_llegada")
+                if(reloj > cantidad)
                 {
-                    Evento_lanzado = "LLegada de un auto";
-                    EventoDeLlegada();
-                    calcularProximaLlegada();
-
+                    reloj = cantidad;
+                    Evento_lanzado = "Fin de simulación";
                 }
-                else if (menor_tiempo == "tiempo_fin_atencion_caseta")
-                {
-                    Evento_lanzado = "Fin de atención en caseta";
+                else { 
 
-                    EventoFinAtencionCaseta();
+                    if (menor_tiempo == "tiempo_proxima_llegada")
+                    {
+                        Evento_lanzado = "LLegada de un auto";
+                        EventoDeLlegada();
+                        calcularProximaLlegada();
 
-                }
-                else if (menor_tiempo == "tiempo_fin_atencion_nave_1")
-                {
-                    Evento_lanzado = "Fin de atención de la nave 1";
+                    }
+                    else if (menor_tiempo == "tiempo_fin_atencion_caseta")
+                    {
+                        Evento_lanzado = "Fin de atención en caseta";
 
-                    EventoFinAtencionNave(1);
-                }
-                else if (menor_tiempo == "tiempo_fin_atencion_nave_2")
-                {
-                    Evento_lanzado = "Fin de atención en la nave 2";
+                        EventoFinAtencionCaseta();
 
-                    EventoFinAtencionNave(2);
-                }
-                else if (menor_tiempo == "tiempo_fin_atencion_oficina_1")
-                {
-                    Evento_lanzado = "Fin de atención en la oficina 1";
+                    }
+                    else if (menor_tiempo == "tiempo_fin_atencion_nave_1")
+                    {
+                        Evento_lanzado = "Fin de atención de la nave 1";
 
-                    EventoFinAtencionOficina(1);
-                }
-                else
-                {
-                    Evento_lanzado = "Fin de atención en la oficina 2";
+                        EventoFinAtencionNave(1);
+                    }
+                    else if (menor_tiempo == "tiempo_fin_atencion_nave_2")
+                    {
+                        Evento_lanzado = "Fin de atención en la nave 2";
 
-                    EventoFinAtencionOficina(2);
+                        EventoFinAtencionNave(2);
+                    }
+                    else if (menor_tiempo == "tiempo_fin_atencion_oficina_1")
+                    {
+                        Evento_lanzado = "Fin de atención en la oficina 1";
+
+                        EventoFinAtencionOficina(1);
+                    }
+                    else
+                    {
+                        Evento_lanzado = "Fin de atención en la oficina 2";
+
+                        EventoFinAtencionOficina(2);
+                    }
                 }
             }
         }
@@ -634,20 +670,25 @@ namespace ITV
             //Cargar columnas y mostrarlas
             tabla_iteraciones.Rows[cantidad_iteraciones]["Evento"] = Evento_lanzado;
             tabla_iteraciones.Rows[cantidad_iteraciones]["Reloj (min)"] = reloj;
-            tabla_iteraciones.Rows[cantidad_iteraciones]["RND llegada cliente"] = rnd_llegadas;
-            tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo entre llegadas"] = tiempo_entre_llegadas;
-            tabla_iteraciones.Rows[cantidad_iteraciones]["Proxima llegada"] = tiempo_proxima_llegada;
-            tabla_iteraciones.Rows[cantidad_iteraciones]["RND atencion caseta"] = rnd_atencion_caseta;
-            tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo atencion caseta"] = tiempo_atencion_caseta;
-            tabla_iteraciones.Rows[cantidad_iteraciones]["Fin atencion caseta"] = tiempo_fin_atencion_caseta;
-            tabla_iteraciones.Rows[cantidad_iteraciones]["RND atencion nave"] = rnd_atencion_nave;
-            tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo atencion nave"] = tiempo_atencion_nave;
-            tabla_iteraciones.Rows[cantidad_iteraciones]["Fin atencion nave 1"] = tiempo_fin_atencion_nave_1;
-            tabla_iteraciones.Rows[cantidad_iteraciones]["Fin atencion nave 2"] = tiempo_fin_atencion_nave_2;
-            tabla_iteraciones.Rows[cantidad_iteraciones]["RND atencion oficina"] = rnd_atencion_oficina;
-            tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo atencion oficina"] = tiempo_atencion_oficina;
-            tabla_iteraciones.Rows[cantidad_iteraciones]["Fin atencion oficina 1"] = tiempo_fin_atencion_oficina_1;
-            tabla_iteraciones.Rows[cantidad_iteraciones]["Fin atencion oficina 2"] = tiempo_fin_atencion_oficina_2;
+
+            tabla_iteraciones.Rows[cantidad_iteraciones]["RND llegada cliente"] = rnd_llegadas.ToString() == "0"? "" : rnd_llegadas.ToString();
+            tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo entre llegadas"] = tiempo_entre_llegadas.ToString() == "0" ? "" : tiempo_entre_llegadas.ToString();
+            tabla_iteraciones.Rows[cantidad_iteraciones]["Proxima llegada"] = tiempo_proxima_llegada.ToString() == "0" ? "" : tiempo_proxima_llegada.ToString();
+            
+            tabla_iteraciones.Rows[cantidad_iteraciones]["RND atencion caseta"] = rnd_atencion_caseta.ToString() == "0" ? "" : rnd_atencion_caseta.ToString();
+            tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo atencion caseta"] = tiempo_atencion_caseta.ToString() == "0" ? "" : tiempo_atencion_caseta.ToString();
+            tabla_iteraciones.Rows[cantidad_iteraciones]["Fin atencion caseta"] = tiempo_fin_atencion_caseta.ToString() == "0" ? "" : tiempo_fin_atencion_caseta.ToString();
+
+            tabla_iteraciones.Rows[cantidad_iteraciones]["RND atencion nave"] = rnd_atencion_nave.ToString() == "0" ? "" : rnd_atencion_nave.ToString();
+            tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo atencion nave"] = tiempo_atencion_nave.ToString() == "0" ? "" : tiempo_atencion_nave.ToString();
+            tabla_iteraciones.Rows[cantidad_iteraciones]["Fin atencion nave 1"] = tiempo_fin_atencion_nave_1.ToString() == "0" ? "" : tiempo_fin_atencion_nave_1.ToString();
+            tabla_iteraciones.Rows[cantidad_iteraciones]["Fin atencion nave 2"] = tiempo_fin_atencion_nave_2.ToString() == "0" ? "" : tiempo_fin_atencion_nave_2.ToString();
+
+            tabla_iteraciones.Rows[cantidad_iteraciones]["RND atencion oficina"] = rnd_atencion_oficina.ToString() == "0" ? "" : rnd_atencion_oficina.ToString();
+            tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo atencion oficina"] = tiempo_atencion_oficina.ToString() == "0" ? "" : tiempo_atencion_oficina.ToString();
+            tabla_iteraciones.Rows[cantidad_iteraciones]["Fin atencion oficina 1"] = tiempo_fin_atencion_oficina_1.ToString() == "0" ? "" : tiempo_fin_atencion_oficina_1.ToString();
+            tabla_iteraciones.Rows[cantidad_iteraciones]["Fin atencion oficina 2"] = tiempo_fin_atencion_oficina_2.ToString() == "0" ? "" : tiempo_fin_atencion_oficina_2.ToString();
+
             tabla_iteraciones.Rows[cantidad_iteraciones]["Estado caseta"] = caseta.GetEstado();
             tabla_iteraciones.Rows[cantidad_iteraciones]["Estado nave"] = nave_1.GetEstado();
             tabla_iteraciones.Rows[cantidad_iteraciones]["Estado oficina 1"] = oficina_1.GetEstado();
@@ -680,6 +721,9 @@ namespace ITV
         
         private void btn_simular_Click(object sender, EventArgs e)
         {
+            volverACero();
+
+
             if (flag_tabla_cargada)
             {
                 //desligo la tabla del data source
@@ -695,17 +739,26 @@ namespace ITV
 
             if (parametro_cantidad == "minutos")
             {
+                if (!int.TryParse(txt_desde.Text, out simulacion_desde) || simulacion_desde >= (cantidad))
+                {
+                    MessageBox.Show("Ingrese desde que simulación se debe mostrar (valor mayor a 0 y menor a " + (cantidad).ToString() + ")", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
                 int cantidad_iteraciones = 0;
-                while (reloj <= cantidad)
+                
+                while (reloj < cantidad)
                 {
                     siguiente_secuencia();
 
-                    if (cantidad_iteraciones < 400)
+                    if (reloj >= simulacion_desde && cantidad_a_mostrar < 400)
                     {
-                        cargar_datos_tabla(cantidad_iteraciones);
+                        cargar_datos_tabla(cantidad_a_mostrar);
+                        cantidad_a_mostrar += 1;
+
                     }
 
-                    if (reloj >= cantidad)
+                    if (cantidad_a_mostrar >= 400 && reloj >= cantidad)
                     {
                         cargar_datos_tabla(400);
                     }
@@ -751,6 +804,7 @@ namespace ITV
             dg_colas.Columns[11].DefaultCellStyle.BackColor = Color.LightSkyBlue;
             dg_colas.Columns[14].DefaultCellStyle.BackColor = Color.LightSkyBlue;
             dg_colas.Columns[15].DefaultCellStyle.BackColor = Color.LightSkyBlue;
+            dg_colas.Columns[0].Width = 200;
 
 
         }
@@ -906,6 +960,86 @@ namespace ITV
             //Metrica 9                   
             tabla_iteraciones.Columns.Add(columna_cantidad_clientes_que_se_fueron_por_cola_llena);
 
+        }
+
+        private void volverACero()
+        {
+            //cantidad de clientes que llegan
+            cantidad_llegadas = 0;
+            cantidad_caseta = 0;
+            cantidad_nave = 0;
+            cantidad_oficina = 0;
+
+            //minutos en los que llegan los clientes
+            minutos_llegadas = 0;
+            minutos_caseta = 0;
+            minutos_nave = 0;
+            minutos_oficina = 0;
+
+            tiempo_entre_llegadas = 0.0;
+            tiempo_atencion_caseta = 0.0;
+            tiempo_atencion_nave = 0.0;
+            tiempo_atencion_oficina = 0.0;
+
+            //tiempos de proxima llegada y fin atencion
+            tiempo_proxima_llegada = 0.0;
+            tiempo_fin_atencion_caseta = 0.0;
+            tiempo_fin_atencion_nave_1 = 0.0;
+            tiempo_fin_atencion_nave_2 = 0.0;
+            tiempo_fin_atencion_oficina_1 = 0.0;
+            tiempo_fin_atencion_oficina_2 = 0.0;
+
+            Cliente_atendido_caseta = null;
+            Cliente_atendido_nave_1 = null;
+            Cliente_atendido_nave_2 = null;
+            Cliente_atendido_oficina_1 = null;
+            Cliente_atendido_oficina_2 = null;
+
+            rnd_llegadas = 0;
+            rnd_atencion_caseta = 0;
+            rnd_atencion_nave = 0;
+            rnd_atencion_oficina = 0;
+
+            //servidores
+            caseta = new servidor();
+            nave_1 = new servidor();
+            nave_2 = new servidor();
+            oficina_1 = new servidor();
+            oficina_2 = new servidor();
+
+            //Cola para los servidores
+            cola_clientes_caseta = new List<cliente>();
+            cola_clientes_nave = new List<cliente>();
+            cola_clientes_oficina = new List<cliente>();
+
+            //reloj
+            reloj = 0;
+
+            flag_primera_vuelta = false;
+
+            Evento_lanzado = "";
+
+            longitud_media_de_la_cola_de_la_nave = 0;
+            tiempo_permanencia_caseta = 0.0;
+            tiempo_medio_cliente_caseta = 0.0;
+            cantidad_clientes_atencion_finalizada_caseta = 0;
+            tiempo_permanencia_nave = 0.0;
+            tiempo_medio_cliente_nave = 0.0;
+            cantidad_clientes_atencion_finalizada_nave = 0;
+            tiempo_permanencia_oficina = 0.0;
+            tiempo_medio_cliente_oficina = 0.0;
+            cantidad_clientes_atencion_finalizada_oficina = 0;
+            tiempo_permanencia_itv = 0.0;
+            tiempo_medio_cliente_itv = 0.0;
+            tiempo_permanencia_cola_caseta = 0.0;
+            tiempo_medio_cliente_cola_caseta = 0.0;
+            tiempo_permanencia_cola_nave = 0.0;
+            tiempo_medio_cliente_cola_nave = 0.0;
+            tiempo_maximo_entre_llegadas = 0.0;
+            cantidad_clientes_que_se_van_por_cola_llena = 0;
+            cantidad_clientes_ingresan_al_sistema = 0;
+
+            cantidad_a_mostrar = 0;
         }
     }
 }
