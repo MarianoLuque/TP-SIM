@@ -35,15 +35,14 @@ namespace ITV
         int cantidad_maxima_cola_caseta;
 
         //reloj
-        //int[] reloj = new int[] { 0, 0, 0 };
         double reloj = 0;
 
         //randoms para los diferentes eventos (llegadas y atenciones)
-        
-        Random objeto_rnd_llegadas = new Random();
-        Random objeto_rnd_atencion_caseta = new Random();
-        Random objeto_rnd_atencion_nave = new Random();
-        Random objeto_rnd_atencion_oficina = new Random();
+        Random objeto_rnd_llegadas;
+        Random objeto_rnd_atencion_caseta;
+        Random objeto_rnd_atencion_nave;
+        Random objeto_rnd_atencion_oficina;
+        Random objeto_semilla;
 
         //Número entre 0 y 1 para calcular los tiempo según corresponda
         double rnd_llegadas, rnd_atencion_caseta, rnd_atencion_nave, rnd_atencion_oficina;
@@ -79,6 +78,12 @@ namespace ITV
         double media_2;
         double media_3;
 
+        //Cantidad de iteraciones
+        int cantidad_iteraciones;
+
+        //array clientes
+        List<cliente> clientes_a_mostrar;
+        int nro_cliente;
 
         //metrica 1
         int longitud_media_de_la_cola_de_la_nave;
@@ -227,21 +232,78 @@ namespace ITV
 
         }
 
+        private void agregar_clientes()
+        {
+
+            for (int i = 0; i < cola_clientes_caseta.Count; i++)
+            {
+                clientes_a_mostrar.Add(cola_clientes_caseta[i]);
+            }
+            if(Cliente_atendido_caseta != null) { clientes_a_mostrar.Add(Cliente_atendido_caseta); }
+            
+            for (int i = 0; i < cola_clientes_nave.Count; i++)
+            {
+                clientes_a_mostrar.Add(cola_clientes_nave[i]);
+            }
+            if(Cliente_atendido_nave_1 != null) { clientes_a_mostrar.Add(Cliente_atendido_nave_1); }
+            if(Cliente_atendido_nave_2 != null) { clientes_a_mostrar.Add(Cliente_atendido_nave_2); }
+
+            for (int i = 0; i < cola_clientes_oficina.Count; i++)
+            {
+                clientes_a_mostrar.Add(cola_clientes_oficina[i]);
+            }
+            if (Cliente_atendido_oficina_1 != null) { clientes_a_mostrar.Add(Cliente_atendido_oficina_1); }
+            if (Cliente_atendido_oficina_2 != null) { clientes_a_mostrar.Add(Cliente_atendido_oficina_2); }
+            
+            for (int i = 0; i < clientes_a_mostrar.Count; i++)
+            {
+                string estado_cliente_nro = "Estado cliente" + nro_cliente.ToString();
+                string hora_llegada_cliente_nro = "Hora llegada cliente" + nro_cliente.ToString();
+                DataColumn columna_estado_cliente = new DataColumn(estado_cliente_nro);
+                DataColumn columna_hora_llegada_cliente = new DataColumn(hora_llegada_cliente_nro);
+                tabla_iteraciones.Columns.Add(columna_estado_cliente);
+                tabla_iteraciones.Columns.Add(columna_hora_llegada_cliente);
+                nro_cliente += 1;
+            }
+        }
+
+        private void agregar_cliente()
+        {
+            string estado_cliente_nro = "Estado cliente" + nro_cliente.ToString();
+            string hora_llegada_cliente_nro = "Hora llegada cliente" + nro_cliente.ToString();
+            DataColumn columna_estado_cliente = new DataColumn(estado_cliente_nro);
+            DataColumn columna_hora_llegada_cliente = new DataColumn(hora_llegada_cliente_nro);
+            tabla_iteraciones.Columns.Add(columna_estado_cliente);
+            tabla_iteraciones.Columns.Add(columna_hora_llegada_cliente);
+            nro_cliente += 1;
+        }
+
         private void EventoDeLlegada()
         {
             cliente Nuevo_Cliente;
+            if (parametro_cantidad == "eventos" && cantidad_iteraciones == int.Parse(txt_desde.Text))
+            {
+                agregar_cliente();
+            }
+
+            if (parametro_cantidad == "minutos" && reloj >= cantidad)
+            {
+                agregar_cliente();
+            }
 
             if (caseta.GetEstado() == servidor.Estados.ocupado)
             {
                 if(cola_clientes_caseta.Count >= cantidad_maxima_cola_caseta)
                 {
                     Nuevo_Cliente = new cliente(reloj, cliente.Estados.SIN_LUGAR_EN_COLA_CASETA);
+                    clientes_a_mostrar.Add(Nuevo_Cliente);
                     cantidad_clientes_que_se_van_por_cola_llena += 1;
                 }
                 else
                 {
                     Nuevo_Cliente = new cliente(reloj, cliente.Estados.ESPERANDO_ATENCION_CASETA);
                     cola_clientes_caseta.Add(Nuevo_Cliente);
+                    clientes_a_mostrar.Add(Nuevo_Cliente);
                     cantidad_clientes_ingresan_al_sistema += 1;
                     
                     //DataColumn nuevo_cliente = new DataColumn($"Cliente {cantidad_clientes_ingresan_al_sistema}");
@@ -254,7 +316,7 @@ namespace ITV
             {
                 caseta.SetEstado(servidor.Estados.ocupado);
                 Cliente_atendido_caseta = new cliente(reloj, cliente.Estados.SIENDO_ATENDIDO_CASETA);
-
+                clientes_a_mostrar.Add(Cliente_atendido_caseta);
                 cantidad_clientes_ingresan_al_sistema += 1;
 
 
@@ -272,14 +334,6 @@ namespace ITV
 
         private void EventoFinAtencionCaseta()
         {
-
-
-            //VERFICIAR EL TEMA DE HORA DE SISTEMA Y HORA DE COLA
-            //VERFICIAR EL TEMA DE HORA DE SISTEMA Y HORA DE COLA
-            //VERFICIAR EL TEMA DE HORA DE SISTEMA Y HORA DE COLA
-            //VERFICIAR EL TEMA DE HORA DE SISTEMA Y HORA DE COLA
-            //VERFICIAR EL TEMA DE HORA DE SISTEMA Y HORA DE COLA
-            //VERFICIAR EL TEMA DE HORA DE SISTEMA Y HORA DE COLA
 
             tiempo_permanencia_caseta += (reloj - Cliente_atendido_caseta.GetMinutoLlegadaALaCola());
             cantidad_clientes_atencion_finalizada_caseta += 1;
@@ -671,10 +725,35 @@ namespace ITV
             tabla_iteraciones.Rows[cantidad_iteraciones]["Evento"] = Evento_lanzado;
             tabla_iteraciones.Rows[cantidad_iteraciones]["Reloj (min)"] = reloj;
 
+            if (cantidad_iteraciones != 0)
+            {
+                if (tiempo_proxima_llegada.ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Proxima llegada"].ToString())
+                { rnd_llegadas = 0; }
+                if (tiempo_entre_llegadas.ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Tiempo entre llegadas"].ToString())
+                { tiempo_entre_llegadas = 0; }
+
+                if (tiempo_fin_atencion_caseta.ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Fin atencion caseta"].ToString())
+                { rnd_atencion_caseta = 0; }
+                if (tiempo_atencion_caseta.ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Tiempo atencion caseta"].ToString())
+                { tiempo_atencion_caseta = 0; }
+
+                if (tiempo_fin_atencion_nave_1.ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Fin atencion nave 1"].ToString() &&
+                    tiempo_fin_atencion_nave_2.ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Fin atencion nave 2"].ToString())
+                { rnd_atencion_nave = 0; }
+                if (tiempo_atencion_nave.ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Tiempo atencion nave"].ToString())
+                { tiempo_atencion_nave = 0; }
+
+                if (tiempo_fin_atencion_oficina_1.ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Fin atencion oficina 1"].ToString() &&
+                    tiempo_fin_atencion_oficina_2.ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Fin atencion oficina 2"].ToString())
+                { rnd_atencion_nave = 0; }
+                if (tiempo_atencion_oficina.ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Tiempo atencion oficina"].ToString())
+                { tiempo_atencion_oficina = 0; }
+            }
+            
             tabla_iteraciones.Rows[cantidad_iteraciones]["RND llegada cliente"] = rnd_llegadas.ToString() == "0"? "" : rnd_llegadas.ToString();
             tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo entre llegadas"] = tiempo_entre_llegadas.ToString() == "0" ? "" : tiempo_entre_llegadas.ToString();
             tabla_iteraciones.Rows[cantidad_iteraciones]["Proxima llegada"] = tiempo_proxima_llegada.ToString() == "0" ? "" : tiempo_proxima_llegada.ToString();
-            
+
             tabla_iteraciones.Rows[cantidad_iteraciones]["RND atencion caseta"] = rnd_atencion_caseta.ToString() == "0" ? "" : rnd_atencion_caseta.ToString();
             tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo atencion caseta"] = tiempo_atencion_caseta.ToString() == "0" ? "" : tiempo_atencion_caseta.ToString();
             tabla_iteraciones.Rows[cantidad_iteraciones]["Fin atencion caseta"] = tiempo_fin_atencion_caseta.ToString() == "0" ? "" : tiempo_fin_atencion_caseta.ToString();
@@ -717,10 +796,34 @@ namespace ITV
             tabla_iteraciones.Rows[cantidad_iteraciones]["Cantidad de clientes que no entran a la cola porque esta llena"] = cantidad_clientes_que_se_van_por_cola_llena;
 
             //Clientes
+            string estado_cliente_nro = "Estado cliente" + nro_cliente.ToString();
+            string hora_llegada_cliente_nro = "Hora llegada cliente" + nro_cliente.ToString();
+            int estado_cliente;
+            string estado_cliente_string;
+            for (int i = 0; i < clientes_a_mostrar.Count; i++)
+            {
+                estado_cliente = (int)clientes_a_mostrar[i].GetEstado();
+                if(estado_cliente == 0) { estado_cliente_string = "EAC"; }
+                else if (estado_cliente == 1) { estado_cliente_string = "SAC"; }
+                else if (estado_cliente == 2) { estado_cliente_string = "EAN"; }
+                else if(estado_cliente == 3) { estado_cliente_string = "SAN"; }
+                else if(estado_cliente == 4) { estado_cliente_string = "EAO"; }
+                else if(estado_cliente == 5) { estado_cliente_string = "SAO"; }
+                else if(estado_cliente == 6) { estado_cliente_string = "SLCC"; }
+                else { estado_cliente_string = "FDS"; }
+
+                tabla_iteraciones.Rows[cantidad_iteraciones]["Estado cliente" + i.ToString()] = estado_cliente_string;
+                tabla_iteraciones.Rows[cantidad_iteraciones]["Hora llegada cliente" + i.ToString()] = clientes_a_mostrar[i].GetMinutoLlegadaAlSistema();
+            }
         }
         
         private void btn_simular_Click(object sender, EventArgs e)
         {
+            objeto_semilla = new Random();
+            objeto_rnd_llegadas = new Random(objeto_semilla.Next());
+            objeto_rnd_atencion_caseta = new Random(objeto_semilla.Next());
+            objeto_rnd_atencion_nave = new Random(objeto_semilla.Next());
+            objeto_rnd_atencion_oficina = new Random(objeto_semilla.Next());
             volverACero();
 
 
@@ -745,7 +848,7 @@ namespace ITV
                     return;
                 }
 
-                int cantidad_iteraciones = 0;
+                cantidad_iteraciones = 0;
                 
                 while (reloj < cantidad)
                 {
@@ -753,9 +856,9 @@ namespace ITV
 
                     if (reloj >= simulacion_desde && cantidad_a_mostrar < 400)
                     {
+                        if (cantidad_a_mostrar == 0) { agregar_clientes(); }
                         cargar_datos_tabla(cantidad_a_mostrar);
                         cantidad_a_mostrar += 1;
-
                     }
 
                     if (cantidad_a_mostrar >= 400 && reloj >= cantidad)
@@ -785,6 +888,7 @@ namespace ITV
 
                     if (cantidad_iteraciones >= simulacion_desde && cantidad_iteraciones < simulacion_desde + 400)
                     {
+                        if (cantidad_iteraciones == simulacion_desde) { agregar_clientes(); }
                         cargar_datos_tabla(cantidad_iteraciones-simulacion_desde);
                     }
                     cantidad_iteraciones += 1;
@@ -1040,6 +1144,9 @@ namespace ITV
             cantidad_clientes_ingresan_al_sistema = 0;
 
             cantidad_a_mostrar = 0;
+
+            nro_cliente = 0;
+            clientes_a_mostrar = new List<cliente>();
         }
     }
 }
