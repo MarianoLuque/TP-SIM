@@ -264,8 +264,8 @@ namespace ITV
                 caseta.SetEstado(servidor.Estados.ocupado);
                 Cliente_atendido_caseta = new cliente(reloj, cliente.Estados.SIENDO_ATENDIDO_CASETA);
                 clientes_a_mostrar.Add(Cliente_atendido_caseta);
-                Metrica9();
-                
+                cantidad_clientes_ingresan_al_sistema += 1;
+
 
                 //Si no pasa a la cola nunca, el tiempo en cola es 0. Esta bien poner el reloj aca?
 
@@ -504,6 +504,7 @@ namespace ITV
         {
             tiempo_permanencia_caseta += (reloj - cliente.GetMinutoLlegadaALaCola());
             tiempo_medio_cliente_caseta = tiempo_permanencia_caseta / (double)cantidad_clientes_atencion_finalizada_caseta;
+
         }
 
         private void Metrica3(cliente cliente)
@@ -543,7 +544,7 @@ namespace ITV
 
         private void Metrica9()
         {
-            cantidad_clientes_ingresan_al_sistema += 1;
+            cantidad_clientes_que_se_van_por_cola_llena += 1;
         }
 
         private void Simulacion_Load(object sender, EventArgs e)
@@ -905,6 +906,17 @@ namespace ITV
             dg_colas.Columns[15].DefaultCellStyle.BackColor = Color.LightSkyBlue;
             dg_colas.Columns[0].Width = 200;
 
+            //VOLVER A CERO!!!
+
+            lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.Text += tiempo_medio_cliente_oficina.ToString();
+            lbl_tiempo_medio_cliente_ITV.Text += tiempo_medio_cliente_itv.ToString();
+            lbl_longitud_media_cola_nave.Text += longitud_media_de_la_cola_de_la_nave.ToString();
+            lbl_tiempo_medio_cliente_nave.Text += tiempo_medio_cliente_nave.ToString();
+            lbl_tiempo_medio_cola_nave.Text += tiempo_medio_cliente_cola_nave.ToString();
+            lbl_tiempo_medio_cliente_caseta.Text += tiempo_medio_cliente_caseta.ToString();
+            lbl_tiempo_medio_cliente_cola_caseta.Text += tiempo_medio_cliente_cola_caseta.ToString();
+            lbl_maximo_tiempo_entre_llegadas.Text += tiempo_maximo_entre_llegadas.ToString();
+            lbl_clientes_se_van_cola_llena.Text += cantidad_clientes_que_se_van_por_cola_llena.ToString();
 
         }
 
@@ -1143,6 +1155,16 @@ namespace ITV
 
             nro_cliente = 0;
             clientes_a_mostrar = new List<cliente>();
+
+            lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.Text = "Tiempo medio que un cliente pasa en la oficina (incluye cola): ";
+            lbl_tiempo_medio_cliente_ITV.Text = "Tiempo medio que un cliente se encuentra en la ITV: ";
+            lbl_longitud_media_cola_nave.Text = "Longitud media de la cola de la nave: ";
+            lbl_tiempo_medio_cliente_nave.Text = "Tiempo medio que un cliente pasa en la nave (incluye cola): ";
+            lbl_tiempo_medio_cola_nave.Text = "Tiempo medio que un cliente pasa en la cola de la nave: ";
+            lbl_tiempo_medio_cliente_caseta.Text = "Tiempo medio que un cliente pasa en la caseta (incluye cola): ";
+            lbl_tiempo_medio_cliente_cola_caseta.Text = "Tiempo medio que un cliente pasa en la cola de la caseta: ";
+            lbl_maximo_tiempo_entre_llegadas.Text = "Máximo tiempo entre llegadas de clientes al sistema: ";
+            lbl_clientes_se_van_cola_llena.Text = "Cantidad de clientes que se van del sistema porque no hay lugar en la cola: ";
         }
     }
 }
