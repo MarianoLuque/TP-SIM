@@ -158,7 +158,7 @@
             // 
             this.lbl_clientes_se_van_cola_llena.AutoSize = true;
             this.lbl_clientes_se_van_cola_llena.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_clientes_se_van_cola_llena.Location = new System.Drawing.Point(26, 360);
+            this.lbl_clientes_se_van_cola_llena.Location = new System.Drawing.Point(26, 349);
             this.lbl_clientes_se_van_cola_llena.Name = "lbl_clientes_se_van_cola_llena";
             this.lbl_clientes_se_van_cola_llena.Size = new System.Drawing.Size(926, 31);
             this.lbl_clientes_se_van_cola_llena.TabIndex = 45;
@@ -168,7 +168,7 @@
             // 
             this.lbl_maximo_tiempo_entre_llegadas.AutoSize = true;
             this.lbl_maximo_tiempo_entre_llegadas.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_maximo_tiempo_entre_llegadas.Location = new System.Drawing.Point(26, 320);
+            this.lbl_maximo_tiempo_entre_llegadas.Location = new System.Drawing.Point(26, 309);
             this.lbl_maximo_tiempo_entre_llegadas.Name = "lbl_maximo_tiempo_entre_llegadas";
             this.lbl_maximo_tiempo_entre_llegadas.Size = new System.Drawing.Size(653, 31);
             this.lbl_maximo_tiempo_entre_llegadas.TabIndex = 44;
@@ -178,7 +178,7 @@
             // 
             this.lbl_tiempo_medio_cliente_cola_caseta.AutoSize = true;
             this.lbl_tiempo_medio_cliente_cola_caseta.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_tiempo_medio_cliente_cola_caseta.Location = new System.Drawing.Point(26, 280);
+            this.lbl_tiempo_medio_cliente_cola_caseta.Location = new System.Drawing.Point(26, 269);
             this.lbl_tiempo_medio_cliente_cola_caseta.Name = "lbl_tiempo_medio_cliente_cola_caseta";
             this.lbl_tiempo_medio_cliente_cola_caseta.Size = new System.Drawing.Size(708, 31);
             this.lbl_tiempo_medio_cliente_cola_caseta.TabIndex = 43;
@@ -188,7 +188,7 @@
             // 
             this.lbl_tiempo_medio_cliente_caseta.AutoSize = true;
             this.lbl_tiempo_medio_cliente_caseta.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_tiempo_medio_cliente_caseta.Location = new System.Drawing.Point(26, 240);
+            this.lbl_tiempo_medio_cliente_caseta.Location = new System.Drawing.Point(26, 229);
             this.lbl_tiempo_medio_cliente_caseta.Name = "lbl_tiempo_medio_cliente_caseta";
             this.lbl_tiempo_medio_cliente_caseta.Size = new System.Drawing.Size(760, 31);
             this.lbl_tiempo_medio_cliente_caseta.TabIndex = 42;
@@ -198,7 +198,7 @@
             // 
             this.lbl_tiempo_medio_cola_nave.AutoSize = true;
             this.lbl_tiempo_medio_cola_nave.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_tiempo_medio_cola_nave.Location = new System.Drawing.Point(26, 200);
+            this.lbl_tiempo_medio_cola_nave.Location = new System.Drawing.Point(26, 189);
             this.lbl_tiempo_medio_cola_nave.Name = "lbl_tiempo_medio_cola_nave";
             this.lbl_tiempo_medio_cola_nave.Size = new System.Drawing.Size(693, 31);
             this.lbl_tiempo_medio_cola_nave.TabIndex = 41;
@@ -208,7 +208,7 @@
             // 
             this.lbl_tiempo_medio_cliente_nave.AutoSize = true;
             this.lbl_tiempo_medio_cliente_nave.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_tiempo_medio_cliente_nave.Location = new System.Drawing.Point(26, 160);
+            this.lbl_tiempo_medio_cliente_nave.Location = new System.Drawing.Point(26, 149);
             this.lbl_tiempo_medio_cliente_nave.Name = "lbl_tiempo_medio_cliente_nave";
             this.lbl_tiempo_medio_cliente_nave.Size = new System.Drawing.Size(738, 31);
             this.lbl_tiempo_medio_cliente_nave.TabIndex = 40;
@@ -228,7 +228,7 @@
             // 
             this.lbl_tiempo_medio_cliente_ITV.AutoSize = true;
             this.lbl_tiempo_medio_cliente_ITV.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_tiempo_medio_cliente_ITV.Location = new System.Drawing.Point(26, 80);
+            this.lbl_tiempo_medio_cliente_ITV.Location = new System.Drawing.Point(26, 69);
             this.lbl_tiempo_medio_cliente_ITV.Name = "lbl_tiempo_medio_cliente_ITV";
             this.lbl_tiempo_medio_cliente_ITV.Size = new System.Drawing.Size(653, 31);
             this.lbl_tiempo_medio_cliente_ITV.TabIndex = 38;
@@ -238,7 +238,7 @@
             // 
             this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.AutoSize = true;
             this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.Location = new System.Drawing.Point(26, 40);
+            this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.Location = new System.Drawing.Point(26, 29);
             this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.Name = "lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina";
             this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.Size = new System.Drawing.Size(758, 31);
             this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.TabIndex = 37;
