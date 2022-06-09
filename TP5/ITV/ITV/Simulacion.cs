@@ -87,7 +87,7 @@ namespace ITV
         int nro_cliente;
 
         //metrica 1
-        int longitud_media_de_la_cola_de_la_nave;
+        double longitud_media_de_la_cola_de_la_nave;
 
         //metrica 2
         double tiempo_permanencia_caseta   = 0.0;
@@ -281,7 +281,7 @@ namespace ITV
             //Primero verifico si alguna nave esta libre para atender
             if (nave_1.GetEstado() == servidor.Estados.libre)
             {
-                Cliente_atendido_caseta.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_NAVE);
+                Cliente_atendido_caseta.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_NAVE_1);
                 nave_1.SetEstado(servidor.Estados.ocupado);
                 Cliente_atendido_nave_1 = Cliente_atendido_caseta;
 
@@ -291,7 +291,7 @@ namespace ITV
             }
             else if(nave_2.GetEstado() == servidor.Estados.libre)
             {
-                Cliente_atendido_caseta.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_NAVE);
+                Cliente_atendido_caseta.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_NAVE_2);
                 nave_2.SetEstado(servidor.Estados.ocupado);
                 Cliente_atendido_nave_2 = Cliente_atendido_caseta;
                 calcularFinAtencion(3);
@@ -346,7 +346,7 @@ namespace ITV
                 //Porque el servidor esta libre.
                 if(nave == 1)
                 {
-                    Cliente_atendido_nave_1.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA);
+                    Cliente_atendido_nave_1.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA_1);
                     oficina_1.SetEstado(servidor.Estados.ocupado);
                     Cliente_atendido_oficina_1 = Cliente_atendido_nave_1;
                     calcularFinAtencion(2);
@@ -354,7 +354,7 @@ namespace ITV
                 }
                 else
                 {
-                    Cliente_atendido_nave_2.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA);
+                    Cliente_atendido_nave_2.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA_1);
                     oficina_1.SetEstado(servidor.Estados.ocupado);
                     Cliente_atendido_oficina_1 = Cliente_atendido_nave_2;
                     calcularFinAtencion(3);
@@ -366,7 +366,7 @@ namespace ITV
             {
                 if (nave == 1)
                 {
-                    Cliente_atendido_nave_1.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA);
+                    Cliente_atendido_nave_1.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA_2);
                     oficina_2.SetEstado(servidor.Estados.ocupado);
                     Cliente_atendido_oficina_2 = Cliente_atendido_nave_1;
                     calcularFinAtencion(2);
@@ -374,7 +374,7 @@ namespace ITV
                 }
                 else
                 {
-                    Cliente_atendido_nave_2.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA);
+                    Cliente_atendido_nave_2.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA_2);
                     oficina_2.SetEstado(servidor.Estados.ocupado);
                     Cliente_atendido_oficina_2 = Cliente_atendido_nave_2;
                     calcularFinAtencion(3);
@@ -403,14 +403,14 @@ namespace ITV
                 if (nave == 1)
                 {
                     Cliente_atendido_nave_1 = cola_clientes_nave.ElementAt(0);
-                    Cliente_atendido_nave_1.SetEstado(cliente.Estados.SIENDO_ATENDIDO_NAVE);
+                    Cliente_atendido_nave_1.SetEstado(cliente.Estados.SIENDO_ATENDIDO_NAVE_1);
                     cola_clientes_nave.RemoveAt(0);
                     calcularFinAtencion(2);
                 }
                 else
                 {
                     Cliente_atendido_nave_2 = cola_clientes_nave.ElementAt(0);
-                    Cliente_atendido_nave_2.SetEstado(cliente.Estados.SIENDO_ATENDIDO_NAVE);
+                    Cliente_atendido_nave_2.SetEstado(cliente.Estados.SIENDO_ATENDIDO_NAVE_2);
                     cola_clientes_nave.RemoveAt(0);
                     calcularFinAtencion(3);
                 }
@@ -461,14 +461,14 @@ namespace ITV
                 if(oficina == 1)
                 {
                     Cliente_atendido_oficina_1 = cola_clientes_oficina.ElementAt(0);
-                    Cliente_atendido_oficina_1.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA);
+                    Cliente_atendido_oficina_1.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA_1);
                     cola_clientes_oficina.RemoveAt(0);
                     calcularFinAtencion(4);
                 }
                 else
                 {
                     Cliente_atendido_oficina_2 = cola_clientes_oficina.ElementAt(0);
-                    Cliente_atendido_oficina_2.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA);
+                    Cliente_atendido_oficina_2.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIENDO_ATENDIDO_OFICINA_2);
                     cola_clientes_oficina.RemoveAt(0);
                     calcularFinAtencion(5);
                 }
@@ -497,44 +497,43 @@ namespace ITV
 
         private void Metrica1()
         {
-            longitud_media_de_la_cola_de_la_nave = (int)(tiempo_permanencia_cola_nave / reloj);
+            longitud_media_de_la_cola_de_la_nave = Math.Round( tiempo_permanencia_cola_nave / reloj , 2);
         }
 
         private void Metrica2(cliente cliente)
         {
-            tiempo_permanencia_caseta += (reloj - cliente.GetMinutoLlegadaALaCola());
-            tiempo_medio_cliente_caseta = tiempo_permanencia_caseta / (double)cantidad_clientes_atencion_finalizada_caseta;
-
+            tiempo_permanencia_caseta += Math.Round((reloj - cliente.GetMinutoLlegadaALaCola()), 2);
+            tiempo_medio_cliente_caseta = Math.Round( tiempo_permanencia_caseta / (double)cantidad_clientes_atencion_finalizada_caseta, 2);
         }
 
         private void Metrica3(cliente cliente)
         {
-            tiempo_permanencia_nave += (reloj - cliente.GetMinutoLlegadaALaCola());
-            tiempo_medio_cliente_nave = tiempo_permanencia_nave / (double)cantidad_clientes_atencion_finalizada_nave;
+            tiempo_permanencia_nave += Math.Round((reloj - cliente.GetMinutoLlegadaALaCola()), 2);
+            tiempo_medio_cliente_nave = Math.Round( tiempo_permanencia_nave / (double)cantidad_clientes_atencion_finalizada_nave, 2);
         }
 
         private void Metrica4(cliente cliente)
         {
-            tiempo_permanencia_oficina = (reloj - cliente.GetMinutoLlegadaALaCola());
-            tiempo_medio_cliente_oficina = tiempo_permanencia_oficina / (double)cantidad_clientes_atencion_finalizada_oficina;
+            tiempo_permanencia_oficina = Math.Round((reloj - cliente.GetMinutoLlegadaALaCola()), 2);
+            tiempo_medio_cliente_oficina = Math.Round( tiempo_permanencia_oficina / (double)cantidad_clientes_atencion_finalizada_oficina, 2);
         }
 
         private void Metrica5(cliente cliente)
         {
-            tiempo_permanencia_itv += (reloj - cliente.GetMinutoLlegadaAlSistema());
-            tiempo_medio_cliente_itv = tiempo_permanencia_itv / (double)cantidad_clientes_atencion_finalizada_oficina;
+            tiempo_permanencia_itv += Math.Round((reloj - cliente.GetMinutoLlegadaAlSistema()), 2);
+            tiempo_medio_cliente_itv = Math.Round( tiempo_permanencia_itv / (double)cantidad_clientes_atencion_finalizada_oficina, 2);
         }
 
         private void Metrica6(cliente cliente)
         {
-            tiempo_permanencia_cola_caseta += (reloj - cliente.GetMinutoLlegadaALaCola());
-            tiempo_medio_cliente_cola_caseta = tiempo_permanencia_cola_caseta / (double)cantidad_clientes_atencion_finalizada_caseta;
+            tiempo_permanencia_cola_caseta += Math.Round((reloj - cliente.GetMinutoLlegadaALaCola()), 2);
+            tiempo_medio_cliente_cola_caseta = Math.Round( tiempo_permanencia_cola_caseta / (double)cantidad_clientes_atencion_finalizada_caseta, 2);
         }
 
         private void Metrica7(cliente cliente)
         {
-            tiempo_permanencia_cola_nave += (reloj - cliente.GetMinutoLlegadaALaCola());
-            tiempo_medio_cliente_cola_nave = tiempo_permanencia_cola_nave / (double)cantidad_clientes_atencion_finalizada_nave;
+            tiempo_permanencia_cola_nave += Math.Round((reloj - cliente.GetMinutoLlegadaALaCola()), 2);
+            tiempo_medio_cliente_cola_nave = Math.Round( tiempo_permanencia_cola_nave / (double)cantidad_clientes_atencion_finalizada_nave, 2);
         }
 
         private void Metrica8()
@@ -801,12 +800,14 @@ namespace ITV
                 {
                     estado_cliente = (int)clientes_a_mostrar[i].GetEstado();
                     if (estado_cliente == 0) { estado_cliente_string = "EAC"; }
-                    else if (estado_cliente == 1) { estado_cliente_string = "SAC"; }
-                    else if (estado_cliente == 2) { estado_cliente_string = "EAN"; }
-                    else if (estado_cliente == 3) { estado_cliente_string = "SAN"; }
-                    else if (estado_cliente == 4) { estado_cliente_string = "EAO"; }
-                    else if (estado_cliente == 5) { estado_cliente_string = "SAO"; }
-                    else if (estado_cliente == 6) { estado_cliente_string = "SLCC"; }
+                    else if (estado_cliente == 1) { estado_cliente_string = "SAC";  }
+                    else if (estado_cliente == 2) { estado_cliente_string = "EAN";  }
+                    else if (estado_cliente == 3) { estado_cliente_string = "SAN(1)"; }
+                    else if (estado_cliente == 4) { estado_cliente_string = "SAN(2)"; }
+                    else if (estado_cliente == 5) { estado_cliente_string = "EAO";  }
+                    else if (estado_cliente == 6) { estado_cliente_string = "SAO(1)"; }
+                    else if (estado_cliente == 7) { estado_cliente_string = "SAO(2)"; }
+                    else if (estado_cliente == 8) { estado_cliente_string = "SLCC"; }
                     else { estado_cliente_string = "FDS"; }
 
                     tabla_iteraciones.Rows[cantidad_iteraciones]["Estado cliente" + i.ToString()] = estado_cliente_string;
@@ -898,13 +899,7 @@ namespace ITV
             }
 
             dg_colas.DataSource = tabla_iteraciones;
-            dg_colas.Columns[4].DefaultCellStyle.BackColor = Color.LightSkyBlue;
-            dg_colas.Columns[7].DefaultCellStyle.BackColor = Color.LightSkyBlue;
-            dg_colas.Columns[10].DefaultCellStyle.BackColor = Color.LightSkyBlue;
-            dg_colas.Columns[11].DefaultCellStyle.BackColor = Color.LightSkyBlue;
-            dg_colas.Columns[14].DefaultCellStyle.BackColor = Color.LightSkyBlue;
-            dg_colas.Columns[15].DefaultCellStyle.BackColor = Color.LightSkyBlue;
-            dg_colas.Columns[0].Width = 200;
+            ModificarColumnas();
 
             //VOLVER A CERO!!!
 
@@ -918,6 +913,65 @@ namespace ITV
             lbl_maximo_tiempo_entre_llegadas.Text += tiempo_maximo_entre_llegadas.ToString();
             lbl_clientes_se_van_cola_llena.Text += cantidad_clientes_que_se_van_por_cola_llena.ToString();
 
+        }
+
+        private void ModificarColumnas()
+        {
+            //colores
+            dg_colas.Columns[4].DefaultCellStyle.BackColor = Color.LightSkyBlue;
+            dg_colas.Columns[7].DefaultCellStyle.BackColor = Color.LightSkyBlue;
+            dg_colas.Columns[10].DefaultCellStyle.BackColor = Color.LightSkyBlue;
+            dg_colas.Columns[11].DefaultCellStyle.BackColor = Color.LightSkyBlue;
+            dg_colas.Columns[14].DefaultCellStyle.BackColor = Color.LightSkyBlue;
+            dg_colas.Columns[15].DefaultCellStyle.BackColor = Color.LightSkyBlue;
+
+            //metrica 1
+            dg_colas.Columns[23].DefaultCellStyle.BackColor = Color.LightSeaGreen;
+            dg_colas.Columns[24].DefaultCellStyle.BackColor = Color.LightSeaGreen;
+
+            //metrica 2
+            dg_colas.Columns[25].DefaultCellStyle.BackColor = Color.DarkGray;
+            dg_colas.Columns[26].DefaultCellStyle.BackColor = Color.DarkGray;
+            dg_colas.Columns[27].DefaultCellStyle.BackColor = Color.DarkGray;
+
+            //metrica 3
+            dg_colas.Columns[28].DefaultCellStyle.BackColor = Color.LightSeaGreen;
+            dg_colas.Columns[29].DefaultCellStyle.BackColor = Color.LightSeaGreen;
+            dg_colas.Columns[30].DefaultCellStyle.BackColor = Color.LightSeaGreen;
+
+            //metrica 4
+            dg_colas.Columns[31].DefaultCellStyle.BackColor = Color.DarkGray;
+            dg_colas.Columns[32].DefaultCellStyle.BackColor = Color.DarkGray;
+            dg_colas.Columns[33].DefaultCellStyle.BackColor = Color.DarkGray;
+
+            //metrica 5
+            dg_colas.Columns[34].DefaultCellStyle.BackColor = Color.LightSeaGreen;
+            dg_colas.Columns[35].DefaultCellStyle.BackColor = Color.LightSeaGreen;
+
+            //metrica 6
+            dg_colas.Columns[36].DefaultCellStyle.BackColor = Color.DarkGray;
+            dg_colas.Columns[37].DefaultCellStyle.BackColor = Color.DarkGray;
+
+            //metrica 7
+            dg_colas.Columns[38].DefaultCellStyle.BackColor = Color.LightSeaGreen;
+            dg_colas.Columns[39].DefaultCellStyle.BackColor = Color.LightSeaGreen;
+
+            //metrica 8
+            dg_colas.Columns[40].DefaultCellStyle.BackColor = Color.DarkGray;
+
+            //metrica 9
+            dg_colas.Columns[41].DefaultCellStyle.BackColor = Color.LightSeaGreen;
+
+            //tamaños
+            dg_colas.Columns[0].Width = 160;
+            for (int i = 1; i <= 22; i++)
+            {
+                dg_colas.Columns[i].Width = 60;
+            }
+            for (int i = 23; i < 41; i++)
+            {
+                dg_colas.Columns[i].Width = 100;
+            }
         }
 
         private void cargarTabla()

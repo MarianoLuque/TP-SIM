@@ -14,11 +14,13 @@ namespace ITV
         public enum Estados { ESPERANDO_ATENCION_CASETA     = 0,
                               SIENDO_ATENDIDO_CASETA        = 1,
                               ESPERANDO_ATENCION_NAVE       = 2,
-                              SIENDO_ATENDIDO_NAVE          = 3,
-                              ESPERANDO_ATENCION_OFICINA    = 4,
-                              SIENDO_ATENDIDO_OFICINA       = 5,
-                              SIN_LUGAR_EN_COLA_CASETA      = 6,
-                              FUERA_DEL_SISTEMA             = 7
+                              SIENDO_ATENDIDO_NAVE_1        = 3,
+                              SIENDO_ATENDIDO_NAVE_2        = 4,
+                              ESPERANDO_ATENCION_OFICINA    = 5,
+                              SIENDO_ATENDIDO_OFICINA_1     = 6,
+                              SIENDO_ATENDIDO_OFICINA_2     = 7,
+                              SIN_LUGAR_EN_COLA_CASETA      = 8,
+                              FUERA_DEL_SISTEMA             = 9
         };
         private Estados estado;
         
