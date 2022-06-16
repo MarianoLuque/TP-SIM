@@ -39,6 +39,10 @@ namespace ITV
             txt_minutos_oficina.Text = "2";
 
             txt_cantidad_maxima_cola.Text = "15";
+
+            txt_cantidad_casetas.Text = "1";
+            txt_cantidad_naves.Text = "2";
+            txt_cantidad_oficinas.Text = "1";
         }
 
         private void btn_simular_Click(object sender, EventArgs e)
@@ -73,11 +77,33 @@ namespace ITV
                 MessageBox.Show("Ingrese la cantidad máxima de clientes que puede haber en la cola de la caseta", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            
+
+            if (txt_cantidad_casetas.Text == "" || int.Parse(txt_cantidad_casetas.Text) == 0)
+            {
+                MessageBox.Show("Ingrese la cantidad de casetas (debe ser mayor a cero)", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (txt_cantidad_naves.Text == "" || int.Parse(txt_cantidad_naves.Text) == 0)
+            {
+                MessageBox.Show("Ingrese la cantidad de naves (debe ser mayor a cero) ", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (txt_cantidad_oficinas.Text == "" || int.Parse(txt_cantidad_oficinas.Text) == 0)
+            {
+                MessageBox.Show("Ingrese la cantidad de oficinas (debe ser mayor a cero) ", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             if (rb_eventos.Checked)
             {
                 parametro_cantidad = "eventos";
-                Simulacion simulacion = new Simulacion(int.Parse(txt_cantidad_eventos.Text), int.Parse(txt_cantidad_clientes_llegadas.Text), int.Parse(txt_cantidad_clientes_caseta.Text), int.Parse(txt_cantidad_clientes_nave.Text), int.Parse(txt_cantidad_clientes_oficina.Text), int.Parse(txt_minutos_llegadas.Text), int.Parse(txt_minutos_caseta.Text), int.Parse(txt_minutos_nave.Text), int.Parse(txt_minutos_oficina.Text), int.Parse(txt_cantidad_maxima_cola.Text), parametro_cantidad, cb_mostrar_clientes.Checked);
+                Simulacion simulacion = new Simulacion(int.Parse(txt_cantidad_eventos.Text), int.Parse(txt_cantidad_clientes_llegadas.Text), int.Parse(txt_cantidad_clientes_caseta.Text), 
+                                                       int.Parse(txt_cantidad_clientes_nave.Text), int.Parse(txt_cantidad_clientes_oficina.Text), int.Parse(txt_minutos_llegadas.Text), 
+                                                       int.Parse(txt_minutos_caseta.Text), int.Parse(txt_minutos_nave.Text), int.Parse(txt_minutos_oficina.Text), int.Parse(txt_cantidad_maxima_cola.Text),
+                                                       int.Parse(txt_cantidad_casetas.Text), int.Parse(txt_cantidad_naves.Text), int.Parse(txt_cantidad_oficinas.Text),
+                                                       parametro_cantidad, cb_mostrar_clientes.Checked);
                 simulacion.ShowDialog();
 
             }
@@ -85,9 +111,15 @@ namespace ITV
             if (rb_minutos.Checked)
             {
                 parametro_cantidad = "minutos";
-                Simulacion simulacion = new Simulacion(int.Parse(txt_cantidad_minutos.Text), int.Parse(txt_cantidad_clientes_llegadas.Text), int.Parse(txt_cantidad_clientes_caseta.Text), int.Parse(txt_cantidad_clientes_nave.Text), int.Parse(txt_cantidad_clientes_oficina.Text), int.Parse(txt_minutos_llegadas.Text), int.Parse(txt_minutos_caseta.Text), int.Parse(txt_minutos_nave.Text), int.Parse(txt_minutos_oficina.Text), int.Parse(txt_cantidad_maxima_cola.Text), parametro_cantidad, cb_mostrar_clientes.Checked);
+                Simulacion simulacion = new Simulacion(int.Parse(txt_cantidad_minutos.Text), int.Parse(txt_cantidad_clientes_llegadas.Text), int.Parse(txt_cantidad_clientes_caseta.Text), 
+                                                       int.Parse(txt_cantidad_clientes_nave.Text), int.Parse(txt_cantidad_clientes_oficina.Text), int.Parse(txt_minutos_llegadas.Text), 
+                                                       int.Parse(txt_minutos_caseta.Text), int.Parse(txt_minutos_nave.Text), int.Parse(txt_minutos_oficina.Text), int.Parse(txt_cantidad_maxima_cola.Text),
+                                                       int.Parse(txt_cantidad_casetas.Text), int.Parse(txt_cantidad_naves.Text), int.Parse(txt_cantidad_oficinas.Text),
+                                                       parametro_cantidad, cb_mostrar_clientes.Checked);
                 simulacion.ShowDialog();
             }
+
+            
         }
 
         private void CheckedChanged(object sender, EventArgs e)
