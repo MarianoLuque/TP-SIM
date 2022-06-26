@@ -37,6 +37,9 @@ namespace ITV
         //reloj
         double reloj = 0;
 
+        //numero de iteracion
+        int cantidad_iteraciones = 0;
+
         //randoms para los diferentes eventos (llegadas y atenciones)
         Random objeto_rnd_llegadas;
         Random objeto_rnd_atencion_caseta;
@@ -67,12 +70,10 @@ namespace ITV
         double media_2;
         double media_3;
 
-        //Cantidad de iteraciones
-        int cantidad_iteraciones;
-
         //array clientes
         List<cliente> clientes_a_mostrar;
         int nro_cliente;
+        int nro_cliente_desde_que_se_muestra;
 
         //metrica 1
         double longitud_media_de_la_cola_de_la_nave;
@@ -216,15 +217,16 @@ namespace ITV
             DataColumn columna_hora_llegada_cliente = new DataColumn(hora_llegada_cliente_nro);
             tabla_iteraciones.Columns.Add(columna_estado_cliente);
             tabla_iteraciones.Columns.Add(columna_hora_llegada_cliente);
-            nro_cliente += 1;
+            if (nro_cliente_desde_que_se_muestra == 0)
+            {
+                nro_cliente_desde_que_se_muestra = nro_cliente;
+            }
         }
 
         private void EventoDeLlegada()
         {
-            cliente Nuevo_Cliente;
-            if (mostrar_clientes) { agregar_cliente(); }
-
-
+            cliente Nuevo_Cliente = null;
+            
             int cantidad_recorrida = 0;
             foreach (servidor i_caseta in lista_casetas)
             {
@@ -235,7 +237,6 @@ namespace ITV
                     i_caseta.SetEstado(servidor.Estados.ocupado);
                     Nuevo_Cliente = new cliente(reloj, cliente.Estados.SIENDO_ATENDIDO_CASETA);
                     i_caseta.SetCliente(Nuevo_Cliente);
-                    clientes_a_mostrar.Add(i_caseta.GetCliente());
                     cantidad_clientes_ingresan_al_sistema += 1;
 
                     tiempo_permanencia_cola_caseta += 0;
@@ -249,22 +250,37 @@ namespace ITV
                     if (cola_clientes_caseta.Count >= cantidad_maxima_cola_caseta)
                     {
                         Nuevo_Cliente = new cliente(reloj, cliente.Estados.SIN_LUGAR_EN_COLA_CASETA);
-                        clientes_a_mostrar.Add(Nuevo_Cliente);
                         Metrica9();
                     }
                     else
                     {
                         Nuevo_Cliente = new cliente(reloj, cliente.Estados.ESPERANDO_ATENCION_CASETA);
                         cola_clientes_caseta.Add(Nuevo_Cliente);
-                        clientes_a_mostrar.Add(Nuevo_Cliente);
                         cantidad_clientes_ingresan_al_sistema += 1;
                     }
-
                 }
-                
+            }
+            if (mostrar_clientes)
+            {
+                if (parametro_cantidad == "eventos")
+                {
+                    if (cantidad_iteraciones >= simulacion_desde && cantidad_iteraciones < simulacion_desde + 400)
+                    {
+                        clientes_a_mostrar.Add(Nuevo_Cliente);
+                        agregar_cliente();
+                    }
+                }
+                else
+                {
+                    if (reloj >= simulacion_desde && cantidad_a_mostrar < 400)
+                    {
+                        clientes_a_mostrar.Add(Nuevo_Cliente);
+                        agregar_cliente();
+                    }
+                }
+                nro_cliente += 1;
             }
 
-            
         }
 
         private void EventoFinAtencionCaseta(servidor caseta_fin_atencion)
@@ -385,11 +401,8 @@ namespace ITV
 
             foreach (servidor i_oficina in lista_oficinas)
             {
-                //ver
                 Metrica4(oficina_fin_atencion.GetCliente());
                 Metrica5(oficina_fin_atencion.GetCliente());
-
-                //calcularFinAtencion(5);
 
                 oficina_fin_atencion.GetCliente().SetEstado(cliente.Estados.FUERA_DEL_SISTEMA);
             }
@@ -408,9 +421,7 @@ namespace ITV
                 tiempo_atencion_oficina = 0.0;
                 oficina_fin_atencion.SetFinAtencion(0);
                 oficina_fin_atencion.SetCliente(null);
-
             }
-            
         }
 
         private void Metrica1()
@@ -655,13 +666,13 @@ namespace ITV
                     }
                     else if (servidor_menor_tiempo.GetTipo() == servidor.Tipos.nave)
                     {
-                        Evento_lanzado = "Fin de atención de la nave 1";
+                        Evento_lanzado = "Fin de atención en la nave";
 
                         EventoFinAtencionNave(servidor_menor_tiempo);
                     }
                     else if (servidor_menor_tiempo.GetTipo() == servidor.Tipos.oficina)
                     {
-                        Evento_lanzado = "Fin de atención en la nave 2";
+                        Evento_lanzado = "Fin de atención en la oficina";
 
                         EventoFinAtencionOficina(servidor_menor_tiempo);
                     }
@@ -799,19 +810,19 @@ namespace ITV
                 for (int i = 0; i < clientes_a_mostrar.Count; i++)
                 {
                     estado_cliente = (int)clientes_a_mostrar[i].GetEstado();
-                    if (estado_cliente == 0) { estado_cliente_string = "EAC"; }
-                    else if (estado_cliente == 1) { estado_cliente_string = "SAC";  }
-                    else if (estado_cliente == 2) { estado_cliente_string = "EAN";  }
-                    else if (estado_cliente == 3) { estado_cliente_string = "SAN(1)"; }
-                    else if (estado_cliente == 4) { estado_cliente_string = "SAN(2)"; }
-                    else if (estado_cliente == 5) { estado_cliente_string = "EAO";  }
-                    else if (estado_cliente == 6) { estado_cliente_string = "SAO(1)"; }
-                    else if (estado_cliente == 7) { estado_cliente_string = "SAO(2)"; }
-                    else if (estado_cliente == 8) { estado_cliente_string = "SLCC"; }
-                    else { estado_cliente_string = "FDS"; }
+                    if      (estado_cliente == 0) { estado_cliente_string = "EAC";      }
+                    else if (estado_cliente == 1) { estado_cliente_string = "SAC";      }
+                    else if (estado_cliente == 2) { estado_cliente_string = "EAN";      }
+                    else if (estado_cliente == 3) { estado_cliente_string = "SAN(1)";   }
+                    else if (estado_cliente == 4) { estado_cliente_string = "SAN(2)";   }
+                    else if (estado_cliente == 5) { estado_cliente_string = "EAO";      }
+                    else if (estado_cliente == 6) { estado_cliente_string = "SAO(1)";   }
+                    else if (estado_cliente == 7) { estado_cliente_string = "SAO(2)";   }
+                    else if (estado_cliente == 8) { estado_cliente_string = "SLCC";     }
+                    else                          { estado_cliente_string = "FDS";      }
 
-                    tabla_iteraciones.Rows[cantidad_iteraciones]["Estado cliente" + i.ToString()] = estado_cliente_string;
-                    tabla_iteraciones.Rows[cantidad_iteraciones]["Hora llegada cliente" + i.ToString()] = clientes_a_mostrar[i].GetMinutoLlegadaAlSistema();
+                    tabla_iteraciones.Rows[cantidad_iteraciones]["Estado cliente" + (i + nro_cliente_desde_que_se_muestra).ToString()] = estado_cliente_string;
+                    tabla_iteraciones.Rows[cantidad_iteraciones]["Hora llegada cliente" + (i + nro_cliente_desde_que_se_muestra).ToString()] = clientes_a_mostrar[i].GetMinutoLlegadaAlSistema();
                 }
             }
         }
@@ -823,14 +834,38 @@ namespace ITV
             objeto_rnd_atencion_caseta = new Random(objeto_semilla.Next());
             objeto_rnd_atencion_nave = new Random(objeto_semilla.Next());
             objeto_rnd_atencion_oficina = new Random(objeto_semilla.Next());
+
+            //pregunto si el programa ya se ejecuto
+            if (flag_tabla_cargada)
+            {
+                //desligo la tabla del data source
+                dg_colas.DataSource = null;
+                //limpiar las filas
+                tabla_iteraciones.Rows.Clear();
+                for (int i = nro_cliente_desde_que_se_muestra; i < (clientes_a_mostrar.Count + nro_cliente_desde_que_se_muestra); i++)
+                {
+                    tabla_iteraciones.Columns.Remove("Estado cliente" + i.ToString());
+                    tabla_iteraciones.Columns.Remove("Hora llegada cliente" + i.ToString());
+                }
+
+            }
+            else
+            {
+                //si no se ejecuto cargo las columnas de la tabla
+                cargarTabla();
+                flag_tabla_cargada = true;
+            }
+
             volverACero();
 
+            //se crean los n servidores del tipo caseta
             for (int i = 0; i < cantidad_de_casetas; i++)
             {
                 servidor nueva_caseta = new servidor(servidor.Tipos.caseta);
                 lista_casetas.Add(nueva_caseta);
             }
 
+            //se crean los n servidores del tipo nave
             for (int i = 0; i < cantidad_de_naves; i++)
             {
                 servidor nueva_nave = new servidor(servidor.Tipos.nave);
@@ -838,24 +873,11 @@ namespace ITV
 
             }
 
+            //se crean los n servidores del tipo oficina
             for (int i = 0; i < cantidad_de_oficinas; i++)
             {
                 servidor nueva_oficina = new servidor(servidor.Tipos.oficina);
                 lista_oficinas.Add(nueva_oficina);
-            }
-
-
-            if (flag_tabla_cargada)
-            {
-                //desligo la tabla del data source
-                dg_colas.DataSource = null;
-                //limpiar las filas
-                tabla_iteraciones.Rows.Clear();
-            }
-            else
-            {
-                cargarTabla();
-                flag_tabla_cargada = true;
             }
 
             if (parametro_cantidad == "minutos")
@@ -866,8 +888,6 @@ namespace ITV
                     return;
                 }
 
-                cantidad_iteraciones = 0;
-                
                 while (reloj < cantidad)
                 {
                     siguiente_secuencia();
@@ -882,12 +902,7 @@ namespace ITV
                     {
                         cargar_datos_tabla(400);
                     }
-
-                    cantidad_iteraciones += 1;
-
                 }
-
-
             }
 
             if(parametro_cantidad == "eventos")
@@ -898,7 +913,7 @@ namespace ITV
                     return;
                 }
 
-                int cantidad_iteraciones = 0;
+                
                 while (cantidad_iteraciones < cantidad)
                 {
                     siguiente_secuencia();
@@ -914,7 +929,6 @@ namespace ITV
                         cargar_datos_tabla(400);
                     }
                 }
-
             }
 
             dg_colas.DataSource = tabla_iteraciones;
@@ -999,11 +1013,6 @@ namespace ITV
             //asigno las columnas a la tabla
             DataColumn columna_reloj            = new DataColumn("Reloj (min)");
             tabla_iteraciones.Columns.Add(columna_reloj);
-
-            //Llegada cliente
-
-            //Atencion caseta             
-            //creo las columnas
 
             //Llegada cliente
             DataColumn columna_rnd_llegada              = new DataColumn("RND llegada cliente");
@@ -1175,13 +1184,6 @@ namespace ITV
             rnd_atencion_nave = 0;
             rnd_atencion_oficina = 0;
 
-            //servidores
-            //caseta = new servidor();
-            //nave_1 = new servidor();
-            //nave_2 = new servidor();
-            //oficina_1 = new servidor();
-            //oficina_2 = new servidor();
-
             //Cola para los servidores
             cola_clientes_caseta = new List<cliente>();
             cola_clientes_nave = new List<cliente>();
@@ -1213,6 +1215,8 @@ namespace ITV
             tiempo_maximo_entre_llegadas = 0.0;
             cantidad_clientes_que_se_van_por_cola_llena = 0;
             cantidad_clientes_ingresan_al_sistema = 0;
+            cantidad_iteraciones = 0;
+            nro_cliente_desde_que_se_muestra = 0;
 
             cantidad_a_mostrar = 0;
 
