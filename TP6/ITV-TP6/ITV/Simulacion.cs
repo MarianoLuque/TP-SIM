@@ -568,65 +568,6 @@ namespace ITV
                 return null;
             }
 
-            //if ((tiempo_proxima_llegada <= tiempo_fin_atencion_caseta || tiempo_fin_atencion_caseta == 0.0) &&
-            //    (tiempo_proxima_llegada <= tiempo_fin_atencion_nave_1 || tiempo_fin_atencion_nave_1 == 0.0) &&
-            //    (tiempo_proxima_llegada <= tiempo_fin_atencion_nave_2 || tiempo_fin_atencion_nave_2 == 0.0) &&
-            //    (tiempo_proxima_llegada <= tiempo_fin_atencion_oficina_1 || tiempo_fin_atencion_oficina_1 == 0.0) &&
-            //    (tiempo_proxima_llegada <= tiempo_fin_atencion_oficina_2 || tiempo_fin_atencion_oficina_2 == 0.0))
-            //{
-            //    reloj = tiempo_proxima_llegada;
-            //    return "tiempo_proxima_llegada";
-            //}
-            //else if( (tiempo_fin_atencion_caseta != 0) &&
-            //    (tiempo_fin_atencion_caseta <= tiempo_proxima_llegada) &&
-            //    (tiempo_fin_atencion_caseta <= tiempo_fin_atencion_nave_1|| tiempo_fin_atencion_nave_1 == 0.0) &&
-            //    (tiempo_fin_atencion_caseta <= tiempo_fin_atencion_nave_2|| tiempo_fin_atencion_nave_2 == 0.0) &&
-            //    (tiempo_fin_atencion_caseta <= tiempo_fin_atencion_oficina_1 || tiempo_fin_atencion_oficina_1 == 0.0) &&
-            //    (tiempo_fin_atencion_caseta <= tiempo_fin_atencion_oficina_2 || tiempo_fin_atencion_oficina_2 == 0.0))
-            //{
-            //    //MessageBox.Show("Tiempo fin caseta: " + tiempo_fin_atencion_caseta.ToString() + " | tiempo proxima llegada: " + tiempo_proxima_llegada.ToString());
-            //    reloj = tiempo_fin_atencion_caseta;
-            //    return "tiempo_fin_atencion_caseta";
-            //}
-            //else if(
-            //    (tiempo_fin_atencion_nave_1 != 0) &&
-            //    (tiempo_fin_atencion_nave_1 <= tiempo_proxima_llegada) &&
-            //    (tiempo_fin_atencion_nave_1 <= tiempo_fin_atencion_caseta || tiempo_fin_atencion_caseta == 0.0) &&
-            //    (tiempo_fin_atencion_nave_1 <= tiempo_fin_atencion_nave_2 || tiempo_fin_atencion_nave_2 == 0.0) &&
-            //    (tiempo_fin_atencion_nave_1 <= tiempo_fin_atencion_oficina_1 || tiempo_fin_atencion_oficina_1 == 0.0) &&
-            //    (tiempo_fin_atencion_nave_1 <= tiempo_fin_atencion_oficina_2|| tiempo_fin_atencion_oficina_2 == 0.0))
-            //{
-            //    reloj = tiempo_fin_atencion_nave_1;
-            //    return "tiempo_fin_atencion_nave_1";
-            //}
-            //else if (
-            //    (tiempo_fin_atencion_nave_2 != 0) &&
-            //    tiempo_fin_atencion_nave_2 <= tiempo_proxima_llegada &&
-            //    (tiempo_fin_atencion_nave_2 <= tiempo_fin_atencion_caseta || tiempo_fin_atencion_caseta == 0.0) && 
-            //    (tiempo_fin_atencion_nave_2 <= tiempo_fin_atencion_nave_1 || tiempo_fin_atencion_nave_1 == 0.0) &&
-            //    (tiempo_fin_atencion_nave_2 <= tiempo_fin_atencion_oficina_1 || tiempo_fin_atencion_oficina_1 == 0.0) &&
-            //    (tiempo_fin_atencion_nave_2 <= tiempo_fin_atencion_oficina_2 || tiempo_fin_atencion_oficina_2 == 0.0))
-            //{
-            //    reloj = tiempo_fin_atencion_nave_2;
-            //    return "tiempo_fin_atencion_nave_2";
-            //}
-            //else if (
-            //    (tiempo_fin_atencion_oficina_1 != 0) &&
-            //    tiempo_fin_atencion_oficina_1 <= tiempo_proxima_llegada &&
-            //    (tiempo_fin_atencion_oficina_1 <= tiempo_fin_atencion_caseta || tiempo_fin_atencion_caseta == 0.0) && 
-            //    (tiempo_fin_atencion_oficina_1 <= tiempo_fin_atencion_nave_1 || tiempo_fin_atencion_nave_1 == 0.0) &&
-            //    (tiempo_fin_atencion_oficina_1 <= tiempo_fin_atencion_nave_2 || tiempo_fin_atencion_nave_2 == 0.0) &&
-            //    (tiempo_fin_atencion_oficina_1 <= tiempo_fin_atencion_oficina_2 || tiempo_fin_atencion_oficina_2 == 0.0))
-            //{
-            //    reloj = tiempo_fin_atencion_oficina_1;
-            //    return "tiempo_fin_atencion_oficina_1";
-            //}
-            //else 
-            //{
-            //    reloj = tiempo_fin_atencion_oficina_2;
-            //    return "tiempo_fin_atencion_oficina_2";
-            //}
-
         }
 
         //Función que se encarga de verificar cual es el siguiente evento y apartir de eso ejecutar lo que corresponda
@@ -1007,12 +948,13 @@ namespace ITV
 
             //tamaños
             int comienzo_de_metricas = dg_colas.Columns["Tiempo de permanencia en cola de la nave"].Index;
+            int ultima_metrica = comienzo_de_metricas + 19;
             dg_colas.Columns[0].Width = 160;
             for (int i = 1; i <= comienzo_de_metricas; i++)
             {
                 dg_colas.Columns[i].Width = 60;
             }
-            for (int i = comienzo_de_metricas; i < comienzo_de_metricas+19; i++)
+            for (int i = comienzo_de_metricas; i < ultima_metrica; i++)
             {
                 dg_colas.Columns[i].Width = 100;
             }
