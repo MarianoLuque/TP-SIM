@@ -8,9 +8,10 @@ namespace ITV
 {
     class servidor
     {
-        public enum Estados { libre, ocupado };
+        public enum Estados { libre, ocupado, bloqueado };
         private Estados estado;
         private double fin_atencion;
+        private double tiempo_remanente_atencion;
         private cliente cliente_atendido;
         public enum Tipos { caseta, nave, oficina };
         private Tipos tipo;
@@ -52,6 +53,11 @@ namespace ITV
         public Tipos GetTipo()
         {
             return this.tipo;
+        }
+
+        public void SetTiempoRemanenteAtencion(double tiempo_remanente_atencion)
+        {
+            this.tiempo_remanente_atencion = tiempo_remanente_atencion;
         }
     }
 }

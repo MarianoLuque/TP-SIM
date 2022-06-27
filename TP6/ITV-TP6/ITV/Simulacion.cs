@@ -46,6 +46,8 @@ namespace ITV
         Random objeto_rnd_atencion_nave;
         Random objeto_rnd_atencion_oficina;
         Random objeto_semilla;
+        Random objeto_rnd_atentados_tipo;
+        Random objeto_rnd_atentados_beta;
 
         //Número entre 0 y 1 para calcular los tiempo según corresponda
         double rnd_llegadas, rnd_atencion_caseta, rnd_atencion_nave, rnd_atencion_oficina;
@@ -777,7 +779,9 @@ namespace ITV
             objeto_rnd_atencion_caseta = new Random(objeto_semilla.Next());
             objeto_rnd_atencion_nave = new Random(objeto_semilla.Next());
             objeto_rnd_atencion_oficina = new Random(objeto_semilla.Next());
-
+            objeto_rnd_atentados_tipo = new Random(objeto_semilla.Next());
+            objeto_rnd_atentados_beta = new Random(objeto_semilla.Next());
+            
             //pregunto si el programa ya se ejecuto
             if (flag_tabla_cargada)
             {
@@ -1193,5 +1197,59 @@ namespace ITV
             lista_naves = new List<servidor>();
             lista_oficinas = new List<servidor>();
         }
+
+        public void EventoAtentado()
+        {
+            double tipo_atentado = objeto_rnd_atentados_tipo.NextDouble();
+            if (tipo_atentado <= 0.29)
+            {
+                //bloquear las llegadas
+                //llamar a rungeKutta(0)
+                
+            }
+            else
+            {
+                //bloquear el servidor
+            }
+            //calcularProximoAtentado
+        }
+
+        public void calcularProximoAtentado()
+        {
+
+        }
+
+        public void EventoFinBloqueoLlegadas()
+        {
+
+        }
+
+        public void EventoFinBloqueoServicio()
+        {
+
+        }
+
+        //Nosotros elegimos que servicio se va a demorar?
+        //Llamamos a esta funcion cuando se produce el evento Atentado
+        public void rungeKutta(int llegada_o_servicio /* 0 llegada y 1 servicio */)
+        {
+            double t0 = reloj;
+            double S0_o_L0 = 0;
+
+            double t1 = 0;
+            double S1_o_L1 = 0;
+
+            double k1 = 0.0;
+            double k2 = 0.0;
+            double k3 = 0.0;
+            double k4 = 0.0;
+            
+            if( llegada_o_servicio == 0)
+            {
+
+            }
+
+        }
+
     }
 }
