@@ -59,5 +59,11 @@ namespace ITV
         {
             this.tiempo_remanente_atencion = tiempo_remanente_atencion;
         }
+
+        public double GetTiempoRemanenteAtencion()
+        {
+            return this.tiempo_remanente_atencion;
+        }
+        
     }
 }
