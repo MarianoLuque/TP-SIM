@@ -21,7 +21,8 @@ namespace ITV
                               SIENDO_ATENDIDO_OFICINA_2         = 7,
                               SIN_LUGAR_EN_COLA_CASETA          = 8,
                               FUERA_DEL_SISTEMA                 = 9,
-                              ESPERANDO_REANUDACION_ATENCION    = 10
+                              ESPERANDO_REANUDACION_ATENCION    = 10,
+                              INGRESO_BLOQUEADO                 = 11
         };
         private Estados estado;
         
