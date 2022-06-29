@@ -71,11 +71,14 @@ namespace ITV
         double h;
         double A;
         int cantidad_iteraciones_rk_atentado;
+        int cantidad_iteraciones_mostradas_atentado;
         int cantidad_iteraciones_rk_bloqueo_ingreso;
+        int cantidad_iteraciones_mostradas_bloqueo_ingreso;
         int cantidad_iteraciones_rk_bloqueo_servicio;
+        int cantidad_iteraciones_mostradas_bloqueo_servicio;
 
         //datatable RungeKutta
-        DataTable tabla_rk_atentado;
+        DataTable tabla_rk_atentado = new DataTable();
         DataTable tabla_rk_atentado2;
         DataTable tabla_rk_atentado3;
         DataTable tabla_rk_bloqueo_ingreso;
@@ -85,7 +88,7 @@ namespace ITV
 
         //bandera llegadas
         bool bandera_llegadas;
-        
+
         //Cola para los servidores
         List<cliente> cola_clientes_caseta;
         List<cliente> cola_clientes_nave;
@@ -531,6 +534,8 @@ namespace ITV
                 lbl_desde.Text = lbl_desde.Text + "(Desde 0 hasta " + (cantidad - 400).ToString() + ")";
                 lbl_desde.Location = new Point(lbl_desde.Location.X + 95, lbl_desde.Location.Y);
             }
+
+            txt_h.Text = "0,01";
         }
 
         private void btn_cerrar_programa_Click(object sender, EventArgs e)
@@ -558,14 +563,14 @@ namespace ITV
                 tiempo_fin_bloqueo_servicio = tiempo_entre_bloqueos_servicio + reloj;
                 foreach (servidor serv in lista_casetas)
                 {
-                    if(serv.GetEstado() == servidor.Estados.ocupado)
+                    if (serv.GetEstado() == servidor.Estados.ocupado)
                     {
                         serv.SetTiempoRemanenteAtencion(Math.Truncate((serv.GetFinAtencion() - reloj) * 100) / 100);
                         serv.SetFinAtencion(0.0);
                         serv.GetCliente().SetEstado(cliente.Estados.ESPERANDO_REANUDACION_ATENCION);
                     }
                     serv.SetEstado(servidor.Estados.bloqueado);
-                    
+
                 }
             }
         }
@@ -581,7 +586,7 @@ namespace ITV
             tiempo_fin_bloqueo_servicio = 0;
             foreach (servidor serv in lista_casetas)
             {
-                if(serv.GetCliente() == null)
+                if (serv.GetCliente() == null)
                 {
                     serv.SetEstado(servidor.Estados.libre);
                 }
@@ -601,7 +606,7 @@ namespace ITV
             double x0 = 0;
             double y0 = reloj;
             double h_2 = (h / 2);
-            int maximo = 72;
+            int maximo = 10;
 
             double x1 = 0;
             double y1 = 0;
@@ -618,17 +623,18 @@ namespace ITV
                 {
                     if (cantidad_iteraciones >= simulacion_desde && cantidad_iteraciones < simulacion_desde + 400)
                     {
-                        if(cantidad_iteraciones_rk_atentado <= maximo)
+                        cantidad_iteraciones_mostradas_atentado += 1;
+                        if (cantidad_iteraciones_mostradas_atentado <= maximo)
                         {
-                            cargarTablaRKAtentado(cantidad_iteraciones_rk_atentado);
+                            cargarTablaRKAtentado(cantidad_iteraciones_mostradas_atentado);
                         }
-                        else if(cantidad_iteraciones_rk_atentado <= 2 * maximo)
+                        else if (cantidad_iteraciones_mostradas_atentado <= 2 * maximo)
                         {
-                            cargarTablaRKAtentado2(cantidad_iteraciones_rk_atentado);
+                            cargarTablaRKAtentado2(cantidad_iteraciones_mostradas_atentado);
                         }
-                        else if (cantidad_iteraciones_rk_atentado <= 3 * maximo)
+                        else if (cantidad_iteraciones_mostradas_atentado <= 3 * maximo)
                         {
-                            cargarTablaRKAtentado3(cantidad_iteraciones_rk_atentado);
+                            cargarTablaRKAtentado3(cantidad_iteraciones_mostradas_atentado);
                         }
                     }
                 }
@@ -636,21 +642,22 @@ namespace ITV
                 {
                     if (reloj >= simulacion_desde && cantidad_a_mostrar < 400)
                     {
-                        if (cantidad_iteraciones_rk_atentado <= maximo)
+                        cantidad_iteraciones_mostradas_atentado += 1;
+                        if (cantidad_iteraciones_mostradas_atentado <= maximo)
                         {
-                            cargarTablaRKAtentado(cantidad_iteraciones_rk_atentado);
+                            cargarTablaRKAtentado(cantidad_iteraciones_mostradas_atentado);
                         }
-                        else if (cantidad_iteraciones_rk_atentado <= 2 * maximo)
+                        else if (cantidad_iteraciones_mostradas_atentado <= 2 * maximo)
                         {
-                            cargarTablaRKAtentado2(cantidad_iteraciones_rk_atentado);
+                            cargarTablaRKAtentado2(cantidad_iteraciones_mostradas_atentado);
                         }
-                        else if (cantidad_iteraciones_rk_atentado <= 3 * maximo)
+                        else if (cantidad_iteraciones_mostradas_atentado <= 3 * maximo)
                         {
-                            cargarTablaRKAtentado3(cantidad_iteraciones_rk_atentado);
+                            cargarTablaRKAtentado3(cantidad_iteraciones_mostradas_atentado);
                         }
                     }
                 }
-                
+
                 do
                 {
                     rnd_beta = Math.Truncate((objeto_rnd_atentados_beta.NextDouble() * 100)) / 100;
@@ -661,7 +668,7 @@ namespace ITV
                 bool flag_primera = false;
                 do
                 {
-                    
+
                     if (!flag_primera)
                     {
                         flag_primera = true;
@@ -686,119 +693,119 @@ namespace ITV
                     {
                         if (cantidad_iteraciones >= simulacion_desde && cantidad_iteraciones < simulacion_desde + 400)
                         {
-                            if(cantidad_iteraciones_rk_atentado <= maximo)
+                            if (cantidad_iteraciones_mostradas_atentado <= maximo)
                             {
                                 if (iteracion >= tabla_rk_atentado.Rows.Count)
                                 {
                                     tabla_rk_atentado.Rows.Add();
                                 }
 
-                                tabla_rk_atentado.Rows[iteracion]["t-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(x0 * 1000) / 1000;
-                                tabla_rk_atentado.Rows[iteracion]["A-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(y0 * 1000) / 1000;
-                                tabla_rk_atentado.Rows[iteracion]["β-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(rnd_beta * 1000) / 1000;
-                                tabla_rk_atentado.Rows[iteracion]["K1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k1 * 1000) / 1000;
-                                tabla_rk_atentado.Rows[iteracion]["K2-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k2 * 1000) / 1000;
-                                tabla_rk_atentado.Rows[iteracion]["K3-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k3 * 1000) / 1000;
-                                tabla_rk_atentado.Rows[iteracion]["K4-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k4 * 1000) / 1000;
-                                tabla_rk_atentado.Rows[iteracion]["t1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(x1 * 1000) / 1000;
-                                tabla_rk_atentado.Rows[iteracion]["A1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(y1 * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["t-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(x0 * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["A-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(y0 * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["β-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(rnd_beta * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["K1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k1 * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["K2-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k2 * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["K3-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k3 * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["K4-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k4 * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["t1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(x1 * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["A1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(y1 * 1000) / 1000;
                                 iteracion += 1;
                             }
-                            else if(cantidad_iteraciones_rk_atentado <= 2*maximo)
+                            else if (cantidad_iteraciones_mostradas_atentado <= 2 * maximo)
                             {
                                 if (iteracion >= tabla_rk_atentado2.Rows.Count)
                                 {
                                     tabla_rk_atentado2.Rows.Add();
                                 }
 
-                                tabla_rk_atentado2.Rows[iteracion]["t-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(x0 * 1000) / 1000;
-                                tabla_rk_atentado2.Rows[iteracion]["A-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(y0 * 1000) / 1000;
-                                tabla_rk_atentado2.Rows[iteracion]["β-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(rnd_beta * 1000) / 1000;
-                                tabla_rk_atentado2.Rows[iteracion]["K1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k1 * 1000) / 1000;
-                                tabla_rk_atentado2.Rows[iteracion]["K2-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k2 * 1000) / 1000;
-                                tabla_rk_atentado2.Rows[iteracion]["K3-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k3 * 1000) / 1000;
-                                tabla_rk_atentado2.Rows[iteracion]["K4-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k4 * 1000) / 1000;
-                                tabla_rk_atentado2.Rows[iteracion]["t1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(x1 * 1000) / 1000;
-                                tabla_rk_atentado2.Rows[iteracion]["A1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(y1 * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["t-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(x0 * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["A-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(y0 * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["β-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(rnd_beta * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["K1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k1 * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["K2-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k2 * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["K3-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k3 * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["K4-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k4 * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["t1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(x1 * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["A1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(y1 * 1000) / 1000;
                                 iteracion += 1;
                             }
-                            else if(cantidad_iteraciones_rk_atentado <= 3 * maximo)
+                            else if (cantidad_iteraciones_mostradas_atentado <= 3 * maximo)
                             {
                                 if (iteracion >= tabla_rk_atentado3.Rows.Count)
                                 {
                                     tabla_rk_atentado3.Rows.Add();
                                 }
 
-                                tabla_rk_atentado3.Rows[iteracion]["t-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(x0 * 1000) / 1000;
-                                tabla_rk_atentado3.Rows[iteracion]["A-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(y0 * 1000) / 1000;
-                                tabla_rk_atentado3.Rows[iteracion]["β-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(rnd_beta * 1000) / 1000;
-                                tabla_rk_atentado3.Rows[iteracion]["K1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k1 * 1000) / 1000;
-                                tabla_rk_atentado3.Rows[iteracion]["K2-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k2 * 1000) / 1000;
-                                tabla_rk_atentado3.Rows[iteracion]["K3-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k3 * 1000) / 1000;
-                                tabla_rk_atentado3.Rows[iteracion]["K4-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k4 * 1000) / 1000;
-                                tabla_rk_atentado3.Rows[iteracion]["t1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(x1 * 1000) / 1000;
-                                tabla_rk_atentado3.Rows[iteracion]["A1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(y1 * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["t-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(x0 * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["A-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(y0 * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["β-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(rnd_beta * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["K1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k1 * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["K2-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k2 * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["K3-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k3 * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["K4-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k4 * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["t1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(x1 * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["A1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(y1 * 1000) / 1000;
                                 iteracion += 1;
                             }
-                            
+
                         }
                     }
                     else
                     {
                         if (reloj >= simulacion_desde && cantidad_a_mostrar < 400)
                         {
-                            if (cantidad_iteraciones_rk_atentado <= maximo)
+                            if (cantidad_iteraciones_mostradas_atentado <= maximo)
                             {
                                 if (iteracion >= tabla_rk_atentado.Rows.Count)
                                 {
                                     tabla_rk_atentado.Rows.Add();
                                 }
 
-                                tabla_rk_atentado.Rows[iteracion]["t-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(x0 * 1000) / 1000;
-                                tabla_rk_atentado.Rows[iteracion]["A-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(y0 * 1000) / 1000;
-                                tabla_rk_atentado.Rows[iteracion]["β-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(rnd_beta * 1000) / 1000;
-                                tabla_rk_atentado.Rows[iteracion]["K1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k1 * 1000) / 1000;
-                                tabla_rk_atentado.Rows[iteracion]["K2-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k2 * 1000) / 1000;
-                                tabla_rk_atentado.Rows[iteracion]["K3-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k3 * 1000) / 1000;
-                                tabla_rk_atentado.Rows[iteracion]["K4-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k4 * 1000) / 1000;
-                                tabla_rk_atentado.Rows[iteracion]["t1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(x1 * 1000) / 1000;
-                                tabla_rk_atentado.Rows[iteracion]["A1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(y1 * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["t-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(x0 * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["A-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(y0 * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["β-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(rnd_beta * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["K1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k1 * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["K2-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k2 * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["K3-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k3 * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["K4-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k4 * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["t1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(x1 * 1000) / 1000;
+                                tabla_rk_atentado.Rows[iteracion]["A1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(y1 * 1000) / 1000;
                                 iteracion += 1;
                             }
-                            else if (cantidad_iteraciones_rk_atentado <= 2 * maximo)
+                            else if (cantidad_iteraciones_mostradas_atentado <= 2 * maximo)
                             {
                                 if (iteracion >= tabla_rk_atentado2.Rows.Count)
                                 {
                                     tabla_rk_atentado2.Rows.Add();
                                 }
 
-                                tabla_rk_atentado2.Rows[iteracion]["t-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(x0 * 1000) / 1000;
-                                tabla_rk_atentado2.Rows[iteracion]["A-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(y0 * 1000) / 1000;
-                                tabla_rk_atentado2.Rows[iteracion]["β-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(rnd_beta * 1000) / 1000;
-                                tabla_rk_atentado2.Rows[iteracion]["K1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k1 * 1000) / 1000;
-                                tabla_rk_atentado2.Rows[iteracion]["K2-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k2 * 1000) / 1000;
-                                tabla_rk_atentado2.Rows[iteracion]["K3-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k3 * 1000) / 1000;
-                                tabla_rk_atentado2.Rows[iteracion]["K4-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k4 * 1000) / 1000;
-                                tabla_rk_atentado2.Rows[iteracion]["t1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(x1 * 1000) / 1000;
-                                tabla_rk_atentado2.Rows[iteracion]["A1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(y1 * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["t-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(x0 * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["A-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(y0 * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["β-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(rnd_beta * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["K1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k1 * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["K2-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k2 * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["K3-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k3 * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["K4-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k4 * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["t1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(x1 * 1000) / 1000;
+                                tabla_rk_atentado2.Rows[iteracion]["A1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(y1 * 1000) / 1000;
                                 iteracion += 1;
                             }
-                            else if (cantidad_iteraciones_rk_atentado <= 3 * maximo)
+                            else if (cantidad_iteraciones_mostradas_atentado <= 3 * maximo)
                             {
                                 if (iteracion >= tabla_rk_atentado3.Rows.Count)
                                 {
                                     tabla_rk_atentado3.Rows.Add();
                                 }
 
-                                tabla_rk_atentado3.Rows[iteracion]["t-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(x0 * 1000) / 1000;
-                                tabla_rk_atentado3.Rows[iteracion]["A-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(y0 * 1000) / 1000;
-                                tabla_rk_atentado3.Rows[iteracion]["β-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(rnd_beta * 1000) / 1000;
-                                tabla_rk_atentado3.Rows[iteracion]["K1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k1 * 1000) / 1000;
-                                tabla_rk_atentado3.Rows[iteracion]["K2-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k2 * 1000) / 1000;
-                                tabla_rk_atentado3.Rows[iteracion]["K3-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k3 * 1000) / 1000;
-                                tabla_rk_atentado3.Rows[iteracion]["K4-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(k4 * 1000) / 1000;
-                                tabla_rk_atentado3.Rows[iteracion]["t1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(x1 * 1000) / 1000;
-                                tabla_rk_atentado3.Rows[iteracion]["A1-" + cantidad_iteraciones_rk_atentado.ToString()] = Math.Truncate(y1 * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["t-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(x0 * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["A-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(y0 * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["β-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(rnd_beta * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["K1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k1 * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["K2-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k2 * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["K3-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k3 * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["K4-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(k4 * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["t1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(x1 * 1000) / 1000;
+                                tabla_rk_atentado3.Rows[iteracion]["A1-" + cantidad_iteraciones_mostradas_atentado.ToString()] = Math.Truncate(y1 * 1000) / 1000;
                                 iteracion += 1;
                             }
                         }
@@ -813,39 +820,51 @@ namespace ITV
             {
                 if (parametro_cantidad == "eventos")
                 {
-                    
+
                     if (cantidad_iteraciones >= simulacion_desde && cantidad_iteraciones < simulacion_desde + 400)
                     {
-                        if (cantidad_iteraciones_rk_bloqueo_ingreso <= maximo)
+                        cantidad_iteraciones_mostradas_bloqueo_ingreso += 1;
+                        if (cantidad_iteraciones_mostradas_bloqueo_ingreso <= maximo)
                         {
-                            cargarTablaRKBloqueoIngreso(cantidad_iteraciones_rk_bloqueo_ingreso);
+
+                            cargarTablaRKBloqueoIngreso(cantidad_iteraciones_mostradas_bloqueo_ingreso);
+
                         }
-                        else if (cantidad_iteraciones_rk_bloqueo_ingreso <= 2 * maximo)
+                        else if (cantidad_iteraciones_mostradas_bloqueo_ingreso <= 2 * maximo)
                         {
-                            cargarTablaRKBloqueoIngreso2(cantidad_iteraciones_rk_bloqueo_ingreso);
+
+                            cargarTablaRKBloqueoIngreso2(cantidad_iteraciones_mostradas_bloqueo_ingreso);
+
                         }
+
+
                     }
                 }
                 else
                 {
                     if (reloj >= simulacion_desde && cantidad_a_mostrar < 400)
                     {
-                        if (cantidad_iteraciones_rk_bloqueo_ingreso <= maximo)
+                        cantidad_iteraciones_mostradas_bloqueo_ingreso += 1;
+                        if (cantidad_iteraciones_mostradas_bloqueo_ingreso <= maximo)
                         {
-                            cargarTablaRKBloqueoIngreso(cantidad_iteraciones_rk_bloqueo_ingreso);
+                            cargarTablaRKBloqueoIngreso(cantidad_iteraciones_mostradas_bloqueo_ingreso);
+
                         }
-                        else if (cantidad_iteraciones_rk_bloqueo_ingreso <= 2 * maximo)
+                        else if (cantidad_iteraciones_mostradas_bloqueo_ingreso <= 2 * maximo)
                         {
-                            cargarTablaRKBloqueoIngreso2(cantidad_iteraciones_rk_bloqueo_ingreso);
+                            cargarTablaRKBloqueoIngreso2(cantidad_iteraciones_mostradas_bloqueo_ingreso);
+
                         }
+
+
                     }
                 }
-                
+
 
                 bool flag_primera = false;
                 do
                 {
-                    
+
                     if (!flag_primera)
                     {
                         flag_primera = true;
@@ -869,38 +888,40 @@ namespace ITV
                     {
                         if (cantidad_iteraciones >= simulacion_desde && cantidad_iteraciones < simulacion_desde + 400)
                         {
-                            if (cantidad_iteraciones_rk_bloqueo_ingreso <= maximo)
+                            if (cantidad_iteraciones_mostradas_bloqueo_ingreso <= maximo)
                             {
                                 if (iteracion >= tabla_rk_bloqueo_ingreso.Rows.Count)
                                 {
                                     tabla_rk_bloqueo_ingreso.Rows.Add();
                                 }
-                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["t-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = x0;
-                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["L-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = y0;
-                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["K1-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = k1;
-                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["K2-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = k2;
-                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["K3-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = k3;
-                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["K4-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = k4;
-                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["t1-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = x1;
-                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["L1-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = y1;
+                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["t-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = x0;
+                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["L-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = y0;
+                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["K1-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = k1;
+                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["K2-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = k2;
+                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["K3-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = k3;
+                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["K4-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = k4;
+                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["t1-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = x1;
+                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["L1-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = y1;
                                 iteracion += 1;
                             }
-                            else if (cantidad_iteraciones_rk_bloqueo_ingreso <= 2 * maximo)
+                            else if (cantidad_iteraciones_mostradas_bloqueo_ingreso <= 2 * maximo)
                             {
                                 if (iteracion >= tabla_rk_bloqueo_ingreso2.Rows.Count)
                                 {
                                     tabla_rk_bloqueo_ingreso2.Rows.Add();
                                 }
-                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["t-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = x0;
-                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["L-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = y0;
-                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K1-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = k1;
-                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K2-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = k2;
-                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K3-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = k3;
-                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K4-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = k4;
-                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["t1-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = x1;
-                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["L1-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = y1;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["t-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = x0;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["L-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = y0;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K1-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = k1;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K2-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = k2;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K3-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = k3;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K4-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = k4;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["t1-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = x1;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["L1-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = y1;
                                 iteracion += 1;
                             }
+
+
 
                         }
                     }
@@ -908,45 +929,49 @@ namespace ITV
                     {
                         if (reloj >= simulacion_desde && cantidad_a_mostrar < 400)
                         {
-                            if (cantidad_iteraciones_rk_bloqueo_ingreso <= maximo)
+                            if (cantidad_iteraciones_mostradas_bloqueo_ingreso <= maximo)
                             {
                                 if (iteracion >= tabla_rk_bloqueo_ingreso.Rows.Count)
                                 {
                                     tabla_rk_bloqueo_ingreso.Rows.Add();
                                 }
-                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["t-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = x0;
-                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["L-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = y0;
-                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["K1-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = k1;
-                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["K2-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = k2;
-                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["K3-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = k3;
-                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["K4-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = k4;
-                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["t1-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = x1;
-                                tabla_rk_bloqueo_ingreso.Rows[iteracion]["L1-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = y1;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["t-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = x0;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["L-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = y0;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K1-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = k1;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K2-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = k2;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K3-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = k3;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K4-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = k4;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["t1-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = x1;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["L1-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = y1;
                                 iteracion += 1;
                             }
-                            else if (cantidad_iteraciones_rk_bloqueo_ingreso <= 2 * maximo)
+                            else if (cantidad_iteraciones_mostradas_bloqueo_ingreso <= 2 * maximo)
                             {
                                 if (iteracion >= tabla_rk_bloqueo_ingreso2.Rows.Count)
                                 {
                                     tabla_rk_bloqueo_ingreso2.Rows.Add();
                                 }
-                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["t-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = x0;
-                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["L-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = y0;
-                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K1-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = k1;
-                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K2-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = k2;
-                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K3-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = k3;
-                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K4-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = k4;
-                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["t1-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = x1;
-                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["L1-" + cantidad_iteraciones_rk_bloqueo_ingreso.ToString()] = y1;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["t-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = x0;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["L-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = y0;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K1-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = k1;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K2-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = k2;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K3-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = k3;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["K4-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = k4;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["t1-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = x1;
+                                tabla_rk_bloqueo_ingreso2.Rows[iteracion]["L1-" + cantidad_iteraciones_mostradas_bloqueo_ingreso.ToString()] = y1;
                                 iteracion += 1;
                             }
+
+
                         }
                     }
 
-                    
+
                 }
                 while (Math.Abs(y0 - y1) > 1);
+
                 cantidad_iteraciones_rk_bloqueo_ingreso += 1;
+
                 return (x1 * 5);
             }
 
@@ -956,28 +981,30 @@ namespace ITV
                 {
                     if (cantidad_iteraciones >= simulacion_desde && cantidad_iteraciones < simulacion_desde + 400)
                     {
-                        if(cantidad_iteraciones_rk_bloqueo_servicio <= maximo)
+                        cantidad_iteraciones_mostradas_bloqueo_servicio += 1;
+                        if (cantidad_iteraciones_mostradas_bloqueo_servicio <= maximo)
                         {
-                            cargarTablaRKBloqueoCaseta(cantidad_iteraciones_rk_bloqueo_servicio);
+                            cargarTablaRKBloqueoCaseta(cantidad_iteraciones_mostradas_bloqueo_servicio);
                         }
-                        else if(cantidad_iteraciones_rk_bloqueo_servicio <= 2 * maximo)
+                        else if (cantidad_iteraciones_mostradas_bloqueo_servicio <= 2 * maximo)
                         {
-                            cargarTablaRKBloqueoCaseta2(cantidad_iteraciones_rk_bloqueo_servicio);
+                            cargarTablaRKBloqueoCaseta2(cantidad_iteraciones_mostradas_bloqueo_servicio);
                         }
-                        
+
                     }
                 }
                 else
                 {
                     if (reloj >= simulacion_desde && cantidad_a_mostrar < 400)
                     {
-                        if (cantidad_iteraciones_rk_bloqueo_servicio <= maximo)
+                        cantidad_iteraciones_mostradas_bloqueo_servicio += 1;
+                        if (cantidad_iteraciones_mostradas_bloqueo_servicio <= maximo)
                         {
-                            cargarTablaRKBloqueoCaseta(cantidad_iteraciones_rk_bloqueo_servicio);
+                            cargarTablaRKBloqueoCaseta(cantidad_iteraciones_mostradas_bloqueo_servicio);
                         }
-                        else if (cantidad_iteraciones_rk_bloqueo_servicio <= 2 * maximo)
+                        else if (cantidad_iteraciones_mostradas_bloqueo_servicio <= 2 * maximo)
                         {
-                            cargarTablaRKBloqueoCaseta2(cantidad_iteraciones_rk_bloqueo_servicio);
+                            cargarTablaRKBloqueoCaseta2(cantidad_iteraciones_mostradas_bloqueo_servicio);
                         }
                     }
                 }
@@ -1009,38 +1036,38 @@ namespace ITV
                     {
                         if (cantidad_iteraciones >= simulacion_desde && cantidad_iteraciones < simulacion_desde + 400)
                         {
-                            if(cantidad_iteraciones_rk_bloqueo_servicio <= maximo)
+                            if (cantidad_iteraciones_mostradas_bloqueo_servicio <= maximo)
                             {
                                 if (iteracion >= tabla_rk_bloqueo_servicio.Rows.Count)
                                 {
                                     tabla_rk_bloqueo_servicio.Rows.Add();
                                 }
 
-                                tabla_rk_bloqueo_servicio.Rows[iteracion]["t-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = x0;
-                                tabla_rk_bloqueo_servicio.Rows[iteracion]["S-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = y0;
-                                tabla_rk_bloqueo_servicio.Rows[iteracion]["K1-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = k1;
-                                tabla_rk_bloqueo_servicio.Rows[iteracion]["K2-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = k2;
-                                tabla_rk_bloqueo_servicio.Rows[iteracion]["K3-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = k3;
-                                tabla_rk_bloqueo_servicio.Rows[iteracion]["K4-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = k4;
-                                tabla_rk_bloqueo_servicio.Rows[iteracion]["t1-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = x1;
-                                tabla_rk_bloqueo_servicio.Rows[iteracion]["S1-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = y1;
+                                tabla_rk_bloqueo_servicio.Rows[iteracion]["t-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = x0;
+                                tabla_rk_bloqueo_servicio.Rows[iteracion]["S-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = y0;
+                                tabla_rk_bloqueo_servicio.Rows[iteracion]["K1-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = k1;
+                                tabla_rk_bloqueo_servicio.Rows[iteracion]["K2-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = k2;
+                                tabla_rk_bloqueo_servicio.Rows[iteracion]["K3-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = k3;
+                                tabla_rk_bloqueo_servicio.Rows[iteracion]["K4-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = k4;
+                                tabla_rk_bloqueo_servicio.Rows[iteracion]["t1-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = x1;
+                                tabla_rk_bloqueo_servicio.Rows[iteracion]["S1-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = y1;
                                 iteracion += 1;
                             }
-                            else if(cantidad_iteraciones_rk_bloqueo_servicio <= 2 * maximo)
+                            else if (cantidad_iteraciones_mostradas_bloqueo_servicio <= 2 * maximo)
                             {
                                 if (iteracion >= tabla_rk_bloqueo_servicio2.Rows.Count)
                                 {
                                     tabla_rk_bloqueo_servicio2.Rows.Add();
                                 }
 
-                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["t-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = x0;
-                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["S-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = y0;
-                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["K1-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = k1;
-                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["K2-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = k2;
-                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["K3-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = k3;
-                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["K4-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = k4;
-                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["t1-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = x1;
-                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["S1-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = y1;
+                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["t-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = x0;
+                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["S-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = y0;
+                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["K1-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = k1;
+                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["K2-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = k2;
+                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["K3-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = k3;
+                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["K4-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = k4;
+                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["t1-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = x1;
+                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["S1-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = y1;
                                 iteracion += 1;
                             }
                         }
@@ -1049,44 +1076,44 @@ namespace ITV
                     {
                         if (reloj >= simulacion_desde && cantidad_a_mostrar < 400)
                         {
-                            if (cantidad_iteraciones_rk_bloqueo_servicio <= maximo)
+                            if (cantidad_iteraciones_mostradas_bloqueo_servicio <= maximo)
                             {
                                 if (iteracion >= tabla_rk_bloqueo_servicio.Rows.Count)
                                 {
                                     tabla_rk_bloqueo_servicio.Rows.Add();
                                 }
 
-                                tabla_rk_bloqueo_servicio.Rows[iteracion]["t-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = x0;
-                                tabla_rk_bloqueo_servicio.Rows[iteracion]["S-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = y0;
-                                tabla_rk_bloqueo_servicio.Rows[iteracion]["K1-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = k1;
-                                tabla_rk_bloqueo_servicio.Rows[iteracion]["K2-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = k2;
-                                tabla_rk_bloqueo_servicio.Rows[iteracion]["K3-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = k3;
-                                tabla_rk_bloqueo_servicio.Rows[iteracion]["K4-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = k4;
-                                tabla_rk_bloqueo_servicio.Rows[iteracion]["t1-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = x1;
-                                tabla_rk_bloqueo_servicio.Rows[iteracion]["S1-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = y1;
+                                tabla_rk_bloqueo_servicio.Rows[iteracion]["t-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = x0;
+                                tabla_rk_bloqueo_servicio.Rows[iteracion]["S-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = y0;
+                                tabla_rk_bloqueo_servicio.Rows[iteracion]["K1-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = k1;
+                                tabla_rk_bloqueo_servicio.Rows[iteracion]["K2-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = k2;
+                                tabla_rk_bloqueo_servicio.Rows[iteracion]["K3-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = k3;
+                                tabla_rk_bloqueo_servicio.Rows[iteracion]["K4-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = k4;
+                                tabla_rk_bloqueo_servicio.Rows[iteracion]["t1-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = x1;
+                                tabla_rk_bloqueo_servicio.Rows[iteracion]["S1-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = y1;
                                 iteracion += 1;
                             }
-                            else if (cantidad_iteraciones_rk_bloqueo_servicio <= 2 * maximo)
+                            else if (cantidad_iteraciones_mostradas_bloqueo_servicio <= 2 * maximo)
                             {
                                 if (iteracion >= tabla_rk_bloqueo_servicio2.Rows.Count)
                                 {
                                     tabla_rk_bloqueo_servicio2.Rows.Add();
                                 }
 
-                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["t-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = x0;
-                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["S-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = y0;
-                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["K1-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = k1;
-                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["K2-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = k2;
-                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["K3-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = k3;
-                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["K4-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = k4;
-                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["t1-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = x1;
-                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["S1-" + cantidad_iteraciones_rk_bloqueo_servicio.ToString()] = y1;
+                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["t-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = x0;
+                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["S-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = y0;
+                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["K1-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = k1;
+                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["K2-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = k2;
+                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["K3-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = k3;
+                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["K4-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = k4;
+                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["t1-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = x1;
+                                tabla_rk_bloqueo_servicio2.Rows[iteracion]["S1-" + cantidad_iteraciones_mostradas_bloqueo_servicio.ToString()] = y1;
                                 iteracion += 1;
                             }
                         }
                     }
 
-                    
+
                 }
                 while (y1 < inicial);
                 cantidad_iteraciones_rk_bloqueo_servicio += 1;
@@ -1109,7 +1136,7 @@ namespace ITV
             foreach (servidor caseta in lista_casetas)
             {
                 double temp_fin_atencion_caseta = caseta.GetFinAtencion();
-                
+
                 if (temp_fin_atencion_caseta != 0.0 && temp_fin_atencion_caseta < temp_menor_caseta.GetFinAtencion())
                 {
                     temp_menor_caseta = caseta;
@@ -1341,12 +1368,12 @@ namespace ITV
                 {
                     tiempo_entre_bloqueos_ingreso = 0;
                 }
-                
+
                 if (tiempo_entre_bloqueos_servicio.ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Tiempo entre bloqueos de caseta"].ToString())
                 {
                     tiempo_entre_bloqueos_servicio = 0;
                 }
-                
+
                 if (rnd_atentado_tipo.ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["RND atentados"].ToString())
                 {
                     rnd_atentado_tipo = 0;
@@ -1479,9 +1506,9 @@ namespace ITV
                     else if (estado_cliente == 7) { estado_cliente_string = "FDS"; }
                     else if (estado_cliente == 8) { estado_cliente_string = "ERA"; }
                     else { estado_cliente_string = "IB"; }
-                    
 
-                        tabla_iteraciones.Rows[cantidad_iteraciones]["Estado cliente" + (i + nro_cliente_desde_que_se_muestra).ToString()] = estado_cliente_string;
+
+                    tabla_iteraciones.Rows[cantidad_iteraciones]["Estado cliente" + (i + nro_cliente_desde_que_se_muestra).ToString()] = estado_cliente_string;
                     tabla_iteraciones.Rows[cantidad_iteraciones]["Hora llegada cliente" + (i + nro_cliente_desde_que_se_muestra).ToString()] = clientes_a_mostrar[i].GetMinutoLlegadaAlSistema();
                 }
             }
@@ -1497,7 +1524,9 @@ namespace ITV
             objeto_rnd_atentados_tipo = new Random(objeto_semilla.Next());
             objeto_rnd_atentados_beta = new Random(objeto_semilla.Next());
 
-            if(txt_h.Text == "" || !double.TryParse(txt_h.Text, out h) || h < 0.01)
+
+
+            if (txt_h.Text == "" || !double.TryParse(txt_h.Text, out h) || h < 0.01)
             {
                 MessageBox.Show("Ingrese el paso de integracion (h) mayor o igual a 0.01", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -1510,8 +1539,12 @@ namespace ITV
                 dg_colas.DataSource = null;
                 dg_atentados.DataSource = null;
                 dg_atentados2.DataSource = null;
+                dg_atentados3.DataSource = null;
                 dg_bloqueo_llegadas.DataSource = null;
+                dg_bloqueo_llegadas2.DataSource = null;
                 dg_bloqueo_servidor.DataSource = null;
+                dg_bloqueo_servidor2.DataSource = null;
+
                 //limpiar las filas
                 tabla_iteraciones.Rows.Clear();
                 tabla_rk_atentado.Rows.Clear();
@@ -1540,9 +1573,9 @@ namespace ITV
             {
                 //si no se ejecuto cargo las columnas de la tabla
                 cargarTabla();
+
                 flag_tabla_cargada = true;
             }
-
             volverACero();
 
             //se crean los n servidores del tipo caseta
@@ -1718,13 +1751,13 @@ namespace ITV
 
             int h = 0;
             int j = 0;
-            for (int i = 0; i < (dg_atentados.Columns.Count/9); i++)
+            for (int i = 0; i < (dg_atentados.Columns.Count / 9); i++)
             {
-                if(i%2 == 0)
+                if (i % 2 == 0)
                 {
-                    for (; j < 9+h; j++)
+                    for (; j < 9 + h; j++)
                     {
-                        dg_atentados.Columns[j+h].DefaultCellStyle.BackColor = Color.LightSkyBlue;
+                        dg_atentados.Columns[j + h].DefaultCellStyle.BackColor = Color.LightSkyBlue;
                     }
                     h += 9;
                 }
@@ -1757,7 +1790,7 @@ namespace ITV
             }
             h = 0;
             j = 0;
-            for (int i = 0; i < (dg_bloqueo_llegadas.Columns.Count/8); i++)
+            for (int i = 0; i < (dg_bloqueo_llegadas.Columns.Count / 8); i++)
             {
                 if (i % 2 == 0)
                 {
@@ -1770,7 +1803,7 @@ namespace ITV
             }
             h = 0;
             j = 0;
-            for (int i = 0; i < (dg_bloqueo_llegadas2.Columns.Count/8); i++)
+            for (int i = 0; i < (dg_bloqueo_llegadas2.Columns.Count / 8); i++)
             {
                 if (i % 2 == 0)
                 {
@@ -1783,7 +1816,7 @@ namespace ITV
             }
             h = 0;
             j = 0;
-            for (int i = 0; i < (dg_bloqueo_servidor.Columns.Count/8); i++)
+            for (int i = 0; i < (dg_bloqueo_servidor.Columns.Count / 8); i++)
             {
                 if (i % 2 == 0)
                 {
@@ -1796,7 +1829,7 @@ namespace ITV
             }
             h = 0;
             j = 0;
-            for (int i = 0; i < (dg_bloqueo_servidor2.Columns.Count/8); i++)
+            for (int i = 0; i < (dg_bloqueo_servidor2.Columns.Count / 8); i++)
             {
                 if (i % 2 == 0)
                 {
@@ -1855,7 +1888,7 @@ namespace ITV
             tabla_iteraciones.Columns.Add(columna_rnd_atentados);
             DataColumn columna_tipo_atentado = new DataColumn("Tipo de atentado");
             tabla_iteraciones.Columns.Add(columna_tipo_atentado);
-            
+
 
             //Bloqueo llegadas
             DataColumn columna_tiempo_bloqueo_ingreso = new DataColumn("Tiempo entre bloqueos de llegadas");
@@ -2202,6 +2235,10 @@ namespace ITV
             cantidad_iteraciones_rk_atentado = 0;
             cantidad_iteraciones_rk_bloqueo_ingreso = 0;
             cantidad_iteraciones_rk_bloqueo_servicio = 0;
+
+            cantidad_iteraciones_mostradas_atentado = 0;
+            cantidad_iteraciones_mostradas_bloqueo_ingreso = 0;
+            cantidad_iteraciones_mostradas_bloqueo_servicio = 0;
 
             tabla_rk_atentado = new DataTable();
             tabla_rk_atentado2 = new DataTable();
