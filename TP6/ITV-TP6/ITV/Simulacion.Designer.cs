@@ -68,12 +68,18 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.dg_atentados2 = new System.Windows.Forms.DataGridView();
+            this.dg_atentados3 = new System.Windows.Forms.DataGridView();
+            this.dg_bloqueo_llegadas2 = new System.Windows.Forms.DataGridView();
+            this.dg_bloqueo_servidor2 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dg_colas)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_atentados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg_bloqueo_llegadas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg_bloqueo_servidor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg_atentados2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_atentados3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_bloqueo_llegadas2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_bloqueo_servidor2)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_cerrar_programa
@@ -291,7 +297,7 @@
             this.dg_atentados.Location = new System.Drawing.Point(12, 728);
             this.dg_atentados.Name = "dg_atentados";
             this.dg_atentados.RowHeadersWidth = 15;
-            this.dg_atentados.Size = new System.Drawing.Size(646, 191);
+            this.dg_atentados.Size = new System.Drawing.Size(441, 191);
             this.dg_atentados.TabIndex = 47;
             // 
             // dg_bloqueo_llegadas
@@ -303,17 +309,18 @@
             this.dg_bloqueo_llegadas.Location = new System.Drawing.Point(12, 973);
             this.dg_bloqueo_llegadas.Name = "dg_bloqueo_llegadas";
             this.dg_bloqueo_llegadas.RowHeadersWidth = 20;
-            this.dg_bloqueo_llegadas.Size = new System.Drawing.Size(1329, 191);
+            this.dg_bloqueo_llegadas.Size = new System.Drawing.Size(661, 191);
             this.dg_bloqueo_llegadas.TabIndex = 47;
             // 
             // dg_bloqueo_servidor
             // 
             this.dg_bloqueo_servidor.AllowUserToAddRows = false;
             this.dg_bloqueo_servidor.AllowUserToDeleteRows = false;
+            this.dg_bloqueo_servidor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dg_bloqueo_servidor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dg_bloqueo_servidor.Location = new System.Drawing.Point(12, 1220);
             this.dg_bloqueo_servidor.Name = "dg_bloqueo_servidor";
-            this.dg_bloqueo_servidor.Size = new System.Drawing.Size(1329, 191);
+            this.dg_bloqueo_servidor.Size = new System.Drawing.Size(661, 191);
             this.dg_bloqueo_servidor.TabIndex = 47;
             // 
             // label3
@@ -490,11 +497,46 @@
             this.dg_atentados2.AllowUserToDeleteRows = false;
             this.dg_atentados2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dg_atentados2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dg_atentados2.Location = new System.Drawing.Point(664, 728);
+            this.dg_atentados2.Location = new System.Drawing.Point(456, 728);
             this.dg_atentados2.Name = "dg_atentados2";
             this.dg_atentados2.RowHeadersWidth = 15;
-            this.dg_atentados2.Size = new System.Drawing.Size(677, 191);
+            this.dg_atentados2.Size = new System.Drawing.Size(441, 191);
             this.dg_atentados2.TabIndex = 47;
+            // 
+            // dg_atentados3
+            // 
+            this.dg_atentados3.AllowUserToAddRows = false;
+            this.dg_atentados3.AllowUserToDeleteRows = false;
+            this.dg_atentados3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dg_atentados3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_atentados3.Location = new System.Drawing.Point(900, 728);
+            this.dg_atentados3.Name = "dg_atentados3";
+            this.dg_atentados3.RowHeadersWidth = 15;
+            this.dg_atentados3.Size = new System.Drawing.Size(441, 191);
+            this.dg_atentados3.TabIndex = 47;
+            // 
+            // dg_bloqueo_llegadas2
+            // 
+            this.dg_bloqueo_llegadas2.AllowUserToAddRows = false;
+            this.dg_bloqueo_llegadas2.AllowUserToDeleteRows = false;
+            this.dg_bloqueo_llegadas2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dg_bloqueo_llegadas2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_bloqueo_llegadas2.Location = new System.Drawing.Point(680, 973);
+            this.dg_bloqueo_llegadas2.Name = "dg_bloqueo_llegadas2";
+            this.dg_bloqueo_llegadas2.RowHeadersWidth = 20;
+            this.dg_bloqueo_llegadas2.Size = new System.Drawing.Size(661, 191);
+            this.dg_bloqueo_llegadas2.TabIndex = 47;
+            // 
+            // dg_bloqueo_servidor2
+            // 
+            this.dg_bloqueo_servidor2.AllowUserToAddRows = false;
+            this.dg_bloqueo_servidor2.AllowUserToDeleteRows = false;
+            this.dg_bloqueo_servidor2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dg_bloqueo_servidor2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_bloqueo_servidor2.Location = new System.Drawing.Point(680, 1220);
+            this.dg_bloqueo_servidor2.Name = "dg_bloqueo_servidor2";
+            this.dg_bloqueo_servidor2.Size = new System.Drawing.Size(661, 191);
+            this.dg_bloqueo_servidor2.TabIndex = 47;
             // 
             // Simulacion
             // 
@@ -520,8 +562,11 @@
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.dg_bloqueo_servidor2);
             this.Controls.Add(this.dg_bloqueo_servidor);
+            this.Controls.Add(this.dg_bloqueo_llegadas2);
             this.Controls.Add(this.dg_bloqueo_llegadas);
+            this.Controls.Add(this.dg_atentados3);
             this.Controls.Add(this.dg_atentados2);
             this.Controls.Add(this.dg_atentados);
             this.Controls.Add(this.label2);
@@ -545,6 +590,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dg_bloqueo_llegadas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg_bloqueo_servidor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg_atentados2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_atentados3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_bloqueo_llegadas2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_bloqueo_servidor2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -591,5 +639,8 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.DataGridView dg_atentados2;
+        private System.Windows.Forms.DataGridView dg_atentados3;
+        private System.Windows.Forms.DataGridView dg_bloqueo_llegadas2;
+        private System.Windows.Forms.DataGridView dg_bloqueo_servidor2;
     }
 }
