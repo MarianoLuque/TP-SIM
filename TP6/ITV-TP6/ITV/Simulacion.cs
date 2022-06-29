@@ -1510,12 +1510,8 @@ namespace ITV
                 dg_colas.DataSource = null;
                 dg_atentados.DataSource = null;
                 dg_atentados2.DataSource = null;
-                dg_atentados3.DataSource = null;
                 dg_bloqueo_llegadas.DataSource = null;
-                dg_bloqueo_llegadas2.DataSource = null;
                 dg_bloqueo_servidor.DataSource = null;
-                dg_bloqueo_servidor2.DataSource = null;
-
                 //limpiar las filas
                 tabla_iteraciones.Rows.Clear();
                 tabla_rk_atentado.Rows.Clear();
