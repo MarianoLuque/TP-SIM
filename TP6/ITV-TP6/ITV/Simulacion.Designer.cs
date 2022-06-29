@@ -50,11 +50,30 @@
             this.dg_atentados = new System.Windows.Forms.DataGridView();
             this.dg_bloqueo_llegadas = new System.Windows.Forms.DataGridView();
             this.dg_bloqueo_servidor = new System.Windows.Forms.DataGridView();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txt_h = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.dg_atentados2 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dg_colas)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_atentados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg_bloqueo_llegadas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg_bloqueo_servidor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_atentados2)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_cerrar_programa
@@ -73,7 +92,7 @@
             // btn_simular
             // 
             this.btn_simular.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_simular.Location = new System.Drawing.Point(1237, 97);
+            this.btn_simular.Location = new System.Drawing.Point(1237, 115);
             this.btn_simular.Name = "btn_simular";
             this.btn_simular.Size = new System.Drawing.Size(104, 34);
             this.btn_simular.TabIndex = 22;
@@ -84,7 +103,7 @@
             // btn_volver
             // 
             this.btn_volver.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_volver.Location = new System.Drawing.Point(12, 99);
+            this.btn_volver.Location = new System.Drawing.Point(12, 115);
             this.btn_volver.Name = "btn_volver";
             this.btn_volver.Size = new System.Drawing.Size(104, 34);
             this.btn_volver.TabIndex = 23;
@@ -107,7 +126,7 @@
             this.dg_colas.AllowUserToAddRows = false;
             this.dg_colas.AllowUserToDeleteRows = false;
             this.dg_colas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dg_colas.Location = new System.Drawing.Point(12, 151);
+            this.dg_colas.Location = new System.Drawing.Point(12, 160);
             this.dg_colas.Name = "dg_colas";
             this.dg_colas.ReadOnly = true;
             this.dg_colas.RowHeadersWidth = 51;
@@ -118,7 +137,7 @@
             // 
             this.lbl_desde.AutoSize = true;
             this.lbl_desde.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_desde.Location = new System.Drawing.Point(466, 101);
+            this.lbl_desde.Location = new System.Drawing.Point(466, 83);
             this.lbl_desde.Name = "lbl_desde";
             this.lbl_desde.Size = new System.Drawing.Size(356, 25);
             this.lbl_desde.TabIndex = 26;
@@ -127,7 +146,7 @@
             // txt_desde
             // 
             this.txt_desde.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_desde.Location = new System.Drawing.Point(1153, 100);
+            this.txt_desde.Location = new System.Drawing.Point(1153, 83);
             this.txt_desde.Mask = "9999999";
             this.txt_desde.Name = "txt_desde";
             this.txt_desde.Size = new System.Drawing.Size(79, 29);
@@ -146,10 +165,10 @@
             this.groupBox1.Controls.Add(this.lbl_tiempo_medio_cliente_ITV);
             this.groupBox1.Controls.Add(this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.groupBox1.Location = new System.Drawing.Point(12, 1321);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Location = new System.Drawing.Point(12, 1416);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(1329, 325);
             this.groupBox1.TabIndex = 37;
             this.groupBox1.TabStop = false;
@@ -267,19 +286,23 @@
             // 
             this.dg_atentados.AllowUserToAddRows = false;
             this.dg_atentados.AllowUserToDeleteRows = false;
+            this.dg_atentados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dg_atentados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dg_atentados.Location = new System.Drawing.Point(12, 680);
+            this.dg_atentados.Location = new System.Drawing.Point(12, 728);
             this.dg_atentados.Name = "dg_atentados";
-            this.dg_atentados.Size = new System.Drawing.Size(1329, 191);
+            this.dg_atentados.RowHeadersWidth = 15;
+            this.dg_atentados.Size = new System.Drawing.Size(646, 191);
             this.dg_atentados.TabIndex = 47;
             // 
             // dg_bloqueo_llegadas
             // 
             this.dg_bloqueo_llegadas.AllowUserToAddRows = false;
             this.dg_bloqueo_llegadas.AllowUserToDeleteRows = false;
+            this.dg_bloqueo_llegadas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dg_bloqueo_llegadas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dg_bloqueo_llegadas.Location = new System.Drawing.Point(12, 887);
+            this.dg_bloqueo_llegadas.Location = new System.Drawing.Point(12, 973);
             this.dg_bloqueo_llegadas.Name = "dg_bloqueo_llegadas";
+            this.dg_bloqueo_llegadas.RowHeadersWidth = 20;
             this.dg_bloqueo_llegadas.Size = new System.Drawing.Size(1329, 191);
             this.dg_bloqueo_llegadas.TabIndex = 47;
             // 
@@ -288,10 +311,190 @@
             this.dg_bloqueo_servidor.AllowUserToAddRows = false;
             this.dg_bloqueo_servidor.AllowUserToDeleteRows = false;
             this.dg_bloqueo_servidor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dg_bloqueo_servidor.Location = new System.Drawing.Point(12, 1094);
+            this.dg_bloqueo_servidor.Location = new System.Drawing.Point(12, 1220);
             this.dg_bloqueo_servidor.Name = "dg_bloqueo_servidor";
             this.dg_bloqueo_servidor.Size = new System.Drawing.Size(1329, 191);
             this.dg_bloqueo_servidor.TabIndex = 47;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(837, 119);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(242, 25);
+            this.label3.TabIndex = 48;
+            this.label3.Text = "Paso del runge kutta (h)";
+            // 
+            // txt_h
+            // 
+            this.txt_h.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_h.Location = new System.Drawing.Point(1079, 117);
+            this.txt_h.Name = "txt_h";
+            this.txt_h.Size = new System.Drawing.Size(153, 29);
+            this.txt_h.TabIndex = 49;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(12, 700);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(132, 25);
+            this.label4.TabIndex = 48;
+            this.label4.Text = "dA/dt = β * A";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(574, 700);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(54, 25);
+            this.label5.TabIndex = 48;
+            this.label5.Text = "t = 0";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(693, 700);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(313, 25);
+            this.label6.TabIndex = 48;
+            this.label6.Text = "A(0) = reloj en la llegada nro 80";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(12, 943);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(220, 25);
+            this.label7.TabIndex = 48;
+            this.label7.Text = "dL/dt = -((L/0,8).t^2)-L";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(574, 943);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(54, 25);
+            this.label8.TabIndex = 48;
+            this.label8.Text = "t = 0";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(693, 943);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(115, 25);
+            this.label9.TabIndex = 48;
+            this.label9.Text = "L(0) = reloj";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(303, 700);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(240, 25);
+            this.label10.TabIndex = 48;
+            this.label10.Text = "Condiciones iniciales ->";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(303, 943);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(240, 25);
+            this.label11.TabIndex = 48;
+            this.label11.Text = "Condiciones iniciales ->";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(303, 1190);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(240, 25);
+            this.label12.TabIndex = 48;
+            this.label12.Text = "Condiciones iniciales ->";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(12, 1190);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(211, 25);
+            this.label13.TabIndex = 48;
+            this.label13.Text = "dS/dt = 0,2 * S + 3 - t";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(574, 1190);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(54, 25);
+            this.label14.TabIndex = 48;
+            this.label14.Text = "t = 0";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(693, 1190);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(117, 25);
+            this.label15.TabIndex = 48;
+            this.label15.Text = "S(0) = reloj";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(872, 943);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(171, 25);
+            this.label16.TabIndex = 48;
+            this.label16.Text = "t = 1 ≡ 5 minutos";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(872, 1190);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(171, 25);
+            this.label17.TabIndex = 48;
+            this.label17.Text = "t = 1 ≡ 2 minutos";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(1042, 700);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(171, 25);
+            this.label18.TabIndex = 48;
+            this.label18.Text = "t = 1 ≡ 9 minutos";
+            // 
+            // dg_atentados2
+            // 
+            this.dg_atentados2.AllowUserToAddRows = false;
+            this.dg_atentados2.AllowUserToDeleteRows = false;
+            this.dg_atentados2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dg_atentados2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_atentados2.Location = new System.Drawing.Point(664, 728);
+            this.dg_atentados2.Name = "dg_atentados2";
+            this.dg_atentados2.RowHeadersWidth = 15;
+            this.dg_atentados2.Size = new System.Drawing.Size(677, 191);
+            this.dg_atentados2.TabIndex = 47;
             // 
             // Simulacion
             // 
@@ -300,8 +503,26 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.SlateGray;
             this.ClientSize = new System.Drawing.Size(1389, 894);
+            this.Controls.Add(this.txt_h);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.dg_bloqueo_servidor);
             this.Controls.Add(this.dg_bloqueo_llegadas);
+            this.Controls.Add(this.dg_atentados2);
             this.Controls.Add(this.dg_atentados);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
@@ -323,6 +544,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dg_atentados)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg_bloqueo_llegadas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg_bloqueo_servidor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_atentados2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -351,5 +573,23 @@
         private System.Windows.Forms.DataGridView dg_atentados;
         private System.Windows.Forms.DataGridView dg_bloqueo_llegadas;
         private System.Windows.Forms.DataGridView dg_bloqueo_servidor;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txt_h;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.DataGridView dg_atentados2;
     }
 }
