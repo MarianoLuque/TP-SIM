@@ -610,13 +610,23 @@ namespace ITV
 
                         calcularFinAtencion(i_caseta);
 
-                        continue;
+                        break;
                     }
 
-                    if (cantidad_recorrida == cantidad_caseta)
+                    if (cantidad_recorrida == cantidad_de_casetas)
                     {
-                        i_cliente.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.ESPERANDO_ATENCION_CASETA);
-                        cola_clientes_caseta.Add(i_cliente);
+                        
+                        if (cola_clientes_caseta.Count >= cantidad_maxima_cola_caseta)
+                        {
+                            i_cliente.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.SIN_LUGAR_EN_COLA_CASETA);
+                            Metrica9();
+                        }
+                        else
+                        {
+                            i_cliente.SetEstadoYHoraLlegadaCola(reloj, cliente.Estados.ESPERANDO_ATENCION_CASETA);
+                            cola_clientes_caseta.Add(i_cliente);
+                            cantidad_clientes_ingresan_al_sistema += 1;
+                        }
                     }
                 }
 
@@ -1452,7 +1462,8 @@ namespace ITV
             tabla_iteraciones.Rows[cantidad_iteraciones]["RND llegada cliente"] = rnd_llegadas.ToString() == "0" ? "" : rnd_llegadas.ToString();
             tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo entre llegadas"] = tiempo_entre_llegadas.ToString() == "0" ? "" : tiempo_entre_llegadas.ToString();
             tabla_iteraciones.Rows[cantidad_iteraciones]["Proxima llegada"] = tiempo_proxima_llegada.ToString() == "0" ? "" : tiempo_proxima_llegada.ToString();
-            tabla_iteraciones.Rows[cantidad_iteraciones]["Cantidad de llegadas"] = (cantidad_clientes_ingresan_al_sistema + cantidad_clientes_que_se_van_por_cola_llena + cantidad_clientes_que_se_van_por_bloqueo).ToString();
+            //tabla_iteraciones.Rows[cantidad_iteraciones]["Cantidad de llegadas"] = (cantidad_clientes_ingresan_al_sistema + cantidad_clientes_que_se_van_por_cola_llena + cantidad_clientes_que_se_van_por_bloqueo).ToString();
+            tabla_iteraciones.Rows[cantidad_iteraciones]["Cantidad de llegadas"] = (cantidad_clientes_ingresan_al_sistema + cantidad_clientes_que_se_van_por_cola_llena).ToString();
 
 
             tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo entre bloqueos de llegadas"] = tiempo_entre_bloqueos_ingreso.ToString() == "0" ? "" : tiempo_entre_bloqueos_ingreso.ToString();
