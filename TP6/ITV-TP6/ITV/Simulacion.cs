@@ -88,6 +88,7 @@ namespace ITV
 
         //bandera llegadas
         bool bandera_llegadas;
+        bool bandera_clientes_actuales_agregados;
 
         //Cola para los servidores
         List<cliente> cola_clientes_ingreso;
@@ -248,19 +249,121 @@ namespace ITV
 
         }
 
-        private void agregar_cliente()
+        private void agregarClientesActuales()
         {
-            string estado_cliente_nro = "Estado cliente" + nro_cliente.ToString();
-            string hora_llegada_cliente_nro = "Hora llegada cliente" + nro_cliente.ToString();
-            DataColumn columna_estado_cliente = new DataColumn(estado_cliente_nro);
-            DataColumn columna_hora_llegada_cliente = new DataColumn(hora_llegada_cliente_nro);
-            tabla_iteraciones.Columns.Add(columna_estado_cliente);
-            tabla_iteraciones.Columns.Add(columna_hora_llegada_cliente);
+            string estado_cliente_nro;
+            string hora_llegada_cliente_nro;
+            DataColumn columna_estado_cliente;
+            DataColumn columna_hora_llegada_cliente;
             if (nro_cliente_desde_que_se_muestra == 0 && bandera_nro_cliente)
             {
                 nro_cliente_desde_que_se_muestra = nro_cliente;
                 bandera_nro_cliente = false;
             }
+            foreach (servidor caseta in lista_casetas)
+            {
+                if (caseta.GetCliente() != null)
+                {
+                    estado_cliente_nro = "Estado cliente" + nro_cliente.ToString();
+                    hora_llegada_cliente_nro = "Hora llegada cliente" + nro_cliente.ToString();
+                    columna_estado_cliente = new DataColumn(estado_cliente_nro);
+                    columna_hora_llegada_cliente = new DataColumn(hora_llegada_cliente_nro);
+                    tabla_iteraciones.Columns.Add(columna_estado_cliente);
+                    tabla_iteraciones.Columns.Add(columna_hora_llegada_cliente);
+                    clientes_a_mostrar.Add(caseta.GetCliente());
+                    nro_cliente += 1;
+                }
+            }
+            foreach (servidor nave in lista_naves)
+            {
+                if (nave.GetCliente() != null)
+                {
+                    estado_cliente_nro = "Estado cliente" + nro_cliente.ToString();
+                    hora_llegada_cliente_nro = "Hora llegada cliente" + nro_cliente.ToString();
+                    columna_estado_cliente = new DataColumn(estado_cliente_nro);
+                    columna_hora_llegada_cliente = new DataColumn(hora_llegada_cliente_nro);
+                    tabla_iteraciones.Columns.Add(columna_estado_cliente);
+                    tabla_iteraciones.Columns.Add(columna_hora_llegada_cliente);
+                    clientes_a_mostrar.Add(nave.GetCliente());
+                    nro_cliente += 1;
+                }
+            }
+            foreach (servidor oficina in lista_oficinas)
+            {
+                if (oficina.GetCliente() != null)
+                {
+                    estado_cliente_nro = "Estado cliente" + nro_cliente.ToString();
+                    hora_llegada_cliente_nro = "Hora llegada cliente" + nro_cliente.ToString();
+                    columna_estado_cliente = new DataColumn(estado_cliente_nro);
+                    columna_hora_llegada_cliente = new DataColumn(hora_llegada_cliente_nro);
+                    tabla_iteraciones.Columns.Add(columna_estado_cliente);
+                    tabla_iteraciones.Columns.Add(columna_hora_llegada_cliente);
+                    clientes_a_mostrar.Add(oficina.GetCliente());
+                    nro_cliente += 1;
+                }
+            }
+            foreach (cliente cli in cola_clientes_caseta)
+            {
+                estado_cliente_nro = "Estado cliente" + nro_cliente.ToString();
+                hora_llegada_cliente_nro = "Hora llegada cliente" + nro_cliente.ToString();
+                columna_estado_cliente = new DataColumn(estado_cliente_nro);
+                columna_hora_llegada_cliente = new DataColumn(hora_llegada_cliente_nro);
+                tabla_iteraciones.Columns.Add(columna_estado_cliente);
+                tabla_iteraciones.Columns.Add(columna_hora_llegada_cliente);
+                clientes_a_mostrar.Add(cli);
+                nro_cliente += 1;
+            }
+            foreach (cliente cli in cola_clientes_nave)
+            {
+                estado_cliente_nro = "Estado cliente" + nro_cliente.ToString();
+                hora_llegada_cliente_nro = "Hora llegada cliente" + nro_cliente.ToString();
+                columna_estado_cliente = new DataColumn(estado_cliente_nro);
+                columna_hora_llegada_cliente = new DataColumn(hora_llegada_cliente_nro);
+                tabla_iteraciones.Columns.Add(columna_estado_cliente);
+                tabla_iteraciones.Columns.Add(columna_hora_llegada_cliente);
+                clientes_a_mostrar.Add(cli);
+                nro_cliente += 1;
+            }
+            foreach (cliente cli in cola_clientes_oficina)
+            {
+                estado_cliente_nro = "Estado cliente" + nro_cliente.ToString();
+                hora_llegada_cliente_nro = "Hora llegada cliente" + nro_cliente.ToString();
+                columna_estado_cliente = new DataColumn(estado_cliente_nro);
+                columna_hora_llegada_cliente = new DataColumn(hora_llegada_cliente_nro);
+                tabla_iteraciones.Columns.Add(columna_estado_cliente);
+                tabla_iteraciones.Columns.Add(columna_hora_llegada_cliente);
+                clientes_a_mostrar.Add(cli);
+                nro_cliente += 1;
+            }
+            foreach (cliente cli in cola_clientes_ingreso)
+            {
+                estado_cliente_nro = "Estado cliente" + nro_cliente.ToString();
+                hora_llegada_cliente_nro = "Hora llegada cliente" + nro_cliente.ToString();
+                columna_estado_cliente = new DataColumn(estado_cliente_nro);
+                columna_hora_llegada_cliente = new DataColumn(hora_llegada_cliente_nro);
+                tabla_iteraciones.Columns.Add(columna_estado_cliente);
+                tabla_iteraciones.Columns.Add(columna_hora_llegada_cliente);
+                clientes_a_mostrar.Add(cli);
+                nro_cliente += 1;
+            }
+        }
+        private void agregar_cliente()
+        {
+            string estado_cliente_nro;
+            string hora_llegada_cliente_nro;
+            DataColumn columna_estado_cliente;
+            DataColumn columna_hora_llegada_cliente;
+            if (nro_cliente_desde_que_se_muestra == 0 && bandera_nro_cliente)
+            {
+                nro_cliente_desde_que_se_muestra = nro_cliente;
+                bandera_nro_cliente = false;
+            }
+            estado_cliente_nro = "Estado cliente" + nro_cliente.ToString();
+            hora_llegada_cliente_nro = "Hora llegada cliente" + nro_cliente.ToString();
+            columna_estado_cliente = new DataColumn(estado_cliente_nro);
+            columna_hora_llegada_cliente = new DataColumn(hora_llegada_cliente_nro);
+            tabla_iteraciones.Columns.Add(columna_estado_cliente);
+            tabla_iteraciones.Columns.Add(columna_hora_llegada_cliente);
         }
 
         private void EventoDeLlegada()
@@ -316,16 +419,16 @@ namespace ITV
                 {
                     if (cantidad_iteraciones >= simulacion_desde && cantidad_iteraciones < simulacion_desde + 400)
                     {
-                        clientes_a_mostrar.Add(Nuevo_Cliente);
                         agregar_cliente();
+                        clientes_a_mostrar.Add(Nuevo_Cliente);
                     }
                 }
                 else
                 {
                     if (reloj >= simulacion_desde && cantidad_a_mostrar < 400)
                     {
-                        clientes_a_mostrar.Add(Nuevo_Cliente);
                         agregar_cliente();
+                        clientes_a_mostrar.Add(Nuevo_Cliente);
                     }
                 }
                 nro_cliente += 1;
@@ -1549,9 +1652,15 @@ namespace ITV
 
             tabla_iteraciones.Rows[cantidad_iteraciones]["Cantidad de clientes que no entran a la cola porque esta llena"] = cantidad_clientes_que_se_van_por_cola_llena;
 
+
             //Clientes
             if (mostrar_clientes)
             {
+                if (!bandera_clientes_actuales_agregados)
+                {
+                    bandera_clientes_actuales_agregados = true;
+                    agregarClientesActuales();
+                }
                 string estado_cliente_nro = "Estado cliente" + nro_cliente.ToString();
                 string hora_llegada_cliente_nro = "Hora llegada cliente" + nro_cliente.ToString();
                 int estado_cliente;
@@ -2272,6 +2381,7 @@ namespace ITV
 
             flag_primera_vuelta = false;
             bandera_llegadas = true;
+            bandera_clientes_actuales_agregados = false;
 
             Evento_lanzado = "";
 
