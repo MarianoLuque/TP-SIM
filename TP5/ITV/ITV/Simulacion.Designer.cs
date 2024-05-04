@@ -35,7 +35,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dg_colas = new System.Windows.Forms.DataGridView();
             this.lbl_desde = new System.Windows.Forms.Label();
-            this.txt_desde = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbl_clientes_se_van_cola_llena = new System.Windows.Forms.Label();
             this.lbl_maximo_tiempo_entre_llegadas = new System.Windows.Forms.Label();
@@ -47,6 +46,7 @@
             this.lbl_tiempo_medio_cliente_ITV = new System.Windows.Forms.Label();
             this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.txt_desde = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dg_colas)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -57,10 +57,9 @@
             this.btn_cerrar_programa.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_cerrar_programa.BackgroundImage")));
             this.btn_cerrar_programa.FlatAppearance.BorderSize = 0;
             this.btn_cerrar_programa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_cerrar_programa.Location = new System.Drawing.Point(1733, 13);
-            this.btn_cerrar_programa.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_cerrar_programa.Location = new System.Drawing.Point(1300, 11);
             this.btn_cerrar_programa.Name = "btn_cerrar_programa";
-            this.btn_cerrar_programa.Size = new System.Drawing.Size(55, 50);
+            this.btn_cerrar_programa.Size = new System.Drawing.Size(41, 41);
             this.btn_cerrar_programa.TabIndex = 17;
             this.btn_cerrar_programa.UseVisualStyleBackColor = false;
             this.btn_cerrar_programa.Click += new System.EventHandler(this.btn_cerrar_programa_Click);
@@ -68,10 +67,9 @@
             // btn_simular
             // 
             this.btn_simular.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_simular.Location = new System.Drawing.Point(1649, 119);
-            this.btn_simular.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_simular.Location = new System.Drawing.Point(1237, 97);
             this.btn_simular.Name = "btn_simular";
-            this.btn_simular.Size = new System.Drawing.Size(139, 42);
+            this.btn_simular.Size = new System.Drawing.Size(104, 34);
             this.btn_simular.TabIndex = 22;
             this.btn_simular.Text = "Simular";
             this.btn_simular.UseVisualStyleBackColor = true;
@@ -80,10 +78,9 @@
             // btn_volver
             // 
             this.btn_volver.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_volver.Location = new System.Drawing.Point(16, 122);
-            this.btn_volver.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_volver.Location = new System.Drawing.Point(12, 99);
             this.btn_volver.Name = "btn_volver";
-            this.btn_volver.Size = new System.Drawing.Size(139, 42);
+            this.btn_volver.Size = new System.Drawing.Size(104, 34);
             this.btn_volver.TabIndex = 23;
             this.btn_volver.Text = "Volver";
             this.btn_volver.UseVisualStyleBackColor = true;
@@ -93,10 +90,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(636, 27);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(477, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(550, 54);
+            this.label1.Size = new System.Drawing.Size(439, 42);
             this.label1.TabIndex = 24;
             this.label1.Text = "Simulación de colas - ITV";
             // 
@@ -105,35 +101,22 @@
             this.dg_colas.AllowUserToAddRows = false;
             this.dg_colas.AllowUserToDeleteRows = false;
             this.dg_colas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dg_colas.Location = new System.Drawing.Point(16, 186);
-            this.dg_colas.Margin = new System.Windows.Forms.Padding(4);
+            this.dg_colas.Location = new System.Drawing.Point(12, 151);
             this.dg_colas.Name = "dg_colas";
             this.dg_colas.ReadOnly = true;
             this.dg_colas.RowHeadersWidth = 51;
-            this.dg_colas.Size = new System.Drawing.Size(1772, 631);
+            this.dg_colas.Size = new System.Drawing.Size(1329, 513);
             this.dg_colas.TabIndex = 25;
             // 
             // lbl_desde
             // 
             this.lbl_desde.AutoSize = true;
             this.lbl_desde.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_desde.Location = new System.Drawing.Point(621, 124);
-            this.lbl_desde.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_desde.Location = new System.Drawing.Point(466, 101);
             this.lbl_desde.Name = "lbl_desde";
-            this.lbl_desde.Size = new System.Drawing.Size(447, 31);
+            this.lbl_desde.Size = new System.Drawing.Size(356, 25);
             this.lbl_desde.TabIndex = 26;
             this.lbl_desde.Text = "Ingrese desde que iteración mostrar";
-            // 
-            // txt_desde
-            // 
-            this.txt_desde.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_desde.Location = new System.Drawing.Point(1537, 123);
-            this.txt_desde.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_desde.Mask = "9999999";
-            this.txt_desde.Name = "txt_desde";
-            this.txt_desde.Size = new System.Drawing.Size(104, 34);
-            this.txt_desde.TabIndex = 27;
-            this.txt_desde.ValidatingType = typeof(int);
             // 
             // groupBox1
             // 
@@ -147,9 +130,11 @@
             this.groupBox1.Controls.Add(this.lbl_tiempo_medio_cliente_ITV);
             this.groupBox1.Controls.Add(this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.groupBox1.Location = new System.Drawing.Point(16, 824);
+            this.groupBox1.Location = new System.Drawing.Point(12, 670);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1772, 400);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(1329, 325);
             this.groupBox1.TabIndex = 37;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Métricas";
@@ -158,9 +143,10 @@
             // 
             this.lbl_clientes_se_van_cola_llena.AutoSize = true;
             this.lbl_clientes_se_van_cola_llena.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_clientes_se_van_cola_llena.Location = new System.Drawing.Point(26, 349);
+            this.lbl_clientes_se_van_cola_llena.Location = new System.Drawing.Point(20, 284);
+            this.lbl_clientes_se_van_cola_llena.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_clientes_se_van_cola_llena.Name = "lbl_clientes_se_van_cola_llena";
-            this.lbl_clientes_se_van_cola_llena.Size = new System.Drawing.Size(926, 31);
+            this.lbl_clientes_se_van_cola_llena.Size = new System.Drawing.Size(744, 25);
             this.lbl_clientes_se_van_cola_llena.TabIndex = 45;
             this.lbl_clientes_se_van_cola_llena.Text = "Cantidad de clientes que se van del sistema porque no hay lugar en la cola: ";
             // 
@@ -168,9 +154,10 @@
             // 
             this.lbl_maximo_tiempo_entre_llegadas.AutoSize = true;
             this.lbl_maximo_tiempo_entre_llegadas.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_maximo_tiempo_entre_llegadas.Location = new System.Drawing.Point(26, 309);
+            this.lbl_maximo_tiempo_entre_llegadas.Location = new System.Drawing.Point(20, 251);
+            this.lbl_maximo_tiempo_entre_llegadas.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_maximo_tiempo_entre_llegadas.Name = "lbl_maximo_tiempo_entre_llegadas";
-            this.lbl_maximo_tiempo_entre_llegadas.Size = new System.Drawing.Size(653, 31);
+            this.lbl_maximo_tiempo_entre_llegadas.Size = new System.Drawing.Size(524, 25);
             this.lbl_maximo_tiempo_entre_llegadas.TabIndex = 44;
             this.lbl_maximo_tiempo_entre_llegadas.Text = "Máximo tiempo entre llegadas de clientes al sistema: ";
             // 
@@ -178,9 +165,10 @@
             // 
             this.lbl_tiempo_medio_cliente_cola_caseta.AutoSize = true;
             this.lbl_tiempo_medio_cliente_cola_caseta.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_tiempo_medio_cliente_cola_caseta.Location = new System.Drawing.Point(26, 269);
+            this.lbl_tiempo_medio_cliente_cola_caseta.Location = new System.Drawing.Point(20, 219);
+            this.lbl_tiempo_medio_cliente_cola_caseta.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_tiempo_medio_cliente_cola_caseta.Name = "lbl_tiempo_medio_cliente_cola_caseta";
-            this.lbl_tiempo_medio_cliente_cola_caseta.Size = new System.Drawing.Size(708, 31);
+            this.lbl_tiempo_medio_cliente_cola_caseta.Size = new System.Drawing.Size(569, 25);
             this.lbl_tiempo_medio_cliente_cola_caseta.TabIndex = 43;
             this.lbl_tiempo_medio_cliente_cola_caseta.Text = "Tiempo medio que un cliente pasa en la cola de la caseta:";
             // 
@@ -188,9 +176,10 @@
             // 
             this.lbl_tiempo_medio_cliente_caseta.AutoSize = true;
             this.lbl_tiempo_medio_cliente_caseta.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_tiempo_medio_cliente_caseta.Location = new System.Drawing.Point(26, 229);
+            this.lbl_tiempo_medio_cliente_caseta.Location = new System.Drawing.Point(20, 186);
+            this.lbl_tiempo_medio_cliente_caseta.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_tiempo_medio_cliente_caseta.Name = "lbl_tiempo_medio_cliente_caseta";
-            this.lbl_tiempo_medio_cliente_caseta.Size = new System.Drawing.Size(760, 31);
+            this.lbl_tiempo_medio_cliente_caseta.Size = new System.Drawing.Size(610, 25);
             this.lbl_tiempo_medio_cliente_caseta.TabIndex = 42;
             this.lbl_tiempo_medio_cliente_caseta.Text = "Tiempo medio que un cliente pasa en la caseta (incluye cola): ";
             // 
@@ -198,9 +187,10 @@
             // 
             this.lbl_tiempo_medio_cola_nave.AutoSize = true;
             this.lbl_tiempo_medio_cola_nave.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_tiempo_medio_cola_nave.Location = new System.Drawing.Point(26, 189);
+            this.lbl_tiempo_medio_cola_nave.Location = new System.Drawing.Point(20, 154);
+            this.lbl_tiempo_medio_cola_nave.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_tiempo_medio_cola_nave.Name = "lbl_tiempo_medio_cola_nave";
-            this.lbl_tiempo_medio_cola_nave.Size = new System.Drawing.Size(693, 31);
+            this.lbl_tiempo_medio_cola_nave.Size = new System.Drawing.Size(558, 25);
             this.lbl_tiempo_medio_cola_nave.TabIndex = 41;
             this.lbl_tiempo_medio_cola_nave.Text = "Tiempo medio que un cliente pasa en la cola de la nave: ";
             // 
@@ -208,9 +198,10 @@
             // 
             this.lbl_tiempo_medio_cliente_nave.AutoSize = true;
             this.lbl_tiempo_medio_cliente_nave.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_tiempo_medio_cliente_nave.Location = new System.Drawing.Point(26, 149);
+            this.lbl_tiempo_medio_cliente_nave.Location = new System.Drawing.Point(20, 121);
+            this.lbl_tiempo_medio_cliente_nave.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_tiempo_medio_cliente_nave.Name = "lbl_tiempo_medio_cliente_nave";
-            this.lbl_tiempo_medio_cliente_nave.Size = new System.Drawing.Size(738, 31);
+            this.lbl_tiempo_medio_cliente_nave.Size = new System.Drawing.Size(593, 25);
             this.lbl_tiempo_medio_cliente_nave.TabIndex = 40;
             this.lbl_tiempo_medio_cliente_nave.Text = "Tiempo medio que un cliente pasa en la nave (incluye cola): ";
             // 
@@ -218,9 +209,10 @@
             // 
             this.lbl_longitud_media_cola_nave.AutoSize = true;
             this.lbl_longitud_media_cola_nave.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_longitud_media_cola_nave.Location = new System.Drawing.Point(26, 109);
+            this.lbl_longitud_media_cola_nave.Location = new System.Drawing.Point(20, 89);
+            this.lbl_longitud_media_cola_nave.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_longitud_media_cola_nave.Name = "lbl_longitud_media_cola_nave";
-            this.lbl_longitud_media_cola_nave.Size = new System.Drawing.Size(459, 31);
+            this.lbl_longitud_media_cola_nave.Size = new System.Drawing.Size(370, 25);
             this.lbl_longitud_media_cola_nave.TabIndex = 39;
             this.lbl_longitud_media_cola_nave.Text = "Longitud media de la cola de la nave:";
             // 
@@ -228,9 +220,10 @@
             // 
             this.lbl_tiempo_medio_cliente_ITV.AutoSize = true;
             this.lbl_tiempo_medio_cliente_ITV.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_tiempo_medio_cliente_ITV.Location = new System.Drawing.Point(26, 69);
+            this.lbl_tiempo_medio_cliente_ITV.Location = new System.Drawing.Point(20, 56);
+            this.lbl_tiempo_medio_cliente_ITV.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_tiempo_medio_cliente_ITV.Name = "lbl_tiempo_medio_cliente_ITV";
-            this.lbl_tiempo_medio_cliente_ITV.Size = new System.Drawing.Size(653, 31);
+            this.lbl_tiempo_medio_cliente_ITV.Size = new System.Drawing.Size(522, 25);
             this.lbl_tiempo_medio_cliente_ITV.TabIndex = 38;
             this.lbl_tiempo_medio_cliente_ITV.Text = "Tiempo medio que un cliente se encuentra en la ITV: ";
             // 
@@ -238,27 +231,39 @@
             // 
             this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.AutoSize = true;
             this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.Location = new System.Drawing.Point(26, 29);
+            this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.Location = new System.Drawing.Point(20, 24);
+            this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.Name = "lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina";
-            this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.Size = new System.Drawing.Size(758, 31);
+            this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.Size = new System.Drawing.Size(609, 25);
             this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.TabIndex = 37;
             this.lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina.Text = "Tiempo medio que un cliente pasa en la oficina (incluye cola): ";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1762, 1231);
+            this.label2.Location = new System.Drawing.Point(1322, 1000);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 17);
+            this.label2.Size = new System.Drawing.Size(0, 13);
             this.label2.TabIndex = 46;
+            // 
+            // txt_desde
+            // 
+            this.txt_desde.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_desde.Location = new System.Drawing.Point(1153, 100);
+            this.txt_desde.Mask = "9999999";
+            this.txt_desde.Name = "txt_desde";
+            this.txt_desde.Size = new System.Drawing.Size(79, 29);
+            this.txt_desde.TabIndex = 27;
+            this.txt_desde.ValidatingType = typeof(int);
             // 
             // Simulacion
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.SlateGray;
-            this.ClientSize = new System.Drawing.Size(1852, 1147);
+            this.ClientSize = new System.Drawing.Size(1389, 894);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txt_desde);
@@ -269,7 +274,6 @@
             this.Controls.Add(this.btn_simular);
             this.Controls.Add(this.btn_cerrar_programa);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Simulacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Simulacion";
@@ -290,7 +294,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dg_colas;
         private System.Windows.Forms.Label lbl_desde;
-        private System.Windows.Forms.MaskedTextBox txt_desde;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lbl_clientes_se_van_cola_llena;
         private System.Windows.Forms.Label lbl_maximo_tiempo_entre_llegadas;
@@ -302,5 +305,6 @@
         private System.Windows.Forms.Label lbl_tiempo_medio_cliente_ITV;
         private System.Windows.Forms.Label lbl_tiempo_medio_que_un_cliente_pasa_en_la_oficina;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.MaskedTextBox txt_desde;
     }
 }

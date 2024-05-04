@@ -117,26 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btn_cerrar_programa.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAYAAACoYAD2AAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1
-        MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAACxIAAAsSAdLdfvwAAANkSURBVFhHvZg9axRRFIajiP6D
-        YLQW7cU/oaWgCEkUFCyExDKVNpYKVn4kvVpapFKRmEhEY2vK6JpACkVJlFjpep7JznDn7Dsz985ucuBh
-        mXPPvefd+z0zMjE22pbjxoQxaywZm8Zvo9v75Rk/5ZMG8aqdRqSzhiPGZeON8c9AUCzEU++KQTuqfYl0
-        Cg4a14wNQwlIhXauG7Sr8pWQTscp472hkg3KB4P2Vd4C6Qy4ZPwyVIJhQfvkUfkzpLPHjJE679pCHvIp
-        HZUiqaAa22uk0D6HcdHYrx70kJf8JU2lB+OksW2oBvYL5ig6Cl2hwAPGsqEqFjy5d7f7fG62e+PMaVne
-        xP3pqaz+zLmzsrzHOwM9fSKvGqpCAQJz+/n9W/fO5ISMqyKsv7a6KmMC0FMSedj4YqjgAnogtM1OJ7pH
-        +UN/dnZ6NXf/pIoL6BjoKkRytqrAEggKE2GfVlZkbAj1EBUavapiHegqRC70nI34HsGaEjK0oX1cWJBx
-        AnRlIrmdJG05CA0N0VXzU00RFVcBuo4hcjxwRhMzP9WfaVjVinFEPnLOaJiPoYXzE8EID23u9q1S/Uge
-        I3LROaNRQl48e5qVLc3P9zy7FrPAKlhE5FfnTEItJBZGaJT7qZDAOiK3nDMZhrHOWg5zzjYiVUEyDLMy
-        hl3FpzCUngSG0w974nZTxdbAczLHb9i5Ve2fCWwgkjc4VRiNXyihDaE3lxH50DmT8HORIff7Z74ttWQW
-        ka1OHAivXrkxvMxPf6EYYNizE2fM+Bs4o/BHHhZeNHw5olvslegaQyS87jmjQIBfyZzlPs5PhRbbEbqK
-        q1r0kKujsO7qNeD5zbem0s28cStSApteA/ywMwKRN6F1o3QzBz4kqeACvxciOGae+ctGZD30ZNpCkbyd
-        vTVUhb6VnLIQ1Ag0bEvokG+LcMKQx2QokiFL3VL8Yqu5upEfHYWuUGDOBUO+TvDvWSSpAnOoR48yChVt
-        kJf8JU2lh4ApQzWy10wbfXr6HAE3jaQXtAEgD/mUjlqRcN4YylWuBtonj8qfIZ0OJjEf6FWCQWEVlxaJ
-        QjoFbAfsW2uGSpbKZ4P2im2mDums4ZDBEfrSSL2UEP/KoD7tqPYl0hnJUYNv3Q8MLgJ8YPphIIZfnvFT
-        Thzxqp0GRkf+A3WfnzPaMj3WAAAAAElFTkSuQmCC
-</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cerrar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cerrar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="flecha" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flecha.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
