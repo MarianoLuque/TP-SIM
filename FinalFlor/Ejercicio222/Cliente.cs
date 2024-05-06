@@ -24,6 +24,11 @@ namespace Ejercicio222
             this.estado = estado;
         }
 
+        public Cliente(double hora_actual)
+        {
+            this.hora_llegada_al_sistema = hora_actual;
+        }
+
         public Estados GetEstado()
         {
             return this.estado;
