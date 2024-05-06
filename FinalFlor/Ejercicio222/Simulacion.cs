@@ -65,10 +65,6 @@ namespace Ejercicio222
         //randoms para los diferentes eventos (llegadas y atenciones)
         Random objeto_rnd_llegadas;
         Random objeto_rnd_llegadas_con_porcentaje;
-        Random objeto_rnd_maquina1;
-        Random objeto_rnd_maquina2;
-        Random objeto_rnd_maquina3;
-        Random objeto_rnd_maquina4;
         Random objeto_semilla;
 
         //Número entre 0 y 1 para calcular los tiempo según corresponda
@@ -78,7 +74,7 @@ namespace Ejercicio222
         string Evento_lanzado;
 
         //Bandera para comprobar si es la primera vuelta
-        bool flag_primera_vuelta;
+        bool flag_primera_vuelta = false;
 
         //Metrica máxima espera
         double maxima_espera_de_cheque;
@@ -89,9 +85,9 @@ namespace Ejercicio222
             InitializeComponent();
             this.cantidad = cantidad;
 
-            horas_llegadas = horas_llegadas/60;
-            horas_maquina1 = horas_maquina1/60;
-            horas_maquina2 = horas_maquina2/60;
+            horas_llegadas = horas_llegadas;
+            horas_maquina1 = horas_maquina1;
+            horas_maquina2 = horas_maquina2;
 
             this.parametro_cantidad = parametro_cantidad;
             this.mostrar_clientes = mostrar_clientes;
@@ -123,11 +119,6 @@ namespace Ejercicio222
             objeto_semilla = new Random();
             objeto_rnd_llegadas = new Random(objeto_semilla.Next());
             objeto_rnd_llegadas_con_porcentaje = new Random(objeto_semilla.Next());
-            objeto_rnd_maquina1 = new Random(objeto_semilla.Next());
-            objeto_rnd_maquina2 = new Random(objeto_semilla.Next());
-            objeto_rnd_maquina3 = new Random(objeto_semilla.Next());
-            objeto_rnd_maquina4 = new Random(objeto_semilla.Next());
-
 
             //pregunto si el programa ya se ejecuto
             if (flag_tabla_cargada)
@@ -173,10 +164,10 @@ namespace Ejercicio222
 
             volverACero();
 
-            Servidor maquina1 = new Servidor(Servidor.Tipo.MAQUINA1);
-            Servidor maquina2 = new Servidor(Servidor.Tipo.MAQUINA2);
-            Servidor maquina3 = new Servidor(Servidor.Tipo.MAQUINA3);
-            Servidor maquina4 = new Servidor(Servidor.Tipo.MAQUINA4);
+            Servidor maquina1 = new Servidor(Servidor.Tipo.MAQUINA1, objeto_semilla, this.media_maquina1);
+            Servidor maquina2 = new Servidor(Servidor.Tipo.MAQUINA2, objeto_semilla, this.media_maquina2);
+            Servidor maquina3 = new Servidor(Servidor.Tipo.MAQUINA3, objeto_semilla, this.media_maquina1);
+            Servidor maquina4 = new Servidor(Servidor.Tipo.MAQUINA4, objeto_semilla, this.media_maquina2);
             List<Servidor> maquinas = new List<Servidor> { maquina1, maquina2, maquina3, maquina4 };
             int maquinaIndex = 0;
 
@@ -316,64 +307,20 @@ namespace Ejercicio222
                     tiempo_entre_llegadas = 0;
                 }
 
-                switch (maquina.GetTipo())
-                {
-                    case Servidor.Tipo.MAQUINA1:
-                        if (maquina.GetFinProcesamiento().ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Tiempo procesamiento maquina"].ToString())
-                        {  
-                            tiempo_procesamiento_maquina1 = 0;
-                        }
-                        break;
-                    case Servidor.Tipo.MAQUINA2:
-                        if (maquina.GetFinProcesamiento().ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Tiempo procesamiento maquina"].ToString())
-                        { 
-                            tiempo_procesamiento_maquina2 = 0;
-                        }
-                        break;
-                    case Servidor.Tipo.MAQUINA3:
-                        if (maquina.GetFinProcesamiento().ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Tiempo procesamiento maquina"].ToString())
-                        { 
-                            tiempo_procesamiento_maquina3 = 0;
-                        }
-                        break;
-                    case Servidor.Tipo.MAQUINA4:
-                        if (maquina.GetFinProcesamiento().ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Tiempo procesamiento maquina"].ToString())
-                        { 
-                            tiempo_procesamiento_maquina4 = 0;
-                        }
-                        break;
-                    default:
-                        break;
+
+                if (maquina.GetFinProcesamiento().ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Tiempo procesamiento maquina"].ToString())
+                { 
+                    maquina.SetTiempoProcesamiento(0);
                 }
+
             }
 
             tabla_iteraciones.Rows[cantidad_iteraciones]["RND llegada cheque"] = rnd_llegadas.ToString() == "0" ? "" : rnd_llegadas.ToString();
             tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo entre llegadas"] = tiempo_entre_llegadas.ToString() == "0" ? "" : tiempo_entre_llegadas.ToString();
             tabla_iteraciones.Rows[cantidad_iteraciones]["Proxima llegada"] = tiempo_proxima_llegada.ToString() == "0" ? "" : tiempo_proxima_llegada.ToString();
 
-            
-
-            switch (maquina.GetTipo())
-            {
-                case Servidor.Tipo.MAQUINA1:
-                    tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo procesamiento maquina"] = tiempo_procesamiento_maquina1.ToString() == "0" ? "" : tiempo_procesamiento_maquina1.ToString();
-                    tabla_iteraciones.Rows[cantidad_iteraciones]["Fin procesamiento maquina"] = maquina.GetFinProcesamiento().ToString() == "0" ? "" : maquina.GetFinProcesamiento().ToString();
-                    break;
-                case Servidor.Tipo.MAQUINA2:
-                    tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo procesamiento maquina"] = tiempo_procesamiento_maquina2.ToString() == "0" ? "" : tiempo_procesamiento_maquina2.ToString();
-                    tabla_iteraciones.Rows[cantidad_iteraciones]["Fin procesamiento maquina"] = maquina.GetFinProcesamiento().ToString() == "0" ? "" : maquina.GetFinProcesamiento().ToString();
-                    break;
-                case Servidor.Tipo.MAQUINA3:
-                    tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo procesamiento maquina"] = tiempo_procesamiento_maquina3.ToString() == "0" ? "" : tiempo_procesamiento_maquina3.ToString();
-                    tabla_iteraciones.Rows[cantidad_iteraciones]["Fin procesamiento maquina"] = maquina.GetFinProcesamiento().ToString() == "0" ? "" : maquina.GetFinProcesamiento().ToString();
-                    break;
-                case Servidor.Tipo.MAQUINA4:
-                    tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo procesamiento maquina"] = tiempo_procesamiento_maquina4.ToString() == "0" ? "" : tiempo_procesamiento_maquina4.ToString();
-                    tabla_iteraciones.Rows[cantidad_iteraciones]["Fin procesamiento maquina"] = maquina.GetFinProcesamiento().ToString() == "0" ? "" : maquina.GetFinProcesamiento().ToString();
-                    break;
-                default:
-                    break;
-            }
+            tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo procesamiento maquina"] = maquina.GetTiempoProcesamiento().ToString() == "0" ? "" : maquina.GetTiempoProcesamiento().ToString();
+            tabla_iteraciones.Rows[cantidad_iteraciones]["Fin procesamiento maquina"] = maquina.GetFinProcesamiento().ToString() == "0" ? "" : maquina.GetFinProcesamiento().ToString();
 
             tabla_iteraciones.Rows[cantidad_iteraciones]["Estado maquina"] = maquina.GetEstado();
             tabla_iteraciones.Rows[cantidad_iteraciones]["Cola maquina"] = maquina.GetColaCheques().Count;
@@ -528,7 +475,7 @@ namespace Ejercicio222
 
             //limpiar labels de resultados
 
-
+            flag_primera_vuelta = false;
             bandera_nro_cliente = true;
             nro_cliente = 0;
             nro_cliente_desde_que_se_muestra = 0;
@@ -576,13 +523,17 @@ namespace Ejercicio222
                 else
                 {
                     //Si el tiempo de proxima llegada es menor al tiempo de fin de procesamiento se da una llegada
-                    if(maquina.GetFinProcesamiento() > tiempo_proxima_llegada)
+                    if(maquina.GetFinProcesamiento() == 0.0 || maquina.GetFinProcesamiento() >= tiempo_proxima_llegada)
                     {
+                        Evento_lanzado = "Llegada cheque";
+                        reloj = tiempo_proxima_llegada;
                         EventoLlegadaCheque(maquina);
                     }
                     //Sino se da un fin de procesamiento
                     else
                     {
+                        Evento_lanzado = "Fin procesamiento cheque";
+                        reloj = maquina.GetFinProcesamiento();
                         EventoFinProcesamiento(maquina);
                     }
                 }
@@ -714,38 +665,18 @@ namespace Ejercicio222
 
         private void calcularFinProcesamiento(Servidor maquina)
         {
-            //hacer referencia desde myObject a un objeto de la clase random de los definidos como objeto_rnd_maquina1, objeto_rnd_maquina2, objeto_rnd_maquina3, objeto_rnd_maquina4 dependiendo si el servidor es del tipo 1, 2, 3 o 4
-
-            // Obtener el objeto Random correspondiente
-            (Random myObject, double lambda) = ObtenerRandomYLambdaSegunTipoMaquina(maquina);
             double p = 1;
             double x = -1;
-            double A = Math.Exp(-lambda);
+            double A = Math.Exp(-maquina.GetLambda());
             do
             {
-                double random_p = (Math.Truncate(myObject.NextDouble() * 10000)) / 10000;
+                double random_p = (Math.Truncate(maquina.GetRND() * 10000)) / 10000;
                 p = (p * random_p);
                 x = x + 1;
             } while (p >= A);
             x = Math.Truncate(x * 100) / 100;
+            maquina.SetTiempoProcesamiento(x);
             maquina.SetFinProcesamiento(reloj + x);
-        }
-
-        private (Random, double) ObtenerRandomYLambdaSegunTipoMaquina(Servidor maquina)
-        {
-            switch (maquina.GetTipo())
-            {
-                case Servidor.Tipo.MAQUINA1:
-                    return (objeto_rnd_maquina1, this.media_maquina1);
-                case Servidor.Tipo.MAQUINA2:
-                    return (objeto_rnd_maquina2, this.media_maquina2);
-                case Servidor.Tipo.MAQUINA3:
-                    return (objeto_rnd_maquina3, this.media_maquina1);
-                case Servidor.Tipo.MAQUINA4:
-                    return (objeto_rnd_maquina4, this.media_maquina2);
-                default:
-                    throw new ArgumentException("Tipo de máquina no válido.");
-            }
         }
 
         private void btn_cerrar_programa_Click(object sender, EventArgs e)

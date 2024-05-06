@@ -13,16 +13,42 @@ namespace Ejercicio222
         private Estados estado;
         public enum Tipo { MAQUINA1 = 1, MAQUINA2 = 2, MAQUINA3 = 3, MAQUINA4 = 4 }
         private Tipo tipo;
+        private double tiempo_procesamiento;
         private double fin_procesamiento;
         private Cliente? cheque_procesado;
         List<Cliente>? cola_cheques_maquina;
+        Random objeto_rnd;
+        double lambda;
 
-        public Servidor(Tipo tipo)
+        public Servidor(Tipo tipo, Random objeto_semilla, double lambda)
         {
             this.estado = Estados.libre;
             this.tipo = tipo;
+            this.tiempo_procesamiento = 0.0;
             this.fin_procesamiento = 0.0;
             this.cola_cheques_maquina = new List<Cliente>();
+            this.objeto_rnd = new Random(objeto_semilla.Next());
+            this.lambda = lambda;
+        }
+
+        public double GetLambda()
+        {
+            return this.lambda;
+        }
+
+        public double GetTiempoProcesamiento()
+        {
+            return this.tiempo_procesamiento;
+        }
+
+        public void SetTiempoProcesamiento(double tiempo_procesamiento)
+        {
+            this.tiempo_procesamiento = tiempo_procesamiento;
+        }
+
+        public double GetRND()
+        {
+            return objeto_rnd.NextDouble();
         }
 
         public Tipo GetTipo()
