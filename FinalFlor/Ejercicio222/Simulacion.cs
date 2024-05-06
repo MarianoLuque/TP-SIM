@@ -30,10 +30,6 @@ namespace Ejercicio222
         //tiempos de llegada y atencion
         double tiempo_entre_llegadas = 0.0;
         double tiempo_entre_llegadas_con_porcentaje = 0.0;
-        double tiempo_procesamiento_maquina1 = 0.0;
-        double tiempo_procesamiento_maquina2 = 0.0;
-        double tiempo_procesamiento_maquina3 = 0.0;
-        double tiempo_procesamiento_maquina4 = 0.0;
 
         //tiempos de proxima llegada y fin atencion
         double tiempo_proxima_llegada = 0.0;
@@ -92,10 +88,10 @@ namespace Ejercicio222
             this.parametro_cantidad = parametro_cantidad;
             this.mostrar_clientes = mostrar_clientes;
 
-            this.media_llegadas = (double)horas_llegadas / cantidad_llegadas;
-            this.media_llegadas_con_porcentaje = (double)horas_llegadas / ((double)cantidad_llegadas*1.2);
-            this.media_maquina1 = (double)horas_maquina1 / cantidad_cheques_maquina1;
-            this.media_maquina2 = (double)horas_maquina2 / cantidad_cheques_maquina2;
+            this.media_llegadas = (double)horas_llegadas / 60 / cantidad_llegadas;
+            this.media_llegadas_con_porcentaje = (double)horas_llegadas / 60 / ((double)cantidad_llegadas*1.2);
+            this.media_maquina1 = (double)horas_maquina1 /60 / cantidad_cheques_maquina1;
+            this.media_maquina2 = (double)horas_maquina2 /60 / cantidad_cheques_maquina2;
 
             if (parametro_cantidad == "minutos")
             {
@@ -456,10 +452,6 @@ namespace Ejercicio222
             //tiempos de llegada y atencion
             tiempo_entre_llegadas = 0.0;
             tiempo_entre_llegadas_con_porcentaje = 0.0;
-            tiempo_procesamiento_maquina1 = 0.0;
-            tiempo_procesamiento_maquina2 = 0.0;
-            tiempo_procesamiento_maquina3 = 0.0;
-            tiempo_procesamiento_maquina4 = 0.0;
 
             //tiempos de proxima llegada y fin atencion
             tiempo_proxima_llegada = 0.0;
@@ -485,23 +477,21 @@ namespace Ejercicio222
         private void calcularProximaLlegada(Servidor maquina)
         {
             double media;
-            Random random;
             //si la maquina es 1 o 2 se calcula con la media de llegadas sin el 20 porciento extra
             if(maquina.GetTipo() == Servidor.Tipo.MAQUINA1 | maquina.GetTipo() == Servidor.Tipo.MAQUINA2)
             {
                 media = media_llegadas;
-                random = objeto_rnd_llegadas;
+                rnd_llegadas = (Math.Truncate(objeto_rnd_llegadas.NextDouble() * 10000)) / 10000;
             }
             else
             {
                 media = media_llegadas_con_porcentaje;
-                random = objeto_rnd_llegadas_con_porcentaje;
+                rnd_llegadas = (Math.Truncate(objeto_rnd_llegadas_con_porcentaje.NextDouble() * 10000)) / 10000;
             }
-            rnd_llegadas = (Math.Truncate(random.NextDouble() * 100)) / 100;
             //calculo el tiempo entre llegadas para la distribución exponencial
-            tiempo_entre_llegadas = Math.Truncate(((-media) * (Math.Log(1 - rnd_llegadas))) * 100) / 100;
+            tiempo_entre_llegadas = Math.Truncate(((-media) * (Math.Log(1 - rnd_llegadas))) * 10000) / 10000;
             //registro la proxima llegada
-            tiempo_proxima_llegada = Math.Truncate((reloj + tiempo_entre_llegadas) * 100) / 100;
+            tiempo_proxima_llegada = Math.Truncate((reloj + tiempo_entre_llegadas) * 10000) / 10000;
         }
 
         private void siguiente_secuencia(Servidor maquina)
@@ -670,11 +660,11 @@ namespace Ejercicio222
             double A = Math.Exp(-maquina.GetLambda());
             do
             {
-                double random_p = (Math.Truncate(maquina.GetRND() * 10000)) / 10000;
+                double random_p = maquina.GetRND();
                 p = (p * random_p);
                 x = x + 1;
             } while (p >= A);
-            x = Math.Truncate(x * 100) / 100;
+            // x = Math.Truncate(x * 1000000) / 1000000;
             maquina.SetTiempoProcesamiento(x);
             maquina.SetFinProcesamiento(reloj + x);
         }
