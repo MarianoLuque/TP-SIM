@@ -152,7 +152,7 @@ namespace Ejercicio222
             txt_cantidad_cheques_maquina2.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txt_cantidad_cheques_maquina2.Location = new Point(368, 155);
             txt_cantidad_cheques_maquina2.Margin = new Padding(4);
-            txt_cantidad_cheques_maquina2.Mask = "999";
+            txt_cantidad_cheques_maquina2.Mask = "99999";
             txt_cantidad_cheques_maquina2.Name = "txt_cantidad_cheques_maquina2";
             txt_cantidad_cheques_maquina2.Size = new Size(98, 29);
             txt_cantidad_cheques_maquina2.TabIndex = 27;
@@ -207,7 +207,7 @@ namespace Ejercicio222
             txt_cantidad_cheques_maquina1.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txt_cantidad_cheques_maquina1.Location = new Point(368, 109);
             txt_cantidad_cheques_maquina1.Margin = new Padding(4);
-            txt_cantidad_cheques_maquina1.Mask = "999";
+            txt_cantidad_cheques_maquina1.Mask = "99999";
             txt_cantidad_cheques_maquina1.Name = "txt_cantidad_cheques_maquina1";
             txt_cantidad_cheques_maquina1.Size = new Size(98, 29);
             txt_cantidad_cheques_maquina1.TabIndex = 22;
@@ -218,7 +218,7 @@ namespace Ejercicio222
             txt_cantidad_cheques_llegadas.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txt_cantidad_cheques_llegadas.Location = new Point(368, 62);
             txt_cantidad_cheques_llegadas.Margin = new Padding(4);
-            txt_cantidad_cheques_llegadas.Mask = "999";
+            txt_cantidad_cheques_llegadas.Mask = "99999";
             txt_cantidad_cheques_llegadas.Name = "txt_cantidad_cheques_llegadas";
             txt_cantidad_cheques_llegadas.Size = new Size(98, 29);
             txt_cantidad_cheques_llegadas.TabIndex = 22;

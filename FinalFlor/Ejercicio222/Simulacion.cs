@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,6 +75,9 @@ namespace Ejercicio222
 
         //Metrica máxima espera
         double maxima_espera_de_cheque;
+
+        //acumulado de gastos de la maquina
+        decimal acumulado_gastos;
 
 #pragma warning disable CS8618
         public Simulacion(int cantidad, int cantidad_llegadas, int cantidad_cheques_maquina1, int cantidad_cheques_maquina2, int horas_llegadas, int horas_maquina1, int horas_maquina2, string parametro_cantidad, bool mostrar_clientes)
@@ -153,8 +157,6 @@ namespace Ejercicio222
                 cargarTabla();
                 flag_tabla_cargada = true;
             }
-
-            volverACero();
 
             Servidor maquina1 = new Servidor(Servidor.Tipo.MAQUINA1, objeto_semilla, this.media_maquina1);
             Servidor maquina2 = new Servidor(Servidor.Tipo.MAQUINA2, objeto_semilla, this.media_maquina2);
@@ -285,7 +287,60 @@ namespace Ejercicio222
             //ModificarColumnas();
 
             //Mostrar resultados
+            mostrarResultados();
+        }
 
+        private void mostrarResultados()
+        {
+            //gastos acumulados sin porcentaje
+            string gastos_maquina1 = tabla_iteraciones_1.Rows[tabla_iteraciones_1.Rows.Count - 1]["Gastos acumulados"].ToString();
+            string gastos_maquina2 = tabla_iteraciones_2.Rows[tabla_iteraciones_2.Rows.Count - 1]["Gastos acumulados"].ToString();
+            lbl_gasto1_maquina1.Text += gastos_maquina1;
+            lbl_gasto1_maquina2.Text += gastos_maquina2;
+
+            //gastos acumulados con porcentaje
+            string gastos_maquina3 = tabla_iteraciones_3.Rows[tabla_iteraciones_3.Rows.Count - 1]["Gastos acumulados"].ToString();
+            string gastos_maquina4 = tabla_iteraciones_4.Rows[tabla_iteraciones_4.Rows.Count - 1]["Gastos acumulados"].ToString();
+            lbl_gasto2_maquina1.Text += gastos_maquina3;
+            lbl_gasto2_maquina2.Text += gastos_maquina4;
+
+            //calcular que maquina conviene
+            //sin considerar el 20% extra
+            decimal gasto1 = decimal.Parse(gastos_maquina1, CultureInfo.InvariantCulture) + (decimal) 40000;
+            decimal gasto2 = decimal.Parse(gastos_maquina2, CultureInfo.InvariantCulture) + (decimal) 30000;
+            if(gasto1 < gasto2)
+            {
+                lbl_maquina_conveniente1.Text += "conviene la maquina 1";
+            }
+            else
+            {
+                lbl_maquina_conveniente1.Text += "conviene la maquina 2";
+            }
+            //considerando el 20% extra
+            decimal gasto3 = decimal.Parse(gastos_maquina3, CultureInfo.InvariantCulture) + (decimal)40000;
+            decimal gasto4 = decimal.Parse(gastos_maquina4, CultureInfo.InvariantCulture) + (decimal)30000;
+            if (gasto1 < gasto2)
+            {
+                lbl_maquina_conveniente2.Text += "conviene la maquina 1";
+            }
+            else
+            {
+                lbl_maquina_conveniente2.Text += "conviene la maquina 2";
+            }
+
+            //maximas esperas
+            //maquina 1
+            string maxima_espera_maquina1 = tabla_iteraciones_1.Rows[tabla_iteraciones_1.Rows.Count - 1]["Tiempo de espera maximo de un cheque"].ToString();
+            lbl_maxima_espera1_maquina1.Text += maxima_espera_maquina1;
+            //maquina 2
+            string maxima_espera_maquina2 = tabla_iteraciones_2.Rows[tabla_iteraciones_2.Rows.Count - 1]["Tiempo de espera maximo de un cheque"].ToString();
+            lbl_maxima_espera1_maquina2.Text += maxima_espera_maquina2;
+            //maquina 3
+            string maxima_espera_maquina3 = tabla_iteraciones_3.Rows[tabla_iteraciones_3.Rows.Count - 1]["Tiempo de espera maximo de un cheque"].ToString();
+            lbl_maxima_espera2_maquina1.Text += maxima_espera_maquina3;
+            //maquina 4
+            string maxima_espera_maquina4 = tabla_iteraciones_4.Rows[tabla_iteraciones_4.Rows.Count - 1]["Tiempo de espera maximo de un cheque"].ToString();
+            lbl_maxima_espera2_maquina2.Text += maxima_espera_maquina4;
         }
 
         private void cargar_datos_tabla(int cantidad_iteraciones, Servidor maquina, DataTable tabla_iteraciones, List<Cliente> cheques)
@@ -323,6 +378,9 @@ namespace Ejercicio222
             tabla_iteraciones.Rows[cantidad_iteraciones]["Estado maquina"] = maquina.GetEstado();
             tabla_iteraciones.Rows[cantidad_iteraciones]["Cola maquina"] = maquina.GetColaCheques().Count;
 
+            //Gastos acumulados
+            tabla_iteraciones.Rows[cantidad_iteraciones]["Gastos acumulados"] = acumulado_gastos;
+
             //Metrica 
             tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo de espera maximo de un cheque"] = maxima_espera_de_cheque;
             
@@ -345,7 +403,7 @@ namespace Ejercicio222
                 }
             }
         }
-
+        //le pone el nombre d elas columnas a cada datatable
         private void cargarTabla()
         {
             // Primer data grid
@@ -359,6 +417,7 @@ namespace Ejercicio222
             DataColumn columna_fin_procesamiento_maquina_1 = new DataColumn("Fin procesamiento maquina");
             DataColumn columna_estado_maquina_1 = new DataColumn("Estado maquina");
             DataColumn columna_cola_maquina_1 = new DataColumn("Cola maquina");
+            DataColumn columna_gastos_acumulados_1 = new DataColumn("Gastos acumulados");
             DataColumn columna_maxima_espera_de_cheque_1 = new DataColumn("Tiempo de espera maximo de un cheque");
 
             tabla_iteraciones_1.Columns.Add(evento_1);
@@ -371,6 +430,7 @@ namespace Ejercicio222
             tabla_iteraciones_1.Columns.Add(columna_fin_procesamiento_maquina_1);
             tabla_iteraciones_1.Columns.Add(columna_estado_maquina_1);
             tabla_iteraciones_1.Columns.Add(columna_cola_maquina_1);
+            tabla_iteraciones_1.Columns.Add(columna_gastos_acumulados_1);
             tabla_iteraciones_1.Columns.Add(columna_maxima_espera_de_cheque_1);
 
             // Segundo data grid
@@ -384,6 +444,7 @@ namespace Ejercicio222
             DataColumn columna_fin_procesamiento_maquina_2 = new DataColumn("Fin procesamiento maquina");
             DataColumn columna_estado_maquina_2 = new DataColumn("Estado maquina");
             DataColumn columna_cola_maquina_2 = new DataColumn("Cola maquina");
+            DataColumn columna_gastos_acumulados_2 = new DataColumn("Gastos acumulados");
             DataColumn columna_maxima_espera_de_cheque_2 = new DataColumn("Tiempo de espera maximo de un cheque");
 
             tabla_iteraciones_2.Columns.Add(evento_2);
@@ -396,6 +457,7 @@ namespace Ejercicio222
             tabla_iteraciones_2.Columns.Add(columna_fin_procesamiento_maquina_2);
             tabla_iteraciones_2.Columns.Add(columna_estado_maquina_2);
             tabla_iteraciones_2.Columns.Add(columna_cola_maquina_2);
+            tabla_iteraciones_2.Columns.Add(columna_gastos_acumulados_2);
             tabla_iteraciones_2.Columns.Add(columna_maxima_espera_de_cheque_2);
 
             // Tercer data grid
@@ -409,6 +471,7 @@ namespace Ejercicio222
             DataColumn columna_fin_procesamiento_maquina_3 = new DataColumn("Fin procesamiento maquina");
             DataColumn columna_estado_maquina_3 = new DataColumn("Estado maquina");
             DataColumn columna_cola_maquina_3 = new DataColumn("Cola maquina");
+            DataColumn columna_gastos_acumulados_3 = new DataColumn("Gastos acumulados");
             DataColumn columna_maxima_espera_de_cheque_3 = new DataColumn("Tiempo de espera maximo de un cheque");
 
             tabla_iteraciones_3.Columns.Add(evento_3);
@@ -421,6 +484,7 @@ namespace Ejercicio222
             tabla_iteraciones_3.Columns.Add(columna_fin_procesamiento_maquina_3);
             tabla_iteraciones_3.Columns.Add(columna_estado_maquina_3);
             tabla_iteraciones_3.Columns.Add(columna_cola_maquina_3);
+            tabla_iteraciones_3.Columns.Add(columna_gastos_acumulados_3);
             tabla_iteraciones_3.Columns.Add(columna_maxima_espera_de_cheque_3);
 
             // Cuarto data grid
@@ -434,6 +498,7 @@ namespace Ejercicio222
             DataColumn columna_fin_procesamiento_maquina_4 = new DataColumn("Fin procesamiento maquina");
             DataColumn columna_estado_maquina_4 = new DataColumn("Estado maquina");
             DataColumn columna_cola_maquina_4 = new DataColumn("Cola maquina");
+            DataColumn columna_gastos_acumulados_4 = new DataColumn("Gastos acumulados");
             DataColumn columna_maxima_espera_de_cheque_4 = new DataColumn("Tiempo de espera maximo de un cheque");
 
             tabla_iteraciones_4.Columns.Add(evento_4);
@@ -446,6 +511,7 @@ namespace Ejercicio222
             tabla_iteraciones_4.Columns.Add(columna_fin_procesamiento_maquina_4);
             tabla_iteraciones_4.Columns.Add(columna_estado_maquina_4);
             tabla_iteraciones_4.Columns.Add(columna_cola_maquina_4);
+            tabla_iteraciones_4.Columns.Add(columna_gastos_acumulados_4);
             tabla_iteraciones_4.Columns.Add(columna_maxima_espera_de_cheque_4);
         }
 
@@ -483,6 +549,7 @@ namespace Ejercicio222
             nro_cliente = 0;
             nro_cliente_desde_que_se_muestra = 0;
             maxima_espera_de_cheque = 0.0;
+            acumulado_gastos = (decimal)0.0;
         }
 
         private void calcularProximaLlegada(Servidor maquina)
@@ -502,7 +569,7 @@ namespace Ejercicio222
             //calculo el tiempo entre llegadas para la distribución exponencial
             tiempo_entre_llegadas = Math.Truncate((-media) * (Math.Log(1 - rnd_llegadas)) * 100000) / 100000;
             //registro la proxima llegada
-            tiempo_proxima_llegada = reloj + tiempo_entre_llegadas;
+            tiempo_proxima_llegada = Math.Truncate((reloj + tiempo_entre_llegadas) * 100000) / 100000;
         }
 
         private void siguiente_secuencia(Servidor maquina)
@@ -535,7 +602,7 @@ namespace Ejercicio222
                     else
                     {
                         Evento_lanzado = "Fin procesamiento cheque";
-                        reloj = maquina.GetFinProcesamiento();
+                        reloj = fin_procesamiento;
                         EventoFinProcesamiento(maquina);
                     }
                 }
@@ -547,7 +614,41 @@ namespace Ejercicio222
             double espera_cheque = reloj - cheque_procesado.GetHoraLlegadaAlSistema();
             if(espera_cheque > maxima_espera_de_cheque)
             {
-                maxima_espera_de_cheque = espera_cheque;
+                maxima_espera_de_cheque = Math.Truncate(espera_cheque * 100000) / 100000;
+            }
+        }
+
+        private void calcularGastoCliente(Cliente cheque)
+        {
+            double tiempo_esperado = reloj - cheque.GetHoraLlegadaAlSistema();
+
+            string tiempo_str = tiempo_esperado.ToString("F20");
+            string numero_str;
+            double numero;
+            if (tiempo_str.Contains('E')) {
+                numero = double.Parse(tiempo_str, CultureInfo.InvariantCulture);
+                numero_str = numero.ToString();
+            }
+            else
+            {
+                numero_str = tiempo_str;
+            }
+
+            string [] tiempo_partido = numero_str.Split(',');
+            try
+            {
+                if (long.Parse(tiempo_partido[0]) > 0)
+                {
+                    acumulado_gastos += (decimal)10 * (decimal)long.Parse(tiempo_partido[0]);
+                }
+                if (long.Parse(tiempo_partido[1]) > 0)
+                {
+                    acumulado_gastos += (decimal)10;
+                }
+            }
+            catch (Exception e)
+            {
+                acumulado_gastos += (decimal)10;
             }
         }
 
@@ -557,17 +658,25 @@ namespace Ejercicio222
             {
                 Cliente? cheque_procesado = maquina.GetCliente();
                 cheque_procesado.SetEstado(Cliente.Estados.FUERA_DEL_SISTEMA);
-                metricaMaximaEspera(cheque_procesado);
+
                 Cliente cheque_a_procesar = maquina.GetColaCheques()[0];
+                calcularGastoCliente(cheque_a_procesar);
+                metricaMaximaEspera(cheque_a_procesar);
                 cheque_a_procesar.SetEstado(Cliente.Estados.SIENDO_PROCESADO);
                 maquina.SetCliente(cheque_a_procesar);
                 maquina.EliminarClienteDeCola();
                 calcularFinProcesamiento(maquina);
+
             }
             else
             {
+                Cliente? cheque_procesado = maquina.GetCliente();
+                cheque_procesado.SetEstado(Cliente.Estados.FUERA_DEL_SISTEMA);
+
                 maquina.SetEstado(Servidor.Estados.libre);
                 maquina.SetCliente(null);
+                maquina.SetTiempoProcesamiento(0.0);
+                rnd_procesamiento = 0.0;
                 maquina.SetFinProcesamiento(0.0);
             }
         }
