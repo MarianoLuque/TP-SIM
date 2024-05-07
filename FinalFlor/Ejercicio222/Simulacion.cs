@@ -29,7 +29,6 @@ namespace Ejercicio222
 
         //tiempos de llegada y atencion
         double tiempo_entre_llegadas = 0.0;
-        double tiempo_entre_llegadas_con_porcentaje = 0.0;
 
         //tiempos de proxima llegada y fin atencion
         double tiempo_proxima_llegada = 0.0;
@@ -65,6 +64,7 @@ namespace Ejercicio222
 
         //Número entre 0 y 1 para calcular los tiempo según corresponda
         double rnd_llegadas;
+        double rnd_procesamiento;
 
         //Evento lanzado
         string Evento_lanzado;
@@ -80,10 +80,6 @@ namespace Ejercicio222
         {
             InitializeComponent();
             this.cantidad = cantidad;
-
-            horas_llegadas = horas_llegadas;
-            horas_maquina1 = horas_maquina1;
-            horas_maquina2 = horas_maquina2;
 
             this.parametro_cantidad = parametro_cantidad;
             this.mostrar_clientes = mostrar_clientes;
@@ -177,6 +173,7 @@ namespace Ejercicio222
                 //recorro la lista maquinas para armar cada tabla
                 foreach(Servidor maquina in maquinas)
                 {
+                    volverACero();
                     // Determinar la tabla y los cheques a mostrar correspondientes según el índice de la máquina
                     DataTable tablaIteraciones;
                     List<Cliente> cheques;
@@ -218,6 +215,7 @@ namespace Ejercicio222
                             cargar_datos_tabla(400, maquina, tablaIteraciones, cheques);
                         }
                     }
+                    maquinaIndex += 1;
                 }
             }
 
@@ -232,6 +230,7 @@ namespace Ejercicio222
                 //recorro la lista maquinas para armar cada tabla
                 foreach (Servidor maquina in maquinas)
                 {
+                    volverACero();
                     // Determinar la tabla y los cheques a mostrar correspondientes según el índice de la máquina
                     DataTable tablaIteraciones;
                     List<Cliente> cheques;
@@ -273,6 +272,7 @@ namespace Ejercicio222
                             cargar_datos_tabla(400, maquina, tablaIteraciones, cheques);
                         }
                     }
+                    maquinaIndex += 1;
                 }
             }
 
@@ -294,7 +294,7 @@ namespace Ejercicio222
             //Cargar columnas y mostrarlas
             tabla_iteraciones.Rows[cantidad_iteraciones]["Evento"] = Evento_lanzado;
             tabla_iteraciones.Rows[cantidad_iteraciones]["Reloj (hs)"] = reloj;
-
+            
             if (cantidad_iteraciones != 0)
             {
                 if (tiempo_proxima_llegada.ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Proxima llegada"].ToString())
@@ -304,8 +304,9 @@ namespace Ejercicio222
                 }
 
 
-                if (maquina.GetFinProcesamiento().ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Tiempo procesamiento maquina"].ToString())
+                if (maquina.GetFinProcesamiento().ToString() == tabla_iteraciones.Rows[cantidad_iteraciones - 1]["Fin procesamiento maquina"].ToString())
                 { 
+                    rnd_procesamiento = 0;
                     maquina.SetTiempoProcesamiento(0);
                 }
 
@@ -315,6 +316,7 @@ namespace Ejercicio222
             tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo entre llegadas"] = tiempo_entre_llegadas.ToString() == "0" ? "" : tiempo_entre_llegadas.ToString();
             tabla_iteraciones.Rows[cantidad_iteraciones]["Proxima llegada"] = tiempo_proxima_llegada.ToString() == "0" ? "" : tiempo_proxima_llegada.ToString();
 
+            tabla_iteraciones.Rows[cantidad_iteraciones]["RND procesamiento maquina"] = rnd_procesamiento.ToString() == "0" ? "" : rnd_procesamiento.ToString();
             tabla_iteraciones.Rows[cantidad_iteraciones]["Tiempo procesamiento maquina"] = maquina.GetTiempoProcesamiento().ToString() == "0" ? "" : maquina.GetTiempoProcesamiento().ToString();
             tabla_iteraciones.Rows[cantidad_iteraciones]["Fin procesamiento maquina"] = maquina.GetFinProcesamiento().ToString() == "0" ? "" : maquina.GetFinProcesamiento().ToString();
 
@@ -352,6 +354,7 @@ namespace Ejercicio222
             DataColumn columna_rnd_llegada_1 = new DataColumn("RND llegada cheque");
             DataColumn columna_tiempo_entre_llegadas_1 = new DataColumn("Tiempo entre llegadas");
             DataColumn columna_proxima_llegada_1 = new DataColumn("Proxima llegada");
+            DataColumn columna_rnd_procesamiento_1 = new DataColumn("RND procesamiento maquina");
             DataColumn columna_tiempo_procesamiento_maquina_1 = new DataColumn("Tiempo procesamiento maquina");
             DataColumn columna_fin_procesamiento_maquina_1 = new DataColumn("Fin procesamiento maquina");
             DataColumn columna_estado_maquina_1 = new DataColumn("Estado maquina");
@@ -363,6 +366,7 @@ namespace Ejercicio222
             tabla_iteraciones_1.Columns.Add(columna_rnd_llegada_1);
             tabla_iteraciones_1.Columns.Add(columna_tiempo_entre_llegadas_1);
             tabla_iteraciones_1.Columns.Add(columna_proxima_llegada_1);
+            tabla_iteraciones_1.Columns.Add(columna_rnd_procesamiento_1);
             tabla_iteraciones_1.Columns.Add(columna_tiempo_procesamiento_maquina_1);
             tabla_iteraciones_1.Columns.Add(columna_fin_procesamiento_maquina_1);
             tabla_iteraciones_1.Columns.Add(columna_estado_maquina_1);
@@ -375,6 +379,7 @@ namespace Ejercicio222
             DataColumn columna_rnd_llegada_2 = new DataColumn("RND llegada cheque");
             DataColumn columna_tiempo_entre_llegadas_2 = new DataColumn("Tiempo entre llegadas");
             DataColumn columna_proxima_llegada_2 = new DataColumn("Proxima llegada");
+            DataColumn columna_rnd_procesamiento_2 = new DataColumn("RND procesamiento maquina");
             DataColumn columna_tiempo_procesamiento_maquina_2 = new DataColumn("Tiempo procesamiento maquina");
             DataColumn columna_fin_procesamiento_maquina_2 = new DataColumn("Fin procesamiento maquina");
             DataColumn columna_estado_maquina_2 = new DataColumn("Estado maquina");
@@ -386,6 +391,7 @@ namespace Ejercicio222
             tabla_iteraciones_2.Columns.Add(columna_rnd_llegada_2);
             tabla_iteraciones_2.Columns.Add(columna_tiempo_entre_llegadas_2);
             tabla_iteraciones_2.Columns.Add(columna_proxima_llegada_2);
+            tabla_iteraciones_2.Columns.Add(columna_rnd_procesamiento_2);
             tabla_iteraciones_2.Columns.Add(columna_tiempo_procesamiento_maquina_2);
             tabla_iteraciones_2.Columns.Add(columna_fin_procesamiento_maquina_2);
             tabla_iteraciones_2.Columns.Add(columna_estado_maquina_2);
@@ -398,6 +404,7 @@ namespace Ejercicio222
             DataColumn columna_rnd_llegada_3 = new DataColumn("RND llegada cheque");
             DataColumn columna_tiempo_entre_llegadas_3 = new DataColumn("Tiempo entre llegadas");
             DataColumn columna_proxima_llegada_3 = new DataColumn("Proxima llegada");
+            DataColumn columna_rnd_procesamiento_3 = new DataColumn("RND procesamiento maquina");
             DataColumn columna_tiempo_procesamiento_maquina_3 = new DataColumn("Tiempo procesamiento maquina");
             DataColumn columna_fin_procesamiento_maquina_3 = new DataColumn("Fin procesamiento maquina");
             DataColumn columna_estado_maquina_3 = new DataColumn("Estado maquina");
@@ -409,6 +416,7 @@ namespace Ejercicio222
             tabla_iteraciones_3.Columns.Add(columna_rnd_llegada_3);
             tabla_iteraciones_3.Columns.Add(columna_tiempo_entre_llegadas_3);
             tabla_iteraciones_3.Columns.Add(columna_proxima_llegada_3);
+            tabla_iteraciones_3.Columns.Add(columna_rnd_procesamiento_3);
             tabla_iteraciones_3.Columns.Add(columna_tiempo_procesamiento_maquina_3);
             tabla_iteraciones_3.Columns.Add(columna_fin_procesamiento_maquina_3);
             tabla_iteraciones_3.Columns.Add(columna_estado_maquina_3);
@@ -421,6 +429,7 @@ namespace Ejercicio222
             DataColumn columna_rnd_llegada_4 = new DataColumn("RND llegada cheque");
             DataColumn columna_tiempo_entre_llegadas_4 = new DataColumn("Tiempo entre llegadas");
             DataColumn columna_proxima_llegada_4 = new DataColumn("Proxima llegada");
+            DataColumn columna_rnd_procesamiento_4 = new DataColumn("RND procesamiento maquina");
             DataColumn columna_tiempo_procesamiento_maquina_4 = new DataColumn("Tiempo procesamiento maquina");
             DataColumn columna_fin_procesamiento_maquina_4 = new DataColumn("Fin procesamiento maquina");
             DataColumn columna_estado_maquina_4 = new DataColumn("Estado maquina");
@@ -432,6 +441,7 @@ namespace Ejercicio222
             tabla_iteraciones_4.Columns.Add(columna_rnd_llegada_4);
             tabla_iteraciones_4.Columns.Add(columna_tiempo_entre_llegadas_4);
             tabla_iteraciones_4.Columns.Add(columna_proxima_llegada_4);
+            tabla_iteraciones_4.Columns.Add(columna_rnd_procesamiento_4);
             tabla_iteraciones_4.Columns.Add(columna_tiempo_procesamiento_maquina_4);
             tabla_iteraciones_4.Columns.Add(columna_fin_procesamiento_maquina_4);
             tabla_iteraciones_4.Columns.Add(columna_estado_maquina_4);
@@ -444,14 +454,14 @@ namespace Ejercicio222
             //reloj
             reloj = 0;
 
-            Evento_lanzado = "";
+            Evento_lanzado = "Inicio Simulación";
 
             //numero de iteracion
             cantidad_iteraciones = 0;
+            cantidad_a_mostrar = 0;
 
             //tiempos de llegada y atencion
             tiempo_entre_llegadas = 0.0;
-            tiempo_entre_llegadas_con_porcentaje = 0.0;
 
             //tiempos de proxima llegada y fin atencion
             tiempo_proxima_llegada = 0.0;
@@ -464,6 +474,7 @@ namespace Ejercicio222
 
             //randoms 
             rnd_llegadas = 0.0;
+            rnd_procesamiento = 0.0;
 
             //limpiar labels de resultados
 
@@ -471,7 +482,7 @@ namespace Ejercicio222
             bandera_nro_cliente = true;
             nro_cliente = 0;
             nro_cliente_desde_que_se_muestra = 0;
-
+            maxima_espera_de_cheque = 0.0;
         }
 
         private void calcularProximaLlegada(Servidor maquina)
@@ -481,17 +492,17 @@ namespace Ejercicio222
             if(maquina.GetTipo() == Servidor.Tipo.MAQUINA1 | maquina.GetTipo() == Servidor.Tipo.MAQUINA2)
             {
                 media = media_llegadas;
-                rnd_llegadas = (Math.Truncate(objeto_rnd_llegadas.NextDouble() * 10000)) / 10000;
+                rnd_llegadas = objeto_rnd_llegadas.NextDouble();
             }
             else
             {
                 media = media_llegadas_con_porcentaje;
-                rnd_llegadas = (Math.Truncate(objeto_rnd_llegadas_con_porcentaje.NextDouble() * 10000)) / 10000;
+                rnd_llegadas = objeto_rnd_llegadas_con_porcentaje.NextDouble();
             }
             //calculo el tiempo entre llegadas para la distribución exponencial
-            tiempo_entre_llegadas = Math.Truncate(((-media) * (Math.Log(1 - rnd_llegadas))) * 10000) / 10000;
+            tiempo_entre_llegadas = Math.Truncate((-media) * (Math.Log(1 - rnd_llegadas)) * 100000) / 100000;
             //registro la proxima llegada
-            tiempo_proxima_llegada = Math.Truncate((reloj + tiempo_entre_llegadas) * 10000) / 10000;
+            tiempo_proxima_llegada = reloj + tiempo_entre_llegadas;
         }
 
         private void siguiente_secuencia(Servidor maquina)
@@ -512,8 +523,9 @@ namespace Ejercicio222
                 }
                 else
                 {
+                    double fin_procesamiento = maquina.GetFinProcesamiento();
                     //Si el tiempo de proxima llegada es menor al tiempo de fin de procesamiento se da una llegada
-                    if(maquina.GetFinProcesamiento() == 0.0 || maquina.GetFinProcesamiento() >= tiempo_proxima_llegada)
+                    if(fin_procesamiento == 0.0 || fin_procesamiento >= tiempo_proxima_llegada)
                     {
                         Evento_lanzado = "Llegada cheque";
                         reloj = tiempo_proxima_llegada;
@@ -655,18 +667,14 @@ namespace Ejercicio222
 
         private void calcularFinProcesamiento(Servidor maquina)
         {
-            double p = 1;
-            double x = -1;
-            double A = Math.Exp(-maquina.GetLambda());
-            do
-            {
-                double random_p = maquina.GetRND();
-                p = (p * random_p);
-                x = x + 1;
-            } while (p >= A);
-            // x = Math.Truncate(x * 1000000) / 1000000;
-            maquina.SetTiempoProcesamiento(x);
-            maquina.SetFinProcesamiento(reloj + x);
+            //Obtengo la media de la maquina y el random
+            double media = maquina.GetMedia();
+            rnd_procesamiento = maquina.GetRND();
+            //calculo el tiempo de procesamiento para la distribución exponencial
+            double tiempo_procesamiento = Math.Truncate((-media) * (Math.Log(1 - rnd_procesamiento)) * 100000) / 100000 ;
+            //registro el tiempo de procesamiento y el tiempo de fin de procesamiento
+            maquina.SetTiempoProcesamiento(tiempo_procesamiento);
+            maquina.SetFinProcesamiento(reloj + tiempo_procesamiento);
         }
 
         private void btn_cerrar_programa_Click(object sender, EventArgs e)

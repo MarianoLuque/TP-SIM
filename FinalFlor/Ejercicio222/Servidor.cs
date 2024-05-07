@@ -18,9 +18,9 @@ namespace Ejercicio222
         private Cliente? cheque_procesado;
         List<Cliente>? cola_cheques_maquina;
         Random objeto_rnd;
-        double lambda;
+        double media;
 
-        public Servidor(Tipo tipo, Random objeto_semilla, double lambda)
+        public Servidor(Tipo tipo, Random objeto_semilla, double media)
         {
             this.estado = Estados.libre;
             this.tipo = tipo;
@@ -28,12 +28,12 @@ namespace Ejercicio222
             this.fin_procesamiento = 0.0;
             this.cola_cheques_maquina = new List<Cliente>();
             this.objeto_rnd = new Random(objeto_semilla.Next());
-            this.lambda = lambda;
+            this.media = media;
         }
 
-        public double GetLambda()
+        public double GetMedia()
         {
-            return this.lambda;
+            return this.media;
         }
 
         public double GetTiempoProcesamiento()
@@ -48,7 +48,7 @@ namespace Ejercicio222
 
         public double GetRND()
         {
-            return objeto_rnd.NextDouble();
+            return ((Math.Truncate(objeto_rnd.NextDouble() * 100000)) / 100000 );
         }
 
         public Tipo GetTipo()

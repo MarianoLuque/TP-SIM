@@ -50,7 +50,7 @@ namespace Ejercicio222
             if (rb_horas.Checked)
             {
                 parametro_cantidad = "minutos";
-                Simulacion simulacion = new Simulacion(int.Parse(txt_cantidad_eventos.Text),
+                Simulacion simulacion = new Simulacion(int.Parse(txt_cantidad_horas.Text),
                                                        int.Parse(txt_cantidad_cheques_llegadas.Text), int.Parse(txt_cantidad_cheques_maquina1.Text), int.Parse(txt_cantidad_cheques_maquina2.Text),
                                                        int.Parse(txt_horas_llegadas.Text), int.Parse(txt_horas_maquina1.Text), int.Parse(txt_horas_maquina2.Text),
                                                        parametro_cantidad, cb_mostrar_clientes.Checked);
