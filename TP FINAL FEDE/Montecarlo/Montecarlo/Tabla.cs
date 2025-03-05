@@ -27,6 +27,7 @@ namespace Montecarlo
         //Variables creadas
         DataTable tabla = new DataTable();
         int simulacion_desde;
+        int simulacion_hasta;
         bool flag_tabla_cargada = false;
 
         decimal beneficio_acumulado;
@@ -47,10 +48,10 @@ namespace Montecarlo
         double[] array_empleados_ausentes = new double[] { 0, 0.36, 0.74, 0.93, 0.99 };
 
         //Metricas
-        //  int cantidad_dias_operativos;
-        //  int cantidad_dias_no_operativos;
-        //  long beneficios_por_dia_acumulado;
-
+        int dias_operativos = 0;
+        int dias_no_operativos = 0;
+        double promedio_empleados_ausentes = 0;
+        int total_empleados_ausentes = 0;
 
         public Tabla(long cantidad_iteraciones, int costo_produccion, int salario_diario, int ganancias, int cant_empleados_nomina, int cant_empleados_minima, DataTable tabla_nro_obreros_ausentes)
         {
@@ -66,16 +67,21 @@ namespace Montecarlo
 
         private void btn_simular_Click(object sender, EventArgs e)
         {
-            if(!int.TryParse(txt_desde.Text, out simulacion_desde) || simulacion_desde > (cantidad_iteraciones - 300))
+            if(!int.TryParse(txt_desde.Text, out simulacion_desde) || simulacion_desde > cantidad_iteraciones || simulacion_desde < 1)
             {
-                MessageBox.Show("Ingrese desde que simulación se debe mostrar (valor mayor a 0 y menor a " + (cantidad_iteraciones - 300).ToString() + ")", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Ingrese desde que simulación se debe mostrar (valor mayor o igual a 1 y menor o igual a " + cantidad_iteraciones.ToString() + ")", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+
+            if(!int.TryParse(txt_hasta.Text, out simulacion_hasta) || simulacion_hasta > cantidad_iteraciones || simulacion_hasta < simulacion_desde)
+            {
+                MessageBox.Show("El valor 'hasta' debe ser mayor o igual que 'desde' y menor o igual a " + cantidad_iteraciones.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             if (flag_tabla_cargada)
             {
-                //desligo la tabla del data source
                 dg_montecarlo.DataSource = null;
-                //limpiar las filas
                 tabla.Rows.Clear();
             }
             else
@@ -84,23 +90,23 @@ namespace Montecarlo
                 flag_tabla_cargada = true;
             }
 
-            //cargo los datos a la tabla
             cargar_datos();
-            //ligo la tabla al data source
             dg_montecarlo.DataSource = tabla;
-            //muestro las metricas
-            //  mostrar_metricas();
         }
 
-        //private void mostrar_metricas()
-        //{
-        //    lbl_m1.Text = "Máximo costo total: $" + max_beneficio_diario.ToString() + " - En la fila: " + fila_max_costo.ToString();
-        //    lbl_m2.Text = "Cantidad de barcos con retraso: " + cantidad_barcos_retrasados.ToString();
-        //    lbl_m3.Text = "Porcentaje de ocupación del muelle: " + (Math.Round(((double)cantidad_veces_muelle_no_vacio / (double)cantidad_iteraciones) * 100 , 10)).ToString() + "%";
-        //    lbl_m4.Text = "Promedio de barcos que llegan por día: " + (Math.Round(((double)cantidad_barcos_llegados_total / (double)cantidad_iteraciones), 2)).ToString();
-        //    lbl_m5.Text = "Promedio de barcos descargados por día: " + (Math.Round(((double)cantidad_barcos_descargados_total / (double)cantidad_iteraciones), 2)).ToString();
-        //    lbl_m6.Text = "Porcentaje del costo por noche en el muelle sobre el costo acumulado: " + (Math.Round(((decimal)costo_por_noche_acumulado / beneficio_acumulado) * 100 , 4)).ToString() + "%";
-        //}
+        private void mostrar_metricas()
+        {
+            double porcentaje_dias_operativos = (double)dias_operativos / cantidad_iteraciones * 100;
+            promedio_empleados_ausentes = (double)total_empleados_ausentes / cantidad_iteraciones;
+            decimal beneficio_promedio = beneficio_acumulado / cantidad_iteraciones;
+
+            lbl_m1.Text = $"Días operativos: {dias_operativos} ({Math.Round(porcentaje_dias_operativos, 2)}%)";
+            lbl_m2.Text = $"Días no operativos por falta de personal: {dias_no_operativos} ({Math.Round(100 - porcentaje_dias_operativos, 2)}%)";
+            lbl_m3.Text = $"Promedio diario de empleados ausentes: {Math.Round(promedio_empleados_ausentes, 2)}";
+            lbl_m4.Text = $"Beneficio total en {cantidad_iteraciones} días: ${beneficio_acumulado:N2}";
+            lbl_m5.Text = $"Beneficio promedio diario: ${beneficio_promedio:N2}";
+            lbl_m6.Text = $"Nómina: {cant_empleados_nomina} obreros (mínimo necesario: {cant_empleados_minima})";
+        }
 
         private void cargar_datos()
         {
@@ -115,8 +121,10 @@ namespace Montecarlo
             beneficio_acumulado = 0;
             j = 0;
 
-            //vuelvo metricas a 0
-
+            // Reiniciar métricas
+            dias_operativos = 0;
+            dias_no_operativos = 0;
+            total_empleados_ausentes = 0;
 
             //Hago las N simulaciones
             for (int i = 0; i < cantidad_iteraciones; i++)
@@ -175,7 +183,7 @@ namespace Montecarlo
                 beneficio_acumulado += (decimal)beneficio_diario;
 
                 //cargo los resultados en la tabla
-                if (i >= simulacion_desde && i < simulacion_desde + 300)
+                if (i >= (simulacion_desde-1) && i < simulacion_hasta)
                 {
                     tabla.Rows.Add();
                     tabla.Rows[j]["Iteracion"] = i+1;
@@ -211,7 +219,19 @@ namespace Montecarlo
                     tabla.Rows[j]["Beneficio acumulado"] = beneficio_acumulado;
 
                 }
+
+                // Actualizar métricas
+                if (dia_operativo)
+                    dias_operativos++;
+                else
+                    dias_no_operativos++;
+
+                total_empleados_ausentes += nro_empleados_ausentes;
             }
+
+            // Calcular métricas adicionales
+            promedio_empleados_ausentes = (double)total_empleados_ausentes / cantidad_iteraciones;
+            mostrar_metricas();
         }
 
         private void cargar_tabla()
@@ -258,8 +278,8 @@ namespace Montecarlo
 
         private void Tabla_Load(object sender, EventArgs e)
         {
-            //informo al usuario desde que iteracion puede elegir ver
-            lbl_desde.Text = lbl_desde.Text + "(Desde 0 hasta " + (cantidad_iteraciones - 300).ToString() + ")";
+            txt_desde.Text = 1.ToString();
+            txt_hasta.Text = cantidad_iteraciones.ToString();
         }
     }
 }

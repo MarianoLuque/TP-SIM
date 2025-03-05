@@ -96,7 +96,7 @@ namespace Montecarlo
             //}
 
             // Si el usuario no escribe nada, se usa 300 como valor por defecto
-            cantidad_iteraciones = string.IsNullOrWhiteSpace(txt_cantidad_simulaciones.Text) ? 300 : long.Parse(txt_cantidad_simulaciones.Text);
+            cantidad_iteraciones = string.IsNullOrWhiteSpace(txt_cantidad_simulaciones.Text) ? 1000 : long.Parse(txt_cantidad_simulaciones.Text);
 
             // Usar valores predeterminados si los TextBox están vacíos
             costo_produccion = string.IsNullOrWhiteSpace(txt_costo_produccion.Text) ? 2400 : int.Parse(txt_costo_produccion.Text);
